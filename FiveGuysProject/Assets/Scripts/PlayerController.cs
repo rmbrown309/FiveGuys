@@ -9,8 +9,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("----- Player Stats -----")]
     [Range(1, 10)][SerializeField] float playerSpeed;
-    [Range(1, 3)][SerializeField] float sprintMod;
-    [Range(1, 3)][SerializeField] int jumpMax;
+    [Range(1, 3)][SerializeField] float sprintMod; // amount playerSpeed is multiplied when sprinting
+    [Range(1, 3)][SerializeField] int jumpMax; // number of jumps player can perform before landing
     [Range(8, 30)][SerializeField] float jumpHeight;
     [Range(-10, -40)][SerializeField] float gravityValue;
 
@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
     {
         Sprint();
 
+        // Keeps player velocity from going negative and resets ability to jump while grounded
         groundedPlayer = controller.isGrounded;
         if (groundedPlayer && playerVelocity.y < 0)
         {
@@ -43,6 +44,7 @@ public class PlayerController : MonoBehaviour
             jumpedTimes = 0;
         }
 
+        // wasd movement input
         move = Input.GetAxis("Horizontal") * transform.right +
                Input.GetAxis("Vertical") * transform.forward;
 
@@ -56,16 +58,19 @@ public class PlayerController : MonoBehaviour
             jumpedTimes++;
         }
 
+        // makes gravity work on player
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
 
     void Sprint()
     {
+        // start sprint
         if (Input.GetButtonDown("Sprint"))
         {
             playerSpeed *= sprintMod;
         }
+        // stop sprint
         else if (Input.GetButtonUp("Sprint"))
         {
             playerSpeed /= sprintMod;
