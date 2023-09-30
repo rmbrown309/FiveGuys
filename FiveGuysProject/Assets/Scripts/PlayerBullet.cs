@@ -24,13 +24,12 @@ public class PlayerBullet : MonoBehaviour
         {
             return;
         }
-        /*Need the IDamage script to uncomment following line
+
         IDamage damageable = other.GetComponent<IDamage>();
         if (damageable != null)
         {
             damageable.takeDamage(damage);
         }
-        */
 
         Destroy(gameObject);
     }

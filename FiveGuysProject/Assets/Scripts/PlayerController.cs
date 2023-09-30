@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDamage
 {
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
 
     [Header("----- Player Stats -----")]
+    [Range(1, 15)][SerializeField] int HP;
     [Range(1, 10)][SerializeField] float playerSpeed;
     [Range(1, 3)][SerializeField] float sprintMod; // amount playerSpeed is multiplied when sprinting
     [Range(1, 3)][SerializeField] int jumpMax; // number of jumps player can perform before landing
@@ -77,4 +78,17 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void takeDamage(int amount)
+    {
+        HP -= amount;
+
+        //For when health Bar is implemented (Method name changeable)
+        //updatePlayerUI();
+
+        //Future Implementation for when a game over menu needs to appear
+        //if (HP <= 0)
+        //{
+        //    gameManager.instance.gameOver();
+        //}
+    }
 }
