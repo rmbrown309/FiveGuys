@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
     [Header("-----Player------")]
     public GameObject player;
     public PlayerController playerScript;
-    //public GameObject playerSpawnPos;
+    public GameObject playerSpawnPoint;
     [Header("-----Menu UI-----")]
     [SerializeField] GameObject activeMenu;
     [SerializeField] GameObject pauseMenu;
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
         instance = this;
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
-        //playerSpawnPos = GameObject.FindWithTag("PlayerSpawn");
+        playerSpawnPoint = GameObject.FindWithTag("Player Spawn Point");
     }
 
     // Update is called once per frame

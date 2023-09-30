@@ -20,11 +20,13 @@ public class PlayerController : MonoBehaviour, IDamage
     private bool groundedPlayer;
     private Vector3 move;
     private int jumpedTimes;
+    private int HPOrig;
     
 
     private void Start()
     {
-        
+        HPOrig = HP;
+        SpawnPlayer();
     }
 
     void Update()
@@ -90,5 +92,15 @@ public class PlayerController : MonoBehaviour, IDamage
         //{
         //    gameManager.instance.gameOver();
         //}
+    }
+
+    public void SpawnPlayer()
+    {
+        HP = HPOrig;
+        // For when health bar is implemented
+        //UpdatePlayerUI();
+        controller.enabled = false;
+        transform.position = GameManager.instance.playerSpawnPoint.transform.position;
+        controller.enabled = true;
     }
 }
