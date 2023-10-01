@@ -17,10 +17,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject activeMenu;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject winMenu;
-    [SerializeField] GameObject looseMenu;
+    [SerializeField] GameObject loseMenu;
 
     public bool isPaused;
     float origTimeScale;
+    [SerializeField] int enemiesRemainging;
 
     void Awake()
     {
@@ -39,6 +40,10 @@ public class GameManager : MonoBehaviour
         if(Input.GetButtonDown("Cancel") && activeMenu == null)
         {
             StatePaused();
+            //make the active menu be the pause menu
+            //activeMenu = pauseMenu;
+            //activeMenu.SetActive(isPaused);
+            setActive(pauseMenu);
         }
     }
 
@@ -52,9 +57,6 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
         //let the cursor move around the screen only
         Cursor.lockState = CursorLockMode.Confined;
-        //make the active menu be the pause menu
-        activeMenu = pauseMenu;
-        activeMenu.SetActive(isPaused);
     }
 
     public void StateUnpaused()
@@ -70,5 +72,27 @@ public class GameManager : MonoBehaviour
         //reset our active menu
         activeMenu.SetActive(false);
         activeMenu = null;
+    }
+    public void UpdateWinCondition(int amount)
+    {
+        enemiesRemainging += amount;
+
+        if(enemiesRemainging < 1)
+        {
+            StatePaused();
+            setActive(winMenu);
+        }
+    }
+
+    public void GameOver()
+    {
+        StatePaused();
+        setActive(loseMenu);
+    }
+
+    void setActive(GameObject setActive)
+    {
+        activeMenu = setActive;
+        activeMenu.SetActive(true);
     }
 }

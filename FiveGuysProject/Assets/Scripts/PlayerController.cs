@@ -26,12 +26,17 @@ public class PlayerController : MonoBehaviour, IDamage
     private void Start()
     {
         HPOrig = HP;
-        SpawnPlayer();
+        if (GameManager.instance.playerSpawnPoint != null)
+        {
+            SpawnPlayer();
+        }
     }
 
     void Update()
     {
         Movement();
+        
+
     }
 
 
@@ -87,11 +92,11 @@ public class PlayerController : MonoBehaviour, IDamage
         //For when health Bar is implemented (Method name changeable)
         //updatePlayerUI();
 
-        //Future Implementation for when a game over menu needs to appear
-        //if (HP <= 0)
-        //{
-        //    gameManager.instance.gameOver();
-        //}
+       // Future Implementation for when a game over menu needs to appear
+        if (HP < 1)
+        {
+            GameManager.instance.GameOver();
+        }
     }
 
     public void SpawnPlayer()

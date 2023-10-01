@@ -16,4 +16,15 @@ public class ButtonFunction : MonoBehaviour
     {
         Application.Quit();
     }
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Resume();
+    }
+
+    public void Respawn()
+    {
+        GameManager.instance.playerScript.SpawnPlayer();
+        Resume();
+    }
 }
