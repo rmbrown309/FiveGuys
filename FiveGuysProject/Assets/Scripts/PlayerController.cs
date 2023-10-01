@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour, IDamage
     [Range(1, 3)][SerializeField] int jumpMax; // number of jumps player can perform before landing
     [Range(8, 30)][SerializeField] float jumpHeight;
     [Range(-10, -40)][SerializeField] float gravityValue;
+    [SerializeField] float healthRegainSpeed;
 
 
     private Vector3 playerVelocity;
@@ -21,7 +22,9 @@ public class PlayerController : MonoBehaviour, IDamage
     private Vector3 move;
     private int jumpedTimes;
     private int HPOrig;
-    
+    //Regen detectors
+    bool isDamaged;
+    bool damageActive;
 
     private void Start()
     {
@@ -35,7 +38,13 @@ public class PlayerController : MonoBehaviour, IDamage
     void Update()
     {
         Movement();
-        
+
+        //if player got damaged AND there isnt an active regen happening
+        //then regen health
+        if (isDamaged && !damageActive)
+        {
+            StartCoroutine(RegainHelth());
+        }
 
     }
 
@@ -88,24 +97,56 @@ public class PlayerController : MonoBehaviour, IDamage
     public void takeDamage(int amount)
     {
         HP -= amount;
+        isDamaged = true;
+        UpdatePlayerUI();
 
-        //For when health Bar is implemented (Method name changeable)
-        //updatePlayerUI();
-
-       // Future Implementation for when a game over menu needs to appear
+        // Future Implementation for when a game over menu needs to appear
         if (HP < 1)
         {
             GameManager.instance.GameOver();
         }
     }
-
+    IEnumerator RegainHelth()
+    {
+        //set active regen
+        //reset damage
+        damageActive = true;
+        isDamaged = false;
+        float startWait = 0;
+        while (startWait < healthRegainSpeed)
+        {
+            //wait one second then add to counter
+            yield return new WaitForSeconds(1);
+            startWait++;
+            //if the player got damaged while regen, exit regen state
+            if (isDamaged)
+            {
+                startWait = 0;
+                damageActive = false;
+                break;
+            }
+        }
+        //if the player got damaged, skip the regen animation
+        if (!isDamaged)
+        {
+            HP = HPOrig;
+            UpdatePlayerUI();
+            startWait = 0;
+            damageActive = false;
+        }
+    }
     public void SpawnPlayer()
     {
         HP = HPOrig;
-        // For when health bar is implemented
-        //UpdatePlayerUI();
+        GameManager.instance.playerHealthBar.CrossFadeAlpha(0,0, false);
         controller.enabled = false;
         transform.position = GameManager.instance.playerSpawnPoint.transform.position;
         controller.enabled = true;
+    }
+    void UpdatePlayerUI()
+    {
+        //fade the health in and out
+        GameManager.instance.playerHealthBar.CrossFadeAlpha((1 - ((float)HP / HPOrig)), (float).8, false);
+
     }
 }

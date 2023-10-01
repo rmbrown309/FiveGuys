@@ -159,12 +159,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 9198960336271817168}
-  HP: 0
+  HP: 6
   playerSpeed: 6
   sprintMod: 2
   jumpMax: 1
   jumpHeight: 10
   gravityValue: -25
+  num: 0
+  healthRegainSpeed: 4
 --- !u!143 &9198960336271817168
 CharacterController:
   m_ObjectHideFlags: 0

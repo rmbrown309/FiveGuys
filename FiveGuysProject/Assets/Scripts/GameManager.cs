@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject winMenu;
     [SerializeField] GameObject loseMenu;
+    [SerializeField] GameObject healthActive;
     [SerializeField] TMP_Text enemiesRemainText;
 
     public Image playerHealthBar;
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         //initiallize player variables;
+        healthActive.SetActive(true);
         origTimeScale = Time.timeScale;
         instance = this;
         player = GameObject.FindWithTag("Player");
