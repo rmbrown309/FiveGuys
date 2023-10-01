@@ -17,6 +17,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [Header("----- Gun Stats -----")]
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
+
     bool isShooting;
     Vector3 playerDir;
     bool playerInRange;

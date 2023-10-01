@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour, IDamage
 {
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
+    [SerializeField] Transform shootPos;
 
     [Header("----- Player Stats -----")]
     [Range(1, 15)][SerializeField] int HP;
@@ -16,12 +17,16 @@ public class PlayerController : MonoBehaviour, IDamage
     [Range(-10, -40)][SerializeField] float gravityValue;
     [SerializeField] float healthRegainSpeed;
 
+    [Header("----- Gun Stats -----")]
+    [SerializeField] GameObject bullet;
+    [SerializeField] float shootRate;
 
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     private Vector3 move;
     private int jumpedTimes;
     private int HPOrig;
+    bool isShooting;
     //Regen detectors
     bool isDamaged;
     bool damageActive;
@@ -38,6 +43,9 @@ public class PlayerController : MonoBehaviour, IDamage
     void Update()
     {
         Movement();
+
+        if (Input.GetButton("Shoot") && !isShooting)
+            StartCoroutine(Shoot());
 
         //if player got damaged AND there isnt an active regen happening
         //then regen health
@@ -92,6 +100,31 @@ public class PlayerController : MonoBehaviour, IDamage
         {
             playerSpeed /= sprintMod;
         }
+    }
+
+    IEnumerator Shoot()
+    {
+        isShooting = true;
+
+        // Find hit position with raycast
+        Ray ray = Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f));
+        RaycastHit hit;
+        Vector3 targetPoint;
+        if (Physics.Raycast(ray, out hit))
+            targetPoint = hit.point; // aims at specific point on ray at the distance of the hit
+        else
+            targetPoint = ray.GetPoint(50); // some distant point on ray if not aiming at anything
+
+        // Calculate shooting direction
+        Vector3 shootDir = targetPoint - shootPos.position;
+
+        // Instantiates bullet object and redirects its rotation toward the shootDir
+        GameObject currBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
+        currBullet.transform.forward = shootDir.normalized;
+
+        yield return new WaitForSeconds(shootRate);
+        isShooting = false;
+
     }
 
     public void takeDamage(int amount)
