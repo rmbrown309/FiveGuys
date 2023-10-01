@@ -14,16 +14,19 @@ public class ButtonFunction : MonoBehaviour
     }
     public void Quit()
     {
+        //quit the game
         Application.Quit();
     }
     public void Restart()
     {
+        //restart the scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Resume();
     }
 
     public void Respawn()
     {
+        //spawn the player at a spawn point
         GameManager.instance.playerScript.SpawnPlayer();
         Resume();
     }

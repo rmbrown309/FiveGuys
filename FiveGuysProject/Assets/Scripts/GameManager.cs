@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,10 +19,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject winMenu;
     [SerializeField] GameObject loseMenu;
+    [SerializeField] TMP_Text enemiesRemainText;
 
+    public Image playerHealthBar;
     public bool isPaused;
+    int enemiesRemain;
     float origTimeScale;
-    [SerializeField] int enemiesRemainging;
 
     void Awake()
     {
@@ -75,21 +78,25 @@ public class GameManager : MonoBehaviour
     }
     public void UpdateWinCondition(int amount)
     {
-        enemiesRemainging += amount;
-
-        if(enemiesRemainging < 1)
+        //add a counter to the enemies 
+        enemiesRemain += amount;
+        enemiesRemainText.text = enemiesRemain.ToString("0");
+        //when there are no enemies remaining pull the win menu up
+        if(enemiesRemain < 1)
         {
             StatePaused();
             setActive(winMenu);
         }
     }
-
+    
     public void GameOver()
     {
+        //pause the menu
         StatePaused();
+        //set the active menu
         setActive(loseMenu);
     }
-
+    //set the paramater menu to be the active menu
     void setActive(GameObject setActive)
     {
         activeMenu = setActive;
