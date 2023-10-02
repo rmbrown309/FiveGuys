@@ -199,8 +199,8 @@ MonoBehaviour:
   jumpHeight: 10
   gravityValue: -25
   healthRegainSpeed: 4
-  bullet: {fileID: 4307941743950219541, guid: b8fce9a039d17f5488ca5fbb159c20ba, type: 3}
-  shootRate: 1
+  bullet: {fileID: 3773670445560834378, guid: 11797fb46023f3445838bd4a651a02d3, type: 3}
+  shootRate: 0.5
 --- !u!143 &9198960336271817168
 CharacterController:
   m_ObjectHideFlags: 0
