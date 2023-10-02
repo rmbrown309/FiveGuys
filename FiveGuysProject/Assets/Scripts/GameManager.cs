@@ -21,10 +21,12 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject loseMenu;
     [SerializeField] GameObject healthActive;
     [SerializeField] TMP_Text enemiesRemainText;
+    [SerializeField] TMP_Text scoreCount;
 
     public Image playerHealthBar;
     public bool isPaused;
     int enemiesRemain;
+    int score;
     float origTimeScale;
 
     void Awake()
@@ -78,6 +80,7 @@ public class GameManager : MonoBehaviour
         activeMenu.SetActive(false);
         activeMenu = null;
     }
+
     public void UpdateWinCondition(int amount)
     {
         //add a counter to the enemies 
@@ -90,7 +93,12 @@ public class GameManager : MonoBehaviour
             setActive(winMenu);
         }
     }
-    
+    public void IncreasePlayerScore(int num)
+    {
+        score += num;
+        scoreCount.text = score.ToString("0");
+    }
+
     public void GameOver()
     {
         //pause the menu

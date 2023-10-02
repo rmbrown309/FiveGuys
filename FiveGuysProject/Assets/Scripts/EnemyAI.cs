@@ -68,6 +68,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             //it's dead; Needs trigger from game manager to indicate to gameManager that it died and flash win screen.
             GameManager.instance.UpdateWinCondition(-1);
             Destroy(gameObject);
+            GameManager.instance.IncreasePlayerScore(1);
         }
     }
 
