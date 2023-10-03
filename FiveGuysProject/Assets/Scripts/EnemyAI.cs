@@ -84,6 +84,12 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         HP -= amount;
         agent.SetDestination(GameManager.instance.player.transform.position);
+        if (agent.remainingDistance < agent.stoppingDistance) 
+        {
+            playerDir = GameManager.instance.player.transform.position - headPos.position;
+            faceTarget();
+        }
+
         StartCoroutine(flashDamage());
 
         if (HP <= 0)
