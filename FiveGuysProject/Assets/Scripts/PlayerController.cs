@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IDamage
+public class PlayerController : MonoBehaviour, IDamage, IPower
 {
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
@@ -26,13 +26,18 @@ public class PlayerController : MonoBehaviour, IDamage
     private Vector3 move;
     private int jumpedTimes;
     private int HPOrig;
+    private float OrigSpeed;
     bool isShooting;
     //Regen detectors
     bool isDamaged;
     bool damageActive;
+    //Power Up
+    bool isPowered;
+    int powerType;
 
     private void Start()
     {
+        OrigSpeed = playerSpeed;
         HPOrig = HP;
         if (GameManager.instance.playerSpawnPoint != null)
         {
@@ -52,6 +57,10 @@ public class PlayerController : MonoBehaviour, IDamage
         if (isDamaged && !damageActive)
         {
             StartCoroutine(RegainHelth());
+        }
+        if (isPowered)
+        {
+            StartCoroutine(PowerCooldown(5));
         }
 
     }
@@ -126,7 +135,36 @@ public class PlayerController : MonoBehaviour, IDamage
         isShooting = false;
 
     }
-
+    IEnumerator PowerCooldown(float wait)
+    {
+        switch (powerType)
+        {
+            case 1:
+                yield return new WaitForSeconds(wait);
+                jumpMax = 1;
+                isPowered = false;
+                break;
+            case 2:
+                yield return new WaitForSeconds(wait);
+                playerSpeed = OrigSpeed;
+                isPowered = false;
+                break;
+            case 3:
+                break;
+        }
+    }
+    public void JumpPower(int jumps)
+    {
+        jumpMax = jumps;
+        isPowered = true;
+        powerType = 1;
+    }
+    public void SpeedBoost(float speed)
+    {
+        playerSpeed = speed;
+        isPowered = true;
+        powerType = 2;
+    }
     public void takeDamage(int amount)
     {
         HP -= amount;
