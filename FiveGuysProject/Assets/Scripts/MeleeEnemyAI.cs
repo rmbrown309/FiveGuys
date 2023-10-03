@@ -13,12 +13,12 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage
     [Header("----- Enemy Stats -----")]
     [SerializeField] int HP;
     [SerializeField] int targetFaceSpeed;
-    [SerializeField] int viewAngel;
+    [SerializeField] int viewAngle;
 
     [Header("----- Melee Stats -----")]
     [SerializeField] float hitRate;
     [SerializeField] int meleeDamage;
-    [SerializeField] int meleeRange;
+    [SerializeField] int meleeRange; //advised to keep the stoping and melee range short
 
     bool isMeleeing;
     Vector3 playerDir;
@@ -46,9 +46,10 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage
         playerDir = GameManager.instance.player.transform.position - transform.position;
         angelToPlayer = Vector3.Angle(playerDir, transform.forward);
         RaycastHit see;
+        //checks to see if enemy can see player
         if (Physics.Raycast(transform.position, playerDir, out see))
         {
-            if (see.collider.CompareTag("Player") && angelToPlayer <= viewAngel)
+            if (see.collider.CompareTag("Player") && angelToPlayer <= viewAngle)
             {
                 agent.SetDestination(GameManager.instance.player.transform.position);
                 if (agent.remainingDistance < agent.stoppingDistance)
@@ -98,7 +99,7 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage
             GameManager.instance.IncreasePlayerScore(1);
         }
     }
-
+    
     IEnumerator flashDamage()
     {
         model.material.color = Color.red;
