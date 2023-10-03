@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour
     public bool noEnemies;
     public bool isPaused;
     public int waves = 0;
-    int enemiesRemain;
+    public int enemiesRemain;
     int score;
     float origTimeScale;
 

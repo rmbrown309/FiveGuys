@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         {
             SpawnPlayer();
         }
+        if (GameManager.instance.enemiesRemain == 0)
+            GameManager.instance.noEnemies = true;
     }
 
     void Update()
