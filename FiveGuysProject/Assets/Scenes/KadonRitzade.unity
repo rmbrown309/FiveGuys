@@ -123,32 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 23800000, guid: e8739df53a079704f927270c158b1172, type: 2}
---- !u!1 &185544783 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2908664668703409485, guid: e2a57b18f852ce9489be17ece1fef0f4, type: 3}
-  m_PrefabInstance: {fileID: 1828295365192299328}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &185544784 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2175584822468794347, guid: e2a57b18f852ce9489be17ece1fef0f4, type: 3}
-  m_PrefabInstance: {fileID: 1828295365192299328}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &185544785
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 185544783}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 837412e7ffa89694d88323a7c720d7e5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy: {fileID: 3551929409588678981, guid: a2a9ab4b8049bbc47af2a94d0f121c7c, type: 3}
-  numOfEnemies: 5
-  spawnRate: 2
-  posToSpawn: {fileID: 185544784}
 --- !u!1 &353883261
 GameObject:
   m_ObjectHideFlags: 0
@@ -1032,10 +1006,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7685153062364083925, guid: a2a9ab4b8049bbc47af2a94d0f121c7c, type: 3}
-      propertyPath: m_Radius
-      value: 24
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1096,10 +1066,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2908664668703409485, guid: e2a57b18f852ce9489be17ece1fef0f4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 185544785}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2a57b18f852ce9489be17ece1fef0f4, type: 3}
 --- !u!1001 &2420994409408686999
 PrefabInstance:
@@ -1153,24 +1120,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6529593921625482064, guid: 8a93cb5b9de100a459f889cf71eb2f98, type: 3}
-      propertyPath: m_Radius
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 7133420607358106483, guid: 8a93cb5b9de100a459f889cf71eb2f98, type: 3}
-      propertyPath: headPos
-      value: 
-      objectReference: {fileID: 6285493373453413073}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a93cb5b9de100a459f889cf71eb2f98, type: 3}
---- !u!4 &6285493373453413073 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3958980552653387236, guid: 8a93cb5b9de100a459f889cf71eb2f98, type: 3}
-  m_PrefabInstance: {fileID: 2420994409408686999}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
