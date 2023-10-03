@@ -24,7 +24,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text scoreCount;
 
     public Image playerHealthBar;
+    public bool noEnemies;
     public bool isPaused;
+    public int waves = 0;
     int enemiesRemain;
     int score;
     float origTimeScale;
@@ -89,9 +91,16 @@ public class GameManager : MonoBehaviour
         //when there are no enemies remaining pull the win menu up
         if(enemiesRemain < 1)
         {
-            StatePaused();
-            setActive(winMenu);
+            noEnemies = true;
+            if (waves == 5)
+            {
+                StatePaused();
+                setActive(winMenu);
+            }
+
         }
+
+        
     }
     public void IncreasePlayerScore(int num)
     {

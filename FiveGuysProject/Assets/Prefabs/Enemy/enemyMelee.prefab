@@ -164,7 +164,7 @@ MonoBehaviour:
   shootPos: {fileID: 2347573440735477225}
   HP: 3
   targetFaceSpeed: 3
-  viewAngel: 90
+  viewAngle: 90
   hitRate: 0.5
   meleeDamage: 1
   meleeRange: 2
