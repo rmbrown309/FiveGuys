@@ -36,38 +36,46 @@ public class EnemyAI : MonoBehaviour, IDamage
     void Update()
     {
         //if the player is in range then we get the direction and tell the nav agent to set its destination towards the player and start shooting
-        if (playerInRange && canSeePlayer())
-        {
-          
-        }
-    }
-
-    bool canSeePlayer()
-    {
         playerDir = GameManager.instance.player.transform.position - headPos.position;
         angleToPlayer = Vector3.Angle(playerDir, transform.forward);
 
+        agent.SetDestination(GameManager.instance.player.transform.position);
 
-        Debug.DrawRay(headPos.position, playerDir);
-        Debug.Log(angleToPlayer);
+            if (agent.remainingDistance < agent.stoppingDistance)
+                faceTarget();
 
-        RaycastHit hit;
-        if (Physics.Raycast(headPos.position, playerDir, out hit))
-        {
-            if (hit.collider.CompareTag("Player") && angleToPlayer <= viewAngle)
-            {
-                agent.SetDestination(GameManager.instance.player.transform.position);
-
-                if (agent.remainingDistance < agent.stoppingDistance)
-                    faceTarget();
-
-                if (angleToPlayer <= shootAngle && !isShooting)
-                    StartCoroutine(shoot());
-                return true;
-            }
-        }
-        return false;
+            if (angleToPlayer <= shootAngle && !isShooting && playerInRange)
+                StartCoroutine(shoot());
+            
+        
     }
+
+    //bool canSeePlayer()
+    //{
+    //    playerDir = GameManager.instance.player.transform.position - headPos.position;
+    //    angleToPlayer = Vector3.Angle(playerDir, transform.forward);
+
+
+    //    Debug.DrawRay(headPos.position, playerDir);
+    //    Debug.Log(angleToPlayer);
+
+    //    RaycastHit hit;
+    //    if (Physics.Raycast(headPos.position, playerDir, out hit))
+    //    {
+    //        if (hit.collider.CompareTag("Player") && angleToPlayer <= viewAngle)
+    //        {
+    //            agent.SetDestination(GameManager.instance.player.transform.position);
+
+    //            if (agent.remainingDistance < agent.stoppingDistance)
+    //                faceTarget();
+
+    //            if (angleToPlayer <= shootAngle && !isShooting)
+    //                StartCoroutine(shoot());
+    //            return true;
+    //        }
+    //    }
+    //    return false;
+    //}
 
     //sheeet we shootin. Shoots the bullet.
     IEnumerator shoot()
