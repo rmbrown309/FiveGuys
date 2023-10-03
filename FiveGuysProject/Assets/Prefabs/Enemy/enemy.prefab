@@ -898,7 +898,7 @@ MonoBehaviour:
   viewAngle: 90
   bullet: {fileID: 7283729910232731192, guid: 8f6e98573d892e24ea439a8197ac0804, type: 3}
   shootRate: 2
-  shootAngle: 15
+  shootAngle: 30
 --- !u!135 &7685153062364083925
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2936,13 +2936,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9042048972405191085}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 3.0145791e-10, z: -7.285232e-10, w: 0.7071067}
+  m_LocalRotation: {x: -0.24275644, y: -0.6641305, z: 0.6641305, w: -0.24275644}
   m_LocalPosition: {x: 0.000000011175871, y: 0.000000002384183, z: 0.000000013336539}
   m_LocalScale: {x: 0.0000009999999, y: 0.000001, z: 0.000001}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4312294639575915085}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: -499.84302}
 --- !u!137 &3945902859902914066
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
