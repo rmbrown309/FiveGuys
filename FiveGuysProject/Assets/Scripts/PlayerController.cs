@@ -45,6 +45,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     private int HPOrig;
     private float OrigSpeed;
 
+    //sdf
     //Regen detectors
     bool isDamaged;
     bool damageActive;
@@ -54,6 +55,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
     private void Start()
     {
+        
         enemyToFind = GameObject.FindGameObjectsWithTag("Enemy1");
         powerIndex = -1;
         origJump = jumpMax;
@@ -208,32 +210,122 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     }
     IEnumerator JumpPowerCooldown()
     {
-        yield return new WaitForSeconds(waitT);
+        GameManager.instance.powerJumpActive.SetActive(true);
+        GameManager.instance.jumpPowerCoolDown.CrossFadeAlpha(1, 1, false);
+        GameManager.instance.jumpPowerImage.CrossFadeAlpha(1, 1, false);
+        float CD = waitT;
+        while (CD > 0)
+        {
+            //wait one second then add to counter
+            yield return new WaitForSeconds(1);
+            CD--;
+            if(CD <= 1)
+            {
+                GameManager.instance.jumpPowerCoolDown.CrossFadeAlpha(0, 1, false);
+                GameManager.instance.jumpPowerImage.CrossFadeAlpha(0, 1, false);
+            }
+            GameManager.instance.JumpPowerCoolDown(CD);
+            //if the player got damaged while regen, exit regen state
+        }
+        
+        GameManager.instance.powerJumpActive.SetActive(false);
         jumpMax = origJump;
         powerActive[0] = false;
     }
     IEnumerator SpeedPowerCooldown()
     {
-        yield return new WaitForSeconds(waitT);
+        float CD = waitT;
+        GameManager.instance.powerSpeedActive.SetActive(true);
+        GameManager.instance.speedPowerCoolDown.CrossFadeAlpha(1, 1, false);
+        GameManager.instance.speedPowerImage.CrossFadeAlpha(1, 1, false);
+        while (CD > 0)
+        {
+            //wait one second then add to counter
+            yield return new WaitForSeconds(1);
+            CD--;
+            if (CD <= 1)
+            {
+                GameManager.instance.speedPowerCoolDown.CrossFadeAlpha(0, 1, false);
+                GameManager.instance.speedPowerImage.CrossFadeAlpha(0, 1, false);
+            }
+            GameManager.instance.SpeedPowerCoolDown(CD);
+            //if the player got damaged while regen, exit regen state
+        }
+
+        GameManager.instance.powerSpeedActive.SetActive(false);
         playerSpeed = OrigSpeed;
         powerActive[1] = false;
     }
 
     IEnumerator HealthPowerCooldown()
     {
-        yield return new WaitForSeconds(waitT);
+        float CD = waitT;
+        GameManager.instance.powerHealthActive.SetActive(true);
+        GameManager.instance.healthPowerCoolDown.CrossFadeAlpha(1, 1, false);
+        GameManager.instance.healthPowerImage.CrossFadeAlpha(1, 1, false);
+        while (CD > 0)
+        {
+            //wait one second then add to counter
+            yield return new WaitForSeconds(1);
+            CD--;
+            if (CD <= 1)
+            {
+                GameManager.instance.healthPowerCoolDown.CrossFadeAlpha(0, 1, false);
+                GameManager.instance.healthPowerImage.CrossFadeAlpha(0, 1, false);
+            }
+            GameManager.instance.HealthPowerCoolDown(CD);
+            //if the player got damaged while regen, exit regen state
+        }
+
+        GameManager.instance.powerHealthActive.SetActive(false);
         healthRegainSpeed = origHealthRegen;
         powerActive[2] = false;
     }
     IEnumerator ShootRatePowerCooldown()
     {
-        yield return new WaitForSeconds(waitT);
+        float CD = waitT;
+        GameManager.instance.powerShootActive.SetActive(true);
+        GameManager.instance.shootPowerCoolDown.CrossFadeAlpha(1, 1, false);
+        GameManager.instance.shootPowerImage.CrossFadeAlpha(1, 1, false);
+        while (CD > 0)
+        {
+            //wait one second then add to counter
+            yield return new WaitForSeconds(1);
+            CD--;
+            if (CD <= 1)
+            {
+                GameManager.instance.shootPowerCoolDown.CrossFadeAlpha(0, 1, false);
+                GameManager.instance.shootPowerImage.CrossFadeAlpha(0, 1, false);
+            }
+            GameManager.instance.ShootPowerCoolDown(CD);
+            //if the player got damaged while regen, exit regen state
+        }
+
+        GameManager.instance.powerShootActive.SetActive(false);
         shootRate = origShootRate;
         powerActive[3] = false;
     }
     IEnumerator EnemyHpPowerCooldown()
     {
-        yield return new WaitForSeconds(waitT);
+        float CD = waitT;
+        GameManager.instance.powerDmgActive.SetActive(true);
+        GameManager.instance.dmgPowerCoolDown.CrossFadeAlpha(1, 1, false);
+        GameManager.instance.dmgPowerImage.CrossFadeAlpha(1, 1, false);
+        while (CD > 0)
+        {
+            //wait one second then add to counter
+            yield return new WaitForSeconds(1);
+            CD--;
+            if (CD <= 1)
+            {
+                GameManager.instance.dmgPowerCoolDown.CrossFadeAlpha(0, 1, false);
+                GameManager.instance.dmgPowerImage.CrossFadeAlpha(0, 1, false);
+            }
+            GameManager.instance.DmgPowerCoolDown(CD);
+            //if the player got damaged while regen, exit regen state
+        }
+
+        GameManager.instance.powerDmgActive.SetActive(false);
         for (int i = 0; i < enemyToFind.Length; i++)
         {
             if (enemyToFind[i] != null)
@@ -340,6 +432,5 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     {
         //fade the health in and out
         GameManager.instance.playerHealthBar.CrossFadeAlpha((1 - ((float)HP / HPOrig)), (float).8, false);
-
     }
 }

@@ -23,17 +23,43 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text enemiesRemainText;
     [SerializeField] TMP_Text scoreCount;
 
+    public GameObject powerJumpActive;
+    public GameObject powerSpeedActive;
+    public GameObject powerHealthActive;
+    public GameObject powerShootActive;
+    public GameObject powerDmgActive;
+    public TMP_Text jumpPowerCoolDown;
+    public Image jumpPowerImage;
+    public TMP_Text speedPowerCoolDown;
+    public Image speedPowerImage;
+    public TMP_Text healthPowerCoolDown;
+    public Image healthPowerImage;
+    public TMP_Text shootPowerCoolDown;
+    public Image shootPowerImage;
+    public TMP_Text dmgPowerCoolDown;
+    public Image dmgPowerImage;
     public Image playerHealthBar;
     public bool noEnemies;
     public bool isPaused;
     public int waves;
     public int enemiesRemain;
     int score;
+    int jumpCoolDown;
     float origTimeScale;
 
     void Awake()
     {
         //initiallize player variables;
+        jumpPowerCoolDown.CrossFadeAlpha(0, 1, false);
+        jumpPowerImage.CrossFadeAlpha(0, 1, false);
+        speedPowerCoolDown.CrossFadeAlpha(0, 1, false);
+        speedPowerImage.CrossFadeAlpha(0, 1, false);
+        healthPowerCoolDown.CrossFadeAlpha(0, 1, false);
+        healthPowerImage.CrossFadeAlpha(0, 1, false);
+        shootPowerCoolDown.CrossFadeAlpha(0, 1, false);
+        shootPowerImage.CrossFadeAlpha(0, 1, false);
+        dmgPowerCoolDown.CrossFadeAlpha(0, 1, false);
+        dmgPowerImage.CrossFadeAlpha(0, 1, false);
         healthActive.SetActive(true);
         origTimeScale = Time.timeScale;
         instance = this;
@@ -58,7 +84,6 @@ public class GameManager : MonoBehaviour
             setActive(pauseMenu);
         }
     }
-
     public void StatePaused()
     {
         //flip bool
@@ -106,7 +131,26 @@ public class GameManager : MonoBehaviour
         score += num;
         scoreCount.text = score.ToString("0");
     }
-
+    public void JumpPowerCoolDown(float coolDown)
+    {
+        jumpPowerCoolDown.text = coolDown.ToString("0");
+    }
+    public void SpeedPowerCoolDown(float coolDown)
+    {
+        speedPowerCoolDown.text = coolDown.ToString("0");
+    }
+    public void HealthPowerCoolDown(float coolDown)
+    {
+        healthPowerCoolDown.text = coolDown.ToString("0");
+    }
+    public void ShootPowerCoolDown(float coolDown)
+    {
+        shootPowerCoolDown.text = coolDown.ToString("0");
+    }
+    public void DmgPowerCoolDown(float coolDown)
+    {
+        dmgPowerCoolDown.text = coolDown.ToString("0");
+    }
     public void GameOver()
     {
         //pause the menu
