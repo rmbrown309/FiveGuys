@@ -893,9 +893,11 @@ MonoBehaviour:
   agent: {fileID: 5824977193453673502}
   shootPos: {fileID: 597716741979114574}
   headPos: {fileID: 7704370466756930451}
+  powerSpawn: {fileID: 0}
   HP: 3
   targetFaceSpeed: 3
   viewAngle: 90
+  percentage: 0.364
   bullet: {fileID: 7283729910232731192, guid: 8f6e98573d892e24ea439a8197ac0804, type: 3}
   shootRate: 2
   shootAngle: 30

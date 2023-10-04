@@ -25,9 +25,26 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     private bool groundedPlayer;
     private Vector3 move;
     private int jumpedTimes;
+    
+    bool isShooting;
+
+    [Header("-----PowerUp Settings-----")]
+    GameObject[] enemyToFind;
+    [SerializeField] float waitT;
+    bool[] powerActive = new bool[5];
+    int powerIndex;
+    private IEnumerator type1Routine;
+    private IEnumerator type2Routine;
+    private IEnumerator type3Routine;
+    private IEnumerator type4Routine;
+    private IEnumerator type5Routine;
+    private int origJump;
+    private float origHealthRegen;
+    private float origShootRate;
+    private int origEnemyHp;
     private int HPOrig;
     private float OrigSpeed;
-    bool isShooting;
+
     //Regen detectors
     bool isDamaged;
     bool damageActive;
@@ -37,8 +54,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
     private void Start()
     {
+        enemyToFind = GameObject.FindGameObjectsWithTag("Enemy1");
+        powerIndex = -1;
+        origJump = jumpMax;
         OrigSpeed = playerSpeed;
         HPOrig = HP;
+        origHealthRegen = healthRegainSpeed;
+        origShootRate = shootRate;
         if (GameManager.instance.playerSpawnPoint != null)
         {
             SpawnPlayer();
@@ -60,13 +82,60 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         {
             StartCoroutine(RegainHelth());
         }
-        if (isPowered)
+        switch (powerIndex)
         {
-            StartCoroutine(PowerCooldown(5));
+            case 0:
+                powerIndex = -1;
+                if (type1Routine != null)
+                {
+                    StopCoroutine(type1Routine);
+                    powerActive[0] = false;
+                }
+                type1Routine = JumpPowerCooldown();
+                StartCoroutine(type1Routine);
+                break;
+            case 1:
+                powerIndex = -1;
+                if (type2Routine != null)
+                {
+                    StopCoroutine(type2Routine);
+                    powerActive[1] = false;
+                }
+                type2Routine = SpeedPowerCooldown();
+                StartCoroutine(type2Routine);
+                break;
+            case 2:
+                powerIndex = -1;
+                if (type3Routine != null)
+                {
+                    StopCoroutine(type3Routine);
+                    powerActive[2] = false;
+                }
+                type3Routine = HealthPowerCooldown();
+                StartCoroutine(type3Routine);
+                break;
+            case 3:
+                powerIndex = -1;
+                if (type4Routine != null)
+                {
+                    StopCoroutine(type4Routine);
+                    powerActive[3] = false;
+                }
+                type4Routine = ShootRatePowerCooldown();
+                StartCoroutine(type4Routine);
+                break;
+            case 4:
+                powerIndex = -1;
+                if (type5Routine != null)
+                {
+                    StopCoroutine(type5Routine);
+                    powerActive[4] = false;
+                }
+                type5Routine = EnemyHpPowerCooldown();
+                StartCoroutine(type5Routine);
+                break;
         }
-
     }
-
 
     void Movement()
     {
@@ -137,35 +206,86 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         isShooting = false;
 
     }
-    IEnumerator PowerCooldown(float wait)
+    IEnumerator JumpPowerCooldown()
     {
-        switch (powerType)
+        yield return new WaitForSeconds(waitT);
+        jumpMax = origJump;
+        powerActive[0] = false;
+    }
+    IEnumerator SpeedPowerCooldown()
+    {
+        yield return new WaitForSeconds(waitT);
+        playerSpeed = OrigSpeed;
+        powerActive[1] = false;
+    }
+
+    IEnumerator HealthPowerCooldown()
+    {
+        yield return new WaitForSeconds(waitT);
+        healthRegainSpeed = origHealthRegen;
+        powerActive[2] = false;
+    }
+    IEnumerator ShootRatePowerCooldown()
+    {
+        yield return new WaitForSeconds(waitT);
+        shootRate = origShootRate;
+        powerActive[3] = false;
+    }
+    IEnumerator EnemyHpPowerCooldown()
+    {
+        yield return new WaitForSeconds(waitT);
+        for (int i = 0; i < enemyToFind.Length; i++)
         {
-            case 1:
-                yield return new WaitForSeconds(wait);
-                jumpMax = 1;
-                isPowered = false;
-                break;
-            case 2:
-                yield return new WaitForSeconds(wait);
-                playerSpeed = OrigSpeed;
-                isPowered = false;
-                break;
-            case 3:
-                break;
+            if (enemyToFind[i] != null)
+            {
+                EnemyAI enemyScript = enemyToFind[i].GetComponent<EnemyAI>();
+
+                enemyScript.SetHP(origEnemyHp);
+            }
         }
+        powerActive[4] = false;
     }
     public void JumpPower(int jumps)
     {
         jumpMax = jumps;
-        isPowered = true;
-        powerType = 1;
+        powerActive[0] = true;
+        powerIndex = 0;
     }
     public void SpeedBoost(float speed)
     {
         playerSpeed = speed;
-        isPowered = true;
-        powerType = 2;
+        powerActive[1] = true;
+        powerIndex = 1;
+    }
+    public void HealthRegen(float regen)
+    {
+        healthRegainSpeed = regen;
+        powerActive[2] = true;
+        powerIndex = 2;
+    }
+    public void ShootRate(float shoot)
+    {
+        shootRate = shoot;
+        powerActive[3] = true;
+        powerIndex = 3;
+    }
+    public void DamageUp(int damage)
+    {
+        for (int i = 0; i < enemyToFind.Length; i++)
+        {
+            if (enemyToFind[i] != null)
+            {
+                EnemyAI enemyScript = enemyToFind[i].GetComponent<EnemyAI>();
+                if (origEnemyHp == 0)
+                {
+                    origEnemyHp = enemyScript.GetHp();
+                }
+                enemyScript.SetHP(damage);
+            }
+            
+        }
+        powerActive[4] = true;
+        powerIndex = 4;
     }
     public void takeDamage(int amount)
     {
@@ -211,7 +331,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     public void SpawnPlayer()
     {
         HP = HPOrig;
-        GameManager.instance.playerHealthBar.CrossFadeAlpha(0,0, false);
+        GameManager.instance.playerHealthBar.CrossFadeAlpha(0, 0, false);
         controller.enabled = false;
         transform.position = GameManager.instance.playerSpawnPoint.transform.position;
         controller.enabled = true;

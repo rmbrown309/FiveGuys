@@ -31,7 +31,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.654, y: 0.95, z: -40.4}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -49,10 +49,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 1035692266659615446}
-  destroyTimer: 10
-  typePower: 1
+  player: {fileID: 0}
+  destroyTimer: 40
+  typePower: 5
   newJumpMax: 3
   newSpeedMax: 10
+  newDamage: 1
+  newShootRate: 0.1
+  newRegen: 1
+  randType: 1
 --- !u!33 &7258941296870575776
 MeshFilter:
   m_ObjectHideFlags: 0

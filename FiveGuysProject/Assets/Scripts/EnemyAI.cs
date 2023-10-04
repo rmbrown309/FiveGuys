@@ -11,11 +11,13 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] UnityEngine.AI.NavMeshAgent agent;
     [SerializeField] Transform shootPos;
     [SerializeField] Transform headPos;
+    [SerializeField] GameObject powerSpawn;
 
     [Header("----- Enemy Stats -----")]
     [SerializeField] int HP;
     [SerializeField] int targetFaceSpeed;
     [SerializeField] int viewAngle;
+    [Range(0, 1)][SerializeField] float percentage;
 
     [Header("----- Gun Stats -----")]
     [SerializeField] GameObject bullet;
@@ -93,6 +95,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         agent.SetDestination(GameManager.instance.player.transform.position);
         if (agent.remainingDistance < agent.stoppingDistance) 
         {
+
             playerDir = GameManager.instance.player.transform.position - headPos.position;
             faceTarget();
         }
@@ -103,6 +106,10 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             //it's dead; Needs trigger from game manager to indicate to gameManager that it died and flash win screen.
             GameManager.instance.UpdateWinCondition(-1);
+            if (Random.value > percentage)
+            {
+                GameObject PowerSpawn = Instantiate(powerSpawn, shootPos.position, Quaternion.identity);
+            }
             Destroy(gameObject);
             GameManager.instance.IncreasePlayerScore(1);
         }
@@ -121,7 +128,14 @@ public class EnemyAI : MonoBehaviour, IDamage
         Quaternion rot = Quaternion.LookRotation(playerDir);
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * targetFaceSpeed);
     }
-
+    public void SetHP(int health)
+    {
+        HP = health;
+    }
+    public int GetHp()
+    {
+        return HP;
+    }
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))

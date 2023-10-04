@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(waves);
+        //Debug.Log(waves);
 
         //once esc is pressed and there arent any menus active pause the game
         if(Input.GetButtonDown("Cancel") && activeMenu == null)
