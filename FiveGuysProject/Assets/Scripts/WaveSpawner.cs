@@ -11,6 +11,7 @@ public class WaveSpawner : MonoBehaviour
     [Range(1, 5)][SerializeField] int waveNum; // On what wave this spawner is active
     [SerializeField] int numOfEnemies; // number of enemies spawned during the wave
     [SerializeField] float spawnRate; // seconds between each emnemy spawn
+    [SerializeField] bool rats;
 
     bool spawnStopped = false;
     bool isWaveActive = true;
@@ -38,7 +39,8 @@ public class WaveSpawner : MonoBehaviour
         isWaveActive = false;
 
         // increments remaining enemies by the amount of enemies about to spawn
-        GameManager.instance.UpdateWinCondition(numOfEnemies);
+        if(!rats)
+            GameManager.instance.UpdateWinCondition(numOfEnemies);
 
         // spawns the specified enemies at the specified rate
         for (int i = 0; i < numOfEnemies; i++)

@@ -45,6 +45,7 @@ public class RatPatrolAI : MonoBehaviour
         if (damageable != null && playerScript != null)
         {
             damageable.takeDamage(damage);
+            Destroy(gameObject);
         }
 
     }
