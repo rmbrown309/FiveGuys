@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 3874802237693387725}
   - component: {fileID: 4443684677530788087}
   - component: {fileID: 3445881978267480410}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: TempPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -201,6 +201,7 @@ MonoBehaviour:
   healthRegainSpeed: 4
   bullet: {fileID: 3773670445560834378, guid: 11797fb46023f3445838bd4a651a02d3, type: 3}
   shootRate: 0.5
+  waitT: 8
 --- !u!143 &9198960336271817168
 CharacterController:
   m_ObjectHideFlags: 0

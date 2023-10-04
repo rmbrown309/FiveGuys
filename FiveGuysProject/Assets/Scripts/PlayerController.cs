@@ -56,7 +56,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     private void Start()
     {
         
-        enemyToFind = GameObject.FindGameObjectsWithTag("Enemy1");
+        enemyToFind = GameObject.FindGameObjectsWithTag("Enemy");
         powerIndex = -1;
         origJump = jumpMax;
         OrigSpeed = playerSpeed;

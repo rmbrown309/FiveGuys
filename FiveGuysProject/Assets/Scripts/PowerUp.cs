@@ -5,8 +5,6 @@ using UnityEngine;
 public class PowerUp : MonoBehaviour
 {
 
-    [SerializeField] Rigidbody rb;
-    [SerializeField] GameObject player;
     [SerializeField] float destroyTimer;
     [SerializeField] int typePower;
     [SerializeField] int newJumpMax;

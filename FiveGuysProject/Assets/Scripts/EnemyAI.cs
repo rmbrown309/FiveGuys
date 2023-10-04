@@ -12,12 +12,12 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Transform shootPos;
     [SerializeField] Transform headPos;
     [SerializeField] GameObject powerSpawn;
+    [Range(0, 1)][SerializeField] float powerSpawnPercentage;
 
     [Header("----- Enemy Stats -----")]
     [SerializeField] int HP;
     [SerializeField] int targetFaceSpeed;
     [SerializeField] int viewAngle;
-    [Range(0, 1)][SerializeField] float percentage;
 
     [Header("----- Gun Stats -----")]
     [SerializeField] GameObject bullet;
@@ -106,7 +106,7 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             //it's dead; Needs trigger from game manager to indicate to gameManager that it died and flash win screen.
             GameManager.instance.UpdateWinCondition(-1);
-            if (Random.value > percentage)
+            if (Random.value < powerSpawnPercentage)
             {
                 GameObject PowerSpawn = Instantiate(powerSpawn, shootPos.position, Quaternion.identity);
             }
