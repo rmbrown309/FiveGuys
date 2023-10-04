@@ -28,7 +28,7 @@ public class WaveSpawner : MonoBehaviour
         // allows next wave to begin
         if (spawnStopped && GameManager.instance.enemiesRemain == 0)
         {
-            GameManager.instance.waves = waveNum + 1;
+            GameManager.instance.IncreaseWaveCount(waveNum + 1);
             spawnStopped = false; // stops waves from being reset to a previous value
         }
     }

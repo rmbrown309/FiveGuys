@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject healthActive;
     [SerializeField] TMP_Text enemiesRemainText;
     [SerializeField] TMP_Text scoreCount;
+    [SerializeField] TMP_Text currentWaveCount;
 
     public GameObject powerJumpActive;
     public GameObject powerSpeedActive;
@@ -131,6 +132,12 @@ public class GameManager : MonoBehaviour
         score += num;
         scoreCount.text = score.ToString("0");
     }
+    public void IncreaseWaveCount(int num)
+    {
+        waves = num;
+        currentWaveCount.text = waves.ToString("0");
+    }
+
     public void JumpPowerCoolDown(float coolDown)
     {
         jumpPowerCoolDown.text = coolDown.ToString("0");
@@ -151,6 +158,7 @@ public class GameManager : MonoBehaviour
     {
         dmgPowerCoolDown.text = coolDown.ToString("0");
     }
+
     public void GameOver()
     {
         //pause the menu
@@ -158,6 +166,7 @@ public class GameManager : MonoBehaviour
         //set the active menu
         setActive(loseMenu);
     }
+
     //set the paramater menu to be the active menu
     void setActive(GameObject setActive)
     {
