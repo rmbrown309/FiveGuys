@@ -29,8 +29,7 @@ public class EnemyAI : MonoBehaviour, IDamage
 
     void Start()
     {
-        //alerts game manager that an enemy exists so it can tick the counter.
-        GameManager.instance.UpdateWinCondition(1);
+        
     }
 
     void Update()

@@ -27,8 +27,7 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage
 
     void Start()
     {
-        //tells the game manager that there is an enemy to count
-        GameManager.instance.UpdateWinCondition(1);
+        
     }
 
     void Update()

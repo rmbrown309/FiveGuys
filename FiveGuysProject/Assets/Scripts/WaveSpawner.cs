@@ -4,37 +4,49 @@ using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
 {
-    // Start is called before the first frame update
-    [SerializeField] GameObject enemy;
-    [SerializeField] int numOfEnemies;
-    [SerializeField] float spawnRate;
+    [Header("-----Components------")]
     [SerializeField] Transform posToSpawn;
+    [SerializeField] GameObject enemy; // enemy type spawned by this spawner
+    [Header("-----Spawner Stats------")]
+    [Range(1, 5)][SerializeField] int waveNum; // On what wave this spawner is active
+    [SerializeField] int numOfEnemies; // number of enemies spawned during the wave
+    [SerializeField] float spawnRate; // seconds between each emnemy spawn
 
-    int origNumOfEnemies;
+    bool spawnStopped = false;
+    bool isWaveActive = true;
 
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.instance.noEnemies == true && GameManager.instance.waves != 5)
+        // Spawns enemies only on the correct wave number
+        if (isWaveActive && GameManager.instance.waves == waveNum)
         {
-            origNumOfEnemies = numOfEnemies;
             StartCoroutine(TotalEnemy());
-            GameManager.instance.waves++;
-            GameManager.instance.noEnemies = false;
         }
 
+        // allows next wave to begin
+        if (spawnStopped && GameManager.instance.enemiesRemain == 0)
+        {
+            GameManager.instance.waves = waveNum + 1;
+            spawnStopped = false; // stops waves from being reset to a previous value
+        }
     }
 
     IEnumerator TotalEnemy()
     {
-        while (numOfEnemies > 0 )
+        // prevents spawner from starting again during the wave
+        isWaveActive = false;
+
+        // increments remaining enemies by the amount of enemies about to spawn
+        GameManager.instance.UpdateWinCondition(numOfEnemies);
+
+        // spawns the specified enemies at the specified rate
+        for (int i = 0; i < numOfEnemies; i++)
         {
-
             Instantiate(enemy, posToSpawn.position, Quaternion.identity);
-            numOfEnemies--;
             yield return new WaitForSeconds(spawnRate);
-
         }
-        numOfEnemies = origNumOfEnemies;
+
+        spawnStopped = true;
     }
 }

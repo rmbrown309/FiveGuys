@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     public Image playerHealthBar;
     public bool noEnemies;
     public bool isPaused;
-    public int waves = 0;
+    public int waves;
     public int enemiesRemain;
     int score;
     float origTimeScale;
@@ -40,11 +40,14 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         playerSpawnPoint = GameObject.FindWithTag("Player Spawn Point");
+        waves = 1;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(waves);
+
         //once esc is pressed and there arent any menus active pause the game
         if(Input.GetButtonDown("Cancel") && activeMenu == null)
         {
@@ -88,18 +91,14 @@ public class GameManager : MonoBehaviour
         //add a counter to the enemies 
         enemiesRemain += amount;
         enemiesRemainText.text = enemiesRemain.ToString("0");
-        //when there are no enemies remaining pull the win menu up
-        if(enemiesRemain < 1)
+        //when there are no enemies or waves remaining pull the win menu up
+        if(enemiesRemain < 1 && waves == 5)
         {
             noEnemies = true;
-            if (waves == 5)
-            {
-                StatePaused();
-                setActive(winMenu);
-            }
-
+            
+            StatePaused();
+            setActive(winMenu);
         }
-
         
     }
     public void IncreasePlayerScore(int num)
