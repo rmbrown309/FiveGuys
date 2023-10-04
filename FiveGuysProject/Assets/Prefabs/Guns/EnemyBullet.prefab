@@ -12,17 +12,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyBullet
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: faed0e6ed186b9b479ddef4ff61a5f80, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: faed0e6ed186b9b479ddef4ff61a5f80, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.1436877
+      value: 20.409779
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: faed0e6ed186b9b479ddef4ff61a5f80, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.75
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: faed0e6ed186b9b479ddef4ff61a5f80, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.9598389
+      value: -23.285673
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: faed0e6ed186b9b479ddef4ff61a5f80, type: 3}
       propertyPath: m_LocalRotation.w
@@ -85,7 +89,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 31794849329376779}
   damage: 1
-  speed: 15
+  speed: 18
   destroyTime: 3
 --- !u!136 &7518422455510651041
 CapsuleCollider:
@@ -106,8 +110,8 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.101989836
-  m_Height: 0.12854995
+  m_Radius: 0.15
+  m_Height: 0.15
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0.10154262}
 --- !u!54 &31794849329376779

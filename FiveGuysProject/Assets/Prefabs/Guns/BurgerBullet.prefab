@@ -180,7 +180,7 @@ GameObject:
   - component: {fileID: 4078337398798466207}
   - component: {fileID: 9014295080919762298}
   - component: {fileID: 4034368476981674213}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BurgerBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
