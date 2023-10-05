@@ -36,40 +36,18 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage
 
     void Update()
     {
-        //check if player is in range, to get the direction and tell it to move, and deal damage
-        if (playerInRange && canSeePlayer())
-        {
-            Debug.DrawRay(shootPos.transform.position, shootPos.forward * meleeRange, Color.red);
-        }
-        agent.SetDestination(GameManager.instance.player.transform.position);
-    }
-
-    bool canSeePlayer()
-    {
-
         playerDir = GameManager.instance.player.transform.position - headPos.position;
         angelToPlayer = Vector3.Angle(playerDir, transform.forward);
-        RaycastHit see;
-        //checks to see if enemy can see player
-        if (Physics.Raycast(headPos.position, playerDir, out see))
-        {
-            if (see.collider.CompareTag("Player") && angelToPlayer <= viewAngle)
-            {
-                agent.SetDestination(GameManager.instance.player.transform.position);
-                if (agent.remainingDistance <= agent.stoppingDistance)
-                {
-                    faceTarget();
-                }
 
-                if (angelToPlayer <= hitAngle && !isMeleeing)
-                {
-                    StartCoroutine(melee());
-                }
-                return true;
-            }
-        }
-        return false;
+        agent.SetDestination(GameManager.instance.player.transform.position);
+
+        if (agent.remainingDistance <= agent.stoppingDistance)
+            faceTarget();
+
+        if (angelToPlayer <= hitAngle && !isMeleeing && playerInRange)
+            StartCoroutine(melee());
     }
+
     //stab time
     IEnumerator melee()
     {
