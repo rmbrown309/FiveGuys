@@ -28,6 +28,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     Vector3 playerDir;
     bool playerInRange;
     float angleToPlayer;
+    Vector3 spawnPos;
 
     void Start()
     {
@@ -108,7 +109,8 @@ public class EnemyAI : MonoBehaviour, IDamage
             GameManager.instance.UpdateWinCondition(-1);
             if (Random.value < powerSpawnPercentage)
             {
-                GameObject PowerSpawn = Instantiate(powerSpawn, shootPos.position, Quaternion.identity);
+                spawnPos = new Vector3(transform.position.x, 1, transform.position.z);
+                GameObject PowerSpawn = Instantiate(powerSpawn, spawnPos , Quaternion.identity);
             }
             Destroy(gameObject);
             GameManager.instance.IncreasePlayerScore(1);

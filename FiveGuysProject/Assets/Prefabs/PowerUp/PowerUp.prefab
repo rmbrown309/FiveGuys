@@ -51,10 +51,13 @@ MonoBehaviour:
   typePower: 5
   newJumpMax: 2
   newSpeedMax: 10
-  newDamage: 3
+  newEnemyHealthDown: 1
   newShootRate: 0.25
   newRegen: 2
   randType: 1
+  rotationSpeed: 40
+  duration: 2.5
+  heightUp: 0.3
 --- !u!33 &7258941296870575776
 MeshFilter:
   m_ObjectHideFlags: 0
