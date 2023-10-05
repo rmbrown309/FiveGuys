@@ -25,8 +25,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     private bool groundedPlayer;
     private Vector3 move;
     private int jumpedTimes;
-    
+
     bool isShooting;
+    bool isSprinting;
 
     [Header("-----PowerUp Settings-----")]
     GameObject[] enemyToFind;
@@ -45,7 +46,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     private int HPOrig;
     private float OrigSpeed;
 
-    //sdf
     //Regen detectors
     bool isDamaged;
     bool damageActive;
@@ -55,11 +55,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
     private void Start()
     {
-        
         enemyToFind = GameObject.FindGameObjectsWithTag("Enemy");
         powerIndex = -1;
         origJump = jumpMax;
         OrigSpeed = playerSpeed;
+        Debug.Log(OrigSpeed);
         HPOrig = HP;
         origHealthRegen = healthRegainSpeed;
         origShootRate = shootRate;
@@ -176,11 +176,19 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         if (Input.GetButtonDown("Sprint"))
         {
             playerSpeed *= sprintMod;
+            //isSprinting = true;
         }
         // stop sprint
         else if (Input.GetButtonUp("Sprint"))
         {
             playerSpeed /= sprintMod;
+            //isSprinting = false;
+        }
+        if (Input.GetButtonUp("Sprint") && isSprinting)
+        {
+            playerSpeed *= sprintMod;
+            isSprinting = false;
+            Debug.Log(isSprinting);
         }
     }
 
@@ -219,7 +227,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             //wait one second then add to counter
             yield return new WaitForSeconds(1);
             CD--;
-            if(CD <= 1)
+            if (CD <= 1)
             {
                 GameManager.instance.jumpPowerCoolDown.CrossFadeAlpha(0, 1, false);
                 GameManager.instance.jumpPowerImage.CrossFadeAlpha(0, 1, false);
@@ -227,7 +235,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             GameManager.instance.JumpPowerCoolDown(CD);
             //if the player got damaged while regen, exit regen state
         }
-        
+
         GameManager.instance.powerJumpActive.SetActive(false);
         jumpMax = origJump;
         powerActive[0] = false;
@@ -254,6 +262,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
         GameManager.instance.powerSpeedActive.SetActive(false);
         playerSpeed = OrigSpeed;
+        //if (isSprinting)
+        //{
+        //    playerSpeed = playerSpeed + (OrigSpeed / sprintMod);
+        // }
+        isSprinting = true;
+        Debug.Log(playerSpeed);
         powerActive[1] = false;
     }
 
@@ -361,7 +375,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         powerActive[3] = true;
         powerIndex = 3;
     }
-    public void DamageUp(int damage)
+    public void EnemyHealthDown(int damage)
     {
         for (int i = 0; i < enemyToFind.Length; i++)
         {
@@ -372,9 +386,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
                 {
                     origEnemyHp = enemyScript.GetHp();
                 }
+
                 enemyScript.SetHP(damage);
             }
-            
         }
         powerActive[4] = true;
         powerIndex = 4;

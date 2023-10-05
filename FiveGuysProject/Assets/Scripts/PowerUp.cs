@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class PowerUp : MonoBehaviour
 {
@@ -9,16 +10,28 @@ public class PowerUp : MonoBehaviour
     [SerializeField] int typePower;
     [SerializeField] int newJumpMax;
     [SerializeField] int newSpeedMax;
-    [SerializeField] int newDamage;
+    [SerializeField] int newEnemyHealthDown;
     [SerializeField] float newShootRate;
     [SerializeField] float newRegen;
     [SerializeField] bool randType;
-
+    [SerializeField] float rotationSpeed;
+    [SerializeField] float duration;
+    [SerializeField] float heightUp;
+    Vector3 origPosition;
     // Start is called before the first frame update
     void Start()
     {
+        origPosition = transform.position;
         Destroy(gameObject, destroyTimer);
     }
+    private void Update()
+    {
+        transform.Rotate(Vector3.up * (rotationSpeed * Time.deltaTime));
+
+        float newY = Mathf.Sin(Time.time * duration) * heightUp + origPosition.y;
+        transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+    }
+
 
     // Update is called once per frame
     private void OnTriggerEnter(Collider other)
@@ -59,12 +72,12 @@ public class PowerUp : MonoBehaviour
                 case 5:
                     Debug.Log("dmg");
 
-                    powerUp.DamageUp(newDamage);
+                    powerUp.EnemyHealthDown(newEnemyHealthDown);
                     break;
                 case 6:
                     Debug.Log("dmg");
 
-                    powerUp.DamageUp(newDamage);
+                    powerUp.EnemyHealthDown(newEnemyHealthDown);
                     break;
             }
         }
