@@ -175,14 +175,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         // start sprint
         if (Input.GetButtonDown("Sprint"))
         {
-            isSprinting = true;
             playerSpeed *= sprintMod;
-        }
-        // stop sprint
-        else if (Input.GetButtonUp("Sprint") && isSprinting)
-        {
-            isSprinting = false;
-            playerSpeed = OrigSpeed;
+            isSprinting = true;
         }
         else if (Input.GetButtonUp("Sprint"))
         {
@@ -344,9 +338,20 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         {
             if (enemyToFind[i] != null)
             {
-                EnemyAI enemyScript = enemyToFind[i].GetComponent<EnemyAI>();
+                if (enemyToFind[i].GetComponent<EnemyAI>() != null)
+                {
 
-                enemyScript.SetHP(origEnemyHp);
+                    EnemyAI enemyScript = enemyToFind[i].GetComponent<EnemyAI>();
+
+                    enemyScript.SetHP(origEnemyHp);
+                }
+                else if (enemyToFind[i].GetComponent<MeleeEnemyAI>() != null)
+                {
+
+                    MeleeEnemyAI enemyScript = enemyToFind[i].GetComponent<MeleeEnemyAI>();
+
+                    enemyScript.SetHP(origEnemyHp);
+                }
             }
         }
         powerActive[4] = false;
@@ -360,6 +365,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     public void SpeedBoost(float speed)
     {
         playerSpeed = speed;
+        if (isSprinting)
+        {
+            playerSpeed = speed * sprintMod;
+        }
         powerActive[1] = true;
         powerIndex = 1;
     }
@@ -382,13 +391,28 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         {
             if (enemyToFind[i] != null)
             {
-                EnemyAI enemyScript = enemyToFind[i].GetComponent<EnemyAI>();
-                if (origEnemyHp == 0)
+                EnemyAI enemyScript;
+                MeleeEnemyAI meleeEnemyScript;
+                if (enemyToFind[i].GetComponent<EnemyAI>() != null)
                 {
-                    origEnemyHp = enemyScript.GetHp();
-                }
+                    enemyScript = enemyToFind[i].GetComponent<EnemyAI>();
+                    if (origEnemyHp == 0)
+                    {
+                        origEnemyHp = enemyScript.GetHp();
+                    }
 
-                enemyScript.SetHP(damage);
+                    enemyScript.SetHP(damage);
+                }
+                else if(enemyToFind[i].GetComponent<MeleeEnemyAI>() != null)
+                {
+                    meleeEnemyScript = enemyToFind[i].GetComponent<MeleeEnemyAI>();
+                    if (origEnemyHp == 0)
+                    {
+                        origEnemyHp = meleeEnemyScript.GetHp();
+                    }
+                    meleeEnemyScript.SetHP(damage);
+                }
+                
             }
         }
         powerActive[4] = true;

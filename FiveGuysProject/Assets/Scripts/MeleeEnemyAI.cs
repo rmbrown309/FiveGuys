@@ -65,7 +65,14 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage
         yield return new WaitForSeconds(hitRate);
         isMeleeing = false;
     }
-
+    public int GetHp()
+    {
+        return HP;
+    }
+    public void SetHP(int hp)
+    {
+        HP = hp;
+    }
     public void takeDamage(int amount)
     {
         HP -= amount;
