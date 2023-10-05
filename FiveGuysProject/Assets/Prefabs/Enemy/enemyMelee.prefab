@@ -1277,7 +1277,7 @@ MonoBehaviour:
   HP: 3
   targetFaceSpeed: 3
   viewAngle: 90
-  hitRate: 2
+  hitRate: 1
   hitAngle: 90
   meleeDamage: 1
   meleeRange: 4
