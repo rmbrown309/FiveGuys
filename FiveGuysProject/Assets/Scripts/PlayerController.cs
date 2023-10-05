@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
     private void Start()
     {
-        enemyToFind = GameObject.FindGameObjectsWithTag("Enemy");
+       
         powerIndex = -1;
         origJump = jumpMax;
         OrigSpeed = playerSpeed;
@@ -175,20 +175,19 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         // start sprint
         if (Input.GetButtonDown("Sprint"))
         {
+            isSprinting = true;
             playerSpeed *= sprintMod;
-            //isSprinting = true;
         }
         // stop sprint
+        else if (Input.GetButtonUp("Sprint") && isSprinting)
+        {
+            isSprinting = false;
+            playerSpeed = OrigSpeed;
+        }
         else if (Input.GetButtonUp("Sprint"))
         {
             playerSpeed /= sprintMod;
-            //isSprinting = false;
-        }
-        if (Input.GetButtonUp("Sprint") && isSprinting)
-        {
-            playerSpeed *= sprintMod;
             isSprinting = false;
-            Debug.Log(isSprinting);
         }
     }
 
@@ -257,16 +256,17 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
                 GameManager.instance.speedPowerImage.CrossFadeAlpha(0, 1, false);
             }
             GameManager.instance.SpeedPowerCoolDown(CD);
+            
             //if the player got damaged while regen, exit regen state
         }
 
         GameManager.instance.powerSpeedActive.SetActive(false);
+        
         playerSpeed = OrigSpeed;
-        //if (isSprinting)
-        //{
-        //    playerSpeed = playerSpeed + (OrigSpeed / sprintMod);
-        // }
-        isSprinting = true;
+        if (isSprinting)
+        {
+            playerSpeed = playerSpeed * sprintMod;
+        }
         Debug.Log(playerSpeed);
         powerActive[1] = false;
     }
@@ -377,6 +377,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     }
     public void EnemyHealthDown(int damage)
     {
+        enemyToFind = GameObject.FindGameObjectsWithTag("Enemy");
         for (int i = 0; i < enemyToFind.Length; i++)
         {
             if (enemyToFind[i] != null)
