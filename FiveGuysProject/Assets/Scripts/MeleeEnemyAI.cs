@@ -9,6 +9,9 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage
     [SerializeField] Renderer model;
     [SerializeField] UnityEngine.AI.NavMeshAgent agent;
     [SerializeField] Transform shootPos;
+    [SerializeField] Transform headPos;
+    [SerializeField] GameObject powerSpawn;
+    [Range(0, 1)][SerializeField] float powerSpawnPercentage;
 
     [Header("----- Enemy Stats -----")]
     [SerializeField] int HP;
@@ -17,6 +20,7 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage
 
     [Header("----- Melee Stats -----")]
     [SerializeField] float hitRate;
+    [SerializeField] int hitAngle;
     [SerializeField] int meleeDamage;
     [SerializeField] int meleeRange; //advised to keep the stoping and melee range short
 
@@ -37,27 +41,27 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage
         {
             Debug.DrawRay(shootPos.transform.position, shootPos.forward * meleeRange, Color.red);
         }
+        agent.SetDestination(GameManager.instance.player.transform.position);
     }
 
     bool canSeePlayer()
     {
 
-        playerDir = GameManager.instance.player.transform.position - transform.position;
+        playerDir = GameManager.instance.player.transform.position - headPos.position;
         angelToPlayer = Vector3.Angle(playerDir, transform.forward);
         RaycastHit see;
         //checks to see if enemy can see player
-        if (Physics.Raycast(transform.position, playerDir, out see))
+        if (Physics.Raycast(headPos.position, playerDir, out see))
         {
             if (see.collider.CompareTag("Player") && angelToPlayer <= viewAngle)
             {
                 agent.SetDestination(GameManager.instance.player.transform.position);
-                if (agent.remainingDistance < agent.stoppingDistance)
+                if (agent.remainingDistance <= agent.stoppingDistance)
                 {
                     faceTarget();
                 }
-                agent.SetDestination(GameManager.instance.player.transform.position);
 
-                if (!isMeleeing)
+                if (angelToPlayer <= hitAngle && !isMeleeing)
                 {
                     StartCoroutine(melee());
                 }
@@ -70,8 +74,7 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage
     IEnumerator melee()
     {
         isMeleeing = true;
-        RaycastHit hit;
-        if (Physics.Raycast(shootPos.transform.position, playerDir, out hit, meleeRange))
+        if (Physics.Raycast(shootPos.transform.position, playerDir, out RaycastHit hit, meleeRange))
         {
             IDamage damagable = hit.collider.GetComponent<IDamage>();
             //checks to see if it is not hitting an enemy
@@ -94,6 +97,10 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage
         {
             //is dead
             GameManager.instance.UpdateWinCondition(-1);
+            if (Random.value < powerSpawnPercentage)
+            {
+                GameObject PowerSpawn = Instantiate(powerSpawn, shootPos.position, Quaternion.identity);
+            }
             Destroy(gameObject);
             GameManager.instance.IncreasePlayerScore(1);
         }
