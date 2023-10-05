@@ -896,7 +896,7 @@ MonoBehaviour:
   powerSpawn: {fileID: 3765320052660688747, guid: c47bfb552fb3908498c28232875026b8, type: 3}
   powerSpawnPercentage: 0.197
   HP: 3
-  targetFaceSpeed: 3
+  targetFaceSpeed: 6
   viewAngle: 90
   bullet: {fileID: 7283729910232731192, guid: 8f6e98573d892e24ea439a8197ac0804, type: 3}
   shootRate: 2
