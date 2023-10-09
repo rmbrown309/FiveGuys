@@ -39,7 +39,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     {
         //if the player is in range then we get the direction and tell the nav agent to set its destination towards the player and start shooting
         playerDir = GameManager.instance.player.transform.position - headPos.position;
-        angleToPlayer = Vector3.Angle(playerDir, transform.forward);
+        angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
 
         agent.SetDestination(GameManager.instance.player.transform.position);
 
@@ -83,7 +83,10 @@ public class EnemyAI : MonoBehaviour, IDamage
     IEnumerator shoot()
     {
         isShooting = true;
-        Instantiate(bullet, shootPos.position, transform.rotation);
+        GameObject currBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
+        //allows enemies to shoot vertically toward player
+        currBullet.transform.forward = playerDir.normalized;
+
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
 
