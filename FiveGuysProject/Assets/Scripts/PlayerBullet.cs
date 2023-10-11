@@ -7,7 +7,7 @@ public class PlayerBullet : MonoBehaviour
     [SerializeField] Rigidbody rb;
 
     [Header("----- Bullet Stats -----")]
-    [SerializeField] int damage;
+    public int damage;
     [SerializeField] int speed;
     [SerializeField] int destroyTime;
 

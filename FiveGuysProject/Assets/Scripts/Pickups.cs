@@ -60,12 +60,7 @@ public class Pickups : MonoBehaviour
                     break;
 
                 case PickupType.DamageUp:
-                    //not yet implemented
-
-                    // remove label to show that pickup was bought
-                    if (GameManager.instance.pickupLabel != null)
-                        GameManager.instance.pickupLabel.SetActive(false);
-                    pickedUp = true;
+                    GameManager.instance.playerScript.IncreasePlayerDamage(1);
 
                     break;
 

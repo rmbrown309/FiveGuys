@@ -20,11 +20,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [Header("----- Gun Stats -----")]
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
+    [SerializeField] int startDamage;
 
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     private Vector3 move;
     private int jumpedTimes;
+    private int gunDamage;
 
     bool isShooting;
     bool isSprinting;
@@ -45,9 +47,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     private float origShootRate;
     private int origEnemyHp;
     private int HPOrig;
-    private int HPMax;
     private float OrigSpeed;
-    private float MaxSpeed;
 
     //Regen detectors
     bool isDamaged;
@@ -61,9 +61,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         powerIndex = -1;
         origJump = jumpMax;
         OrigSpeed = playerSpeed;
-        MaxSpeed = playerSpeed;
         HPOrig = HP;
-        HPMax = HP;
+        gunDamage = startDamage;
         origHealthRegen = healthRegainSpeed;
         origShootRate = shootRate;
         if (GameManager.instance.playerSpawnPoint != null)
@@ -261,7 +260,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
         GameManager.instance.powerSpeedActive.SetActive(false);
         
-        playerSpeed = MaxSpeed;
+        playerSpeed = OrigSpeed;
         if (isSprinting)
         {
             playerSpeed = playerSpeed * sprintMod;
@@ -427,19 +426,24 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     // Pickup functions
     public void IncreasePlayerMaxHealth(int addition)
     {
-        HPMax += addition;
-        HP = HPMax - (HPOrig - HP);
+        HPOrig += addition;
+        HP += addition;
     }
     public void IncreasePlayerMaxSpeed(float addition)
     {
-        MaxSpeed += addition;
-        playerSpeed = MaxSpeed;
+        OrigSpeed += addition;
+        playerSpeed = OrigSpeed;
         if (isSprinting)
             playerSpeed = playerSpeed * sprintMod;
     }
     public void IncreasePlayerRegenSpeed(int subtraction)
     {
         healthRegainSpeed -= subtraction;
+    }
+    public void IncreasePlayerDamage(int addition)
+    {
+        gunDamage += addition;
+        bullet.GetComponent<PlayerBullet>().damage = gunDamage;
     }
 
     public void takeDamage(int amount)
@@ -480,7 +484,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         //if the player got damaged, skip the regen animation
         if (!isDamaged)
         {
-            HP = HPMax;
+            HP = HPOrig;
             UpdatePlayerUI();
             startWait = 0;
             damageActive = false;
@@ -490,8 +494,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     {
         HP = HPOrig;
         playerSpeed = OrigSpeed;
-        MaxSpeed = OrigSpeed;
         healthRegainSpeed = origHealthRegen;
+        gunDamage = startDamage;
+        bullet.GetComponent<PlayerBullet>().damage = gunDamage;
         GameManager.instance.playerHealthBar.CrossFadeAlpha(0, 0, false);
         controller.enabled = false;
         transform.position = GameManager.instance.playerSpawnPoint.transform.position;
@@ -500,6 +505,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     void UpdatePlayerUI()
     {
         //fade the health in and out
-        GameManager.instance.playerHealthBar.CrossFadeAlpha((1 - ((float)HP / HPMax)), (float).8, false);
+        GameManager.instance.playerHealthBar.CrossFadeAlpha((1 - ((float)HP / HPOrig)), (float).8, false);
     }
 }
