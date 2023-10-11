@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text scoreCount;
     [SerializeField] TMP_Text currentWaveCount;
 
+    public GameObject pickupLabel;
+    public TMP_Text pickupText;
     public GameObject powerJumpActive;
     public GameObject powerSpeedActive;
     public GameObject powerHealthActive;
@@ -44,7 +46,7 @@ public class GameManager : MonoBehaviour
     public bool isPaused;
     public int waves;
     public int enemiesRemain;
-    int score;
+    public int score;
     int jumpCoolDown;
     float origTimeScale;
 

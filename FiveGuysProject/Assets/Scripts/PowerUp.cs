@@ -62,7 +62,7 @@ public class PowerUp : MonoBehaviour
                 case 3:
                     Debug.Log("health");
 
-                    powerUp.HealthRegen(newRegen);
+                    powerUp.Invulnerability();
                     break;
                 case 4:
                     Debug.Log("shoot");

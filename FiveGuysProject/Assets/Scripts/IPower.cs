@@ -6,7 +6,7 @@ public interface IPower
 {
     void JumpPower(int jumps);
     void SpeedBoost(float speed);
-    void HealthRegen(float regen);
+    void Invulnerability();
     void ShootRate(float shoot);
     void EnemyHealthDown(int damage);
 }

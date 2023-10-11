@@ -40,11 +40,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     private IEnumerator type4Routine;
     private IEnumerator type5Routine;
     private int origJump;
+    private bool isInvulnerable;
     private float origHealthRegen;
     private float origShootRate;
     private int origEnemyHp;
     private int HPOrig;
+    private int HPMax;
     private float OrigSpeed;
+    private float MaxSpeed;
 
     //Regen detectors
     bool isDamaged;
@@ -55,12 +58,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
     private void Start()
     {
-       
         powerIndex = -1;
         origJump = jumpMax;
         OrigSpeed = playerSpeed;
-        Debug.Log(OrigSpeed);
+        MaxSpeed = playerSpeed;
         HPOrig = HP;
+        HPMax = HP;
         origHealthRegen = healthRegainSpeed;
         origShootRate = shootRate;
         if (GameManager.instance.playerSpawnPoint != null)
@@ -113,7 +116,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
                     StopCoroutine(type3Routine);
                     powerActive[2] = false;
                 }
-                type3Routine = HealthPowerCooldown();
+                type3Routine = InvulnerableCooldown();
                 StartCoroutine(type3Routine);
                 break;
             case 3:
@@ -209,6 +212,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         isShooting = false;
 
     }
+
+    // Power Up functions
     IEnumerator JumpPowerCooldown()
     {
         GameManager.instance.powerJumpActive.SetActive(true);
@@ -256,7 +261,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
         GameManager.instance.powerSpeedActive.SetActive(false);
         
-        playerSpeed = OrigSpeed;
+        playerSpeed = MaxSpeed;
         if (isSprinting)
         {
             playerSpeed = playerSpeed * sprintMod;
@@ -265,7 +270,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         powerActive[1] = false;
     }
 
-    IEnumerator HealthPowerCooldown()
+    IEnumerator InvulnerableCooldown()
     {
         float CD = waitT;
         GameManager.instance.powerHealthActive.SetActive(true);
@@ -286,7 +291,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         }
 
         GameManager.instance.powerHealthActive.SetActive(false);
-        healthRegainSpeed = origHealthRegen;
+        isInvulnerable = false;
         powerActive[2] = false;
     }
     IEnumerator ShootRatePowerCooldown()
@@ -372,9 +377,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         powerActive[1] = true;
         powerIndex = 1;
     }
-    public void HealthRegen(float regen)
+    public void Invulnerability()
     {
-        healthRegainSpeed = regen;
+        isInvulnerable = true;
         powerActive[2] = true;
         powerIndex = 2;
     }
@@ -418,16 +423,38 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         powerActive[4] = true;
         powerIndex = 4;
     }
+
+    // Pickup functions
+    public void IncreasePlayerMaxHealth(int addition)
+    {
+        HPMax += addition;
+        HP = HPMax - (HPOrig - HP);
+    }
+    public void IncreasePlayerMaxSpeed(float addition)
+    {
+        MaxSpeed += addition;
+        playerSpeed = MaxSpeed;
+        if (isSprinting)
+            playerSpeed = playerSpeed * sprintMod;
+    }
+    public void IncreasePlayerRegenSpeed(int subtraction)
+    {
+        healthRegainSpeed -= subtraction;
+    }
+
     public void takeDamage(int amount)
     {
-        HP -= amount;
-        isDamaged = true;
-        UpdatePlayerUI();
-
-        // Future Implementation for when a game over menu needs to appear
-        if (HP < 1)
+        if (!isInvulnerable)
         {
-            GameManager.instance.GameOver();
+            HP -= amount;
+            isDamaged = true;
+            UpdatePlayerUI();
+
+            // Future Implementation for when a game over menu needs to appear
+            if (HP < 1)
+            {
+                GameManager.instance.GameOver();
+            }
         }
     }
     IEnumerator RegainHelth()
@@ -453,7 +480,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         //if the player got damaged, skip the regen animation
         if (!isDamaged)
         {
-            HP = HPOrig;
+            HP = HPMax;
             UpdatePlayerUI();
             startWait = 0;
             damageActive = false;
@@ -462,6 +489,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     public void SpawnPlayer()
     {
         HP = HPOrig;
+        playerSpeed = OrigSpeed;
+        MaxSpeed = OrigSpeed;
+        healthRegainSpeed = origHealthRegen;
         GameManager.instance.playerHealthBar.CrossFadeAlpha(0, 0, false);
         controller.enabled = false;
         transform.position = GameManager.instance.playerSpawnPoint.transform.position;
@@ -470,6 +500,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     void UpdatePlayerUI()
     {
         //fade the health in and out
-        GameManager.instance.playerHealthBar.CrossFadeAlpha((1 - ((float)HP / HPOrig)), (float).8, false);
+        GameManager.instance.playerHealthBar.CrossFadeAlpha((1 - ((float)HP / HPMax)), (float).8, false);
     }
 }
