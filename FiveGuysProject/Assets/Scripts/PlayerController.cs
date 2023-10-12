@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
     [Header("----- Rat Spray Stats -----")]
     [SerializeField] ParticleSystem sprayEffect;
+    [SerializeField] int sprayDistance;
     [SerializeField] int maxSprayAmmo;
     public int currSprayAmmo;
     [SerializeField] float sprayRegenSpeed;
@@ -39,7 +40,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [Range(0, 1)][SerializeField] float audSprayVol;
 
     // Activates rat spray
-    private bool sprayWeaponActive = true;
+    private bool sprayWeaponActive;
 
     private Vector3 playerVelocity;
     private bool groundedPlayer;
@@ -88,6 +89,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         origHealthRegen = healthRegainSpeed;
         origShootRate = shootRate;
         currSprayAmmo = maxSprayAmmo;
+        GameManager.instance.updateSprayAmmoUI(currSprayAmmo, maxSprayAmmo);
         if (GameManager.instance.playerSpawnPoint != null)
         {
             SpawnPlayer();
@@ -255,6 +257,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             isSpraying = true;
 
             currSprayAmmo--;
+            GameManager.instance.updateSprayAmmoUI(currSprayAmmo, maxSprayAmmo);
 
             aud.PlayOneShot(audSpray, audSprayVol);
 
@@ -262,10 +265,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             Ray ray = Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f));
             RaycastHit hit;
             Vector3 targetPoint;
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit, sprayDistance))
                 targetPoint = hit.point; // aims at specific point on ray at the distance of the hit
             else
-                targetPoint = ray.GetPoint(15); // some distant point on ray if not aiming at anything
+                targetPoint = ray.GetPoint(sprayDistance); // some distant point on ray if not aiming at anything
 
             // play spray effect on contact
             if (sprayEffect != null)
@@ -292,6 +295,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         yield return new WaitForSeconds(sprayRegenSpeed);
 
         currSprayAmmo++;
+        GameManager.instance.updateSprayAmmoUI(currSprayAmmo, maxSprayAmmo);
 
         sprayRegen = false;
     }
@@ -528,6 +532,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     {
         gunDamage += addition;
         bullet.GetComponent<PlayerBullet>().damage = gunDamage;
+    }
+    public void GetRatKiller()
+    {
+        sprayWeaponActive = true;
+        GameManager.instance.SprayAmmoParent.SetActive(true);
     }
 
     public void takeDamage(int amount)

@@ -23,7 +23,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text enemiesRemainText;
     [SerializeField] TMP_Text scoreCount;
     [SerializeField] TMP_Text currentWaveCount;
-
+    public GameObject SprayAmmoParent;
+    [SerializeField] Image SprayAmmoBar;
     public GameObject pickupLabel;
     public TMP_Text pickupText;
     public GameObject powerJumpActive;
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
     public int waves;
     public int enemiesRemain;
     public int score;
+
     int jumpCoolDown;
     float origTimeScale;
 
@@ -174,5 +176,10 @@ public class GameManager : MonoBehaviour
     {
         activeMenu = setActive;
         activeMenu.SetActive(true);
+    }
+
+    public void updateSprayAmmoUI(int current, int max)
+    {
+        SprayAmmoBar.fillAmount = (float)current / max;
     }
 }

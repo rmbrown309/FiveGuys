@@ -7,7 +7,7 @@ public class Pickups : MonoBehaviour
 {
     enum PickupType
     {
-        HealthUp, SpeedUp, QuickRegen, DamageUp, AmmoRefill
+        HealthUp, SpeedUp, QuickRegen, DamageUp, AmmoRefill, SprayWeapon
     }
 
     [SerializeField] PickupType pickupType;
@@ -67,6 +67,15 @@ public class Pickups : MonoBehaviour
                 case PickupType.AmmoRefill:
                     // Not yet implemented
                     break;
+                case PickupType.SprayWeapon:
+                    GameManager.instance.playerScript.GetRatKiller();
+
+                    // remove label to show that pickup was bought
+                    if (GameManager.instance.pickupLabel != null)
+                        GameManager.instance.pickupLabel.SetActive(false);
+                    pickedUp = true;
+
+                    break;
             }
 
             GameManager.instance.IncreasePlayerScore(-pickupCost);
@@ -91,6 +100,9 @@ public class Pickups : MonoBehaviour
                 break;
             case PickupType.AmmoRefill:
                 GameManager.instance.pickupText.text = "[E] Refill Ammo: " + pickupCost + " Points";
+                break;
+            case PickupType.SprayWeapon:
+                GameManager.instance.pickupText.text = "[E] Acquire Rat Killer: " + pickupCost + " Points";
                 break;
         }
         if (other.CompareTag("Player") && !pickedUp)
