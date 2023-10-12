@@ -24,6 +24,18 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [SerializeField] float shootRate;
     [SerializeField] int startDamage;
 
+    [Header("----- Rat Spray Stats -----")]
+    [SerializeField] ParticleSystem sprayEffect;
+    [SerializeField] int maxSprayAmmo;
+    public int currSprayAmmo;
+    [SerializeField] float sprayRegenSpeed;
+
+    [Header("----- PowerUp Settings -----")]
+    [SerializeField] float waitT;
+
+    // Activates rat spray
+    private bool sprayWeaponActive = true;
+
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     private Vector3 move;
@@ -31,13 +43,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     private int gunDamage;
 
     bool isShooting;
+    bool isSpraying;
+    bool sprayRegen;
     bool isSprinting;
 
-    int selectedGun; // the int that controls how the player selects their gun
+    //int selectedGun; // the int that controls how the player selects their gun
 
-    [Header("-----PowerUp Settings-----")]
+    // powerup variables
     GameObject[] enemyToFind;
-    [SerializeField] float waitT;
     bool[] powerActive = new bool[5];
     int powerIndex;
     private IEnumerator type1Routine;
@@ -69,6 +82,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         gunDamage = startDamage;
         origHealthRegen = healthRegainSpeed;
         origShootRate = shootRate;
+        currSprayAmmo = maxSprayAmmo;
         if (GameManager.instance.playerSpawnPoint != null)
         {
             SpawnPlayer();
@@ -86,6 +100,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
         if (Input.GetButton("Shoot") && !isShooting)
             StartCoroutine(Shoot());
+
+        if(sprayWeaponActive && Input.GetButton("Shoot2") && !isShooting)
+            StartCoroutine(Spray());
+        if (sprayWeaponActive && (currSprayAmmo < maxSprayAmmo) && !isSpraying && !sprayRegen)
+            StartCoroutine(RegenSprayAmmo());
 
         //if player got damaged AND there isnt an active regen happening
         //then regen health
@@ -221,6 +240,53 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
 
+    }
+
+    IEnumerator Spray()
+    {
+        if (currSprayAmmo > 0)
+        {
+            isShooting = true;
+            isSpraying = true;
+
+            currSprayAmmo--;
+
+            // Find hit position with raycast
+            Ray ray = Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f));
+            RaycastHit hit;
+            Vector3 targetPoint;
+            if (Physics.Raycast(ray, out hit))
+                targetPoint = hit.point; // aims at specific point on ray at the distance of the hit
+            else
+                targetPoint = ray.GetPoint(15); // some distant point on ray if not aiming at anything
+
+            // play spray effect on contact
+            if (sprayEffect != null)
+            {
+                Instantiate(sprayEffect, targetPoint, Quaternion.identity);
+            }
+
+            Collider[] hits = Physics.OverlapSphere(targetPoint, 3);
+            foreach (Collider c in hits)
+            {
+                ISpray sprayable = c.GetComponent<ISpray>();
+                if (sprayable != null)
+                    sprayable.kill();
+            }
+
+            yield return new WaitForSeconds(0.2f);
+            isShooting = false;
+            isSpraying = false;
+        }
+    }
+    IEnumerator RegenSprayAmmo()
+    {
+        sprayRegen = true;
+        yield return new WaitForSeconds(sprayRegenSpeed);
+
+        currSprayAmmo++;
+
+        sprayRegen = false;
     }
 
     // Power Up functions

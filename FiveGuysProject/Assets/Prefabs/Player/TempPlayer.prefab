@@ -200,11 +200,14 @@ MonoBehaviour:
   jumpHeight: 10
   gravityValue: -25
   healthRegainSpeed: 4
-  gunList: []
   gunModel: {fileID: 7488616914648254189}
   bullet: {fileID: 3773670445560834378, guid: 11797fb46023f3445838bd4a651a02d3, type: 3}
   shootRate: 0.5
   startDamage: 1
+  sprayEffect: {fileID: 265766274217486953, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
+  maxSprayAmmo: 25
+  currSprayAmmo: 0
+  sprayRegenSpeed: 1
   waitT: 8
 --- !u!143 &9198960336271817168
 CharacterController:

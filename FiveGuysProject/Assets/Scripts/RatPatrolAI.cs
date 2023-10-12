@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RatPatrolAI : MonoBehaviour
+public class RatPatrolAI : MonoBehaviour, ISpray
 {
     [Header("----- Components -----")]
     [SerializeField] UnityEngine.AI.NavMeshAgent agent;
@@ -63,5 +63,10 @@ public class RatPatrolAI : MonoBehaviour
 
         result = Vector3.zero;
         return false;
+    }
+
+    void ISpray.kill()
+    {
+        Destroy(gameObject);
     }
 }

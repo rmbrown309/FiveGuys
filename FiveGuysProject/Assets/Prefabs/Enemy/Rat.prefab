@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1303288641815626125}
   - component: {fileID: 4046290730191800015}
   - component: {fileID: 4327042168367167304}
+  - component: {fileID: 3711740838936721909}
   m_Layer: 0
   m_Name: Rat
   m_TagString: Untagged
@@ -27,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7524273815717281356}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.0031166864, y: 0.0071279127, z: 0.0038192747, w: 0.99996245}
+  m_LocalRotation: {x: 0.0031165176, y: 0.0071263765, z: 0.0038175497, w: 0.9999625}
   m_LocalPosition: {x: 10, y: 0.5582937, z: -7.906159}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -92,7 +93,28 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.25, y: 0.5, z: 1}
+  m_Size: {x: 0.25, y: 0.65, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &3711740838936721909
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7524273815717281356}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.01, y: 0.01, z: 0.01}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &3780337909426883274
 PrefabInstance:
