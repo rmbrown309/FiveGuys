@@ -218,10 +218,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4034368476981674213}
-  startDamage: 3
   damage: 3
   speed: 25
   destroyTime: 3
+  hitEffect: {fileID: 6327853518906024368, guid: 349d4a817e629c04696c63e33888d7ad, type: 3}
 --- !u!135 &5622002265045382031
 SphereCollider:
   m_ObjectHideFlags: 0

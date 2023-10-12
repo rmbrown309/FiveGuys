@@ -10,6 +10,8 @@ public class PlayerBullet : MonoBehaviour
     public int damage;
     [SerializeField] int speed;
     [SerializeField] int destroyTime;
+    [SerializeField] ParticleSystem hitEffect;
+
 
     void Start()
     {
@@ -29,8 +31,21 @@ public class PlayerBullet : MonoBehaviour
         if (damageable != null)
         {
             damageable.takeDamage(damage);
-        }
 
+        }
+        if(hitEffect != null)
+        {
+            Instantiate(hitEffect, transform.position, Quaternion.identity);
+        }
         Destroy(gameObject);
+    }
+
+    public void setDestroyTime(int time)
+    {
+        destroyTime = time;
+    }
+    public void sethitEffect(ParticleSystem gunHitEffect)
+    {
+        hitEffect = gunHitEffect;
     }
 }

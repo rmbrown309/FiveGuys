@@ -18,6 +18,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [SerializeField] float healthRegainSpeed;
 
     [Header("----- Gun Stats -----")]
+    //[SerializeField] List<gunStats> gunList = new List<gunStats>(); // the amount of guns currently on the player.
+    [SerializeField] GameObject gunModel; // the model of the players curr gun
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
     [SerializeField] int startDamage;
@@ -30,6 +32,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
     bool isShooting;
     bool isSprinting;
+
+    int selectedGun; // the int that controls how the player selects their gun
 
     [Header("-----PowerUp Settings-----")]
     GameObject[] enemyToFind;
@@ -76,6 +80,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     void Update()
     {
         Movement();
+
+        //calls the method to let the player select weapons 
+        //selectGun();
 
         if (Input.GetButton("Shoot") && !isShooting)
             StartCoroutine(Shoot());
@@ -204,8 +211,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         Vector3 shootDir = targetPoint - shootPos.position;
 
         // Instantiates bullet object and redirects its rotation toward the shootDir
-        GameObject currBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
-        currBullet.transform.forward = shootDir.normalized;
+        if(bullet != null)
+        {
+            GameObject currBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
+            currBullet.transform.forward = shootDir.normalized;
+        }
+
 
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
@@ -507,4 +518,56 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         //fade the health in and out
         GameManager.instance.playerHealthBar.CrossFadeAlpha((1 - ((float)HP / HPOrig)), (float).8, false);
     }
+
+
+    //everything involving gun pickup shennanigans \/
+    public void setGunStats(gunStats gun)
+    {
+        //gunList.Add(gun);
+        //stats
+        startDamage = gun.shootDamage;
+        bullet = gun.bullet;
+        bullet.GetComponent<PlayerBullet>().damage = gun.shootDamage;
+        bullet.GetComponent<PlayerBullet>().setDestroyTime(gun.shootTime);
+        bullet.GetComponent<PlayerBullet>().sethitEffect(gun.hitEffect);
+
+        shootRate = gun.shootRate;
+        //model
+        gunModel.GetComponent<MeshFilter>().sharedMesh = gun.model.GetComponent<MeshFilter>().sharedMesh;
+        gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.model.GetComponent<MeshRenderer>().sharedMaterial;
+
+
+
+    }
+    //void selectGun()
+    //{
+    //    if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
+    //    {
+    //        selectedGun++;
+    //        changeGun();
+
+    //    }
+    //    else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
+    //    {
+    //        selectedGun--;
+    //        changeGun();
+    //    }
+    //}
+
+    //void changeGun()
+    //{
+    //    startDamage = gunList[selectedGun].shootDamage;
+    //    shootRate = gunList[selectedGun].shootRate;
+    //    bullet = gunList[selectedGun].bullet;
+    //    bullet.GetComponent<PlayerBullet>().damage = gunList[selectedGun].shootDamage;
+    //    bullet.GetComponent<PlayerBullet>().setDestroyTime(gunList[selectedGun].shootTime);
+    //    bullet.GetComponent<PlayerBullet>().sethitEffect(gunList[selectedGun].hitEffect);
+
+
+
+
+    //    //model
+    //    gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].model.GetComponent<MeshFilter>().sharedMesh;
+    //    gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[selectedGun].model.GetComponent<MeshRenderer>().sharedMaterial;
+    //}
 }
