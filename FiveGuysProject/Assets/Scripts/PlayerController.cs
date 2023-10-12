@@ -33,6 +33,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [Header("----- PowerUp Settings -----")]
     [SerializeField] float waitT;
 
+    [Header("----- Audio Stuff -----")]
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip audSpray;
+    [Range(0, 1)][SerializeField] float audSprayVol;
+
     // Activates rat spray
     private bool sprayWeaponActive = true;
 
@@ -250,6 +255,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             isSpraying = true;
 
             currSprayAmmo--;
+
+            aud.PlayOneShot(audSpray, audSprayVol);
 
             // Find hit position with raycast
             Ray ray = Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f));
