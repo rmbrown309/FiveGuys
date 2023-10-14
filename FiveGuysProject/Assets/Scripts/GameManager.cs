@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text enemiesRemainText;
     [SerializeField] TMP_Text scoreCount;
     [SerializeField] TMP_Text currentWaveCount;
+    [SerializeField] TMP_Text ammoCurr;
+    [SerializeField] TMP_Text ammoMax;
     public GameObject SprayAmmoParent;
     [SerializeField] Image SprayAmmoBar;
     public GameObject pickupLabel;
@@ -181,5 +183,11 @@ public class GameManager : MonoBehaviour
     public void updateSprayAmmoUI(int current, int max)
     {
         SprayAmmoBar.fillAmount = (float)current / max;
+    }
+
+    public void updateAmmmo(int curr, int max)
+    {
+        ammoCurr.text = curr.ToString("F0");
+        ammoMax.text = max.ToString("F0");
     }
 }

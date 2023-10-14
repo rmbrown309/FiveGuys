@@ -18,7 +18,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [SerializeField] float healthRegainSpeed;
 
     [Header("----- Gun Stats -----")]
-    //[SerializeField] List<gunStats> gunList = new List<gunStats>(); // the amount of guns currently on the player.
+    [SerializeField] List<gunStats> gunList = new List<gunStats>(); // the amount of guns currently on the player.
+    [SerializeField] gunStats defGun; // the amount of guns currently on the player.
+
     [SerializeField] GameObject gunModel; // the model of the players curr gun
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
@@ -38,6 +40,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [SerializeField] AudioSource aud;
     [SerializeField] AudioClip audSpray;
     [Range(0, 1)][SerializeField] float audSprayVol;
+    [SerializeField] AudioClip[] audDamage;
+    [Range(0, 1)] [SerializeField] float audDamageVol;
+    [SerializeField] AudioClip[] audJump;
+    [Range(0, 1)] [SerializeField] float audJumpVol;
+    [SerializeField] AudioClip[] audSteps;
+    [Range(0, 1)] [SerializeField] float audStepsVol;
+  
 
     // Activates rat spray
     private bool sprayWeaponActive;
@@ -52,8 +61,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     bool isSpraying;
     bool sprayRegen;
     bool isSprinting;
+    bool footstepsPlaying;
 
-    //int selectedGun; // the int that controls how the player selects their gun
+    int selectedGun; // the int that controls how the player selects their gun
 
     // powerup variables
     GameObject[] enemyToFind;
@@ -86,6 +96,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         OrigSpeed = playerSpeed;
         HPOrig = HP;
         gunDamage = startDamage;
+        setGunStats(defGun);
         origHealthRegen = healthRegainSpeed;
         origShootRate = shootRate;
         currSprayAmmo = maxSprayAmmo;
@@ -105,7 +116,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         //calls the method to let the player select weapons 
         //selectGun();
 
-        if (Input.GetButton("Shoot") && !isShooting)
+        if (Input.GetButton("Shoot") && !isShooting && gunList.Count>0)
             StartCoroutine(Shoot());
 
         if(sprayWeaponActive && Input.GetButton("Shoot2") && !isShooting)
@@ -176,10 +187,17 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
     void Movement()
     {
+
+    
         Sprint();
 
         // Keeps player velocity from going negative and resets ability to jump while grounded
         groundedPlayer = controller.isGrounded;
+
+        if (groundedPlayer && move.normalized.magnitude > 0.3f && !footstepsPlaying)
+        {
+            StartCoroutine(playFootsteps());
+        }
         if (groundedPlayer && playerVelocity.y < 0)
         {
             playerVelocity.y = 0f;
@@ -198,13 +216,28 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         {
             playerVelocity.y = jumpHeight;
             jumpedTimes++;
+            aud.PlayOneShot(audJump[Random.Range(0, audJump.Length)], audJumpVol);
+
         }
 
         // makes gravity work on player
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
     }
+    IEnumerator playFootsteps()
+    {
+        footstepsPlaying = true;
+        aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
+        if (!isSprinting)
+        {
+            yield return new WaitForSeconds(0.3f);
 
+        }
+        else
+            yield return new WaitForSeconds(0.15f);
+
+        footstepsPlaying = false;
+    }
     void Sprint()
     {
         // start sprint
@@ -222,30 +255,39 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
     IEnumerator Shoot()
     {
-        isShooting = true;
-
-        // Find hit position with raycast
-        Ray ray = Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f));
-        RaycastHit hit;
-        Vector3 targetPoint;
-        if (Physics.Raycast(ray, out hit))
-            targetPoint = hit.point; // aims at specific point on ray at the distance of the hit
-        else
-            targetPoint = ray.GetPoint(50); // some distant point on ray if not aiming at anything
-
-        // Calculate shooting direction
-        Vector3 shootDir = targetPoint - shootPos.position;
-
-        // Instantiates bullet object and redirects its rotation toward the shootDir
-        if(bullet != null)
+        if (gunList[selectedGun].ammoCur > 0 && gunList.Count > 0)
         {
-            GameObject currBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
-            currBullet.transform.forward = shootDir.normalized;
+            isShooting = true;
+
+            //plays gunshot audio and ticks the ammo down for the players current gun
+            aud.PlayOneShot(gunList[selectedGun].shootSound, gunList[selectedGun].audShotVol);
+            gunList[selectedGun].ammoCur--;
+            GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
+
+            // Find hit position with raycast
+            Ray ray = Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f));
+            RaycastHit hit;
+            Vector3 targetPoint;
+            if (Physics.Raycast(ray, out hit))
+                targetPoint = hit.point; // aims at specific point on ray at the distance of the hit
+            else
+                targetPoint = ray.GetPoint(50); // some distant point on ray if not aiming at anything
+
+            // Calculate shooting direction
+            Vector3 shootDir = targetPoint - shootPos.position;
+
+            // Instantiates bullet object and redirects its rotation toward the shootDir
+            if (bullet != null)
+            {
+                GameObject currBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
+                currBullet.transform.forward = shootDir.normalized;
+            }
+
+
+            yield return new WaitForSeconds(shootRate);
+            isShooting = false;
         }
-
-
-        yield return new WaitForSeconds(shootRate);
-        isShooting = false;
+            
 
     }
 
@@ -544,6 +586,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         if (!isInvulnerable)
         {
             HP -= amount;
+            aud.PlayOneShot(audDamage[Random.Range(0, audDamage.Length)], audDamageVol);
             isDamaged = true;
             UpdatePlayerUI();
 
@@ -605,7 +648,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     //everything involving gun pickup shennanigans \/
     public void setGunStats(gunStats gun)
     {
-        //gunList.Add(gun);
+        gunList.Add(gun);
         //stats
         startDamage = gun.shootDamage;
         bullet = gun.bullet;
@@ -617,7 +660,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         //model
         gunModel.GetComponent<MeshFilter>().sharedMesh = gun.model.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.model.GetComponent<MeshRenderer>().sharedMaterial;
-
+        selectedGun = gunList.Count - 1;
+        GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
 
 
     }
