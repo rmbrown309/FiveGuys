@@ -2580,9 +2580,10 @@ MonoBehaviour:
   powerSpawnPercentage: 0.2
   anim: {fileID: 1231018368819202769}
   damageCol: {fileID: 2106942561573662265}
-  HP: 10
+  HP: 3
   targetFaceSpeed: 3
   viewAngle: 90
+  despawnTime: 0
   hitRate: 1
   hitAngle: 90
   meleeDamage: 1
