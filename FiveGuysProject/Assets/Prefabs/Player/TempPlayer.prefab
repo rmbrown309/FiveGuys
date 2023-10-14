@@ -201,8 +201,10 @@ MonoBehaviour:
   jumpHeight: 10
   gravityValue: -25
   healthRegainSpeed: 4
+  gunList: []
+  defGun: {fileID: 11400000, guid: bb4956d9fec47224d896cb688ed78b87, type: 2}
   gunModel: {fileID: 7488616914648254189}
-  bullet: {fileID: 3773670445560834378, guid: 11797fb46023f3445838bd4a651a02d3, type: 3}
+  bullet: {fileID: 0}
   shootRate: 0.5
   startDamage: 1
   sprayEffect: {fileID: 265766274217486953, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
@@ -214,6 +216,30 @@ MonoBehaviour:
   aud: {fileID: 8663212489565528548}
   audSpray: {fileID: 8300000, guid: d62df948e36e49f4bb305f7e239e02fb, type: 3}
   audSprayVol: 0.2
+  audDamage:
+  - {fileID: 8300000, guid: fcf5fb26351c88748957120b699b96b5, type: 3}
+  - {fileID: 8300000, guid: 10d41192ad7420740aea23fc3688bae8, type: 3}
+  - {fileID: 8300000, guid: 3077d818b72ce6b42b06fba6091a02cf, type: 3}
+  - {fileID: 8300000, guid: 77dcddf438f1ffe40b9a05d245307d03, type: 3}
+  - {fileID: 8300000, guid: 42ca2d489399b5648a9e6ced7317ddaf, type: 3}
+  - {fileID: 8300000, guid: caea209decadf674c8798ba4cce3a290, type: 3}
+  audDamageVol: 0.2
+  audJump:
+  - {fileID: 8300000, guid: 3050235640b7ed54b98feb4c6e6dd103, type: 3}
+  - {fileID: 8300000, guid: 9628ecb7925924c44a95352a15cc6842, type: 3}
+  - {fileID: 8300000, guid: 2818b58a3b9f79b489dc725c038922b1, type: 3}
+  audJumpVol: 0.3
+  audSteps:
+  - {fileID: 8300000, guid: 15d4178d33f5deb43839a81db0e4d7f0, type: 3}
+  - {fileID: 8300000, guid: dcd0ee2246285d64c81a39aac3aae1f6, type: 3}
+  - {fileID: 8300000, guid: 15ca8c3cc9f7b3c48bc0c79cb0faff14, type: 3}
+  - {fileID: 8300000, guid: d26adf3852889524491c85c3363b4403, type: 3}
+  - {fileID: 8300000, guid: 3b58226d95c6fcd47aad1cc49bf40bb1, type: 3}
+  - {fileID: 8300000, guid: 91ea4b31d1748ad459099fd1a0e21e87, type: 3}
+  - {fileID: 8300000, guid: 967138874af870041a21d52a49db3e8a, type: 3}
+  - {fileID: 8300000, guid: 246ca93320cb0564e9b588ca525d8796, type: 3}
+  - {fileID: 8300000, guid: 7fc4a81bd08c3f3448342c80aaa5451d, type: 3}
+  audStepsVol: 0.05
 --- !u!143 &9198960336271817168
 CharacterController:
   m_ObjectHideFlags: 0
@@ -449,7 +475,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7488616914648254189}
-  m_Mesh: {fileID: 4300004, guid: 6a64651c715edd2428104e893b882c5c, type: 3}
+  m_Mesh: {fileID: 0}
 --- !u!23 &2382827103801317580
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -470,7 +496,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c9a1c53e4c3bcf54c875e91353fb67cb, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
