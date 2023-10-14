@@ -65,7 +65,8 @@ public class Pickups : MonoBehaviour
                     break;
 
                 case PickupType.AmmoRefill:
-                    // Not yet implemented
+                    GameManager.instance.playerScript.RefillAmmo();
+
                     break;
                 case PickupType.SprayWeapon:
                     GameManager.instance.playerScript.GetRatKiller();
@@ -99,7 +100,7 @@ public class Pickups : MonoBehaviour
                 GameManager.instance.pickupText.text = "[E] Damage Up: " + pickupCost + " Points";
                 break;
             case PickupType.AmmoRefill:
-                GameManager.instance.pickupText.text = "[E] Refill Ammo: " + pickupCost + " Points";
+                GameManager.instance.pickupText.text = "[E] Refill Ammo";
                 break;
             case PickupType.SprayWeapon:
                 GameManager.instance.pickupText.text = "[E] Acquire Rat Killer: " + pickupCost + " Points";

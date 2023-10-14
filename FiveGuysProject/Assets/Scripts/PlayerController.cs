@@ -100,6 +100,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         origHealthRegen = healthRegainSpeed;
         origShootRate = shootRate;
         currSprayAmmo = maxSprayAmmo;
+        gunList[selectedGun].ammoCur = gunList[selectedGun].ammoMax;
         GameManager.instance.updateSprayAmmoUI(currSprayAmmo, maxSprayAmmo);
         if (GameManager.instance.playerSpawnPoint != null)
         {
@@ -574,6 +575,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     {
         gunDamage += addition;
         bullet.GetComponent<PlayerBullet>().damage = gunDamage;
+    }
+    public void RefillAmmo()
+    {
+        gunList[selectedGun].ammoCur = gunList[selectedGun].ammoMax;
+        currSprayAmmo = maxSprayAmmo;
+        GameManager.instance.updateSprayAmmoUI(currSprayAmmo, maxSprayAmmo);
+        GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
+
     }
     public void GetRatKiller()
     {

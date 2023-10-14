@@ -306,7 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pickupType: 4
-  pickupCost: 5
+  pickupCost: 0
 --- !u!33 &2244268753312727558
 MeshFilter:
   m_ObjectHideFlags: 0

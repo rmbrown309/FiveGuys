@@ -7776,6 +7776,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 74972429542477763}
     m_Modifications:
+    - target: {fileID: 1671621882946171408, guid: 4de2890c59103e145bb8c7d6b82706c6, type: 3}
+      propertyPath: pickupCost
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3164009696596681523, guid: 4de2890c59103e145bb8c7d6b82706c6, type: 3}
       propertyPath: m_Name
       value: AmmoRefillStation
