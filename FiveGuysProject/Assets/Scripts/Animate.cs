@@ -19,6 +19,7 @@ public class Animate : MonoBehaviour
             if (Input.GetButtonUp("Shoot"))
             {
                 mAnimator.SetTrigger("isClicked");
+                mAnimator.SetBool("contText", false);
             }
         }
     }
