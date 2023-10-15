@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5691c4d8c7a7e440b03620d68a535b9, type: 3}
-  m_Name: BurgerGunStats
+  m_Name: BurgerSubGunStats
   m_EditorClassIdentifier: 
-  shootRate: 0.5
+  shootRate: 0.25
   shootDamage: 1
   shootTime: 3
-  ammoCur: 29
+  ammoCur: 0
   ammoMax: 50
-  cost: 1
-  gunName: Def Burger Gun
-  model: {fileID: -3360393224060375756, guid: 6a64651c715edd2428104e893b882c5c, type: 3}
+  cost: 3
+  gunName: Burger SubGun
+  model: {fileID: 5239969243976173263, guid: 6a64651c715edd2428104e893b882c5c, type: 3}
   bullet: {fileID: 3773670445560834378, guid: 11797fb46023f3445838bd4a651a02d3, type: 3}
   hitEffect: {fileID: 6327853518906024368, guid: 349d4a817e629c04696c63e33888d7ad, type: 3}
-  shootSound: {fileID: 8300000, guid: 6fe3040ce47e8f2448dacb0e96aa0ea4, type: 3}
-  audShotVol: 0.5
+  shootSound: {fileID: 8300000, guid: 402f7596ae9111b429d9d4fd262d7af0, type: 3}
+  audShotVol: 0.1

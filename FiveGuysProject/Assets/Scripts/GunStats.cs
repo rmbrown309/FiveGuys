@@ -10,6 +10,8 @@ public class gunStats : ScriptableObject
     public int shootTime;
     public int ammoCur;
     public int ammoMax;
+    public int cost;
+    public string gunName;
 
     public GameObject model;
     public GameObject bullet;
