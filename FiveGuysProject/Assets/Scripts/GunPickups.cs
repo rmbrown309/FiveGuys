@@ -45,7 +45,7 @@ public class GunPickups : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            playerInTrigger = true;
+            playerInTrigger = false;
             if (GameManager.instance.pickupLabel != null)
                 GameManager.instance.pickupLabel.SetActive(false);
         }
