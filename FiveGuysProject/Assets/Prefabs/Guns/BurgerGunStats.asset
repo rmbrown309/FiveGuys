@@ -15,9 +15,9 @@ MonoBehaviour:
   shootRate: 0.75
   shootDamage: 2
   shootTime: 3
-  ammoCur: 18
+  ammoCur: 28
   ammoMax: 50
-  cost: 1
+  cost: 15
   gunName: Def Burger Gun
   model: {fileID: -3360393224060375756, guid: 6a64651c715edd2428104e893b882c5c, type: 3}
   bullet: {fileID: 3773670445560834378, guid: 11797fb46023f3445838bd4a651a02d3, type: 3}

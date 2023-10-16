@@ -13,11 +13,11 @@ MonoBehaviour:
   m_Name: BurgerSniperStats
   m_EditorClassIdentifier: 
   shootRate: 1.5
-  shootDamage: 3
+  shootDamage: 5
   shootTime: 3
-  ammoCur: 24
+  ammoCur: 25
   ammoMax: 25
-  cost: 5
+  cost: 20
   gunName: Burger Sniper
   model: {fileID: 8612201438210954883, guid: 6a64651c715edd2428104e893b882c5c, type: 3}
   bullet: {fileID: 3773670445560834378, guid: 3905d5c52e14c9e4783a2daa23db404e, type: 3}

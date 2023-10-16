@@ -563,10 +563,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     public void RefillAmmo()
     {
         gunList[selectedGun].ammoCur = gunList[selectedGun].ammoMax;
-        currSprayAmmo = maxSprayAmmo;
-        GameManager.instance.updateSprayAmmoUI(currSprayAmmo, maxSprayAmmo);
         GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
-
     }
     public void GetRatKiller()
     {

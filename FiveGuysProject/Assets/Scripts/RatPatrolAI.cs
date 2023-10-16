@@ -68,5 +68,6 @@ public class RatPatrolAI : MonoBehaviour, ISpray
     void ISpray.kill()
     {
         Destroy(gameObject);
+        GameManager.instance.IncreasePlayerScore(1);
     }
 }

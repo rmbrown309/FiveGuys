@@ -15,9 +15,9 @@ MonoBehaviour:
   shootRate: 0.25
   shootDamage: 1
   shootTime: 3
-  ammoCur: 0
-  ammoMax: 50
-  cost: 3
+  ammoCur: 75
+  ammoMax: 75
+  cost: 15
   gunName: Burger SubGun
   model: {fileID: 5239969243976173263, guid: 6a64651c715edd2428104e893b882c5c, type: 3}
   bullet: {fileID: 3773670445560834378, guid: 11797fb46023f3445838bd4a651a02d3, type: 3}
