@@ -45,7 +45,7 @@ public class PowerUp : MonoBehaviour
         {
             if(randType)
             {
-                typePower = Random.Range(1, 6);
+                typePower = Random.Range(1, 5);
                 Debug.Log(typePower);
             }
             switch (typePower)
@@ -58,6 +58,7 @@ public class PowerUp : MonoBehaviour
                     Debug.Log("speed");
 
                     powerUp.SpeedBoost(newSpeedMax);
+
                     break;
                 case 3:
                     Debug.Log("health");
@@ -74,13 +75,9 @@ public class PowerUp : MonoBehaviour
 
                     powerUp.EnemyHealthDown(newEnemyHealthDown);
                     break;
-                case 6:
-                    Debug.Log("dmg");
-
-                    powerUp.EnemyHealthDown(newEnemyHealthDown);
-                    break;
             }
         }
         Destroy(gameObject);
     }
+
 }

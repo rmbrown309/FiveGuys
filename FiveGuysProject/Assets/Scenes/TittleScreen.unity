@@ -217,6 +217,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+--- !u!114 &559035713 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7695070167180834130, guid: d51af394b1bfcee4694596d965cba949, type: 3}
+  m_PrefabInstance: {fileID: 724504236873903496}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc68b310c62a2574aacb2271d670ca1b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &724504236873903496
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -228,6 +239,10 @@ PrefabInstance:
     - target: {fileID: 3648208774878408451, guid: d51af394b1bfcee4694596d965cba949, type: 3}
       propertyPath: m_Name
       value: Animator MainMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 4449973449766540010, guid: d51af394b1bfcee4694596d965cba949, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6402271003212842800, guid: d51af394b1bfcee4694596d965cba949, type: 3}
       propertyPath: m_LocalPosition.x
@@ -268,6 +283,26 @@ PrefabInstance:
     - target: {fileID: 6402271003212842800, guid: d51af394b1bfcee4694596d965cba949, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7695070167180834130, guid: d51af394b1bfcee4694596d965cba949, type: 3}
+      propertyPath: volume
+      value: 
+      objectReference: {fileID: 11400000, guid: 46f271e14fe41cf4cb7765b24c31d09d, type: 2}
+    - target: {fileID: 9135031340071981447, guid: d51af394b1bfcee4694596d965cba949, type: 3}
+      propertyPath: m_Value
+      value: 0.414
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135031340071981447, guid: d51af394b1bfcee4694596d965cba949, type: 3}
+      propertyPath: m_MinValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135031340071981447, guid: d51af394b1bfcee4694596d965cba949, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 559035713}
+    - target: {fileID: 9135031340071981447, guid: d51af394b1bfcee4694596d965cba949, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: ChangeVolume
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
     public GameObject powerHealthActive;
     public GameObject powerShootActive;
     public GameObject powerDmgActive;
+    public GameObject PowerText;
+    public TMP_Text powerTypeText;
     public TMP_Text jumpPowerCoolDown;
     public Image jumpPowerImage;
     public TMP_Text speedPowerCoolDown;
@@ -163,6 +165,10 @@ public class GameManager : MonoBehaviour
     public void DmgPowerCoolDown(float coolDown)
     {
         dmgPowerCoolDown.text = coolDown.ToString("0");
+    }
+    public void SetPowerText(string powerType)
+    {
+        powerTypeText.text = powerType;
     }
 
     public void GameOver()

@@ -13,6 +13,8 @@ public class MainMenuButton : MonoBehaviour
     Resolution[] resolutions;
     public TMPro.TMP_Dropdown resolutionDropdown;
     public AudioMixer audioMixer;
+    float newVolume;
+    [SerializeField] MasterVolume volume;
     private void Start()
     {
         resolutions = Screen.resolutions;
@@ -74,5 +76,11 @@ public class MainMenuButton : MonoBehaviour
     public void SetAudio(float volume)
     {
         AudioListener.volume = volume;
+    }
+    public void ChangeVolume(float value)
+    {
+        volume.volume = value;
+        AudioListener.volume = value;
+        newVolume = value;
     }
 }

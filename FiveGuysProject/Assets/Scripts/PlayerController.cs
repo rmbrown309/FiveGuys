@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
     [Header("----- PowerUp Settings -----")]
     [SerializeField] float waitT;
+    IEnumerator[] powerUpCorutine;
 
     [Header("----- Audio Stuff -----")]
     [SerializeField] AudioSource aud;
@@ -46,7 +47,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [Range(0, 1)] [SerializeField] float audJumpVol;
     [SerializeField] AudioClip[] audSteps;
     [Range(0, 1)] [SerializeField] float audStepsVol;
-  
 
     // Activates rat spray
     private bool sprayWeaponActive;
@@ -67,8 +67,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
     // powerup variables
     GameObject[] enemyToFind;
-    bool[] powerActive = new bool[5];
-    int powerIndex;
     private IEnumerator type1Routine;
     private IEnumerator type2Routine;
     private IEnumerator type3Routine;
@@ -91,7 +89,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
     private void Start()
     {
-        powerIndex = -1;
+        powerUpCorutine = new IEnumerator[5];
         origJump = jumpMax;
         OrigSpeed = playerSpeed;
         HPOrig = HP;
@@ -131,65 +129,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         {
             StartCoroutine(RegainHelth());
         }
-        switch (powerIndex)
-        {
-            case 0:
-                powerIndex = -1;
-                if (type1Routine != null)
-                {
-                    StopCoroutine(type1Routine);
-                    powerActive[0] = false;
-                }
-                type1Routine = JumpPowerCooldown();
-                StartCoroutine(type1Routine);
-                break;
-            case 1:
-                powerIndex = -1;
-                if (type2Routine != null)
-                {
-                    StopCoroutine(type2Routine);
-                    powerActive[1] = false;
-                }
-                type2Routine = SpeedPowerCooldown();
-                StartCoroutine(type2Routine);
-                break;
-            case 2:
-                powerIndex = -1;
-                if (type3Routine != null)
-                {
-                    StopCoroutine(type3Routine);
-                    powerActive[2] = false;
-                }
-                type3Routine = InvulnerableCooldown();
-                StartCoroutine(type3Routine);
-                break;
-            case 3:
-                powerIndex = -1;
-                if (type4Routine != null)
-                {
-                    StopCoroutine(type4Routine);
-                    powerActive[3] = false;
-                }
-                type4Routine = ShootRatePowerCooldown();
-                StartCoroutine(type4Routine);
-                break;
-            case 4:
-                powerIndex = -1;
-                if (type5Routine != null)
-                {
-                    StopCoroutine(type5Routine);
-                    powerActive[4] = false;
-                }
-                type5Routine = EnemyHpPowerCooldown();
-                StartCoroutine(type5Routine);
-                break;
-        }
     }
-
+    
     void Movement()
     {
-
-    
         Sprint();
 
         // Keeps player velocity from going negative and resets ability to jump while grounded
@@ -253,7 +196,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             isSprinting = false;
         }
     }
-
     IEnumerator Shoot()
     {
         if (gunList[selectedGun].ammoCur > 0 && gunList.Count > 0)
@@ -288,8 +230,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             yield return new WaitForSeconds(shootRate);
             isShooting = false;
         }
-            
-
     }
 
     IEnumerator Spray()
@@ -366,7 +306,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
         GameManager.instance.powerJumpActive.SetActive(false);
         jumpMax = origJump;
-        powerActive[0] = false;
     }
     IEnumerator SpeedPowerCooldown()
     {
@@ -374,10 +313,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         GameManager.instance.powerSpeedActive.SetActive(true);
         GameManager.instance.speedPowerCoolDown.CrossFadeAlpha(1, 1, false);
         GameManager.instance.speedPowerImage.CrossFadeAlpha(1, 1, false);
+
         while (CD > 0)
         {
             //wait one second then add to counter
             yield return new WaitForSeconds(1);
+
             CD--;
             if (CD <= 1)
             {
@@ -397,7 +338,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             playerSpeed = playerSpeed * sprintMod;
         }
         Debug.Log(playerSpeed);
-        powerActive[1] = false;
     }
 
     IEnumerator InvulnerableCooldown()
@@ -406,6 +346,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         GameManager.instance.powerHealthActive.SetActive(true);
         GameManager.instance.healthPowerCoolDown.CrossFadeAlpha(1, 1, false);
         GameManager.instance.healthPowerImage.CrossFadeAlpha(1, 1, false);
+
         while (CD > 0)
         {
             //wait one second then add to counter
@@ -422,7 +363,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
         GameManager.instance.powerHealthActive.SetActive(false);
         isInvulnerable = false;
-        powerActive[2] = false;
     }
     IEnumerator ShootRatePowerCooldown()
     {
@@ -430,6 +370,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         GameManager.instance.powerShootActive.SetActive(true);
         GameManager.instance.shootPowerCoolDown.CrossFadeAlpha(1, 1, false);
         GameManager.instance.shootPowerImage.CrossFadeAlpha(1, 1, false);
+
         while (CD > 0)
         {
             //wait one second then add to counter
@@ -446,7 +387,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
         GameManager.instance.powerShootActive.SetActive(false);
         shootRate = origShootRate;
-        powerActive[3] = false;
     }
     IEnumerator EnemyHpPowerCooldown()
     {
@@ -454,6 +394,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         GameManager.instance.powerDmgActive.SetActive(true);
         GameManager.instance.dmgPowerCoolDown.CrossFadeAlpha(1, 1, false);
         GameManager.instance.dmgPowerImage.CrossFadeAlpha(1, 1, false);
+
         while (CD > 0)
         {
             //wait one second then add to counter
@@ -489,38 +430,78 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
                 }
             }
         }
-        powerActive[4] = false;
+    }
+    IEnumerator PowerTextCD(string typeCD)
+    {
+        GameManager.instance.SetPowerText(typeCD);
+        GameManager.instance.PowerText.SetActive(true);
+        Debug.Log(true);
+        yield return new WaitForSeconds(2);
+        Debug.Log(typeCD);
+        GameManager.instance.PowerText.SetActive(false);
+        Debug.Log(false);
     }
     public void JumpPower(int jumps)
     {
+        if (powerUpCorutine[0] != null)
+        {
+            StopCoroutine(powerUpCorutine[0]);
+            StopCoroutine(PowerTextCD("Double Jump"));
+        }
         jumpMax = jumps;
-        powerActive[0] = true;
-        powerIndex = 0;
+        StartCoroutine(PowerTextCD("Double Jump"));
+        powerUpCorutine[0] = JumpPowerCooldown();
+        StartCoroutine(powerUpCorutine[0]);
     }
     public void SpeedBoost(float speed)
     {
+        if (powerUpCorutine[1] != null)
+        {
+            StopCoroutine(powerUpCorutine[1]);
+            StopCoroutine(PowerTextCD("Speed Boost"));
+        }
         playerSpeed = speed;
         if (isSprinting)
         {
             playerSpeed = speed * sprintMod;
         }
-        powerActive[1] = true;
-        powerIndex = 1;
+
+        StartCoroutine(PowerTextCD("Speed Boost"));
+        powerUpCorutine[1] = SpeedPowerCooldown();
+        StartCoroutine(powerUpCorutine[1]);
     }
     public void Invulnerability()
     {
+        if (powerUpCorutine[2] != null)
+        {
+            StopCoroutine(powerUpCorutine[2]);
+            StopCoroutine(PowerTextCD("Invulnerable"));
+        }
         isInvulnerable = true;
-        powerActive[2] = true;
-        powerIndex = 2;
+        StartCoroutine(PowerTextCD("Invulnerable"));
+        powerUpCorutine[2] = InvulnerableCooldown();
+        StartCoroutine(powerUpCorutine[2]);
     }
     public void ShootRate(float shoot)
     {
+        if (powerUpCorutine[3] != null)
+        {
+            StopCoroutine(powerUpCorutine[3]);
+            StopCoroutine(PowerTextCD("Rapid Fire"));
+        }
         shootRate = shoot;
-        powerActive[3] = true;
-        powerIndex = 3;
+        StartCoroutine(PowerTextCD("Rapid Fire"));
+        powerUpCorutine[3] = ShootRatePowerCooldown();
+        StartCoroutine(powerUpCorutine[3]);
     }
+    
     public void EnemyHealthDown(int damage)
     {
+        if(powerUpCorutine[4] != null)
+        {
+            StopCoroutine(powerUpCorutine[4]);
+            StopCoroutine(PowerTextCD("Enemy Health Down"));
+        }
         enemyToFind = GameObject.FindGameObjectsWithTag("Enemy");
         for (int i = 0; i < enemyToFind.Length; i++)
         {
@@ -550,8 +531,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
                 
             }
         }
-        powerActive[4] = true;
-        powerIndex = 4;
+        //powerActive[4] = true;
+        //powerIndex = 4;
+        StartCoroutine(PowerTextCD("Enemy Health Down"));
+        powerUpCorutine[4] = EnemyHpPowerCooldown();
+        StartCoroutine(powerUpCorutine[4]);
     }
 
     // Pickup functions
