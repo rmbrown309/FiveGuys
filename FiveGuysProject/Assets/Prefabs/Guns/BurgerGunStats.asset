@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5691c4d8c7a7e440b03620d68a535b9, type: 3}
   m_Name: BurgerGunStats
   m_EditorClassIdentifier: 
-  shootRate: 0.5
-  shootDamage: 1
+  shootRate: 0.75
+  shootDamage: 2
   shootTime: 3
-  ammoCur: 29
+  ammoCur: 18
   ammoMax: 50
   cost: 1
   gunName: Def Burger Gun
