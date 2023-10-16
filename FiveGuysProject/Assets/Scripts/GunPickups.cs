@@ -20,10 +20,10 @@ public class GunPickups : MonoBehaviour
         {
             if (GameManager.instance.pickupLabel != null)
                 GameManager.instance.pickupLabel.SetActive(false);
-            pickedUp = true;
+            //pickedUp = true;
             GameManager.instance.IncreasePlayerScore(-gun.cost);
             GameManager.instance.playerScript.setGunStats(gun);
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
 
     }

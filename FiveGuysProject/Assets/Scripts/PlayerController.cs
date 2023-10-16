@@ -174,11 +174,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         aud.PlayOneShot(audSteps[Random.Range(0, audSteps.Length)], audStepsVol);
         if (!isSprinting)
         {
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.4f);
 
         }
         else
-            yield return new WaitForSeconds(0.15f);
+            yield return new WaitForSeconds(0.25f);
 
         footstepsPlaying = false;
     }
