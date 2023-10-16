@@ -30,4 +30,12 @@ public class ButtonFunction : MonoBehaviour
         GameManager.instance.playerScript.SpawnPlayer();
         Resume();
     }
+    public void Settings()
+    {
+        GameManager.instance.SetSettings();
+    }
+    public void SaveSettings()
+    {
+        GameManager.instance.SaveSettings();
+    }
 }

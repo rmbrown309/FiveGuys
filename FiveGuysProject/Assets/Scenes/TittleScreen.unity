@@ -244,6 +244,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5581329387388802943, guid: d51af394b1bfcee4694596d965cba949, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 559035713}
+    - target: {fileID: 5581329387388802943, guid: d51af394b1bfcee4694596d965cba949, type: 3}
+      propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SetResolution
+      objectReference: {fileID: 0}
     - target: {fileID: 6402271003212842800, guid: d51af394b1bfcee4694596d965cba949, type: 3}
       propertyPath: m_LocalPosition.x
       value: 473.713

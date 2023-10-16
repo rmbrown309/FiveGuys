@@ -12,7 +12,6 @@ public class MainMenuButton : MonoBehaviour
     [SerializeField] Animator mAnimator;
     Resolution[] resolutions;
     public TMPro.TMP_Dropdown resolutionDropdown;
-    public AudioMixer audioMixer;
     float newVolume;
     [SerializeField] MasterVolume volume;
     private void Start()
@@ -66,12 +65,9 @@ public class MainMenuButton : MonoBehaviour
     }
     public void SetResolution(int resolitionIndex)
     {
+        Debug.Log(resolitionIndex);
         Resolution resolution = resolutions[resolitionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
-    }
-    public void SetMasterVolume(float volume)
-    {
-        audioMixer.SetFloat("volume", volume);
     }
     public void SetAudio(float volume)
     {

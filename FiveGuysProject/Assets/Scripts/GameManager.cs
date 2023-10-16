@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject winMenu;
     [SerializeField] GameObject loseMenu;
+    [SerializeField] GameObject settingsMenu;
+
     [SerializeField] GameObject healthActive;
     [SerializeField] TMP_Text enemiesRemainText;
     [SerializeField] TMP_Text scoreCount;
@@ -118,6 +120,16 @@ public class GameManager : MonoBehaviour
         //reset our active menu
         activeMenu.SetActive(false);
         activeMenu = null;
+    }
+    public void SetSettings()
+    {
+        activeMenu.SetActive(false);
+        setActive(settingsMenu);
+    }
+    public void SaveSettings()
+    {
+        activeMenu.SetActive(false);
+        setActive(pauseMenu);
     }
 
     public void UpdateWinCondition(int amount)
