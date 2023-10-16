@@ -3,7 +3,11 @@ guid: fc68b310c62a2574aacb2271d670ca1b
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - mAnimator: {instanceID: 0}
+  - resolutionDropdown: {instanceID: 0}
+  - audioMixer: {instanceID: 0}
+  - volume: {fileID: 11400000, guid: 46f271e14fe41cf4cb7765b24c31d09d, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
