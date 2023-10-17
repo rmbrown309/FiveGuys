@@ -66,11 +66,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
     // powerup variables
     GameObject[] enemyToFind;
-    private IEnumerator type1Routine;
-    private IEnumerator type2Routine;
-    private IEnumerator type3Routine;
-    private IEnumerator type4Routine;
-    private IEnumerator type5Routine;
     private int origJump;
     private bool isInvulnerable;
     private float origHealthRegen;

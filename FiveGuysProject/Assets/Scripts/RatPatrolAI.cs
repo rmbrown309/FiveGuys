@@ -11,7 +11,6 @@ public class RatPatrolAI : MonoBehaviour, ISpray
     [SerializeField] float patrolRange;
 
     [SerializeField] int damage;
-    
 
     void Start()
     {

@@ -31,17 +31,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Image SprayAmmoBar;
     [SerializeField]
     private TMP_Text waveUIText;
-    public TMP_Text WaveUIText
-    {
-        get
-        {
-            return waveUIText;
-        }
-        set
-        {
-            WaveUIText = value;
-        }
-    }
+    public TMP_Text WaveUIText;
     public GameObject pickupLabel;
     public TMP_Text pickupText;
     public GameObject powerJumpActive;
@@ -68,7 +58,6 @@ public class GameManager : MonoBehaviour
     public int enemiesRemain;
     public int score;
 
-    int jumpCoolDown;
     float origTimeScale;
 
     void Awake()
@@ -91,6 +80,7 @@ public class GameManager : MonoBehaviour
         playerScript = player.GetComponent<PlayerController>();
         playerSpawnPoint = GameObject.FindWithTag("Player Spawn Point");
         waves = 1;
+        enableWaveUIText();
     }
 
     // Update is called once per frame
@@ -167,9 +157,9 @@ public class GameManager : MonoBehaviour
     }
     public void IncreaseWaveCount(int num)
     {
-        enableWaveUIText();
         waves = num;
         currentWaveCount.text = waves.ToString("0");
+        enableWaveUIText();
     }
 
     public void JumpPowerCoolDown(float coolDown)

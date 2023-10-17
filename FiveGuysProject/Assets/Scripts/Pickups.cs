@@ -14,7 +14,6 @@ public class Pickups : MonoBehaviour
     [SerializeField] int pickupCost;
 
     bool playerInTrigger;
-    string labelText;
     bool pickedUp;
 
     void Start()
