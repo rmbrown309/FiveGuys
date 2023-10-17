@@ -28,15 +28,18 @@ public class PlayerBullet : MonoBehaviour
         }
 
         IDamage damageable = other.GetComponent<IDamage>();
+
         if (damageable != null)
         {
             damageable.takeDamage(damage);
 
         }
+
         if(hitEffect != null)
         {
             Instantiate(hitEffect, transform.position, Quaternion.identity);
         }
+
         Destroy(gameObject);
     }
 
@@ -44,6 +47,7 @@ public class PlayerBullet : MonoBehaviour
     {
         destroyTime = time;
     }
+
     public void sethitEffect(ParticleSystem gunHitEffect)
     {
         hitEffect = gunHitEffect;
