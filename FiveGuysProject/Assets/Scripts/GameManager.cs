@@ -29,6 +29,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text ammoMax;
     public GameObject SprayAmmoParent;
     [SerializeField] Image SprayAmmoBar;
+    [SerializeField]
+    private TMP_Text waveUIText;
+    public TMP_Text WaveUIText
+    {
+        get
+        {
+            return waveUIText;
+        }
+        set
+        {
+            WaveUIText = value;
+        }
+    }
     public GameObject pickupLabel;
     public TMP_Text pickupText;
     public GameObject powerJumpActive;
@@ -154,6 +167,7 @@ public class GameManager : MonoBehaviour
     }
     public void IncreaseWaveCount(int num)
     {
+        enableWaveUIText();
         waves = num;
         currentWaveCount.text = waves.ToString("0");
     }
@@ -207,5 +221,19 @@ public class GameManager : MonoBehaviour
     {
         ammoCurr.text = curr.ToString("F0");
         ammoMax.text = max.ToString("F0");
+    }
+
+    // Next two methids control the Giant Text for each new wave
+    public void enableWaveUIText()
+    {
+        StartCoroutine(WaveUISpawnRoutine());
+    }
+
+    IEnumerator WaveUISpawnRoutine()
+    {
+        waveUIText.text = "Wave " + (waves + 1);
+        waveUIText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(2f);
+        waveUIText.gameObject.SetActive(false);
     }
 }
