@@ -168,6 +168,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
         // makes gravity work on player
         playerVelocity.y += gravityValue * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);
     }
     IEnumerator playFootsteps()
     {
