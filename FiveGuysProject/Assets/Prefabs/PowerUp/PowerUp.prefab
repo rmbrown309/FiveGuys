@@ -52,7 +52,7 @@ MonoBehaviour:
   newJumpMax: 2
   newSpeedMax: 10
   newEnemyHealthDown: 1
-  newShootRate: 0.25
+  newShootRate: 2
   newRegen: 2
   randType: 1
   rotationSpeed: 40

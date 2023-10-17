@@ -386,7 +386,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         }
 
         GameManager.instance.powerShootActive.SetActive(false);
-        shootRate = origShootRate;
+        shootRate = gunList[selectedGun].shootRate;
     }
     IEnumerator EnemyHpPowerCooldown()
     {
@@ -489,7 +489,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             StopCoroutine(powerUpCorutine[3]);
             StopCoroutine(PowerTextCD("Rapid Fire"));
         }
-        shootRate = shoot;
+        shootRate /= shoot;
         StartCoroutine(PowerTextCD("Rapid Fire"));
         powerUpCorutine[3] = ShootRatePowerCooldown();
         StartCoroutine(powerUpCorutine[3]);
