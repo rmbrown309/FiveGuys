@@ -260,7 +260,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
                 Instantiate(sprayEffect, targetPoint, Quaternion.identity);
             }
 
-            Collider[] hits = Physics.OverlapSphere(targetPoint, 3);
+            Collider[] hits = Physics.OverlapSphere(targetPoint, 4);
             foreach (Collider c in hits)
             {
                 ISpray sprayable = c.GetComponent<ISpray>();
