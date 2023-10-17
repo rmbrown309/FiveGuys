@@ -558,8 +558,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     }
     public void IncreasePlayerDamage(int addition)
     {
-        gunDamage += addition;
-        bullet.GetComponent<PlayerBullet>().damage = gunDamage;
+        gunList[selectedGun].shootDamage += addition;
+        bullet.GetComponent<PlayerBullet>().damage = gunList[selectedGun].shootDamage;
     }
     public void RefillAmmo()
     {
