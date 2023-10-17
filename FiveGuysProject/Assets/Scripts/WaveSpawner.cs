@@ -12,10 +12,11 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] int numOfEnemies; // number of enemies spawned during the wave
     [SerializeField] float spawnRate; // seconds between each emnemy spawn
     [SerializeField] bool rats;
-
+  
     bool spawnStopped = false;
     bool isWaveActive = true;
 
+ 
     // Update is called once per frame
     void Update()
     {
