@@ -40,6 +40,16 @@ public class PlayerBullet : MonoBehaviour
             Instantiate(hitEffect, transform.position, Quaternion.identity);
         }
 
+<<<<<<< Updated upstream
+=======
+        IPhysics physicsable  = other.GetComponent<IPhysics>();
+        if (physicsable != null)
+        {
+            physicsable.takePhysics((transform.position + other.transform.position).normalized * (damage * 5));
+        }
+
+
+>>>>>>> Stashed changes
         Destroy(gameObject);
     }
 

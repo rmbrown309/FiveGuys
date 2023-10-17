@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class EnemyAI : MonoBehaviour, IDamage
+public class EnemyAI : MonoBehaviour, IDamage, IPhysics
 {
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
@@ -21,6 +21,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] int targetFaceSpeed;
     [SerializeField] int viewAngle;
     [SerializeField] float despawnTime;
+    [SerializeField] int pushBackResolve;
 
     [Header("----- Gun Stats -----")]
     [SerializeField] GameObject bullet;
@@ -28,6 +29,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] int shootAngle;
 
     bool isShooting;
+    private Vector3 pushBack;
     Vector3 playerDir;
     bool playerInRange;
     float angleToPlayer;
@@ -44,6 +46,9 @@ public class EnemyAI : MonoBehaviour, IDamage
         if (agent.isActiveAndEnabled)
         {
             anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
+
+            pushBack = Vector3.Lerp(pushBack, Vector3.zero, Time.deltaTime * pushBackResolve);
+
             //if the player is in range then we get the direction and tell the nav agent to set its destination towards the player and start shooting
             playerDir = GameManager.instance.player.transform.position - headPos.position;
             angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
@@ -55,6 +60,8 @@ public class EnemyAI : MonoBehaviour, IDamage
 
             if (angleToPlayer <= shootAngle && !isShooting && playerInRange && damageCol.enabled)
                 StartCoroutine(shoot());
+
+            agent.Move((agent.velocity + pushBack) * Time.deltaTime);
         }
             
         
@@ -142,6 +149,12 @@ public class EnemyAI : MonoBehaviour, IDamage
         {
             anim.SetTrigger("Damage");
         }
+    }
+
+    //Take damage and get pushed back
+    public void takePhysics(Vector3 dir)
+    {
+        pushBack += dir;
     }
 
     //Destroys the enemy after a specified amount of time

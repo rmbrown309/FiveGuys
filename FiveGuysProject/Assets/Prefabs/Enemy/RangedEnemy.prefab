@@ -725,6 +725,7 @@ MonoBehaviour:
   targetFaceSpeed: 6
   viewAngle: 90
   despawnTime: 10
+  pushBackResolve: 4
   bullet: {fileID: 7283729910232731192, guid: 8f6e98573d892e24ea439a8197ac0804, type: 3}
   shootRate: 0.5
   shootAngle: 30

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MeleeEnemyAI : MonoBehaviour, IDamage
+public class MeleeEnemyAI : MonoBehaviour, IDamage, IPhysics
 {
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
@@ -21,6 +21,7 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage
     [SerializeField] int targetFaceSpeed;
     [SerializeField] int viewAngle;
     [SerializeField] int despawnTime;
+    [SerializeField] int pushBackResolve;
 
     [Header("----- Melee Stats -----")]
     [SerializeField] float hitRate;
@@ -30,6 +31,7 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage
     [SerializeField] Collider meleeCol;
 
     bool isMeleeing;
+    Vector3 pushBack;
     Vector3 playerDir;
     bool playerInRange;
     float angelToPlayer;
@@ -46,6 +48,8 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage
         {
             anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
 
+            pushBack = Vector3.Lerp(pushBack, Vector3.zero, Time.deltaTime * pushBackResolve);
+
             playerDir = GameManager.instance.player.transform.position - headPos.position;
             angelToPlayer = Vector3.Angle(playerDir, transform.forward);
 
@@ -56,6 +60,8 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage
 
             if (angelToPlayer <= hitAngle && !isMeleeing && playerInRange && damageCol.enabled)
                 StartCoroutine(melee());
+
+            agent.Move((agent.velocity + pushBack) * Time.deltaTime);
         }
     }
 
@@ -118,6 +124,12 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage
         {
             anim.SetTrigger("Damage");
         }
+    }
+
+    //Take damage and get pushed back
+    public void takePhysics(Vector3 dir)
+    {
+        pushBack += dir;
     }
 
     //Destorys the enemy after a specified amount of time

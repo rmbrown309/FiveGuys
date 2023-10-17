@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour, IDamage, IPower
+public class PlayerController : MonoBehaviour, IDamage, IPower, IPhysics
 {
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [Range(8, 30)][SerializeField] float jumpHeight;
     [Range(-10, -40)][SerializeField] float gravityValue;
     [SerializeField] float healthRegainSpeed;
+    [SerializeField] int pushBackResolve;
 
     [Header("----- Gun Stats -----")]
     [SerializeField] List<gunStats> gunList = new List<gunStats>(); // the amount of guns currently on the player.
@@ -51,6 +52,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     // Activates rat spray
     private bool sprayWeaponActive;
 
+    private Vector3 pushBack;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     private Vector3 move;
@@ -136,6 +138,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     {
         Sprint();
 
+        pushBack = Vector3.Lerp(pushBack, Vector3.zero, Time.deltaTime * pushBackResolve);
+
         // Keeps player velocity from going negative and resets ability to jump while grounded
         groundedPlayer = controller.isGrounded;
 
@@ -167,7 +171,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
         // makes gravity work on player
         playerVelocity.y += gravityValue * Time.deltaTime;
-        controller.Move(playerVelocity * Time.deltaTime);
+        controller.Move((playerVelocity + pushBack) * Time.deltaTime);
     }
     IEnumerator playFootsteps()
     {
@@ -617,6 +621,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             damageActive = false;
         }
     }
+
+    //Player push back when taking damage
+    public void takePhysics(Vector3 dir)
+    {
+        pushBack += dir;
+    }
+
     public void SpawnPlayer()
     {
         HP = HPOrig;
@@ -628,6 +639,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         controller.enabled = false;
         transform.position = GameManager.instance.playerSpawnPoint.transform.position;
         controller.enabled = true;
+        pushBack = Vector3.zero;
     }
     void UpdatePlayerUI()
     {

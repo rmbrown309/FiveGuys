@@ -1280,6 +1280,7 @@ MonoBehaviour:
   targetFaceSpeed: 3
   viewAngle: 90
   despawnTime: 0
+  pushBackResolve: 4
   hitRate: 1
   hitAngle: 90
   meleeDamage: 1
