@@ -2583,7 +2583,7 @@ MonoBehaviour:
   HP: 3
   targetFaceSpeed: 3
   viewAngle: 90
-  despawnTime: 0
+  despawnTime: 10
   hitRate: 1
   hitAngle: 90
   meleeDamage: 1

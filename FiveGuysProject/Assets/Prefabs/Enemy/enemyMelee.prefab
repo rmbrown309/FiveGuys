@@ -1223,7 +1223,7 @@ Animator:
   m_GameObject: {fileID: 3735638255783265858}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 7966d979d9982a743a30e3b75a402b94, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cb1d94826e7517641af58bbcbb249f33, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1274,13 +1274,17 @@ MonoBehaviour:
   headPos: {fileID: 3262391430996810517}
   powerSpawn: {fileID: 3765320052660688747, guid: c47bfb552fb3908498c28232875026b8, type: 3}
   powerSpawnPercentage: 0.2
+  anim: {fileID: 0}
+  damageCol: {fileID: 0}
   HP: 3
   targetFaceSpeed: 3
   viewAngle: 90
+  despawnTime: 0
   hitRate: 1
   hitAngle: 90
   meleeDamage: 1
   meleeRange: 4
+  meleeCol: {fileID: 0}
 --- !u!136 &4032849495623127835
 CapsuleCollider:
   m_ObjectHideFlags: 0
