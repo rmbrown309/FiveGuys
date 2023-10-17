@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class EnemyAI : MonoBehaviour, IDamage, IPhysics
+public class EnemyAI : MonoBehaviour, IDamage
 {
     [Header("----- Components -----")]
     [SerializeField] Renderer model;

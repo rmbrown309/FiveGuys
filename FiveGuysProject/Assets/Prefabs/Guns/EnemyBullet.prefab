@@ -22,11 +22,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: faed0e6ed186b9b479ddef4ff61a5f80, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.25
+      value: 14.2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: faed0e6ed186b9b479ddef4ff61a5f80, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -23.285673
+      value: -12.01
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: faed0e6ed186b9b479ddef4ff61a5f80, type: 3}
       propertyPath: m_LocalRotation.w
@@ -91,6 +91,7 @@ MonoBehaviour:
   damage: 1
   speed: 18
   destroyTime: 3
+  hitEffect: {fileID: 0}
 --- !u!136 &7518422455510651041
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -112,7 +113,7 @@ CapsuleCollider:
   serializedVersion: 2
   m_Radius: 0.15
   m_Height: 0.15
-  m_Direction: 1
+  m_Direction: 2
   m_Center: {x: 0, y: 0, z: 0.10154262}
 --- !u!54 &31794849329376779
 Rigidbody:

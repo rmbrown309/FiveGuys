@@ -21,11 +21,5 @@ public class MeleeHit : MonoBehaviour
         {
             damageable.takeDamage(damage);
         }
-
-        IPhysics physicsable = other.GetComponent<IPhysics>();
-        if ( physicsable != null )
-        {
-            physicsable.takePhysics((transform.position + other.transform.position).normalized * (damage * 5));
-        }
     }
 }
