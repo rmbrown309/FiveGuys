@@ -231,7 +231,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator WaveUISpawnRoutine()
     {
-        waveUIText.text = "Wave " + (waves + 1);
+        waveUIText.text = "Wave " + (waves);
         waveUIText.gameObject.SetActive(true);
         yield return new WaitForSeconds(2f);
         waveUIText.gameObject.SetActive(false);
