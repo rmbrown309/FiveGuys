@@ -99,6 +99,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         origShootRate = shootRate;
         currSprayAmmo = maxSprayAmmo;
         gunList[selectedGun].ammoCur = gunList[selectedGun].ammoMax;
+        GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
         GameManager.instance.updateSprayAmmoUI(currSprayAmmo, maxSprayAmmo);
         if (GameManager.instance.playerSpawnPoint != null)
         {
