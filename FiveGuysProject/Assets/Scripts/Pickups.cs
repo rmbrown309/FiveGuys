@@ -13,6 +13,11 @@ public class Pickups : MonoBehaviour
     [SerializeField] PickupType pickupType;
     [SerializeField] int pickupCost;
 
+    [Header("----- Audio Stuff -----")]
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip audCash;
+    [Range(0, 1)][SerializeField] float audCashVol;
+
     bool playerInTrigger;
     bool pickedUp;
 
@@ -77,6 +82,8 @@ public class Pickups : MonoBehaviour
 
                     break;
             }
+
+            aud.PlayOneShot(audCash, audCashVol);
 
             GameManager.instance.IncreasePlayerScore(-pickupCost);
         }

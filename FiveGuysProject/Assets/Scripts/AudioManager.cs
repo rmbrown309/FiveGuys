@@ -12,13 +12,15 @@ public class AudioManager : MonoBehaviour
 
     [SerializeField] AudioClip rat;
     [Range(0, 10)] public float audRatVol;
+    [SerializeField] AudioClip winSound;
+    [Range(0, 1)][SerializeField] float winVol;
 
-
-    bool ratty ;
+    bool ratty;
     bool bossy;
+    bool winner;
     private void Awake()
     {
-        bossa.Pause();
+        bossa.Stop();
     }
 
     // Update is called once per frame
@@ -32,9 +34,15 @@ public class AudioManager : MonoBehaviour
 
         if (bossy == false && GameManager.instance.waves == 5)
         {
-            aud.Pause();
+            aud.Stop();
             bossa.Play();
             bossy = true;
+        }
+
+        if (winner == false && GameManager.instance.noEnemies && GameManager.instance.waves == 5)
+        {
+            winner = true;
+            aud.PlayOneShot(winSound);
         }
     }
 

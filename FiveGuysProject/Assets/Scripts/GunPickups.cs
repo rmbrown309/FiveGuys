@@ -5,6 +5,12 @@ using UnityEngine;
 public class GunPickups : MonoBehaviour
 {
     [SerializeField] gunStats gun;
+
+    [Header("----- Audio Stuff -----")]
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip audCash;
+    [Range(0, 1)][SerializeField] float audCashVol;
+
     bool playerInTrigger;
     bool pickedUp;
 
@@ -23,6 +29,7 @@ public class GunPickups : MonoBehaviour
             //pickedUp = true;
             GameManager.instance.IncreasePlayerScore(-gun.cost);
             GameManager.instance.playerScript.setGunStats(gun);
+            aud.PlayOneShot(audCash, audCashVol);
             //Destroy(gameObject);
         }
 

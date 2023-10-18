@@ -143,13 +143,20 @@ public class GameManager : MonoBehaviour
         //when there are no enemies or waves remaining pull the win menu up
         if(enemiesRemain < 1 && waves == 5)
         {
-            noEnemies = true;
-            
-            StatePaused();
-            setActive(winMenu);
+            StartCoroutine(winGame());
         }
         
     }
+    public IEnumerator winGame()
+    {
+        noEnemies = true;
+
+        yield return new WaitForSeconds(3);
+
+        StatePaused();
+        setActive(winMenu);
+    }
+
     public void IncreasePlayerScore(int num)
     {
         score += num;
@@ -157,9 +164,12 @@ public class GameManager : MonoBehaviour
     }
     public void IncreaseWaveCount(int num)
     {
-        waves = num;
-        currentWaveCount.text = waves.ToString("0");
-        enableWaveUIText();
+        if (num <= 5)
+        {
+            waves = num;
+            currentWaveCount.text = waves.ToString("0");
+            enableWaveUIText();
+        }
     }
 
     public void JumpPowerCoolDown(float coolDown)

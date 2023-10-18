@@ -50,11 +50,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
     // Activates rat spray
     private bool sprayWeaponActive;
+
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     private Vector3 move;
     private int jumpedTimes;
     private int gunDamage;
+    private int extraDamage;
 
     bool isShooting;
     bool isSpraying;
@@ -88,6 +90,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         OrigSpeed = playerSpeed;
         HPOrig = HP;
         gunDamage = startDamage;
+        extraDamage = 0;
         setGunStats(defGun);
         origHealthRegen = healthRegainSpeed;
         origShootRate = shootRate;
@@ -99,8 +102,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         {
             SpawnPlayer();
         }
-        if (GameManager.instance.enemiesRemain == 0)
-            GameManager.instance.noEnemies = true;
+        //if (GameManager.instance.enemiesRemain == 0)
+        //    GameManager.instance.noEnemies = true;
     }
 
     void Update()
@@ -554,8 +557,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     }
     public void IncreasePlayerDamage(int addition)
     {
-        gunList[selectedGun].shootDamage += addition;
-        bullet.GetComponent<PlayerBullet>().damage = gunList[selectedGun].shootDamage;
+        extraDamage += addition;
+        bullet.GetComponent<PlayerBullet>().damage = gunList[selectedGun].shootDamage + extraDamage;
     }
     public void RefillAmmo()
     {
