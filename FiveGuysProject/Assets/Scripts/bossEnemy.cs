@@ -23,6 +23,11 @@ public class BossEnemy : MonoBehaviour, IDamage
     [SerializeField] float shootRate;
     [SerializeField] int shootAngle;
 
+    [Header("----- Boss Audio -----")]
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip[] bossbark;
+    [Range(0, 1)][SerializeField] float bossBarkVol;
+
     bool isShooting;
     Vector3 playerDir;
     bool playerInRange;
@@ -130,6 +135,7 @@ public class BossEnemy : MonoBehaviour, IDamage
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
+            aud.PlayOneShot(bossbark[Random.Range(0, bossbark.Length)], bossBarkVol);
         }
     }
     void OnTriggerExit(Collider other)
