@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   posToSpawn: {fileID: 3835346253811459833}
-  enemy: {fileID: 3735638255783265858, guid: ee9ecaf7249907648af474326615a8a4, type: 3}
+  enemy: {fileID: 7848121369627312878, guid: f46188c19ca8c164a9bdef90eac906ff, type: 3}
   waveNum: 1
   numOfEnemies: 3
   spawnRate: 2
