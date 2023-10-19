@@ -643,7 +643,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         //stats
         startDamage = gun.shootDamage;
         bullet = gun.bullet;
-        bullet.GetComponent<PlayerBullet>().damage = gun.shootDamage;
+        bullet.GetComponent<PlayerBullet>().damage = gun.shootDamage + extraDamage;
         bullet.GetComponent<PlayerBullet>().setDestroyTime(gun.shootTime);
         bullet.GetComponent<PlayerBullet>().sethitEffect(gun.hitEffect);
 
