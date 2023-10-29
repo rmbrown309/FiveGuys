@@ -741,6 +741,7 @@ MonoBehaviour:
   SprayAmmoParent: {fileID: 4836154327549049644}
   SprayAmmoBar: {fileID: 7443929214629447277}
   waveUIText: {fileID: 92051202154628133}
+  WaveUIText: {fileID: 0}
   pickupLabel: {fileID: 802907971681486216}
   pickupText: {fileID: 6596115453393935984}
   powerJumpActive: {fileID: 4880841311268849106}
@@ -5056,6 +5057,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7290291084398880375}
+  - component: {fileID: 3871155304577951710}
   m_Layer: 0
   m_Name: HUD
   m_TagString: Untagged
@@ -5093,6 +5095,27 @@ Transform:
   - {fileID: 550241739425516617}
   m_Father: {fileID: 7594770200883692418}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &3871155304577951710
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4535089844930331901}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fec1bb567abb83f4d81bad651ce4ed4e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4587276320906360668
 GameObject:
   m_ObjectHideFlags: 0

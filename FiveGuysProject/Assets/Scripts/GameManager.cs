@@ -26,7 +26,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text scoreCount;
     [SerializeField] TMP_Text currentWaveCount;
     [SerializeField] TMP_Text ammoCurr;
-    [SerializeField] TMP_Text ammoMax;
+    //[SerializeField] TMP_Text ammoMax;
     public GameObject SprayAmmoParent;
     [SerializeField] Image SprayAmmoBar;
     [SerializeField]
@@ -57,7 +57,8 @@ public class GameManager : MonoBehaviour
     public int waves;
     public int enemiesRemain;
     public int score;
-
+    int ammo;
+    int ammoMax;
     float origTimeScale;
 
     void Awake()
@@ -97,6 +98,14 @@ public class GameManager : MonoBehaviour
             //activeMenu.SetActive(isPaused);
             setActive(pauseMenu);
         }
+    }
+    public int GetAmmo()
+    {
+        return ammo;
+    }
+    public int GetAmmoMax()
+    {
+        return ammoMax;
     }
     public void StatePaused()
     {
@@ -217,10 +226,12 @@ public class GameManager : MonoBehaviour
         SprayAmmoBar.fillAmount = (float)current / max;
     }
 
-    public void updateAmmmo(int curr, int max)
+    public void updateAmmmo(int _curr, int _ammoMax)
     {
-        ammoCurr.text = curr.ToString("F0");
-        ammoMax.text = max.ToString("F0");
+        ammoCurr.text = _curr.ToString("F0");
+        ammo = _curr;
+        ammoMax = _ammoMax;
+        //ammoMax.text = max.ToString("F0");
     }
 
     // Next two methids control the Giant Text for each new wave
