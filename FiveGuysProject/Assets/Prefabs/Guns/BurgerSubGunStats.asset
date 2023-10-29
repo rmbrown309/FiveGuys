@@ -15,7 +15,7 @@ MonoBehaviour:
   shootRate: 0.25
   shootDamage: 1
   shootTime: 3
-  ammoCur: 66
+  ammoCur: 75
   ammoMax: 75
   cost: 15
   gunName: Burger SubGun
