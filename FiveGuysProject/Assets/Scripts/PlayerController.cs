@@ -245,9 +245,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
             if (gunList[selectedGun].isShotgun)
             {
-                shootDir.x = shootDir.x + Random.Range(-gunList[selectedGun].inaccuracy, +gunList[selectedGun].inaccuracy);
-                shootDir.y = shootDir.y + Random.Range(-(gunList[selectedGun].inaccuracy)/2, +(gunList[selectedGun].inaccuracy)/2);
-                shootDir.z = shootDir.z + Random.Range(-gunList[selectedGun].inaccuracy, +gunList[selectedGun].inaccuracy);
+                shootDir.x = shootDir.x + Random.Range(-gunList[selectedGun].horizSpread, +gunList[selectedGun].horizSpread);
+                shootDir.y = shootDir.y + Random.Range(-gunList[selectedGun].vertSpread, +gunList[selectedGun].vertSpread);
+                shootDir.z = shootDir.z + Random.Range(-gunList[selectedGun].zSpread, +gunList[selectedGun].zSpread);
             }
 
             // Instantiates bullet object and redirects its rotation toward the shootDir

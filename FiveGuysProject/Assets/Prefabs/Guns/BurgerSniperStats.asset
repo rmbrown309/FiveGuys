@@ -19,6 +19,9 @@ MonoBehaviour:
   ammoMax: 25
   cost: 20
   gunName: Burger Sniper
+  isShotgun: 0
+  numOfPellets: 1
+  inaccuracy: 0
   model: {fileID: 8612201438210954883, guid: 6a64651c715edd2428104e893b882c5c, type: 3}
   bullet: {fileID: 3773670445560834378, guid: 3905d5c52e14c9e4783a2daa23db404e, type: 3}
   hitEffect: {fileID: 6327853518906024368, guid: 349d4a817e629c04696c63e33888d7ad, type: 3}

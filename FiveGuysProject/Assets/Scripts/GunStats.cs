@@ -14,7 +14,10 @@ public class gunStats : ScriptableObject
     public string gunName;
     public bool isShotgun;
     public int numOfPellets;
-    public float inaccuracy;
+    public float horizSpread;
+    public float vertSpread;
+    public float zSpread;
+
     public GameObject model;
     public GameObject bullet;
     public ParticleSystem hitEffect;
