@@ -17,7 +17,7 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] Collider damageCol;
 
     [Header("----- Enemy Stats -----")]
-    [SerializeField] int HP;
+    [SerializeField] float HP;
     [SerializeField] int targetFaceSpeed;
     [SerializeField] int viewAngle;
     [SerializeField] int despawnTime;
@@ -86,15 +86,15 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage, IPhysics
         meleeCol.enabled = false;
     }
 
-    public int GetHp()
+    public float GetHp()
     {
         return HP;
     }
-    public void SetHP(int hp)
+    public void SetHP(float hp)
     {
         HP = hp;
     }
-    public void takeDamage(int amount)
+    public void takeDamage(float amount)
     {
         HP -= amount;
         //To fix bug of not turning the hit collider off when taking damage

@@ -13,7 +13,7 @@ public class BossEnemy : MonoBehaviour, IDamage
     [SerializeField] Collider damageCol;
 
     [Header("----- Enemy Stats -----")]
-    [SerializeField] int HP;
+    [SerializeField] float HP;
     [SerializeField] int targetFaceSpeed;
     [SerializeField] int viewAngle;
     [SerializeField] float despawnTime;
@@ -77,7 +77,7 @@ public class BossEnemy : MonoBehaviour, IDamage
         currBullet.transform.forward = playerDir.normalized;
     }
 
-    public void takeDamage(int amount)
+    public void takeDamage(float amount)
     {
         HP -= amount;
         agent.SetDestination(GameManager.instance.player.transform.position);
@@ -126,7 +126,7 @@ public class BossEnemy : MonoBehaviour, IDamage
     {
         HP = health;
     }
-    public int GetHp()
+    public float GetHp()
     {
         return HP;
     }

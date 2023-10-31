@@ -7,9 +7,9 @@ public class PlayerBullet : MonoBehaviour
     [SerializeField] Rigidbody rb;
 
     [Header("----- Bullet Stats -----")]
-    public int damage;
+    public float damage;
     [SerializeField] int speed;
-    [SerializeField] int destroyTime;
+    [SerializeField] float destroyTime;
     [SerializeField] ParticleSystem hitEffect;
 
 
@@ -43,7 +43,7 @@ public class PlayerBullet : MonoBehaviour
         Destroy(gameObject);
     }
 
-    public void setDestroyTime(int time)
+    public void setDestroyTime(float time)
     {
         destroyTime = time;
     }
