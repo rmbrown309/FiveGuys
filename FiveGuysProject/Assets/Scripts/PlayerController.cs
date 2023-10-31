@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
     [SerializeField] Transform shootPos;
+    [SerializeField] Transform shovePos;
 
     [Header("----- Player Stats -----")]
     [Range(1, 15)][SerializeField] int HP;
@@ -32,6 +33,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [SerializeField] int maxSprayAmmo;
     public int currSprayAmmo;
     [SerializeField] float sprayRegenSpeed;
+
+    [Header("----- Shove Stats -----")]
+    [SerializeField] float shoveCooldown;
+    [SerializeField] int shoveForce;
 
     [Header("----- PowerUp Settings -----")]
     [SerializeField] float waitT;
@@ -60,6 +65,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
     bool isShooting;
     bool isSpraying;
+    bool isShoving;
     bool sprayRegen;
     bool isSprinting;
     bool footstepsPlaying;
@@ -120,6 +126,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             StartCoroutine(Spray());
         if (sprayWeaponActive && (currSprayAmmo < maxSprayAmmo) && !isSpraying && !sprayRegen)
             StartCoroutine(RegenSprayAmmo());
+
+        if(Input.GetButton("Shove") && !isShoving)
+            StartCoroutine(Shove());
 
         //if player got damaged AND there isnt an active regen happening
         //then regen health
@@ -281,6 +290,21 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         GameManager.instance.updateSprayAmmoUI(currSprayAmmo, maxSprayAmmo);
 
         sprayRegen = false;
+    }
+
+    IEnumerator Shove()
+    {
+        isShoving = true;
+        Collider[] hits = Physics.OverlapSphere(shovePos.position, 3);
+        foreach (Collider c in hits)
+        {
+            IPhysics shoveable = c.GetComponent<IPhysics>();
+            if (shoveable != null)
+                shoveable.TakePhysics(transform.forward * shoveForce);
+        }
+        yield return new WaitForSeconds(shoveCooldown);
+        isShoving = false;
+
     }
 
     // Power Up functions

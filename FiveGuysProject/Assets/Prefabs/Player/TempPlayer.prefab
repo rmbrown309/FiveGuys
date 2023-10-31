@@ -65,6 +65,7 @@ Transform:
   m_Children:
   - {fileID: 603192757935190549}
   - {fileID: 501058306140340089}
+  - {fileID: 73639928150320859}
   m_Father: {fileID: 7350528977810592841}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2903120171533337186
@@ -142,6 +143,59 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1305013526029069405}
   m_Enabled: 1
+--- !u!1 &1736926310164359221
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 73639928150320859}
+  - component: {fileID: 1194000037843370834}
+  m_Layer: 0
+  m_Name: ShovePos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &73639928150320859
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736926310164359221}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2.6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 6989947982579334478}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1194000037843370834
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1736926310164359221}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 3
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7278790523575966485
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,6 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controller: {fileID: 9198960336271817168}
   shootPos: {fileID: 603192757935190549}
+  shovePos: {fileID: 73639928150320859}
   HP: 6
   playerSpeed: 6
   sprintMod: 2
@@ -212,6 +267,8 @@ MonoBehaviour:
   maxSprayAmmo: 20
   currSprayAmmo: 0
   sprayRegenSpeed: 2
+  shoveCooldown: 2
+  shoveForce: 30
   waitT: 8
   aud: {fileID: 8663212489565528548}
   audSpray: {fileID: 8300000, guid: d62df948e36e49f4bb305f7e239e02fb, type: 3}
@@ -240,8 +297,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 246ca93320cb0564e9b588ca525d8796, type: 3}
   - {fileID: 8300000, guid: 7fc4a81bd08c3f3448342c80aaa5451d, type: 3}
   audStepsVol: 0.05
-  volume: {fileID: 11400000, guid: 46f271e14fe41cf4cb7765b24c31d09d, type: 2}
-  sliderVolume: 0
 --- !u!143 &9198960336271817168
 CharacterController:
   m_ObjectHideFlags: 0

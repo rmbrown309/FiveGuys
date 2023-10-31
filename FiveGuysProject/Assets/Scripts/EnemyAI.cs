@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class EnemyAI : MonoBehaviour, IDamage
+public class EnemyAI : MonoBehaviour, IDamage, IPhysics
 {
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
@@ -61,7 +61,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             if (angleToPlayer <= shootAngle && !isShooting && playerInRange && damageCol.enabled)
                 StartCoroutine(shoot());
 
-            agent.Move((agent.velocity + pushBack) * Time.deltaTime);
+            agent.Move((pushBack) * Time.deltaTime);
         }
             
         
@@ -152,7 +152,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     }
 
     //Take damage and get pushed back
-    public void takePhysics(Vector3 dir)
+    public void TakePhysics(Vector3 dir)
     {
         pushBack += dir;
     }
