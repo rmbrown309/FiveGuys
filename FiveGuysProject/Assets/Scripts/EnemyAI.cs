@@ -17,7 +17,7 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] Collider damageCol;
 
     [Header("----- Enemy Stats -----")]
-    [SerializeField] int HP;
+    [SerializeField] float HP;
     [SerializeField] int targetFaceSpeed;
     [SerializeField] int viewAngle;
     [SerializeField] float despawnTime;
@@ -115,7 +115,7 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
     }
 
     //triggers the flash for when the enemy takes damage and flashs to let the player know. 
-    public void takeDamage(int amount)
+    public void takeDamage(float amount)
     {
         HP -= amount;
         agent.SetDestination(GameManager.instance.player.transform.position);
@@ -177,11 +177,11 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
         Quaternion rot = Quaternion.LookRotation(playerDir);
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * targetFaceSpeed);
     }
-    public void SetHP(int health)
+    public void SetHP(float health)
     {
         HP = health;
     }
-    public int GetHp()
+    public float GetHp()
     {
         return HP;
     }
