@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1078579772246358111}
   m_Layer: 0
-  m_Name: PrototypeEnvironment
+  m_Name: FirstLevelEnvironment
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
