@@ -10,12 +10,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [SerializeField] Transform shovePos;
 
     [Header("----- Player Stats -----")]
-    [Range(1, 15)][SerializeField] float HP;
-    [Range(1, 10)][SerializeField] float playerSpeed;
-    [Range(1, 3)][SerializeField] float sprintMod; // amount playerSpeed is multiplied when sprinting
-    [Range(1, 3)][SerializeField] int jumpMax; // number of jumps player can perform before landing
-    [Range(8, 30)][SerializeField] float jumpHeight;
-    [Range(-10, -40)][SerializeField] float gravityValue;
+    [Range(1, 15)] [SerializeField] float HP;
+    [Range(1, 10)] [SerializeField] float playerSpeed;
+    [Range(1, 3)] [SerializeField] float sprintMod; // amount playerSpeed is multiplied when sprinting
+    [Range(1, 3)] [SerializeField] int jumpMax; // number of jumps player can perform before landing
+    [Range(8, 30)] [SerializeField] float jumpHeight;
+    [Range(-10, -40)] [SerializeField] float gravityValue;
     [SerializeField] float healthRegainSpeed;
 
     [Header("----- Gun Stats -----")]
@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [Header("----- Audio Stuff -----")]
     [SerializeField] AudioSource aud;
     [SerializeField] AudioClip audSpray;
-    [Range(0, 1)][SerializeField] float audSprayVol;
+    [Range(0, 1)] [SerializeField] float audSprayVol;
     [SerializeField] AudioClip[] audDamage;
     [Range(0, 1)] [SerializeField] float audDamageVol;
     [SerializeField] AudioClip[] audJump;
@@ -125,7 +125,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         if (Input.GetButton("Shoot") && !isShooting && gunList.Count > 0)//if it is a shotgun then fire multiple times
         {
             //by looping the shoot multiple time we instantiate the correct number of pellets to be shot because bullets are only instantiated when shoot is called.
-            for (int i=0; i< gunList[selectedGun].numOfPellets; i++)
+            for (int i = 0; i < gunList[selectedGun].numOfPellets; i++)
             {
                 StartCoroutine(Shoot());
             }
@@ -140,7 +140,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         if (sprayWeaponActive && (currSprayAmmo < maxSprayAmmo) && !isSpraying && !sprayRegen)
             StartCoroutine(RegenSprayAmmo());
 
-        if(Input.GetButton("Shove") && !isShoving)
+        if (Input.GetButton("Shove") && !isShoving)
             StartCoroutine(Shove());
 
         //if player got damaged AND there isnt an active regen happening
@@ -150,12 +150,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             StartCoroutine(RegainHelth());
         }
     }
-    
+
     void Movement()
     {
         Sprint();
 
-        
+
 
         // Keeps player velocity from going negative and resets ability to jump while grounded
         groundedPlayer = controller.isGrounded;
@@ -231,7 +231,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
                 gunList[selectedGun].ammoCur--;
                 GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
             }
-         
+
             // Find hit position with raycast
             Ray ray = Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f));
             RaycastHit hit;
@@ -257,7 +257,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
                 GameObject currBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
                 currBullet.transform.forward = shootDir.normalized;
             }
-            
+
 
             yield return new WaitForSeconds(shootRate);
             isShooting = false;
@@ -373,12 +373,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
                 GameManager.instance.speedPowerImage.CrossFadeAlpha(0, 1, false);
             }
             GameManager.instance.SpeedPowerCoolDown(CD);
-            
+
             //if the player got damaged while regen, exit regen state
         }
 
         GameManager.instance.powerSpeedActive.SetActive(false);
-        
+
         playerSpeed = OrigSpeed;
         if (isSprinting)
         {
@@ -541,10 +541,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         powerUpCorutine[3] = ShootRatePowerCooldown();
         StartCoroutine(powerUpCorutine[3]);
     }
-    
+
     public void EnemyHealthDown(int damage)
     {
-        if(powerUpCorutine[4] != null)
+        if (powerUpCorutine[4] != null)
         {
             StopCoroutine(powerUpCorutine[4]);
             StopCoroutine(PowerTextCD("Enemy Health Down"));
@@ -566,7 +566,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
                     enemyScript.SetHP(damage);
                 }
-                else if(enemyToFind[i].GetComponent<MeleeEnemyAI>() != null)
+                else if (enemyToFind[i].GetComponent<MeleeEnemyAI>() != null)
                 {
                     meleeEnemyScript = enemyToFind[i].GetComponent<MeleeEnemyAI>();
                     if (origEnemyHp == 0)
@@ -575,7 +575,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
                     }
                     meleeEnemyScript.SetHP(damage);
                 }
-                
+
             }
         }
         //powerActive[4] = true;
