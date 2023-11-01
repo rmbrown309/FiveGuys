@@ -20,7 +20,7 @@ MonoBehaviour:
   ammoMax: 50
   cost: 15
   gunName: Def Burger Gun
-  isShotgun: 0
+  isShotgun: 1
   numOfPellets: 1
   horizSpread: 0
   vertSpread: 0

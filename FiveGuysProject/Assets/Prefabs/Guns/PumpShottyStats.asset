@@ -10,23 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5691c4d8c7a7e440b03620d68a535b9, type: 3}
-  m_Name: Burger16
+  m_Name: PumpShottyStats
   m_EditorClassIdentifier: 
-  weaponID: 3
-  shootRate: 0.75
-  shootDamage: 1
-  shootTime: 3
-  ammoCur: 50
-  ammoMax: 50
+  shootRate: 0.5
+  shootDamage: 0.5
+  shootTime: 0.6
+  ammoCur: 21
+  ammoMax: 35
   cost: 0
-  gunName: Burger-16
+  gunName: Pump Shotgun
   isShotgun: 1
-  numOfPellets: 3
+  numOfPellets: 5
   horizSpread: 0
   vertSpread: 0
-  zSpread: 0
-  model: {fileID: -927199367670048503, guid: d8ff8f9649a82e14791d960a0a17f1e4, type: 3}
-  bullet: {fileID: 3773670445560834378, guid: ff314b8980d265e4180234ebc497458d, type: 3}
-  hitEffect: {fileID: 6327853518906024368, guid: 349d4a817e629c04696c63e33888d7ad, type: 3}
+  zSpread: 1
+  model: {fileID: 678392909175583747, guid: 6a64651c715edd2428104e893b882c5c, type: 3}
+  bullet: {fileID: 4307941743950219541, guid: 5b4e996fa04c95641a778f341e077287, type: 3}
+  hitEffect: {fileID: 0}
   shootSound: {fileID: 0}
   audShotVol: 0.5
