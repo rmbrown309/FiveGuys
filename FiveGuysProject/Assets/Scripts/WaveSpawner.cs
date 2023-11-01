@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class WaveSpawner : MonoBehaviour
 {
     [Header("-----Components------")]
-    [SerializeField] Transform posToSpawn;
+    [SerializeField] Transform[] posToSpawn;
     [SerializeField] GameObject[] enemy; // enemy type spawned by this spawner
     [Header("-----Spawner Stats------")]
     [Range(1, 5)][SerializeField] int waveNum; // On what wave this spawner is active
@@ -46,6 +46,7 @@ public class WaveSpawner : MonoBehaviour
 
     IEnumerator TotalEnemy()
     {
+        Transform spawnpoint = posToSpawn[0];
 
         // prevents spawner from starting again during the wave
         isWaveActive = false;
@@ -57,8 +58,21 @@ public class WaveSpawner : MonoBehaviour
         // spawns the specified enemies at the specified rate
         for (int i = 0; i < numOfEnemies; i++)
         {
+            if (posToSpawn.Length > 1)
+            {
+                Transform furthestSpawn = posToSpawn[0];
+                for(int j = 1; j < posToSpawn.Length; j++)
+                {
+                    // prioritize the spawnpoint furthest from the player in order to keep enemies from spawning on top of them
+                    if ((posToSpawn[j].position - GameManager.instance.player.transform.position).magnitude > (furthestSpawn.position - GameManager.instance.player.transform.position).magnitude)
+                        furthestSpawn = posToSpawn[j];
+                }
+
+                spawnpoint = furthestSpawn;
+            }
+
             yield return new WaitForSeconds(spawnRate);
-            Instantiate(enemy[Random.Range(0, enemy.Length)], posToSpawn.position, Quaternion.identity);
+            Instantiate(enemy[Random.Range(0, enemy.Length)], spawnpoint.position, Quaternion.identity);
         }
 
         spawnStopped = true;
