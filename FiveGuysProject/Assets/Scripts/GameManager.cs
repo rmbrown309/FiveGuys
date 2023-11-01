@@ -4,7 +4,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using Unity.PlasticSCM.Editor.WebApi;
 
 public class GameManager : MonoBehaviour
 {
@@ -32,8 +31,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text pRegenCounter;
     [SerializeField] TMP_Text pSpeedCounter;
 
-    public TMP_Text waveUIText;
-   // private TMP_Text WaveUIText;
+    public GameObject waveUIText;
+    public TMP_Text WaveUIText;
     private int pDamage;
     private int pHealth;
     private int pRegen;
@@ -282,7 +281,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator WaveUISpawnRoutine()
     {
-        waveUIText.text = "Wave " + (waves);
+        WaveUIText.text = "Wave " + (waves);
         waveUIText.gameObject.SetActive(true);
         yield return new WaitForSeconds(2f);
         waveUIText.gameObject.SetActive(false);
