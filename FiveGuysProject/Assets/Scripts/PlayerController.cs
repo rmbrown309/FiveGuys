@@ -7,9 +7,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [Header("----- Components -----")]
     [SerializeField] CharacterController controller;
     [SerializeField] Transform shootPos;
+    [SerializeField] Transform shovePos;
 
     [Header("----- Player Stats -----")]
-    [Range(1, 15)][SerializeField] int HP;
+    [Range(1, 15)][SerializeField] float HP;
     [Range(1, 10)][SerializeField] float playerSpeed;
     [Range(1, 3)][SerializeField] float sprintMod; // amount playerSpeed is multiplied when sprinting
     [Range(1, 3)][SerializeField] int jumpMax; // number of jumps player can perform before landing
@@ -24,7 +25,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [SerializeField] GameObject gunModel; // the model of the players curr gun
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
-    [SerializeField] int startDamage;
+    [SerializeField] float startDamage;
 
     [Header("----- Rat Spray Stats -----")]
     [SerializeField] ParticleSystem sprayEffect;
@@ -32,6 +33,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [SerializeField] int maxSprayAmmo;
     public int currSprayAmmo;
     [SerializeField] float sprayRegenSpeed;
+
+    [Header("----- Shove Stats -----")]
+    [SerializeField] float shoveCooldown;
+    [SerializeField] int shoveForce;
 
     [Header("----- PowerUp Settings -----")]
     [SerializeField] float waitT;
@@ -55,11 +60,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     private bool groundedPlayer;
     private Vector3 move;
     private int jumpedTimes;
-    private int gunDamage;
-    private int extraDamage;
+    private float gunDamage;
+    private float extraDamage;
 
     bool isShooting;
     bool isSpraying;
+    bool isShoving;
     bool sprayRegen;
     bool isSprinting;
     bool footstepsPlaying;
@@ -72,8 +78,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     private bool isInvulnerable;
     private float origHealthRegen;
     private float origShootRate;
-    private int origEnemyHp;
-    private int HPOrig;
+    private float origEnemyHp;
+    private float HPOrig;
     private float OrigSpeed;
 
     //Regen detectors
@@ -113,13 +119,28 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         //calls the method to let the player select weapons 
         //selectGun();
 
-        if (Input.GetButton("Shoot") && !isShooting && gunList.Count>0)
-            StartCoroutine(Shoot());
-
-        if(sprayWeaponActive && Input.GetButton("Shoot2") && !isShooting)
+        //if (Input.GetButton("Shoot") && !isShooting && gunList.Count>0 && !gunList[selectedGun].isShotgun)//if it is not a shotgun then just fire normally
+        //    StartCoroutine(Shoot());
+        if (Input.GetButton("Shoot") && !isShooting && gunList.Count > 0)//if it is a shotgun then fire multiple times
+        {
+            //by looping the shoot multiple time we instantiate the correct number of pellets to be shot because bullets are only instantiated when shoot is called.
+            for (int i=0; i< gunList[selectedGun].numOfPellets; i++)
+            {
+                StartCoroutine(Shoot());
+            }
+            if (gunList[selectedGun].ammoCur != 0 && gunList[selectedGun].isShotgun)
+            {
+                gunList[selectedGun].ammoCur--;
+                GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
+            }
+        }
+        if (sprayWeaponActive && Input.GetButton("Shoot2") && !isShooting)
             StartCoroutine(Spray());
         if (sprayWeaponActive && (currSprayAmmo < maxSprayAmmo) && !isSpraying && !sprayRegen)
             StartCoroutine(RegenSprayAmmo());
+
+        if(Input.GetButton("Shove") && !isShoving)
+            StartCoroutine(Shove());
 
         //if player got damaged AND there isnt an active regen happening
         //then regen health
@@ -204,9 +225,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
             //plays gunshot audio and ticks the ammo down for the players current gun
             aud.PlayOneShot(gunList[selectedGun].shootSound, gunList[selectedGun].audShotVol);
-            gunList[selectedGun].ammoCur--;
-            GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
-
+            if (!gunList[selectedGun].isShotgun)
+            {
+                gunList[selectedGun].ammoCur--;
+                GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
+            }
+         
             // Find hit position with raycast
             Ray ray = Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f));
             RaycastHit hit;
@@ -219,13 +243,20 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             // Calculate shooting direction
             Vector3 shootDir = targetPoint - shootPos.position;
 
+            if (gunList[selectedGun].isShotgun)
+            {
+                shootDir.x = shootDir.x + Random.Range(-gunList[selectedGun].horizSpread, +gunList[selectedGun].horizSpread);
+                shootDir.y = shootDir.y + Random.Range(-gunList[selectedGun].vertSpread, +gunList[selectedGun].vertSpread);
+                shootDir.z = shootDir.z + Random.Range(-gunList[selectedGun].zSpread, +gunList[selectedGun].zSpread);
+            }
+
             // Instantiates bullet object and redirects its rotation toward the shootDir
             if (bullet != null)
             {
                 GameObject currBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
                 currBullet.transform.forward = shootDir.normalized;
             }
-
+            
 
             yield return new WaitForSeconds(shootRate);
             isShooting = false;
@@ -281,6 +312,21 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         GameManager.instance.updateSprayAmmoUI(currSprayAmmo, maxSprayAmmo);
 
         sprayRegen = false;
+    }
+
+    IEnumerator Shove()
+    {
+        isShoving = true;
+        Collider[] hits = Physics.OverlapSphere(shovePos.position, 3);
+        foreach (Collider c in hits)
+        {
+            IPhysics shoveable = c.GetComponent<IPhysics>();
+            if (shoveable != null)
+                shoveable.TakePhysics(transform.forward * shoveForce);
+        }
+        yield return new WaitForSeconds(shoveCooldown);
+        isShoving = false;
+
     }
 
     // Power Up functions
@@ -571,7 +617,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         GameManager.instance.SprayAmmoParent.SetActive(true);
     }
 
-    public void takeDamage(int amount)
+    public void takeDamage(float amount)
     {
         if (!isInvulnerable)
         {

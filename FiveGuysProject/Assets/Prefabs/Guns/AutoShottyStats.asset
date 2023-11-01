@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5691c4d8c7a7e440b03620d68a535b9, type: 3}
+  m_Name: AutoShottyStats
+  m_EditorClassIdentifier: 
+  shootRate: 0.25
+  shootDamage: 0.38
+  shootTime: 0.4
+  ammoCur: 50
+  ammoMax: 50
+  cost: 0
+  gunName: Automatic Shotgun
+  isShotgun: 1
+  numOfPellets: 6
+  horizSpread: 2.5
+  vertSpread: 1.2
+  zSpread: 1
+  model: {fileID: -927199367670048503, guid: d63c91e11d9ebb6469488f1040be7d41, type: 3}
+  bullet: {fileID: 4307941743950219541, guid: b8fce9a039d17f5488ca5fbb159c20ba, type: 3}
+  hitEffect: {fileID: 0}
+  shootSound: {fileID: 0}
+  audShotVol: 0.5

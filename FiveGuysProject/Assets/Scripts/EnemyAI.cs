@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 
-public class EnemyAI : MonoBehaviour, IDamage
+public class EnemyAI : MonoBehaviour, IDamage, IPhysics
 {
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
@@ -17,7 +17,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     [SerializeField] Collider damageCol;
 
     [Header("----- Enemy Stats -----")]
-    [SerializeField] int HP;
+    [SerializeField] float HP;
     [SerializeField] int targetFaceSpeed;
     [SerializeField] int viewAngle;
     [SerializeField] float despawnTime;
@@ -61,7 +61,7 @@ public class EnemyAI : MonoBehaviour, IDamage
             if (angleToPlayer <= shootAngle && !isShooting && playerInRange && damageCol.enabled)
                 StartCoroutine(shoot());
 
-            agent.Move((agent.velocity + pushBack) * Time.deltaTime);
+            agent.Move((pushBack) * Time.deltaTime);
         }
             
         
@@ -115,7 +115,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     }
 
     //triggers the flash for when the enemy takes damage and flashs to let the player know. 
-    public void takeDamage(int amount)
+    public void takeDamage(float amount)
     {
         HP -= amount;
         agent.SetDestination(GameManager.instance.player.transform.position);
@@ -152,7 +152,7 @@ public class EnemyAI : MonoBehaviour, IDamage
     }
 
     //Take damage and get pushed back
-    public void takePhysics(Vector3 dir)
+    public void TakePhysics(Vector3 dir)
     {
         pushBack += dir;
     }
@@ -177,11 +177,11 @@ public class EnemyAI : MonoBehaviour, IDamage
         Quaternion rot = Quaternion.LookRotation(playerDir);
         transform.rotation = Quaternion.Lerp(transform.rotation, rot, Time.deltaTime * targetFaceSpeed);
     }
-    public void SetHP(int health)
+    public void SetHP(float health)
     {
         HP = health;
     }
-    public int GetHp()
+    public float GetHp()
     {
         return HP;
     }
