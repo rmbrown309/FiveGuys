@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu]
 public class gunStats : ScriptableObject
 {
+    public int weaponID;
     public float shootRate;
     public float shootDamage;
     public float shootTime;
@@ -17,7 +18,7 @@ public class gunStats : ScriptableObject
     public float horizSpread;
     public float vertSpread;
     public float zSpread;
-
+    
     public GameObject model;
     public GameObject bullet;
     public ParticleSystem hitEffect;

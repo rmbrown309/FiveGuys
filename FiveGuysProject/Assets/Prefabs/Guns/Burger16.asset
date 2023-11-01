@@ -12,18 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5691c4d8c7a7e440b03620d68a535b9, type: 3}
   m_Name: Burger16
   m_EditorClassIdentifier: 
+  weaponID: 3
   shootRate: 0.75
   shootDamage: 1
   shootTime: 3
-  ammoCur: 0
+  ammoCur: 50
   ammoMax: 50
   cost: 0
   gunName: Burger-16
-  isShotgun: 0
+  isShotgun: 1
   numOfPellets: 3
   horizSpread: 0
   vertSpread: 0
-  zSpread: 1
+  zSpread: 0
   model: {fileID: -927199367670048503, guid: d8ff8f9649a82e14791d960a0a17f1e4, type: 3}
   bullet: {fileID: 3773670445560834378, guid: ff314b8980d265e4180234ebc497458d, type: 3}
   hitEffect: {fileID: 6327853518906024368, guid: 349d4a817e629c04696c63e33888d7ad, type: 3}

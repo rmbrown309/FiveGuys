@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
     [SerializeField] float startDamage;
+    int weaponID;
 
     [Header("----- Rat Spray Stats -----")]
     [SerializeField] ParticleSystem sprayEffect;
@@ -587,11 +588,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     // Pickup functions
     public void IncreasePlayerMaxHealth(int addition)
     {
+        GameManager.instance.IncreaseHealthPickUpCounter();
         HPOrig += addition;
         HP += addition;
     }
     public void IncreasePlayerMaxSpeed(float addition)
     {
+        GameManager.instance.IncreaseSpeedPickUpCounter();
         OrigSpeed += addition;
         playerSpeed = OrigSpeed;
         if (isSprinting)
@@ -599,10 +602,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     }
     public void IncreasePlayerRegenSpeed(int subtraction)
     {
+        GameManager.instance.IncreaseRegenPickUpCounter();
         healthRegainSpeed -= subtraction;
     }
     public void IncreasePlayerDamage(int addition)
     {
+        GameManager.instance.IncreaseDamagePickUpCounter();
         extraDamage += addition;
         bullet.GetComponent<PlayerBullet>().damage = gunList[selectedGun].shootDamage + extraDamage;
     }
@@ -692,7 +697,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         bullet.GetComponent<PlayerBullet>().damage = gun.shootDamage + extraDamage;
         bullet.GetComponent<PlayerBullet>().setDestroyTime(gun.shootTime);
         bullet.GetComponent<PlayerBullet>().sethitEffect(gun.hitEffect);
-
+        weaponID = gun.weaponID;
         shootRate = gun.shootRate;
         //model
         gunModel.GetComponent<MeshFilter>().sharedMesh = gun.model.GetComponent<MeshFilter>().sharedMesh;
@@ -701,6 +706,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
 
 
+    }
+    public int GetGunID()
+    {
+        return weaponID;
     }
     //void selectGun()
     //{

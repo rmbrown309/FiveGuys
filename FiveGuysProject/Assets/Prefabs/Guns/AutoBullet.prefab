@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4646375516670864477}
   - component: {fileID: 6796877210851489624}
   m_Layer: 0
-  m_Name: DefBullet
+  m_Name: AutoBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Unity.PlasticSCM.Editor.WebApi;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,20 +21,33 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject winMenu;
     [SerializeField] GameObject loseMenu;
     [SerializeField] GameObject settingsMenu;
-
+    [Header("-----Information Box-----")]
     [SerializeField] GameObject healthActive;
+
     [SerializeField] TMP_Text enemiesRemainText;
     [SerializeField] TMP_Text scoreCount;
     [SerializeField] TMP_Text currentWaveCount;
+    [SerializeField] TMP_Text pDamageUpCounter;
+    [SerializeField] TMP_Text pMaxHealthCounter;
+    [SerializeField] TMP_Text pRegenCounter;
+    [SerializeField] TMP_Text pSpeedCounter;
+
+    public TMP_Text waveUIText;
+   // private TMP_Text WaveUIText;
+    private int pDamage;
+    private int pHealth;
+    private int pRegen;
+    private int pSpeed;
+    [Header("-----Main Weapon UI-----")]
     [SerializeField] TMP_Text ammoCurr;
-    [SerializeField] TMP_Text ammoMax;
+    [SerializeField] Image _MainWeaponbar; 
+    [Header("-----Secondary Weapon UI-----")]
     public GameObject SprayAmmoParent;
     [SerializeField] Image SprayAmmoBar;
-    [SerializeField]
-    private TMP_Text waveUIText;
-    public TMP_Text WaveUIText;
+    [Header("-----PickUps UI-----")]
     public GameObject pickupLabel;
     public TMP_Text pickupText;
+    [Header("-----PowerUps UI-----")]
     public GameObject powerJumpActive;
     public GameObject powerSpeedActive;
     public GameObject powerHealthActive;
@@ -52,27 +66,21 @@ public class GameManager : MonoBehaviour
     public TMP_Text dmgPowerCoolDown;
     public Image dmgPowerImage;
     public Image playerHealthBar;
+    [Header("-----Quest Text-----")]
+    [SerializeField] GameObject quest;
+    public TMP_Text questText;
+    [Header("-----Other-----")]
     public bool noEnemies;
     public bool isPaused;
     public int waves;
     public int enemiesRemain;
     public int score;
-
     float origTimeScale;
 
     void Awake()
     {
         //initiallize player variables;
-        jumpPowerCoolDown.CrossFadeAlpha(0, 1, false);
-        jumpPowerImage.CrossFadeAlpha(0, 1, false);
-        speedPowerCoolDown.CrossFadeAlpha(0, 1, false);
-        speedPowerImage.CrossFadeAlpha(0, 1, false);
-        healthPowerCoolDown.CrossFadeAlpha(0, 1, false);
-        healthPowerImage.CrossFadeAlpha(0, 1, false);
-        shootPowerCoolDown.CrossFadeAlpha(0, 1, false);
-        shootPowerImage.CrossFadeAlpha(0, 1, false);
-        dmgPowerCoolDown.CrossFadeAlpha(0, 1, false);
-        dmgPowerImage.CrossFadeAlpha(0, 1, false);
+        FadePowerups();
         healthActive.SetActive(true);
         origTimeScale = Time.timeScale;
         instance = this;
@@ -97,6 +105,22 @@ public class GameManager : MonoBehaviour
             //activeMenu.SetActive(isPaused);
             setActive(pauseMenu);
         }
+        if (Input.GetButtonDown("Tab")) { 
+            
+        }
+    }
+    private void FadePowerups()
+    {
+        jumpPowerCoolDown.CrossFadeAlpha(0, 1, false);
+        jumpPowerImage.CrossFadeAlpha(0, 1, false);
+        speedPowerCoolDown.CrossFadeAlpha(0, 1, false);
+        speedPowerImage.CrossFadeAlpha(0, 1, false);
+        healthPowerCoolDown.CrossFadeAlpha(0, 1, false);
+        healthPowerImage.CrossFadeAlpha(0, 1, false);
+        shootPowerCoolDown.CrossFadeAlpha(0, 1, false);
+        shootPowerImage.CrossFadeAlpha(0, 1, false);
+        dmgPowerCoolDown.CrossFadeAlpha(0, 1, false);
+        dmgPowerImage.CrossFadeAlpha(0, 1, false);
     }
     public void StatePaused()
     {
@@ -171,7 +195,26 @@ public class GameManager : MonoBehaviour
             enableWaveUIText();
         }
     }
-
+    public void IncreaseDamagePickUpCounter()
+    {
+        pDamage++;
+        pDamageUpCounter.text = pDamage.ToString("0");
+    }
+    public void IncreaseHealthPickUpCounter()
+    {
+        pHealth++;
+        pMaxHealthCounter.text = pHealth.ToString("0");
+    }
+    public void IncreaseRegenPickUpCounter()
+    {
+        pRegen++;
+        pRegenCounter.text = pRegen.ToString("0");
+    }
+    public void IncreaseSpeedPickUpCounter()
+    {
+        pSpeed++;
+        pSpeedCounter.text = pSpeed.ToString("0");
+    }
     public void JumpPowerCoolDown(float coolDown)
     {
         jumpPowerCoolDown.text = coolDown.ToString("0");
@@ -214,13 +257,21 @@ public class GameManager : MonoBehaviour
 
     public void updateSprayAmmoUI(int current, int max)
     {
-        SprayAmmoBar.fillAmount = (float)current / max;
+        float ammoVal = current / (max * 1.0f);
+        float amount = (ammoVal / .5f) * 180f / 360;
+        SprayAmmoBar.fillAmount = amount;
     }
 
-    public void updateAmmmo(int curr, int max)
+    public void updateAmmmo(int _curr, int _ammoMax)
     {
-        ammoCurr.text = curr.ToString("F0");
-        ammoMax.text = max.ToString("F0");
+        ammoCurr.text = _curr.ToString("F0");
+        float ammoVal = _curr / (_ammoMax * 1.0f);
+        Debug.Log("ammo curr:" + _curr);
+        Debug.Log("ammo max:" + _ammoMax);
+        Debug.Log("ammo value:" + ammoVal);
+        float amount = (ammoVal / .5f) * 180f / 360;
+        _MainWeaponbar.fillAmount = amount;
+
     }
 
     // Next two methids control the Giant Text for each new wave

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5691c4d8c7a7e440b03620d68a535b9, type: 3}
   m_Name: ExplodingBeerBottle
   m_EditorClassIdentifier: 
+  weaponID: 5
   shootRate: 0
   shootDamage: 0
   shootTime: 0
@@ -19,6 +20,11 @@ MonoBehaviour:
   ammoMax: 0
   cost: 0
   gunName: 
+  isShotgun: 0
+  numOfPellets: 0
+  horizSpread: 0
+  vertSpread: 0
+  zSpread: 0
   model: {fileID: 0}
   bullet: {fileID: 0}
   hitEffect: {fileID: 0}

@@ -12,18 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5691c4d8c7a7e440b03620d68a535b9, type: 3}
   m_Name: AutoShottyStats
   m_EditorClassIdentifier: 
+  weaponID: 4
   shootRate: 0.25
   shootDamage: 0.38
   shootTime: 0.4
-  ammoCur: 50
+  ammoCur: 18
   ammoMax: 50
   cost: 0
   gunName: Automatic Shotgun
   isShotgun: 1
   numOfPellets: 6
-  horizSpread: 2.5
-  vertSpread: 1.2
-  zSpread: 1
+  horizSpread: 0
+  vertSpread: 0.5
+  zSpread: 2
   model: {fileID: -927199367670048503, guid: d63c91e11d9ebb6469488f1040be7d41, type: 3}
   bullet: {fileID: 4307941743950219541, guid: b8fce9a039d17f5488ca5fbb159c20ba, type: 3}
   hitEffect: {fileID: 0}
