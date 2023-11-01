@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponID: 3
   shootRate: 0.3
-  shootDamage: 0.5
+  shootDamage: 0.4
   shootTime: 3
-  ammoCur: 43
+  ammoCur: 9
   ammoMax: 50
   cost: 0
   gunName: Burger-16
