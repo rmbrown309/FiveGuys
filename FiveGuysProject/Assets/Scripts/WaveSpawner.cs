@@ -57,8 +57,8 @@ public class WaveSpawner : MonoBehaviour
         // spawns the specified enemies at the specified rate
         for (int i = 0; i < numOfEnemies; i++)
         {
-            Instantiate(enemy[Random.Range(0, enemy.Length)], posToSpawn.position, Quaternion.identity);
             yield return new WaitForSeconds(spawnRate);
+            Instantiate(enemy[Random.Range(0, enemy.Length)], posToSpawn.position, Quaternion.identity);
         }
 
         spawnStopped = true;
