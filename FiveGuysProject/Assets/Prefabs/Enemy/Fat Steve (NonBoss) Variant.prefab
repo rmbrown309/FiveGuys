@@ -1,0 +1,87 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &6455607712247605277
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1443772471820744274, guid: 4b44e62f91fd75c4d9986c63809cdcf7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.82
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443772471820744274, guid: 4b44e62f91fd75c4d9986c63809cdcf7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.744508
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443772471820744274, guid: 4b44e62f91fd75c4d9986c63809cdcf7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.4644613
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443772471820744274, guid: 4b44e62f91fd75c4d9986c63809cdcf7, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -21.056458
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443772471820744274, guid: 4b44e62f91fd75c4d9986c63809cdcf7, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443772471820744274, guid: 4b44e62f91fd75c4d9986c63809cdcf7, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 23.083687
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443772471820744274, guid: 4b44e62f91fd75c4d9986c63809cdcf7, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.678538
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443772471820744274, guid: 4b44e62f91fd75c4d9986c63809cdcf7, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443772471820744274, guid: 4b44e62f91fd75c4d9986c63809cdcf7, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.73456526
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443772471820744274, guid: 4b44e62f91fd75c4d9986c63809cdcf7, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443772471820744274, guid: 4b44e62f91fd75c4d9986c63809cdcf7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443772471820744274, guid: 4b44e62f91fd75c4d9986c63809cdcf7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 94.541
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443772471820744274, guid: 4b44e62f91fd75c4d9986c63809cdcf7, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1443772471820744274, guid: 4b44e62f91fd75c4d9986c63809cdcf7, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599257710245373266, guid: 4b44e62f91fd75c4d9986c63809cdcf7, type: 3}
+      propertyPath: m_Name
+      value: Fat Steve (NonBoss) Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073883104050998310, guid: 4b44e62f91fd75c4d9986c63809cdcf7, type: 3}
+      propertyPath: HP
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5073883104050998310, guid: 4b44e62f91fd75c4d9986c63809cdcf7, type: 3}
+      propertyPath: bossBarkVol
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6881959564828183283, guid: 4b44e62f91fd75c4d9986c63809cdcf7, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4b44e62f91fd75c4d9986c63809cdcf7, type: 3}

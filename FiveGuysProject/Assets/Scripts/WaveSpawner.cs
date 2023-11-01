@@ -7,12 +7,13 @@ public class WaveSpawner : MonoBehaviour
 {
     [Header("-----Components------")]
     [SerializeField] Transform posToSpawn;
-    [SerializeField] GameObject enemy; // enemy type spawned by this spawner
+    [SerializeField] GameObject[] enemy; // enemy type spawned by this spawner
     [Header("-----Spawner Stats------")]
     [Range(1, 5)][SerializeField] int waveNum; // On what wave this spawner is active
     [SerializeField] int numOfEnemies; // number of enemies spawned during the wave
     [SerializeField] float spawnRate; // seconds between each emnemy spawn
     [SerializeField] bool rats;
+    [SerializeField] bool continuousSpawning;
   
     bool spawnStopped = false;
     bool isWaveActive = true;
@@ -30,14 +31,22 @@ public class WaveSpawner : MonoBehaviour
         // allows next wave to begin
         if (spawnStopped && GameManager.instance.enemiesRemain == 0)
         {
-            if(GameManager.instance.waves != 5)
+            if(GameManager.instance.waves != GameManager.instance.maxWaves)
                 GameManager.instance.IncreaseWaveCount(waveNum + 1);
+
+            if(continuousSpawning)
+            {
+                waveNum++;
+                isWaveActive = true;
+            }
+
             spawnStopped = false; // stops waves from being reset to a previous value
         }
     }
 
     IEnumerator TotalEnemy()
     {
+
         // prevents spawner from starting again during the wave
         isWaveActive = false;
 
@@ -48,8 +57,8 @@ public class WaveSpawner : MonoBehaviour
         // spawns the specified enemies at the specified rate
         for (int i = 0; i < numOfEnemies; i++)
         {
-            Instantiate(enemy, posToSpawn.position, Quaternion.identity);
             yield return new WaitForSeconds(spawnRate);
+            Instantiate(enemy[Random.Range(0, enemy.Length)], posToSpawn.position, Quaternion.identity);
         }
 
         spawnStopped = true;

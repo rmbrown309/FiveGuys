@@ -973,7 +973,8 @@ MonoBehaviour:
   pMaxHealthCounter: {fileID: 6457664400300904683}
   pRegenCounter: {fileID: 3183652946973209519}
   pSpeedCounter: {fileID: 1131734286920457900}
-  waveUIText: {fileID: 92051202154628133}
+  waveUIText: {fileID: 8705141004327328203}
+  WaveUIText: {fileID: 92051202154628133}
   ammoCurr: {fileID: 6501455695325406490}
   _MainWeaponbar: {fileID: 867416753364438897}
   SprayAmmoParent: {fileID: 983847117315841641}
@@ -1000,9 +1001,10 @@ MonoBehaviour:
   playerHealthBar: {fileID: 982659221489032331}
   quest: {fileID: 4063250697956208786}
   questText: {fileID: 4344941427039515809}
+  maxWaves: 5
+  waves: 0
   noEnemies: 0
   isPaused: 0
-  waves: 0
   enemiesRemain: 0
   score: 0
 --- !u!114 &8096327349324054164
@@ -14677,7 +14679,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7496840608845974915, guid: 2b9948ebed244544398c7df647b9d47a, type: 3}
   m_PrefabInstance: {fileID: 7587765773602376102}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 8705141004327328203}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -14686,5 +14688,10 @@ MonoBehaviour:
 --- !u!224 &550241739425516617 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7993873080745379311, guid: 2b9948ebed244544398c7df647b9d47a, type: 3}
+  m_PrefabInstance: {fileID: 7587765773602376102}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8705141004327328203 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1262124294380572781, guid: 2b9948ebed244544398c7df647b9d47a, type: 3}
   m_PrefabInstance: {fileID: 7587765773602376102}
   m_PrefabAsset: {fileID: 0}
