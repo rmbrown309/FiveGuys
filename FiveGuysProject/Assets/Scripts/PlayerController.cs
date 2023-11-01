@@ -587,11 +587,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     // Pickup functions
     public void IncreasePlayerMaxHealth(int addition)
     {
+        GameManager.instance.IncreaseHealthPickUpCounter();
         HPOrig += addition;
         HP += addition;
     }
     public void IncreasePlayerMaxSpeed(float addition)
     {
+        GameManager.instance.IncreaseSpeedPickUpCounter();
         OrigSpeed += addition;
         playerSpeed = OrigSpeed;
         if (isSprinting)
@@ -599,10 +601,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     }
     public void IncreasePlayerRegenSpeed(int subtraction)
     {
+        GameManager.instance.IncreaseRegenPickUpCounter();
         healthRegainSpeed -= subtraction;
     }
     public void IncreasePlayerDamage(int addition)
     {
+        GameManager.instance.IncreaseDamagePickUpCounter();
         extraDamage += addition;
         bullet.GetComponent<PlayerBullet>().damage = gunList[selectedGun].shootDamage + extraDamage;
     }
