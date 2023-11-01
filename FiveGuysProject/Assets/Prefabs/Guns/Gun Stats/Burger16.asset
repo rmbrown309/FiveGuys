@@ -13,14 +13,15 @@ MonoBehaviour:
   m_Name: Burger16
   m_EditorClassIdentifier: 
   weaponID: 3
-  shootRate: 0.75
-  shootDamage: 1
+  shootRate: 0.3
+  shootDamage: 0.5
   shootTime: 3
-  ammoCur: 50
+  ammoCur: 43
   ammoMax: 50
   cost: 0
   gunName: Burger-16
   isShotgun: 1
+  isM16: 1
   numOfPellets: 3
   horizSpread: 0
   vertSpread: 0
@@ -30,3 +31,6 @@ MonoBehaviour:
   hitEffect: {fileID: 6327853518906024368, guid: 349d4a817e629c04696c63e33888d7ad, type: 3}
   shootSound: {fileID: 0}
   audShotVol: 0.5
+  xOffset: 0
+  yOffset: 0
+  zOffset: 0

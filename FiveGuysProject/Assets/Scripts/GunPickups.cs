@@ -13,6 +13,8 @@ public class GunPickups : MonoBehaviour
     GameObject animate;
     bool playerInTrigger;
     bool pickedUp;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -106,4 +108,6 @@ public class GunPickups : MonoBehaviour
             }
         }
     }
+ 
+
 }
