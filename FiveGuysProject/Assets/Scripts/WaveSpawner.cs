@@ -9,7 +9,7 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] Transform[] posToSpawn;
     [SerializeField] GameObject[] enemy; // enemy type spawned by this spawner
     [Header("-----Spawner Stats------")]
-    [Range(1, 5)][SerializeField] int waveNum; // On what wave this spawner is active
+    [Range(1, 20)][SerializeField] int waveStart; // On what wave this spawner is active
     [SerializeField] int numOfEnemies; // number of enemies spawned during the wave
     [SerializeField] float spawnRate; // seconds between each emnemy spawn
     [SerializeField] bool rats;
@@ -23,7 +23,7 @@ public class WaveSpawner : MonoBehaviour
     void Update()
     {
         // Spawns enemies only on the correct wave number
-        if (isWaveActive && GameManager.instance.waves == waveNum)
+        if (isWaveActive && GameManager.instance.waves == waveStart)
         {
             StartCoroutine(TotalEnemy());
         }
@@ -32,11 +32,11 @@ public class WaveSpawner : MonoBehaviour
         if (spawnStopped && GameManager.instance.enemiesRemain == 0)
         {
             if(GameManager.instance.waves != GameManager.instance.maxWaves)
-                GameManager.instance.IncreaseWaveCount(waveNum + 1);
+                GameManager.instance.IncreaseWaveCount(waveStart + 1);
 
             if(continuousSpawning)
             {
-                waveNum++;
+                waveStart++;
                 isWaveActive = true;
             }
 
