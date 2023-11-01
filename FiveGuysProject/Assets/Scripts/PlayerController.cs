@@ -70,7 +70,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     bool sprayRegen;
     bool isSprinting;
     bool footstepsPlaying;
-
     int selectedGun; // the int that controls how the player selects their gun
 
     // powerup variables
@@ -89,7 +88,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     //Power Up
     bool isPowered;
     int powerType;
-
+    //shoot shennanigans
+    Transform GunShootPos;
+    Vector3 pos;
     private void Start()
     {
         powerUpCorutine = new IEnumerator[5];
@@ -116,18 +117,20 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     void Update()
     {
         Movement();
-
-        //calls the method to let the player select weapons 
-        //selectGun();
-
-        //if (Input.GetButton("Shoot") && !isShooting && gunList.Count>0 && !gunList[selectedGun].isShotgun)//if it is not a shotgun then just fire normally
-        //    StartCoroutine(Shoot());
+   
         if (Input.GetButton("Shoot") && !isShooting && gunList.Count > 0)//if it is a shotgun then fire multiple times
         {
             //by looping the shoot multiple time we instantiate the correct number of pellets to be shot because bullets are only instantiated when shoot is called.
             for (int i = 0; i < gunList[selectedGun].numOfPellets; i++)
             {
-                StartCoroutine(Shoot());
+                if (gunList[selectedGun].isM16)
+                {
+                    StartCoroutine(Burst());
+                }
+                else
+                {
+                    StartCoroutine(Shoot());
+                }
             }
             if (gunList[selectedGun].ammoCur != 0 && gunList[selectedGun].isShotgun)
             {
@@ -226,7 +229,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
             //plays gunshot audio and ticks the ammo down for the players current gun
             aud.PlayOneShot(gunList[selectedGun].shootSound, gunList[selectedGun].audShotVol);
-            if (!gunList[selectedGun].isShotgun)
+            if (!gunList[selectedGun].isShotgun && !gunList[selectedGun].isM16)
             {
                 gunList[selectedGun].ammoCur--;
                 GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
@@ -251,10 +254,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
                 shootDir.z = shootDir.z + Random.Range(-gunList[selectedGun].zSpread, +gunList[selectedGun].zSpread);
             }
 
+           
             // Instantiates bullet object and redirects its rotation toward the shootDir
             if (bullet != null)
             {
-                GameObject currBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
+                Debug.Log(pos);
+
+         
+                GameObject currBullet = Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
                 currBullet.transform.forward = shootDir.normalized;
             }
 
@@ -704,6 +711,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.model.GetComponent<MeshRenderer>().sharedMaterial;
         selectedGun = gunList.Count - 1;
         GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
+        //picked = true;
 
 
     }
@@ -711,6 +719,66 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     {
         return weaponID;
     }
+
+    IEnumerator Burst()
+    {
+        if (gunList[selectedGun].ammoCur > 0 && gunList.Count > 0)
+        {
+            isShooting = true;
+
+            //plays gunshot audio and ticks the ammo down for the players current gun
+            aud.PlayOneShot(gunList[selectedGun].shootSound, gunList[selectedGun].audShotVol);
+
+            if (!gunList[selectedGun].isShotgun && !gunList[selectedGun].isM16)
+            {
+                gunList[selectedGun].ammoCur--;
+                GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
+            }
+
+            // Find hit position with raycast
+            Ray ray = Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f));
+            RaycastHit hit;
+            Vector3 targetPoint;
+            if (Physics.Raycast(ray, out hit))
+                targetPoint = hit.point; // aims at specific point on ray at the distance of the hit
+            else
+                targetPoint = ray.GetPoint(50); // some distant point on ray if not aiming at anything
+
+            // Calculate shooting direction
+            Vector3 shootDir = targetPoint - shootPos.position;
+
+            if (gunList[selectedGun].isShotgun)
+            {
+                shootDir.x = shootDir.x + Random.Range(-gunList[selectedGun].horizSpread, +gunList[selectedGun].horizSpread);
+                shootDir.y = shootDir.y + Random.Range(-gunList[selectedGun].vertSpread, +gunList[selectedGun].vertSpread);
+                shootDir.z = shootDir.z + Random.Range(-gunList[selectedGun].zSpread, +gunList[selectedGun].zSpread);
+            }
+
+
+            // Instantiates bullet object and redirects its rotation toward the shootDir
+            if (bullet != null)
+            {
+
+
+                GameObject currBullet = Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
+                currBullet.transform.forward = shootDir.normalized;
+                yield return new WaitForSeconds(0.08f);
+
+                GameObject nextBullet = Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
+                nextBullet.transform.forward = shootDir.normalized;
+                yield return new WaitForSeconds(0.08f);
+
+                GameObject lastBullet = Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
+                lastBullet.transform.forward = shootDir.normalized;
+                yield return new WaitForSeconds(0.08f);
+
+            }
+
+            yield return new WaitForSeconds(shootRate);
+            isShooting = false;
+        }
+    }
+
     //void selectGun()
     //{
     //    if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
