@@ -69,9 +69,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject quest;
     public TMP_Text questText;
     [Header("-----Other-----")]
+    public int maxWaves; // Set the maximum number of waves allowed in the level
+    public int waves;
     public bool noEnemies;
     public bool isPaused;
-    public int waves;
     public int enemiesRemain;
     public int score;
     float origTimeScale;
@@ -164,7 +165,7 @@ public class GameManager : MonoBehaviour
         enemiesRemain += amount;
         enemiesRemainText.text = enemiesRemain.ToString("0");
         //when there are no enemies or waves remaining pull the win menu up
-        if(enemiesRemain < 1 && waves == 5)
+        if(enemiesRemain < 1 && waves == maxWaves)
         {
             StartCoroutine(winGame());
         }
@@ -187,7 +188,7 @@ public class GameManager : MonoBehaviour
     }
     public void IncreaseWaveCount(int num)
     {
-        if (num <= 5)
+        if (num <= maxWaves)
         {
             waves = num;
             currentWaveCount.text = waves.ToString("0");

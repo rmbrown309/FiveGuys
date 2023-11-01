@@ -1001,9 +1001,10 @@ MonoBehaviour:
   playerHealthBar: {fileID: 982659221489032331}
   quest: {fileID: 4063250697956208786}
   questText: {fileID: 4344941427039515809}
+  maxWaves: 5
+  waves: 0
   noEnemies: 0
   isPaused: 0
-  waves: 0
   enemiesRemain: 0
   score: 0
 --- !u!114 &8096327349324054164
