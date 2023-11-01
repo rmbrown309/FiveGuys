@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5691c4d8c7a7e440b03620d68a535b9, type: 3}
   m_Name: PumpShottyStats
   m_EditorClassIdentifier: 
+  weaponID: 0
   shootRate: 0.5
   shootDamage: 0.5
   shootTime: 0.6
-  ammoCur: 21
+  ammoCur: 33
   ammoMax: 35
   cost: 0
   gunName: Pump Shotgun
@@ -24,7 +25,7 @@ MonoBehaviour:
   horizSpread: 0
   vertSpread: 0
   zSpread: 1
-  model: {fileID: 678392909175583747, guid: 6a64651c715edd2428104e893b882c5c, type: 3}
+  model: {fileID: 100000, guid: bf2593fe0c804b84688e307cfb1ddfae, type: 3}
   bullet: {fileID: 4307941743950219541, guid: 5b4e996fa04c95641a778f341e077287, type: 3}
   hitEffect: {fileID: 0}
   shootSound: {fileID: 0}
