@@ -66,7 +66,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
     bool isShooting;
     bool isSpraying;
-    bool isShoving;
+    public bool isShoving;
     bool sprayRegen;
     bool isSprinting;
     bool footstepsPlaying;
@@ -91,6 +91,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     //shoot shennanigans
     Transform GunShootPos;
     Vector3 pos;
+    //Shove
+
     private void Start()
     {
         powerUpCorutine = new IEnumerator[5];
@@ -142,6 +144,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             StartCoroutine(Spray());
         if (sprayWeaponActive && (currSprayAmmo < maxSprayAmmo) && !isSpraying && !sprayRegen)
             StartCoroutine(RegenSprayAmmo());
+        if (isShoving)
+        {
+            GameManager.instance.updateShoveUI(shoveCooldown);
+        }
+        else
+        {
+            GameManager.instance.ResetShoveUI();
+        }
 
         if (Input.GetButton("Shove") && !isShoving)
             StartCoroutine(Shove());
@@ -325,6 +335,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     IEnumerator Shove()
     {
         isShoving = true;
+        GameManager.instance.ResetShoveUI();
         Collider[] hits = Physics.OverlapSphere(shovePos.position, 3);
         foreach (Collider c in hits)
         {
@@ -334,9 +345,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         }
         yield return new WaitForSeconds(shoveCooldown);
         isShoving = false;
-
     }
-
     // Power Up functions
     IEnumerator JumpPowerCooldown()
     {

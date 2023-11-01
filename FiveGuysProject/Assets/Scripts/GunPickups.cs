@@ -85,6 +85,12 @@ public class GunPickups : MonoBehaviour
                 case 2:
                     animation.TurnOffSnipeWeapon();
                     break;
+                case 3:
+                    animation.TurnOffShotGunWeapon();
+                    break;
+                case 4:
+                    animation.TurnOffShotGunWeapon();
+                    break;
             }
         }
     }
@@ -104,6 +110,12 @@ public class GunPickups : MonoBehaviour
                     break;
                 case 2:
                     animation.TurnOnSnipeWeapon();
+                    break;
+                case 3:
+                    animation.TurnOnShotGunWeapon();
+                    break;
+                case 4:
+                    animation.TurnOnShotGunWeapon();
                     break;
             }
         }

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5691c4d8c7a7e440b03620d68a535b9, type: 3}
   m_Name: Burger16
   m_EditorClassIdentifier: 
-  weaponID: 3
-  shootRate: 0.3
-  shootDamage: 0.4
+  weaponID: 5
+  shootRate: 0.75
+  shootDamage: 1
   shootTime: 3
   ammoCur: 9
   ammoMax: 50
