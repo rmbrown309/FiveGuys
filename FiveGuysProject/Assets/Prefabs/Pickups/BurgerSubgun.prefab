@@ -50,6 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 11400000, guid: eb1fe2460f1e8924aae5d84e7434f74e, type: 2}
+  weaponAnimation: {fileID: 5545230511604252582, guid: 089f673d38393c44d864c90346443dae, type: 3}
   aud: {fileID: 2514340248660457350}
   audCash: {fileID: 8300000, guid: fe47b3b42df583948969f511890dd8f0, type: 3}
   audCashVol: 0.5

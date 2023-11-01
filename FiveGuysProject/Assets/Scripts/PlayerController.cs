@@ -26,6 +26,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
     [SerializeField] float startDamage;
+    int weaponID;
 
     [Header("----- Rat Spray Stats -----")]
     [SerializeField] ParticleSystem sprayEffect;
@@ -696,7 +697,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         bullet.GetComponent<PlayerBullet>().damage = gun.shootDamage + extraDamage;
         bullet.GetComponent<PlayerBullet>().setDestroyTime(gun.shootTime);
         bullet.GetComponent<PlayerBullet>().sethitEffect(gun.hitEffect);
-
+        weaponID = gun.weaponID;
         shootRate = gun.shootRate;
         //model
         gunModel.GetComponent<MeshFilter>().sharedMesh = gun.model.GetComponent<MeshFilter>().sharedMesh;
@@ -705,6 +706,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
 
 
+    }
+    public int GetGunID()
+    {
+        return weaponID;
     }
     //void selectGun()
     //{

@@ -32,8 +32,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text pRegenCounter;
     [SerializeField] TMP_Text pSpeedCounter;
 
-    private TMP_Text waveUIText;
-    public TMP_Text WaveUIText;
+    public TMP_Text waveUIText;
+   // private TMP_Text WaveUIText;
     private int pDamage;
     private int pHealth;
     private int pRegen;
@@ -66,14 +66,15 @@ public class GameManager : MonoBehaviour
     public TMP_Text dmgPowerCoolDown;
     public Image dmgPowerImage;
     public Image playerHealthBar;
-
+    [Header("-----Quest Text-----")]
+    [SerializeField] GameObject quest;
+    public TMP_Text questText;
+    [Header("-----Other-----")]
     public bool noEnemies;
     public bool isPaused;
     public int waves;
     public int enemiesRemain;
     public int score;
-    int ammo;
-    int ammoMax;
     float origTimeScale;
 
     void Awake()
@@ -120,14 +121,6 @@ public class GameManager : MonoBehaviour
         shootPowerImage.CrossFadeAlpha(0, 1, false);
         dmgPowerCoolDown.CrossFadeAlpha(0, 1, false);
         dmgPowerImage.CrossFadeAlpha(0, 1, false);
-    }
-    public int GetAmmo()
-    {
-        return ammo;
-    }
-    public int GetAmmoMax()
-    {
-        return ammoMax;
     }
     public void StatePaused()
     {
@@ -273,9 +266,9 @@ public class GameManager : MonoBehaviour
     {
         ammoCurr.text = _curr.ToString("F0");
         float ammoVal = _curr / (_ammoMax * 1.0f);
-        //Debug.Log("ammo curr:" + _curr);
-        //Debug.Log("ammo max:" + _ammoMax);
-        //Debug.Log("ammo value:" + ammoVal);
+        Debug.Log("ammo curr:" + _curr);
+        Debug.Log("ammo max:" + _ammoMax);
+        Debug.Log("ammo value:" + ammoVal);
         float amount = (ammoVal / .5f) * 180f / 360;
         _MainWeaponbar.fillAmount = amount;
 

@@ -1,10 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
 
 public class HudAnimate : MonoBehaviour
 {
     private Animator mAnimator;
+    [SerializeField] GameObject mainWeapon;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,5 +32,32 @@ public class HudAnimate : MonoBehaviour
                 mAnimator.SetBool("isInformed", false);
             }
         }
+    }
+    public void TurnOffMainWeapon()
+    {
+        mAnimator.SetBool("isBaseGunOff",true);
+    }
+    public void TurnOnMainWeapon()
+    {
+        mAnimator.SetBool("isBaseGunOff", false);
+    }
+    public void TurnOffSubWeapon()
+    {
+        mAnimator.SetBool("isSubGunOn", false);
+
+    }
+    public void TurnOnSubWeapon()
+    {
+        mAnimator.SetBool("isSubGunOn", true);
+    }
+    public void TurnOffSnipeWeapon()
+    {
+        mAnimator.SetBool("isSniperOn", false);
+
+    }
+    public void TurnOnSnipeWeapon()
+    {
+        mAnimator.SetBool("isSniperOn", true);
+
     }
 }
