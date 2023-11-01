@@ -539,7 +539,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1289254728907810, guid: 0a39e6bc93e859145a2f868ff0277c31, type: 3}
       propertyPath: m_StaticEditorFlags
-      value: 40
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 4730063839388620, guid: 0a39e6bc93e859145a2f868ff0277c31, type: 3}
       propertyPath: m_LocalScale.x
@@ -2308,7 +2308,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &507269397
 Transform:
@@ -3419,16 +3419,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1445517732}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 90}
---- !u!20 &726100076 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 3152096982376883024, guid: 8919dde687b4619498f1200d060a1890, type: 3}
-  m_PrefabInstance: {fileID: 1266384356}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &726100078 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 496940275161907845, guid: 8919dde687b4619498f1200d060a1890, type: 3}
-  m_PrefabInstance: {fileID: 1266384356}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &774215820
 GameObject:
   m_ObjectHideFlags: 0
@@ -3652,6 +3642,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 233961069}
     m_Modifications:
+    - target: {fileID: 2917845420634438998, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3641282881262301686, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4857881351410982344, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5304921440827151561, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5802978546763550458, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.5
@@ -3711,6 +3717,14 @@ PrefabInstance:
     - target: {fileID: 6612272244670174272, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
       propertyPath: m_Name
       value: Luggage-Car (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612272244670174272, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6929176135367036951, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5193,6 +5207,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 233961069}
     m_Modifications:
+    - target: {fileID: 3766894707101287364, guid: c1fe0b748cf8b4b15ac2e0773496e6d8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6279043480545187448, guid: c1fe0b748cf8b4b15ac2e0773496e6d8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6509857901173464973, guid: c1fe0b748cf8b4b15ac2e0773496e6d8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8293675185921474730, guid: c1fe0b748cf8b4b15ac2e0773496e6d8, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4999999
@@ -5252,6 +5278,10 @@ PrefabInstance:
     - target: {fileID: 8670235290509646352, guid: c1fe0b748cf8b4b15ac2e0773496e6d8, type: 3}
       propertyPath: m_Name
       value: TowElectric
+      objectReference: {fileID: 0}
+    - target: {fileID: 8670235290509646352, guid: c1fe0b748cf8b4b15ac2e0773496e6d8, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5566,10 +5596,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3357332634331420485, guid: 089f673d38393c44d864c90346443dae, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 726100076}
     - target: {fileID: 5545230511604252582, guid: 089f673d38393c44d864c90346443dae, type: 3}
       propertyPath: m_Name
       value: UI
@@ -5656,10 +5682,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 7594770200883692418, guid: 089f673d38393c44d864c90346443dae, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 726100078}
+    m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 089f673d38393c44d864c90346443dae, type: 3}
 --- !u!1 &1073447127
@@ -5856,11 +5879,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 455394, guid: db858489e2ba863419c1578fb28da656, type: 3}
   m_PrefabInstance: {fileID: 1086817806}
-  m_PrefabAsset: {fileID: 0}
---- !u!224 &1105417486 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 7594770200883692418, guid: 089f673d38393c44d864c90346443dae, type: 3}
-  m_PrefabInstance: {fileID: 1059029699}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1112130912
 PrefabInstance:
@@ -6065,6 +6083,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 233961069}
     m_Modifications:
+    - target: {fileID: 2917845420634438998, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3641282881262301686, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4857881351410982344, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5304921440827151561, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5802978546763550458, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.4999999
@@ -6124,6 +6158,14 @@ PrefabInstance:
     - target: {fileID: 6612272244670174272, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
       propertyPath: m_Name
       value: Luggage-Car
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612272244670174272, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6929176135367036951, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6697,63 +6739,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 455394, guid: db858489e2ba863419c1578fb28da656, type: 3}
   m_PrefabInstance: {fileID: 1252287391}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1266384356
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 1105417486}
-    m_Modifications:
-    - target: {fileID: 496940275161907845, guid: 8919dde687b4619498f1200d060a1890, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 496940275161907845, guid: 8919dde687b4619498f1200d060a1890, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 496940275161907845, guid: 8919dde687b4619498f1200d060a1890, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -1079.9999
-      objectReference: {fileID: 0}
-    - target: {fileID: 496940275161907845, guid: 8919dde687b4619498f1200d060a1890, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 496940275161907845, guid: 8919dde687b4619498f1200d060a1890, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 496940275161907845, guid: 8919dde687b4619498f1200d060a1890, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 496940275161907845, guid: 8919dde687b4619498f1200d060a1890, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 496940275161907845, guid: 8919dde687b4619498f1200d060a1890, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 496940275161907845, guid: 8919dde687b4619498f1200d060a1890, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 496940275161907845, guid: 8919dde687b4619498f1200d060a1890, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1590984939951519513, guid: 8919dde687b4619498f1200d060a1890, type: 3}
-      propertyPath: m_Name
-      value: CanvasCamera
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 8919dde687b4619498f1200d060a1890, type: 3}
 --- !u!1 &1288406857
 GameObject:
   m_ObjectHideFlags: 0
@@ -8470,6 +8455,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 233961069}
     m_Modifications:
+    - target: {fileID: 2917845420634438998, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 3641282881262301686, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 4857881351410982344, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 5304921440827151561, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 5802978546763550458, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.5
@@ -8529,6 +8530,14 @@ PrefabInstance:
     - target: {fileID: 6612272244670174272, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
       propertyPath: m_Name
       value: Luggage-Car (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6612272244670174272, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
+    - target: {fileID: 6929176135367036951, guid: 877268708f4b64c5f99ecbe670d6a3dc, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
