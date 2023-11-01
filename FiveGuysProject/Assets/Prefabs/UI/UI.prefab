@@ -1001,9 +1001,10 @@ MonoBehaviour:
   playerHealthBar: {fileID: 982659221489032331}
   quest: {fileID: 4063250697956208786}
   questText: {fileID: 4344941427039515809}
+  maxWaves: 5
+  waves: 0
   noEnemies: 0
   isPaused: 0
-  waves: 0
   enemiesRemain: 0
   score: 0
 --- !u!114 &8096327349324054164
@@ -9071,7 +9072,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 1477648718482574878}
   m_PlaneDistance: 10
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -14566,6 +14567,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8919dde687b4619498f1200d060a1890, type: 3}
+--- !u!20 &1477648718482574878 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3152096982376883024, guid: 8919dde687b4619498f1200d060a1890, type: 3}
+  m_PrefabInstance: {fileID: 4557596847217093966}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4168832023958187979 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 496940275161907845, guid: 8919dde687b4619498f1200d060a1890, type: 3}

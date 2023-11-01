@@ -12,6 +12,6 @@ EditorBuildSettings:
     path: Assets/Scenes/TittleScreen.unity
     guid: 00e57472ce48feb4a8f410b671211d54
   - enabled: 1
-    path: Assets/Scenes/RyanBrownTestingScene.unity
+    path: Assets/Scenes/FirstLevel.unity
     guid: 2072310db6e8e724c9954a822aa6c04b
   m_configObjects: {}
