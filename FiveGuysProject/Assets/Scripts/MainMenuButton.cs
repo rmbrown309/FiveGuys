@@ -13,9 +13,15 @@ public class MainMenuButton : MonoBehaviour
     Resolution[] resolutions;
     public TMPro.TMP_Dropdown resolutionDropdown;
     float newVolume;
-    [SerializeField] MasterVolume volume;
+    [SerializeField] SavedSettings SavedSettings;
+    [SerializeField] Slider VolSlider;
+    [SerializeField] Slider SensSlider;
+
     private void Start()
     {
+        VolSlider.value = SavedSettings.volume;
+        SensSlider.value = SavedSettings.Sensitivity;
+        AudioListener.volume = SavedSettings.volume;
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();
@@ -75,8 +81,13 @@ public class MainMenuButton : MonoBehaviour
     }
     public void ChangeVolume(float value)
     {
-        volume.volume = value;
+        SavedSettings.volume = value;
         AudioListener.volume = value;
         newVolume = value;
+    }
+    public void ChangeSenitivity(float value)
+    {
+        SavedSettings.Sensitivity = value;
+
     }
 }
