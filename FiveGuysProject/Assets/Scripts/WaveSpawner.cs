@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UI;
 
 public class WaveSpawner : MonoBehaviour
@@ -12,6 +13,7 @@ public class WaveSpawner : MonoBehaviour
     [Range(1, 20)][SerializeField] int waveStart; // On what wave this spawner is active
     [SerializeField] int numOfEnemies; // number of enemies spawned during the wave
     [SerializeField] float spawnRate; // seconds between each emnemy spawn
+    [SerializeField] float spawnRange;
     [SerializeField] bool rats;
     [SerializeField] bool continuousSpawning;
   
@@ -46,7 +48,7 @@ public class WaveSpawner : MonoBehaviour
 
     IEnumerator TotalEnemy()
     {
-        Transform spawnpoint = posToSpawn[0];
+        Vector3 spawnpoint = posToSpawn[0].position;
 
         // prevents spawner from starting again during the wave
         isWaveActive = false;
@@ -61,18 +63,25 @@ public class WaveSpawner : MonoBehaviour
             if (posToSpawn.Length > 1)
             {
                 Transform furthestSpawn = posToSpawn[0];
-                for(int j = 1; j < posToSpawn.Length; j++)
+                for (int j = 1; j < posToSpawn.Length; j++)
                 {
                     // prioritize the spawnpoint furthest from the player in order to keep enemies from spawning on top of them
                     if ((posToSpawn[j].position - GameManager.instance.player.transform.position).magnitude > (furthestSpawn.position - GameManager.instance.player.transform.position).magnitude)
                         furthestSpawn = posToSpawn[j];
                 }
 
-                spawnpoint = furthestSpawn;
+                // randomly choose a spawnpoint around the spawner transform in a circle of radius spawnRange
+                spawnpoint = furthestSpawn.position + Random.insideUnitSphere * spawnRange;
+                spawnpoint.y = furthestSpawn.position.y;
+            }
+            else
+            {
+                spawnpoint += Random.insideUnitSphere * spawnRange;
+                spawnpoint.y = posToSpawn[0].position.y;
             }
 
             yield return new WaitForSeconds(spawnRate);
-            Instantiate(enemy[Random.Range(0, enemy.Length)], spawnpoint.position, Quaternion.identity);
+            Instantiate(enemy[Random.Range(0, enemy.Length)], spawnpoint, Quaternion.identity);
         }
 
         spawnStopped = true;
