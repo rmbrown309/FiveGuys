@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5691c4d8c7a7e440b03620d68a535b9, type: 3}
   m_Name: PumpShottyStats
   m_EditorClassIdentifier: 
-  weaponID: 0
+  weaponID: 3
   shootRate: 0.5
   shootDamage: 0.5
   shootTime: 0.6

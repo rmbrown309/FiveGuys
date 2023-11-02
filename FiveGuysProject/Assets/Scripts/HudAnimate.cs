@@ -60,4 +60,14 @@ public class HudAnimate : MonoBehaviour
         mAnimator.SetBool("isSniperOn", true);
 
     }
+    public void TurnOnShotGunWeapon()
+    {
+        mAnimator.SetBool("isShotGunOn", true);
+
+    }
+    public void TurnOffShotGunWeapon()
+    {
+        mAnimator.SetBool("isShotGunOn", false);
+
+    }
 }

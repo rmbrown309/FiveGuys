@@ -76,7 +76,9 @@ public class GameManager : MonoBehaviour
     public int enemiesRemain;
     public int score;
     float origTimeScale;
-
+    private float fillTime;
+    [SerializeField] Image shoveBar;
+    [SerializeField] Slider slider;
     void Awake()
     {
         //initiallize player variables;
@@ -261,14 +263,28 @@ public class GameManager : MonoBehaviour
         float amount = (ammoVal / .5f) * 180f / 360;
         SprayAmmoBar.fillAmount = amount;
     }
+    public void updateShoveUI( float shoveCooldown)
+    {
+        
+        slider.value = Mathf.Lerp(slider.minValue, slider.maxValue, fillTime );
+        fillTime += 0.5f * Time.deltaTime;
+    }
+    public void ResetShoveUI()
+    {
+        Debug.Log("Slider reset");
+        Debug.Log(slider.minValue);
+        fillTime = 0;
+        slider.value = slider.minValue;
+
+    }
 
     public void updateAmmmo(int _curr, int _ammoMax)
     {
         ammoCurr.text = _curr.ToString("F0");
         float ammoVal = _curr / (_ammoMax * 1.0f);
-        Debug.Log("ammo curr:" + _curr);
-        Debug.Log("ammo max:" + _ammoMax);
-        Debug.Log("ammo value:" + ammoVal);
+       //Debug.Log("ammo curr:" + _curr);
+       //Debug.Log("ammo max:" + _ammoMax);
+       //Debug.Log("ammo value:" + ammoVal);
         float amount = (ammoVal / .5f) * 180f / 360;
         _MainWeaponbar.fillAmount = amount;
 

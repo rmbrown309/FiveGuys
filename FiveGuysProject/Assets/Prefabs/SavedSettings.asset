@@ -10,6 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9751ce2e0967b2a49a5f2b738632c788, type: 3}
-  m_Name: New Master Volume
+  m_Name: SavedSettings
   m_EditorClassIdentifier: 
-  volume: 0.11338065
+  volume: 0.23153248
+  Sensitivity: 0

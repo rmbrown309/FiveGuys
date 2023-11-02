@@ -80,7 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18cb6c3b8bf229c408abdc5c93ca5d9b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensitivity: 300
+  savedSettings: {fileID: 11400000, guid: 46f271e14fe41cf4cb7765b24c31d09d, type: 2}
   lockVertMin: -90
   lockVertMax: 90
   invertY: 0
@@ -297,6 +297,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 246ca93320cb0564e9b588ca525d8796, type: 3}
   - {fileID: 8300000, guid: 7fc4a81bd08c3f3448342c80aaa5451d, type: 3}
   audStepsVol: 0.05
+  isShoving: 0
 --- !u!143 &9198960336271817168
 CharacterController:
   m_ObjectHideFlags: 0

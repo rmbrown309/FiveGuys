@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [Header("----- Components -----")]
-    [SerializeField] int sensitivity;
+    [SerializeField] SavedSettings savedSettings;
     [SerializeField] int lockVertMin;
     [SerializeField] int lockVertMax;
     [SerializeField] bool invertY;
@@ -21,8 +21,8 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         // get input
-        float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * sensitivity;
-        float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * sensitivity;
+        float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * savedSettings.Sensitivity * 1000;
+        float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * savedSettings.Sensitivity * 1000;
 
         if (invertY)
             xRot += mouseY;
