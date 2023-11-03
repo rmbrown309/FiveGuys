@@ -271,8 +271,8 @@ public class GameManager : MonoBehaviour
     }
     public void ResetShoveUI()
     {
-        Debug.Log("Slider reset");
-        Debug.Log(slider.minValue);
+        //Debug.Log("Slider reset");
+        //Debug.Log(slider.minValue);
         fillTime = 0;
         slider.value = slider.minValue;
 
