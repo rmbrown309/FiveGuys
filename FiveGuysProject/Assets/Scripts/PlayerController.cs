@@ -618,9 +618,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     }
     public void AmmoRefillPower()
     {
-        gunList[selectedGun].ammoCur = gunList[selectedGun].ammoMax;
-        GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
-        StartCoroutine(PowerTextCD("Ammo Refill"));
+       
+            gunList[selectedGun].ammoCur = gunList[selectedGun].ammoMax;
+            GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
+            StartCoroutine(PowerTextCD("Ammo Refill"));
+        
+
     }
 
     // Pickup functions
@@ -651,8 +654,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     }
     public void RefillAmmo()
     {
-        gunList[selectedGun].ammoCur = gunList[selectedGun].ammoMax;
-        GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
+        if (gunList[selectedGun].isPowerWeapon == false)
+        {
+            gunList[selectedGun].ammoCur = gunList[selectedGun].ammoMax;
+            GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
+        }
     }
     public void GetRatKiller()
     {
@@ -811,14 +817,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
                 if (gunList[selectedGun].weaponID == 6)
                 {
-                    Vector3 pos = new Vector3(shootPos.transform.position.x, shootPos.transform.position.y, shootPos.transform.position.z);
                     GameObject currBullet = Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
                     currBullet.transform.forward = shootDir.normalized;
-                    pos.x = shootPos.transform.position.x + 0.3f;
-                    GameObject nextBullet = Instantiate(bullet, pos, Quaternion.identity);
-                    nextBullet.transform.forward = shootDir.normalized;
+                    yield return new WaitForSeconds(0.2f);
 
-            
+                    GameObject nextBullet = Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
+                    nextBullet.transform.forward = shootDir.normalized;
+                    yield return new WaitForSeconds(0.2f);
+
+
 
                 }
 
