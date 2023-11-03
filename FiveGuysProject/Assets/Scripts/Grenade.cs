@@ -46,21 +46,25 @@ public class Grenade : MonoBehaviour
         Destroy(gameObject);
 
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other )
     {
-        if (other.isTrigger)
-        {
-            return;
-        }
-
-        //IDamage damageable = other.GetComponent<IDamage>();
-
-        //if (damageable != null)
+        //if ( isRocket)
         //{
+            if (other.isTrigger)
+            {
+                return;
+            }
+
+            //IDamage damageable = other.GetComponent<IDamage>();
+
+            //if (damageable != null)
+            //{
             Instantiate(explosion, transform.position, explosion.transform.rotation);
 
-        //}
+            //}
 
-        Destroy(gameObject);
+            Destroy(gameObject);
+        //}
+       
     }
 }

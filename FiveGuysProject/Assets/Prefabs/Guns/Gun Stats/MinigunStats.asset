@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5691c4d8c7a7e440b03620d68a535b9, type: 3}
+  m_Name: MinigunStats
+  m_EditorClassIdentifier: 
+  weaponID: 9
+  shootRate: 0.03
+  shootDamage: 0.8
+  shootTime: 1
+  ammoCur: 0
+  ammoMax: 100
+  cost: 0
+  gunName: Minigun
+  isShotgun: 0
+  isM16: 0
+  isPowerWeapon: 1
+  numOfPellets: 1
+  horizSpread: 0
+  vertSpread: 0
+  zSpread: 0
+  model: {fileID: -927199367670048503, guid: 26f4603e86e78c841aca62fab44b2672, type: 3}
+  bullet: {fileID: 4307941743950219541, guid: a65b0f35347196d41874814f00300685, type: 3}
+  hitEffect: {fileID: 0}
+  shootSound: {fileID: 0}
+  audShotVol: 0
+  xOffset: 0
+  yOffset: 0
+  zOffset: 0
