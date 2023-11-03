@@ -27,6 +27,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [SerializeField] float shootRate;
     [SerializeField] float startDamage;
     int weaponID;
+    [Header("----- Grenade Stats -----")]
+    [SerializeField] GameObject grenade;
+    [SerializeField] float tossRate;
+
 
     [Header("----- Rat Spray Stats -----")]
     [SerializeField] ParticleSystem sprayEffect;
@@ -71,6 +75,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     bool isSprinting;
     bool footstepsPlaying;
     int selectedGun; // the int that controls how the player selects their gun
+    bool isTossing;
 
     // powerup variables
     GameObject[] enemyToFind;
@@ -142,6 +147,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         }
         if (sprayWeaponActive && Input.GetButton("Shoot2") && !isShooting)
             StartCoroutine(Spray());
+        if (Input.GetButton("Grenade") && !isTossing)
+        {
+            StartCoroutine(TossGrenade());
+        }
         if (sprayWeaponActive && (currSprayAmmo < maxSprayAmmo) && !isSpraying && !sprayRegen)
             StartCoroutine(RegenSprayAmmo());
         if (isShoving)
@@ -768,18 +777,35 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             if (bullet != null)
             {
 
+                if (gunList[selectedGun].isM16 && gunList[selectedGun].weaponID != 6)
+                {
+                    GameObject currBullet = Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
+                    currBullet.transform.forward = shootDir.normalized;
+                    yield return new WaitForSeconds(0.08f);
 
-                GameObject currBullet = Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
-                currBullet.transform.forward = shootDir.normalized;
-                yield return new WaitForSeconds(0.08f);
+                    GameObject nextBullet = Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
+                    nextBullet.transform.forward = shootDir.normalized;
+                    yield return new WaitForSeconds(0.08f);
 
-                GameObject nextBullet = Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
-                nextBullet.transform.forward = shootDir.normalized;
-                yield return new WaitForSeconds(0.08f);
+                    GameObject lastBullet = Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
+                    lastBullet.transform.forward = shootDir.normalized;
+                    yield return new WaitForSeconds(0.08f);
 
-                GameObject lastBullet = Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
-                lastBullet.transform.forward = shootDir.normalized;
-                yield return new WaitForSeconds(0.08f);
+                }
+
+                if (gunList[selectedGun].weaponID == 6)
+                {
+                    Vector3 pos = new Vector3(shootPos.transform.position.x, shootPos.transform.position.y, shootPos.transform.position.z);
+                    GameObject currBullet = Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
+                    currBullet.transform.forward = shootDir.normalized;
+                    pos.x = shootPos.transform.position.x + 0.3f;
+                    GameObject nextBullet = Instantiate(bullet, pos, Quaternion.identity);
+                    nextBullet.transform.forward = shootDir.normalized;
+
+            
+
+                }
+
 
             }
 
@@ -787,6 +813,30 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             isShooting = false;
         }
     }
+
+    IEnumerator TossGrenade()
+    {
+        isTossing = true;
+        Ray ray = Camera.main.ViewportPointToRay(new Vector2(0.5f, 0.5f));
+        RaycastHit hit;
+        Vector3 targetPoint;
+        if (Physics.Raycast(ray, out hit))
+            targetPoint = hit.point; // aims at specific point on ray at the distance of the hit
+        else
+            targetPoint = ray.GetPoint(50); // some distant point on ray if not aiming at anything
+
+        // Calculate shooting direction
+        Vector3 shootDir = targetPoint - shootPos.position;
+        GameObject currBullet = Instantiate(grenade, shootPos.transform.position, Quaternion.identity);
+        currBullet.transform.forward = shootDir.normalized;
+
+
+        yield return new WaitForSeconds(tossRate);
+        isTossing = false;
+
+    }
+
+
     public void SetAudio(float newVolume)
     {
         audDamageVol = newVolume;

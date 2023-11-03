@@ -99,16 +99,25 @@ public class MainMenuButton : MonoBehaviour
     }
     public void ChangeMusicVolume(float value)
     {
+ 
         Audio = GameObject.FindGameObjectWithTag("AudioManager");
         SavedSettings.MusicVolume = value;
-        Audio.GetComponent<AudioManager>().SetMusicAudio(value/2);
+        if (Audio != null)
+        {
+            Audio.GetComponent<AudioManager>().SetMusicAudio(value / 2);
+        }
+
     }
     public void ChangeEffectsVolume(float value)
     {
         Audio = GameObject.FindGameObjectWithTag("AudioManager");
         PlayerAudio = GameObject.FindGameObjectWithTag("Player");
         SavedSettings.SoundEffectVoulume = value;
-        Audio.GetComponent<AudioManager>().SetEffectsAudio(value);
+        if (Audio != null)
+        {
+            Audio.GetComponent<AudioManager>().SetEffectsAudio(value);
+
+        }
         PlayerAudio.GetComponent<PlayerController>().SetAudio(value);
     }
 }
