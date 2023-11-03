@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 8391375901310642781}
   m_Layer: 0
   m_Name: RatKillerPickupStation
-  m_TagString: Untagged
+  m_TagString: PickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 2147483647

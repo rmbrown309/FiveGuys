@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 8954237048328266577}
   m_Layer: 0
   m_Name: PumpShotty
-  m_TagString: Untagged
+  m_TagString: GunPickUps
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

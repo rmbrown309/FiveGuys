@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 1936265698178248318}
   m_Layer: 0
   m_Name: AutoShotty
-  m_TagString: Untagged
+  m_TagString: GunPickUps
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,6 +138,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gun: {fileID: 11400000, guid: 791a290939cf24d4a8406269e13e9a16, type: 2}
+  weaponAnimation: {fileID: 0}
   aud: {fileID: 1936265698178248318}
   audCash: {fileID: 8300000, guid: fe47b3b42df583948969f511890dd8f0, type: 3}
   audCashVol: 0.5

@@ -13,19 +13,26 @@ public class MainMenuButton : MonoBehaviour
     Resolution[] resolutions;
     public TMPro.TMP_Dropdown resolutionDropdown;
     float newVolume;
+    [SerializeField] GameObject Audio;
+    [SerializeField] GameObject PlayerAudio;
+    [SerializeField] GameObject gunHitAudio;
     [SerializeField] SavedSettings SavedSettings;
     [SerializeField] Slider VolSlider;
+    [SerializeField] Slider MusicVolumeSlider;
+    [SerializeField] Slider SoundEffectSlider;
     [SerializeField] Slider SensSlider;
 
     private void Start()
     {
-        VolSlider.value = SavedSettings.volume;
+        MusicVolumeSlider.value = SavedSettings.MusicVolume;
+        SoundEffectSlider.value = SavedSettings.SoundEffectVoulume;
+        VolSlider.value = SavedSettings.masterVolume;
         SensSlider.value = SavedSettings.Sensitivity;
-        AudioListener.volume = SavedSettings.volume;
+        AudioListener.volume = SavedSettings.masterVolume;
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
         List<string> options = new List<string>();
-
+        
         int currentResolution = 0;
         for(int i = 0; i < resolutions.Length; i++)
         {
@@ -81,7 +88,7 @@ public class MainMenuButton : MonoBehaviour
     }
     public void ChangeVolume(float value)
     {
-        SavedSettings.volume = value;
+        SavedSettings.masterVolume = value;
         AudioListener.volume = value;
         newVolume = value;
     }
@@ -89,5 +96,19 @@ public class MainMenuButton : MonoBehaviour
     {
         SavedSettings.Sensitivity = value;
 
+    }
+    public void ChangeMusicVolume(float value)
+    {
+        Audio = GameObject.FindGameObjectWithTag("AudioManager");
+        SavedSettings.MusicVolume = value;
+        Audio.GetComponent<AudioManager>().SetMusicAudio(value/2);
+    }
+    public void ChangeEffectsVolume(float value)
+    {
+        Audio = GameObject.FindGameObjectWithTag("AudioManager");
+        PlayerAudio = GameObject.FindGameObjectWithTag("Player");
+        SavedSettings.SoundEffectVoulume = value;
+        Audio.GetComponent<AudioManager>().SetEffectsAudio(value);
+        PlayerAudio.GetComponent<PlayerController>().SetAudio(value);
     }
 }

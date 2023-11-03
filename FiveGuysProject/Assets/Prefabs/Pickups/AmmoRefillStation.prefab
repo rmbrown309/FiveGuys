@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: -1736819269632783813}
   m_Layer: 0
   m_Name: AmmoRefillStation
-  m_TagString: Untagged
+  m_TagString: PickUp
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 2147483647

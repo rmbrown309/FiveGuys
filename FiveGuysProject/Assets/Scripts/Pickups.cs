@@ -129,5 +129,8 @@ public class Pickups : MonoBehaviour
                 GameManager.instance.pickupLabel.SetActive(false);
         }
     }
-
+    public void SetAudio(float newVolume)
+    {
+        audCashVol = newVolume;
+    }
 }

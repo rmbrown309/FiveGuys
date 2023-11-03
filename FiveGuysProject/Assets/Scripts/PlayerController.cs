@@ -787,7 +787,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             isShooting = false;
         }
     }
-
+    public void SetAudio(float newVolume)
+    {
+        audDamageVol = newVolume;
+        audJumpVol = newVolume;
+        audSprayVol = newVolume;
+        audStepsVol = newVolume/4;
+    }
     //void selectGun()
     //{
     //    if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)

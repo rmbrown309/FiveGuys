@@ -8,6 +8,11 @@ TagManager:
   - Enemy
   - Powerup
   - HUD
+  - PickUp
+  - GunPickUps
+  - AudioManager
+  - GunHitAudio
+  - GutHitAudio
   layers:
   - Default
   - TransparentFX

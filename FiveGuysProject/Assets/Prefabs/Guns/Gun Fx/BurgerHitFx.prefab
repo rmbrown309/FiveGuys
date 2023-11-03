@@ -12,9 +12,10 @@ GameObject:
   - component: {fileID: 6327853518906024368}
   - component: {fileID: 4111008914720656}
   - component: {fileID: 4322918372070643646}
+  - component: {fileID: -2246723620491436952}
   m_Layer: 0
   m_Name: BurgerHitFx
-  m_TagString: Untagged
+  m_TagString: GutHitAudio
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4925,3 +4926,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-2246723620491436952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1811119091601653981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd2eaafe77b96043bd6abf57c127f66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitSound: {fileID: 4322918372070643646}
+  sound: {fileID: 11400000, guid: 46f271e14fe41cf4cb7765b24c31d09d, type: 2}

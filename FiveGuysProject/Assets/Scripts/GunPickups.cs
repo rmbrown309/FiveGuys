@@ -120,6 +120,10 @@ public class GunPickups : MonoBehaviour
             }
         }
     }
- 
+    public void SetAudio(float newVolume)
+    {
+        audCashVol = newVolume;
+        gun.audShotVol = newVolume;
+    }
 
 }

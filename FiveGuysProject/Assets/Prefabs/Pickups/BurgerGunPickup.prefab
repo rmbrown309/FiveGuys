@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: -8222805778097520190}
   m_Layer: 0
   m_Name: BurgerGunPickup
-  m_TagString: Untagged
+  m_TagString: GunPickUps
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647
@@ -147,7 +147,7 @@ MonoBehaviour:
   weaponAnimation: {fileID: 5545230511604252582, guid: 089f673d38393c44d864c90346443dae, type: 3}
   aud: {fileID: -8222805778097520190}
   audCash: {fileID: 8300000, guid: fe47b3b42df583948969f511890dd8f0, type: 3}
-  audCashVol: 0.5
+  audCashVol: 0
 --- !u!33 &5491838913945208344
 MeshFilter:
   m_ObjectHideFlags: 0

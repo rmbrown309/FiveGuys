@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9751ce2e0967b2a49a5f2b738632c788, type: 3}
   m_Name: SavedSettings
   m_EditorClassIdentifier: 
-  volume: 0.23153248
-  Sensitivity: 0
+  masterVolume: 0.109046854
+  MusicVolume: 0.388
+  SoundEffectVoulume: 0.526
+  Sensitivity: 0.2056706

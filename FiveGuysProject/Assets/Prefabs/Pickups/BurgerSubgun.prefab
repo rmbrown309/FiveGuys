@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2514340248660457350}
   m_Layer: 0
   m_Name: BurgerSubgun
-  m_TagString: Untagged
+  m_TagString: GunPickUps
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 2147483647

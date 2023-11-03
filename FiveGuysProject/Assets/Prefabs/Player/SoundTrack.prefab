@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6827540693371372606}
   m_Layer: 0
   m_Name: SoundTrack
-  m_TagString: Untagged
+  m_TagString: AudioManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,7 +46,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 7514851e79203264fb477b7b9f8a0284, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.2
+  m_Volume: 0.560758
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -144,10 +144,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   aud: {fileID: 8422175351133861028}
   bossa: {fileID: 6827540693371372606}
+  Music:
+  - {fileID: 8422175351133861028}
+  - {fileID: 6827540693371372606}
   rat: {fileID: 8300000, guid: f5beb74c05a93594281fb6719ea852ff, type: 3}
   audRatVol: 10
   winSound: {fileID: 8300000, guid: 1c7aa04a620442346a174395fe21a4fd, type: 3}
   winVol: 1
+  SoundEffects: []
+  WeaponSoundEffects: []
 --- !u!82 &6827540693371372606
 AudioSource:
   m_ObjectHideFlags: 0
@@ -160,7 +165,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0c849b88f1126ff42b2fdb08aac95800, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.2
+  m_Volume: 0.560758
   m_Pitch: 1
   Loop: 1
   Mute: 0
