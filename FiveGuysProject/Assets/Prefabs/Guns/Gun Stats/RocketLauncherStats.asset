@@ -16,12 +16,13 @@ MonoBehaviour:
   shootRate: 1
   shootDamage: 5
   shootTime: 1
-  ammoCur: 3
+  ammoCur: 0
   ammoMax: 3
   cost: 0
   gunName: Rocket Launcher
   isShotgun: 0
   isM16: 0
+  isPowerWeapon: 1
   numOfPellets: 1
   horizSpread: 0
   vertSpread: 0

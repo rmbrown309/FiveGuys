@@ -52,7 +52,7 @@ MonoBehaviour:
   speed: 50
   destroyTime: 1.2
   velUp: 0
-  explosion: {fileID: 8373348211303382249, guid: a0382235b1b1e2d46be1331ee2031b2a, type: 3}
+  explosion: {fileID: 8373348211303382249, guid: 8c1a86a689155e24f989935c5629d525, type: 3}
   isRocket: 0
   targetDir: {x: 0, y: 0, z: 0}
 --- !u!54 &8227445996522034935

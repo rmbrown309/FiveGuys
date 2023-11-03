@@ -287,6 +287,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
             yield return new WaitForSeconds(shootRate);
             isShooting = false;
+
+            if (gunList[selectedGun].isPowerWeapon && gunList[selectedGun].ammoCur == 0)
+            {
+                setGunStats(gunList[selectedGun-1]);
+           
+            }
         }
     }
 

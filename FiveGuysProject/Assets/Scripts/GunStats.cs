@@ -15,6 +15,7 @@ public class gunStats : ScriptableObject
     public string gunName;
     public bool isShotgun;
     public bool isM16;
+    public bool isPowerWeapon;
     public int numOfPellets;
     public float horizSpread;
     public float vertSpread;

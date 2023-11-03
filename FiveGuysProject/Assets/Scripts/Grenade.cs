@@ -53,13 +53,13 @@ public class Grenade : MonoBehaviour
             return;
         }
 
-        IDamage damageable = other.GetComponent<IDamage>();
+        //IDamage damageable = other.GetComponent<IDamage>();
 
-        if (damageable != null)
-        {
+        //if (damageable != null)
+        //{
             Instantiate(explosion, transform.position, explosion.transform.rotation);
 
-        }
+        //}
 
         Destroy(gameObject);
     }
