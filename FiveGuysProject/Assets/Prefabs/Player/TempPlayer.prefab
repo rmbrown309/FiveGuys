@@ -259,9 +259,11 @@ MonoBehaviour:
   gunList: []
   defGun: {fileID: 11400000, guid: bb4956d9fec47224d896cb688ed78b87, type: 2}
   gunModel: {fileID: 7488616914648254189}
-  bullet: {fileID: 0}
+  bullet: {fileID: 3773670445560834378, guid: 11797fb46023f3445838bd4a651a02d3, type: 3}
   shootRate: 0.5
   startDamage: 1
+  grenade: {fileID: 5632428987490490690, guid: 3f030a2314438f84092bb33a3be57616, type: 3}
+  tossRate: 5
   sprayEffect: {fileID: 265766274217486953, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
   sprayDistance: 15
   maxSprayAmmo: 20
@@ -520,7 +522,7 @@ Transform:
   m_GameObject: {fileID: 7488616914648254189}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.00001328578, z: -0, w: 1}
-  m_LocalPosition: {x: 0.292, y: -0.573, z: 0.968}
+  m_LocalPosition: {x: 0.356, y: -0.385, z: 1.23}
   m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
