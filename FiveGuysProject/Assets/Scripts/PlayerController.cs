@@ -509,6 +509,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             }
         }
     }
+    
     IEnumerator PowerTextCD(string typeCD)
     {
         GameManager.instance.SetPowerText(typeCD);
@@ -614,6 +615,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         StartCoroutine(PowerTextCD("Enemy Health Down"));
         powerUpCorutine[4] = EnemyHpPowerCooldown();
         StartCoroutine(powerUpCorutine[4]);
+    }
+    public void AmmoRefillPower()
+    {
+        gunList[selectedGun].ammoCur = gunList[selectedGun].ammoMax;
+        GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
+        StartCoroutine(PowerTextCD("Ammo Refill"));
     }
 
     // Pickup functions

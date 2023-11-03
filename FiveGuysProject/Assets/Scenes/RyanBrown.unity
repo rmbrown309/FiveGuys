@@ -1035,6 +1035,63 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1001 &3472124677261896923
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4826931747813801641, guid: aba13c94f54fbaf40a8e94f7547b6fb0, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 25.84343
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826931747813801641, guid: aba13c94f54fbaf40a8e94f7547b6fb0, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826931747813801641, guid: aba13c94f54fbaf40a8e94f7547b6fb0, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 28.936037
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826931747813801641, guid: aba13c94f54fbaf40a8e94f7547b6fb0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826931747813801641, guid: aba13c94f54fbaf40a8e94f7547b6fb0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826931747813801641, guid: aba13c94f54fbaf40a8e94f7547b6fb0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826931747813801641, guid: aba13c94f54fbaf40a8e94f7547b6fb0, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826931747813801641, guid: aba13c94f54fbaf40a8e94f7547b6fb0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826931747813801641, guid: aba13c94f54fbaf40a8e94f7547b6fb0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4826931747813801641, guid: aba13c94f54fbaf40a8e94f7547b6fb0, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6170631053924869005, guid: aba13c94f54fbaf40a8e94f7547b6fb0, type: 3}
+      propertyPath: m_Name
+      value: AmmoPowerUp
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aba13c94f54fbaf40a8e94f7547b6fb0, type: 3}
 --- !u!1001 &4460217885413375698
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1108,3 +1165,4 @@ SceneRoots:
   - {fileID: 1587510795}
   - {fileID: 2079804347}
   - {fileID: 4460217885413375698}
+  - {fileID: 3472124677261896923}

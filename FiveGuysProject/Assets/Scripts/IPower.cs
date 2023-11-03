@@ -9,6 +9,7 @@ public interface IPower
     void Invulnerability();
     void ShootRate(float shoot);
     void EnemyHealthDown(int damage);
+    void AmmoRefillPower();
 }
 
 

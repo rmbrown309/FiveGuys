@@ -22,7 +22,8 @@ public class PowerUp : MonoBehaviour
     void Start()
     {
         origPosition = transform.position;
-        Destroy(gameObject, destroyTimer);
+        if(randType)
+            Destroy(gameObject, destroyTimer);
     }
     private void Update()
     {
@@ -45,39 +46,57 @@ public class PowerUp : MonoBehaviour
         {
             if(randType)
             {
-                typePower = Random.Range(1, 5);
+                typePower = Random.Range(1, 6);
                 Debug.Log(typePower);
             }
             switch (typePower)
             {
                 case 1:
-                    Debug.Log("jump");
+                    //Debug.Log("jump");
                     powerUp.JumpPower(newJumpMax);
+
+                    Destroy(gameObject);
                     break;
                 case 2:
-                    Debug.Log("speed");
-
+                    //Debug.Log("speed");
                     powerUp.SpeedBoost(newSpeedMax);
 
+                    Destroy(gameObject);
                     break;
                 case 3:
-                    Debug.Log("health");
-
+                    //Debug.Log("health");
                     powerUp.Invulnerability();
+
+                    Destroy(gameObject);
                     break;
                 case 4:
-                    Debug.Log("shoot");
-
+                    //Debug.Log("shoot");
                     powerUp.ShootRate(newShootRate);
+
+                    Destroy(gameObject);
                     break;
                 case 5:
-                    Debug.Log("dmg");
-
+                    //Debug.Log("dmg");
                     powerUp.EnemyHealthDown(newEnemyHealthDown);
+
+                    Destroy(gameObject);
+                    break;
+                case 6:
+                    powerUp.AmmoRefillPower();
+
+                    StartCoroutine(Reactivate());
                     break;
             }
         }
-        Destroy(gameObject);
+    }
+
+    IEnumerator Reactivate()
+    {
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        gameObject.GetComponent<Collider>().enabled = false;
+        yield return new WaitForSeconds(15);
+        gameObject.GetComponent<MeshRenderer>().enabled = true;
+        gameObject.GetComponent<Collider>().enabled = true;
     }
 
 }
