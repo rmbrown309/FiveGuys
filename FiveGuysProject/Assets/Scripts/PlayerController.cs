@@ -91,6 +91,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     bool isDamaged;
     bool damageActive;
     //Power Up
+    [SerializeField]bool canMove;
     bool isPowered;
     int powerType;
     //shoot shennanigans
@@ -100,6 +101,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
     private void Start()
     {
+        canMove = true;
         powerUpCorutine = new IEnumerator[5];
         origJump = jumpMax;
         OrigSpeed = playerSpeed;
@@ -195,8 +197,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         // wasd movement input
         move = Input.GetAxis("Horizontal") * transform.right +
                Input.GetAxis("Vertical") * transform.forward;
-
-        controller.Move(move * Time.deltaTime * playerSpeed);
+        if (canMove)
+        {
+            controller.Move(move * Time.deltaTime * playerSpeed);
+        }
 
 
         // Changes the height position of the player..
@@ -211,6 +215,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         // makes gravity work on player
         playerVelocity.y += gravityValue * Time.deltaTime;
         controller.Move(playerVelocity * Time.deltaTime);
+    }
+    public void SetMoveBool(Vector3 position)
+    {
+        canMove = false;
+        gameObject.transform.SetPositionAndRotation(position, gameObject.transform.rotation);
     }
     IEnumerator playFootsteps()
     {

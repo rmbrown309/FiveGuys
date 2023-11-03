@@ -5,6 +5,7 @@ using UnityEngine;
 public class TriggeredSpawner : MonoBehaviour
 {
     [Header("-----Components------")]
+    [SerializeField] GameObject switchObject;
     [SerializeField] Transform[] posToSpawn;
     [SerializeField] GameObject[] enemy; // enemy type spawned by this spawner
     [Header("-----Spawner Stats------")]
@@ -19,6 +20,14 @@ public class TriggeredSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        if(switchObject.GetComponentInChildren<ButtonSwitch>() != null)
+        {
+            if (switchObject.GetComponentInChildren<ButtonSwitch>().GetSwitchState())
+            {
+                gameObject.GetComponent<SphereCollider>().enabled = true;
+            }
+        }
         // Spawns enemies only on the correct wave number
         if (isTriggered && isWaveActive)
         {

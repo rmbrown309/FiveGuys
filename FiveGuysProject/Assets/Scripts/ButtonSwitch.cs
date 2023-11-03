@@ -16,20 +16,19 @@ public class ButtonSwitch : MonoBehaviour
     private void Update()
     {
         //buttonSet = false;
-        if (Input.GetButtonUp("Interact") && SwitchState == true && onTrigger )
-        {
-            
-            SwitchState = !SwitchState;
-            Debug.Log("Switch off");
-            gameObject.transform.SetLocalPositionAndRotation(new Vector3(0, ButtonUpHeight), gameObject.transform.rotation);
-
-        }
-        else if (Input.GetButtonUp("Interact") && SwitchState == false && onTrigger)
-        {
-            SwitchState = !SwitchState;
-            Debug.Log("Switch In");
-            gameObject.transform.SetLocalPositionAndRotation(new Vector3(0, buttonDownHeight), gameObject.transform.rotation) ;
-        }
+        //if (Input.GetButtonUp("Interact") && SwitchState == true && onTrigger )
+        //{
+        //    SwitchState = !SwitchState;
+        //    Debug.Log("Switch off");
+        //    gameObject.transform.SetLocalPositionAndRotation(new Vector3(0, ButtonUpHeight), gameObject.transform.rotation);
+        //
+        //}
+       if (Input.GetButtonUp("Interact") && SwitchState == false && onTrigger)
+       {
+           SwitchState = !SwitchState;
+           Debug.Log("Switch In");
+           gameObject.transform.SetLocalPositionAndRotation(new Vector3(0, buttonDownHeight), gameObject.transform.rotation) ;
+       }
        
     }
     // Update is called once per frame
