@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7843444501013094997}
   - component: {fileID: 4423421200856819088}
   - component: {fileID: -3466426954988467503}
+  - component: {fileID: 7673731533284895447}
   m_Layer: 0
   m_Name: Rocket effect
   m_TagString: Untagged
@@ -4935,3 +4936,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &7673731533284895447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3983644534430538738}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cd2eaafe77b96043bd6abf57c127f66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HitSound: {fileID: -3466426954988467503}
+  sound: {fileID: 11400000, guid: 46f271e14fe41cf4cb7765b24c31d09d, type: 2}
