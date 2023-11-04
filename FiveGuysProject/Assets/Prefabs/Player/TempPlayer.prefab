@@ -258,6 +258,10 @@ MonoBehaviour:
   healthRegainSpeed: 4
   gunList: []
   defGun: {fileID: 11400000, guid: bb4956d9fec47224d896cb688ed78b87, type: 2}
+  SuperGuns:
+  - {fileID: 11400000, guid: 0e392beb2931e59459f022657853856c, type: 2}
+  - {fileID: 11400000, guid: e4908ee67accde7409ee8e0533207a2d, type: 2}
+  - {fileID: 11400000, guid: 198f514f120425948956efac948cbd51, type: 2}
   gunModel: {fileID: 7488616914648254189}
   bullet: {fileID: 3773670445560834378, guid: 11797fb46023f3445838bd4a651a02d3, type: 3}
   shootRate: 0.5
@@ -300,6 +304,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 7fc4a81bd08c3f3448342c80aaa5451d, type: 3}
   audStepsVol: 0.05
   isShoving: 0
+  canMove: 0
 --- !u!143 &9198960336271817168
 CharacterController:
   m_ObjectHideFlags: 0
