@@ -13,6 +13,7 @@ public class TriggeredSpawner : MonoBehaviour
     [SerializeField] float spawnRate; // seconds between each emnemy spawn
     [SerializeField] float spawnRange;
     [SerializeField] bool rats;
+    [SerializeField] bool gameEnding;
 
     bool isWaveActive = true;
     bool isTriggered = false;
@@ -26,6 +27,8 @@ public class TriggeredSpawner : MonoBehaviour
             if (switchObject.GetComponentInChildren<ButtonSwitch>().GetSwitchState())
             {
                 gameObject.GetComponent<SphereCollider>().enabled = true;
+                if (gameEnding)
+                    GameManager.instance.maxWaves = GameManager.instance.waves;
             }
         }
         // Spawns enemies only on the correct wave number

@@ -44,9 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 837412e7ffa89694d88323a7c720d7e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  posToSpawn: {fileID: 5939310707185476658}
-  enemy: {fileID: 7524273815717281356, guid: 3c7b00dfbacdc2e498023c0560113a8d, type: 3}
-  waveNum: 1
+  posToSpawn:
+  - {fileID: 5939310707185476658}
+  enemy:
+  - {fileID: 7524273815717281356, guid: 3c7b00dfbacdc2e498023c0560113a8d, type: 3}
+  waveStart: 0
   numOfEnemies: 5
   spawnRate: 2
+  spawnRange: 0
   rats: 1
+  continuousSpawning: 0

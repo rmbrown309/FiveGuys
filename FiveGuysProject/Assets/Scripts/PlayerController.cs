@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [SerializeField] int maxSprayAmmo;
     public int currSprayAmmo;
     [SerializeField] float sprayRegenSpeed;
+    [SerializeField] bool sprayWeaponActive;
 
     [Header("----- Shove Stats -----")]
     [SerializeField] float shoveCooldown;
@@ -58,9 +59,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [Range(0, 1)] [SerializeField] float audJumpVol;
     [SerializeField] AudioClip[] audSteps;
     [Range(0, 1)] [SerializeField] float audStepsVol;
-
-    // Activates rat spray
-    private bool sprayWeaponActive;
 
     private Vector3 playerVelocity;
     private bool groundedPlayer;
