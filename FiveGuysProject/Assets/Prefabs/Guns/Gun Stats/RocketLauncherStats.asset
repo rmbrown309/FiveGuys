@@ -16,7 +16,7 @@ MonoBehaviour:
   shootRate: 1
   shootDamage: 5
   shootTime: 1
-  ammoCur: 0
+  ammoCur: 2
   ammoMax: 3
   cost: 0
   gunName: Rocket Launcher

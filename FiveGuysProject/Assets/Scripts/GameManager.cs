@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
     public TMP_Text dmgPowerCoolDown;
     public Image dmgPowerImage;
     public Image playerHealthBar;
+    public GameObject collectable;
     [Header("-----Quest Text-----")]
     [SerializeField] GameObject quest;
     public TMP_Text questText;
@@ -289,7 +290,10 @@ public class GameManager : MonoBehaviour
         _MainWeaponbar.fillAmount = amount;
 
     }
-
+    public void enableCollectable(bool enable)
+    {
+        collectable.SetActive(enable);
+    }
     // Next two methids control the Giant Text for each new wave
     public void enableWaveUIText()
     {

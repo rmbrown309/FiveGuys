@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [Range(8, 30)] [SerializeField] float jumpHeight;
     [Range(-10, -40)] [SerializeField] float gravityValue;
     [SerializeField] float healthRegainSpeed;
-
+    [SerializeField] int collectedItems;
     [Header("----- Gun Stats -----")]
     [SerializeField] List<gunStats> gunList = new List<gunStats>(); // the amount of guns currently on the player.
     [SerializeField] gunStats defGun; // the amount of guns currently on the player.
@@ -882,6 +882,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         audJumpVol = newVolume;
         audSprayVol = newVolume;
         audStepsVol = newVolume/4;
+    }
+    public void SetCollectables(int item)
+    {
+        collectedItems += item;
+    }
+    public int GetCollectables()
+    {
+        return collectedItems;
     }
     //void selectGun()
     //{

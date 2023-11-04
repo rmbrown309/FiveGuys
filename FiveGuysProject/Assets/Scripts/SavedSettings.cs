@@ -7,4 +7,5 @@ public class SavedSettings : ScriptableObject
     [Range(0, 1)] public float MusicVolume;
     [Range(0, 1)] public float SoundEffectVoulume;
     [Range(0, 1)] public float Sensitivity;
+    public int collecteItems;
 }

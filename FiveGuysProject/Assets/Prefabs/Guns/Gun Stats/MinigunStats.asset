@@ -16,7 +16,7 @@ MonoBehaviour:
   shootRate: 0.03
   shootDamage: 0.8
   shootTime: 1
-  ammoCur: 0
+  ammoCur: 76
   ammoMax: 100
   cost: 0
   gunName: Minigun

@@ -31,7 +31,7 @@ public class GunPickups : MonoBehaviour
                 GameManager.instance.pickupLabel.SetActive(false);
             //pickedUp = true;
             WeaponOffAnimation(GameManager.instance.playerScript.GetGunID());
-            Debug.Log(GameManager.instance.playerScript.GetGunID());
+            //Debug.Log(GameManager.instance.playerScript.GetGunID());
             GameManager.instance.IncreasePlayerScore(-gun.cost);
             GameManager.instance.playerScript.setGunStats(gun);
             WeaponOnAnimation(GameManager.instance.playerScript.GetGunID());
