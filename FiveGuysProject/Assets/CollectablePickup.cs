@@ -9,11 +9,13 @@ public class CollectablePickup : MonoBehaviour
     [SerializeField] float duration;
     [SerializeField] float heightUp;
     [SerializeField] int itemsCollected;
+    float rand;
     Vector3 origPosition;
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        rand = Random.Range(0.0f, 1.0f);
         origPosition = transform.position;
     }
 
@@ -22,7 +24,7 @@ public class CollectablePickup : MonoBehaviour
     {
         transform.Rotate(Vector3.up * (rotationSpeed * Time.deltaTime));
 
-        float newY = Mathf.Sin((Time.time + 2) * duration) * heightUp + origPosition.y;
+        float newY = Mathf.Sin((Time.time + rand) * duration) * heightUp + origPosition.y;
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
     }
     private void OnTriggerEnter(Collider other)

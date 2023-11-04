@@ -17,10 +17,12 @@ public class PowerUp : MonoBehaviour
     [SerializeField] float rotationSpeed;
     [SerializeField] float duration;
     [SerializeField] float heightUp;
+    float rand;
     Vector3 origPosition;
     // Start is called before the first frame update
     void Start()
     {
+        rand = Random.Range(0.0f, 1.0f);
         origPosition = transform.position;
         if(randType)
             Destroy(gameObject, destroyTimer);
@@ -28,8 +30,8 @@ public class PowerUp : MonoBehaviour
     private void Update()
     {
         transform.Rotate(Vector3.up * (rotationSpeed * Time.deltaTime));
-
-        float newY = Mathf.Sin(Time.time * duration) * heightUp + origPosition.y;
+        
+        float newY = Mathf.Sin((Time.time + rand) * duration) * heightUp + origPosition.y;
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
     }
 
