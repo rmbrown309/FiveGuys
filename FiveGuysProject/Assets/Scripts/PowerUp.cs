@@ -77,8 +77,11 @@ public class PowerUp : MonoBehaviour
                     break;
                 case 5:
                     //Debug.Log("dmg");
-                    powerUp.EnemyHealthDown(newEnemyHealthDown);
+                    //powerUp.EnemyHealthDown(newEnemyHealthDown);
+                    //
+                    //Destroy(gameObject);
 
+                    powerUp.SuperWeapons();
                     Destroy(gameObject);
                     break;
                 case 6:

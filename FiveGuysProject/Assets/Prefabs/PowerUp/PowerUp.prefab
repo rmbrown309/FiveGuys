@@ -48,13 +48,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destroyTimer: 40
-  typePower: 5
+  typePower: 6
   newJumpMax: 2
   newSpeedMax: 10
   newEnemyHealthDown: 1
   newShootRate: 2
   newRegen: 2
-  randType: 1
+  randType: 0
   rotationSpeed: 40
   duration: 2.5
   heightUp: 0.3

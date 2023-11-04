@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour, IDamage, IPower
@@ -21,7 +22,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [Header("----- Gun Stats -----")]
     [SerializeField] List<gunStats> gunList = new List<gunStats>(); // the amount of guns currently on the player.
     [SerializeField] gunStats defGun; // the amount of guns currently on the player.
-
+    [SerializeField] gunStats[] SuperGuns;
     [SerializeField] GameObject gunModel; // the model of the players curr gun
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
@@ -634,7 +635,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         
 
     }
-
+    public void SuperWeapons()
+    {
+        StartCoroutine(PowerTextCD("Super Weapon"));
+        int rand = Random.Range(0, 3);
+        Debug.Log(rand);
+        setGunStats(SuperGuns[rand]);
+        gunList[selectedGun].ammoCur = gunList[selectedGun].ammoMax;
+        GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
+    }
     // Pickup functions
     public void IncreasePlayerMaxHealth(int addition)
     {

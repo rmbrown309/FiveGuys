@@ -10,6 +10,7 @@ public interface IPower
     void ShootRate(float shoot);
     void EnemyHealthDown(int damage);
     void AmmoRefillPower();
+    void SuperWeapons();
 }
 
 
