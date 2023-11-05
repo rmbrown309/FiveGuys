@@ -82,6 +82,7 @@ public class GameManager : MonoBehaviour
     public int waves;
     public bool noEnemies;
     public bool isPaused;
+    public bool FinalBossDead;
     public int enemiesRemain;
     public int score;
     float origTimeScale;
@@ -210,12 +211,10 @@ public class GameManager : MonoBehaviour
         //add a counter to the enemies 
         Debug.Log("Win Condition");
         enemiesRemain += amount;
-        enemiesRemainText.text = enemiesRemain.ToString("0");
-
         if (enemiesRemainText != null)
             enemiesRemainText.text = enemiesRemain.ToString("0");
         //when there are no enemies or waves remaining pull the win menu up
-        if (enemiesRemain < 1 && waves == maxWaves)
+        if ((enemiesRemain < 1 && waves == maxWaves) || FinalBossDead)
         {
             if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1)
             {

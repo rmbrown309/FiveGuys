@@ -90,6 +90,7 @@ public class CEOBoss : MonoBehaviour, IDamage, IPhysics
         agent.SetDestination(GameManager.instance.player.transform.position);
         if (HP <= 0)
         {
+            GameManager.instance.FinalBossDead = true;
             GameManager.instance.UpdateWinCondition(-1);
             anim.SetBool("Dead", true);
             agent.enabled = false;
