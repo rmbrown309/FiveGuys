@@ -8,6 +8,12 @@ public class ButtonSwitch : MonoBehaviour
     [Range(0,1)] [SerializeField] float ButtonUpHeight;
     [SerializeField] bool SwitchState;
     [Range(0, 1)][SerializeField] float buttonDownHeight;
+    [Header("-----Button Stats------")]
+    [SerializeField] int collectibleCost;
+    [SerializeField] GameObject[] collectibles;
+    [SerializeField] bool collectibleSpawning;
+    [SerializeField] bool gameEnding;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,13 +29,24 @@ public class ButtonSwitch : MonoBehaviour
         //    gameObject.transform.SetLocalPositionAndRotation(new Vector3(0, ButtonUpHeight), gameObject.transform.rotation);
         //
         //}
-       if (Input.GetButtonUp("Interact") && SwitchState == false && onTrigger)
-       {
-           SwitchState = !SwitchState;
-           Debug.Log("Switch In");
-           gameObject.transform.SetLocalPositionAndRotation(new Vector3(0, buttonDownHeight), gameObject.transform.rotation) ;
-       }
-       
+        if (Input.GetButtonUp("Interact") && SwitchState == false && onTrigger)
+        {
+            if ((collectibleCost == 0 || GameManager.instance.playerScript.GetCollectables() >= collectibleCost))
+            {
+                SwitchState = !SwitchState;
+                Debug.Log("Switch In");
+                gameObject.transform.SetLocalPositionAndRotation(new Vector3(0, buttonDownHeight), gameObject.transform.rotation);
+
+                GameManager.instance.playerScript.SetCollectables(-collectibleCost);
+                if (gameEnding)
+                    GameManager.instance.maxWaves = GameManager.instance.waves;
+                if (collectibleSpawning && collectibles != null)
+                {
+                    foreach (var item in collectibles)
+                        item.SetActive(true);
+                }
+            }
+        }
     }
     // Update is called once per frame
     public void OnTriggerEnter(Collider other)
