@@ -11,6 +11,7 @@ public class BeerBottleGrenade : MonoBehaviour
     [SerializeField] int speed;
     [SerializeField] int destroyTime;
     [SerializeField] GameObject explosion;
+    [SerializeField] GameObject beerPuddle;
     [SerializeField] int VelUp;
 
     Vector3 targetDir;
@@ -27,6 +28,10 @@ public class BeerBottleGrenade : MonoBehaviour
         {
             Instantiate(explosion, transform.position, explosion.transform.rotation);
         }
-        Destroy(gameObject);
+        if (beerPuddle != null) 
+        { 
+            Instantiate(beerPuddle, transform.position, beerPuddle.transform.rotation);
+        }
+        Destroy(gameObject, 1f);
     }
 }

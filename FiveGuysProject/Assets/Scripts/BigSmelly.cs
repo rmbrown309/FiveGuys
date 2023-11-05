@@ -93,6 +93,7 @@ public class BigSmelly : MonoBehaviour, IDamage, IPhysics
         if (HP <= 0)
         {
             anim.SetBool("Dead", true);
+            //Create the gas when enemy dies
             GameObject gasObject = Instantiate(noxiousGas.gameObject, headPos.position, Quaternion.identity);
             Destroy(gasObject, 10.0f);
             GameManager.instance.UpdateWinCondition(-1);

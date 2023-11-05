@@ -29,15 +29,10 @@ public class BeerBottleExplosion : MonoBehaviour
         {
             return;
         }
-
         IDamage canTakeDamage = other.GetComponent<IDamage>();
-
         canTakeDamage?.takeDamage(damage);
-
         IPhysics physicsable = other.GetComponent<IPhysics>();
-
         physicsable?.TakePhysics((other.transform.position - transform.position).normalized * (damage * 3));
-
         Destroy(gameObject);
     }
 }

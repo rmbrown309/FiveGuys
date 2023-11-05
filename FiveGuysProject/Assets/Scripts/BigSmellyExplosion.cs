@@ -16,6 +16,7 @@ public class BigSmellyExplosion : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            //Currently set to be removed after greatly damaging the player once.
             IDamage canTakeDamage = other.GetComponent<IDamage>();
             canTakeDamage?.takeDamage(damage);
             IPhysics physicsable = other.GetComponent<IPhysics>();
