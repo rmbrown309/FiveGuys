@@ -1,7 +1,6 @@
 using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class CEOBoss : MonoBehaviour, IDamage, IPhysics
