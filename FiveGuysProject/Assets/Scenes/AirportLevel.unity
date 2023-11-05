@@ -1971,6 +1971,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Spawner (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2908664668703409485, guid: e2a57b18f852ce9489be17ece1fef0f4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3717848877053022123, guid: e2a57b18f852ce9489be17ece1fef0f4, type: 3}
       propertyPath: spawnRate
       value: 4
@@ -9390,6 +9394,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rat Spawner
       objectReference: {fileID: 0}
+    - target: {fileID: 3299778027749887048, guid: 023279334e4b1b9489f44f7b0dd2b1f7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5939310707185476658, guid: 023279334e4b1b9489f44f7b0dd2b1f7, type: 3}
       propertyPath: m_LocalPosition.x
       value: -132.14697
@@ -13189,9 +13197,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4329847803612284773, guid: 089f673d38393c44d864c90346443dae, type: 3}
-      propertyPath: maxWaves
-      value: 99
+    - target: {fileID: 672573223488063711, guid: 089f673d38393c44d864c90346443dae, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5545230511604252582, guid: 089f673d38393c44d864c90346443dae, type: 3}
       propertyPath: m_Name
@@ -13500,7 +13508,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1088178090
 Transform:
   m_ObjectHideFlags: 0
@@ -13637,7 +13645,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1105648128
 Transform:
   m_ObjectHideFlags: 0
@@ -17325,6 +17333,10 @@ PrefabInstance:
     - target: {fileID: 3299778027749887048, guid: 023279334e4b1b9489f44f7b0dd2b1f7, type: 3}
       propertyPath: m_Name
       value: Rat Spawner (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3299778027749887048, guid: 023279334e4b1b9489f44f7b0dd2b1f7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5939310707185476658, guid: 023279334e4b1b9489f44f7b0dd2b1f7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -24960,7 +24972,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2042959925
 Transform:
   m_ObjectHideFlags: 0

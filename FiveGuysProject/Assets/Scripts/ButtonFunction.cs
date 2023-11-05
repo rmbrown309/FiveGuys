@@ -54,7 +54,7 @@ public class ButtonFunction : MonoBehaviour
 
     public void MainMenu()
     {
-        SceneManager.LoadScene(sceneBuildIndex: 0);
+        GameManager.instance.SetMainMenu();
     }
     public void NextLevel()
     {

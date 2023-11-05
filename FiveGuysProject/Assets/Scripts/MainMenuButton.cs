@@ -25,6 +25,7 @@ public class MainMenuButton : MonoBehaviour
     private void Start()
     {
         MusicVolumeSlider.value = SavedSettings.MusicVolume;
+        
         SoundEffectSlider.value = SavedSettings.SoundEffectVoulume;
         VolSlider.value = SavedSettings.masterVolume;
         SensSlider.value = SavedSettings.Sensitivity;
@@ -99,25 +100,38 @@ public class MainMenuButton : MonoBehaviour
     }
     public void ChangeMusicVolume(float value)
     {
- 
-        Audio = GameObject.FindGameObjectWithTag("AudioManager");
         SavedSettings.MusicVolume = value;
-        if (Audio != null)
+        if (SceneManager.GetActiveScene().buildIndex > 0)
         {
-            Audio.GetComponent<AudioManager>().SetMusicAudio(value / 2);
+            Audio = GameObject.FindGameObjectWithTag("AudioManager");
+            
+            if (Audio != null)
+            {
+                Audio.GetComponent<AudioManager>().SetMusicAudio(value / 2);
+            }
+        }
+        else
+        {
+            Audio.GetComponent<AudioSource>().volume = value;
         }
 
     }
     public void ChangeEffectsVolume(float value)
     {
-        Audio = GameObject.FindGameObjectWithTag("AudioManager");
-        PlayerAudio = GameObject.FindGameObjectWithTag("Player");
         SavedSettings.SoundEffectVoulume = value;
-        if (Audio != null)
+        if (SceneManager.GetActiveScene().buildIndex > 0)
         {
-            Audio.GetComponent<AudioManager>().SetEffectsAudio(value);
+            Audio = GameObject.FindGameObjectWithTag("AudioManager");
+            PlayerAudio = GameObject.FindGameObjectWithTag("Player");
+            
+            if (Audio != null)
+            {
+                Audio.GetComponent<AudioManager>().SetEffectsAudio(value);
 
+            }
+            PlayerAudio.GetComponent<PlayerController>().SetAudio(value);
         }
-        PlayerAudio.GetComponent<PlayerController>().SetAudio(value);
+        
     }
+    
 }

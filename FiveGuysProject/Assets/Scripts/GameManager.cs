@@ -4,6 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +21,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject winMenu;
     [SerializeField] GameObject loseMenu;
     [SerializeField] GameObject settingsMenu;
+    [SerializeField] GameObject nextLevelMenu;
+    [SerializeField] GameObject helpMenu;
+    [SerializeField] GameObject objectiveMenu;
+    [SerializeField] GameObject controlsMenu;
+
+    [SerializeField] TMP_Text objectiveText;
+    [SerializeField] string levelOneObjective;
+    [SerializeField] string levelTwoObjective;
+    [SerializeField] string levelThreeObjective;
+
     [Header("-----Information Box-----")]
     [SerializeField] GameObject healthActive;
 
@@ -39,7 +50,7 @@ public class GameManager : MonoBehaviour
     private int pSpeed;
     [Header("-----Main Weapon UI-----")]
     [SerializeField] TMP_Text ammoCurr;
-    [SerializeField] Image _MainWeaponbar; 
+    [SerializeField] Image _MainWeaponbar;
     [Header("-----Secondary Weapon UI-----")]
     public GameObject SprayAmmoParent;
     [SerializeField] Image SprayAmmoBar;
@@ -92,6 +103,7 @@ public class GameManager : MonoBehaviour
         playerSpawnPoint = GameObject.FindWithTag("Player Spawn Point");
         waves = 1;
         enableWaveUIText();
+        //maxWaves = 1;
     }
 
     // Update is called once per frame
@@ -100,16 +112,13 @@ public class GameManager : MonoBehaviour
         //Debug.Log(waves);
 
         //once esc is pressed and there arent any menus active pause the game
-        if(Input.GetButtonDown("Cancel") && activeMenu == null)
+        if (Input.GetButtonDown("Cancel") && activeMenu == null)
         {
             StatePaused();
             //make the active menu be the pause menu
             //activeMenu = pauseMenu;
             //activeMenu.SetActive(isPaused);
             setActive(pauseMenu);
-        }
-        if (Input.GetButtonDown("Tab")) { 
-            
         }
     }
     private void FadePowerups()
@@ -151,6 +160,12 @@ public class GameManager : MonoBehaviour
         activeMenu.SetActive(false);
         activeMenu = null;
     }
+    public void SetMainMenu()
+    {
+        isPaused = !isPaused;
+        Time.timeScale = origTimeScale;
+        SceneManager.LoadScene(sceneBuildIndex: 0);
+    }
     public void SetSettings()
     {
         activeMenu.SetActive(false);
@@ -161,30 +176,83 @@ public class GameManager : MonoBehaviour
         activeMenu.SetActive(false);
         setActive(pauseMenu);
     }
+    public void SetHelpMenu()
+    {
+        activeMenu.SetActive(false);
+        setActive(helpMenu);
+    }
+    public void SetObjectiveMenu()
+    {
+        switch (SceneManager.GetActiveScene().buildIndex)
+        {
+            case 1:
+                objectiveText.SetText(levelOneObjective);
+                break;
+            case 2:
+                objectiveText.SetText(levelTwoObjective);
+                break;
+            case 3:
+                objectiveText.SetText(levelThreeObjective);
+                break;
+        }
+        activeMenu.SetActive(false);
+        setActive(objectiveMenu);
+    }
+    public void SetControlsMenu()
+    {
 
+        activeMenu.SetActive(false);
+        setActive(controlsMenu);
+    }
+    public void SetText(TMP_Text text, string textToSet)
+    {
+        text.SetText(textToSet);
+    }
     public void UpdateWinCondition(int amount)
     {
         //add a counter to the enemies 
+        Debug.Log("Win Condition");
         enemiesRemain += amount;
-        if(enemiesRemainText != null)
+        enemiesRemainText.text = enemiesRemain.ToString("0");
+
+        if (enemiesRemainText != null)
             enemiesRemainText.text = enemiesRemain.ToString("0");
         //when there are no enemies or waves remaining pull the win menu up
-        if(enemiesRemain < 1 && waves == maxWaves)
+        if (enemiesRemain < 1 && waves == maxWaves)
         {
-            StartCoroutine(winGame());
+            if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1)
+            {
+                StartCoroutine(winGame());
+
+            }
+            else
+            {
+                StartCoroutine(NextLevel());
+
+            }
         }
-        
+
     }
     public IEnumerator winGame()
     {
+
         noEnemies = true;
 
         yield return new WaitForSeconds(3);
 
         StatePaused();
         setActive(winMenu);
-    }
 
+
+    }
+    public IEnumerator NextLevel()
+    {
+        noEnemies = true;
+
+        yield return new WaitForSeconds(3);
+        StatePaused();
+        setActive(nextLevelMenu);
+    }
     public void IncreasePlayerScore(int num)
     {
         score += num;
@@ -266,10 +334,10 @@ public class GameManager : MonoBehaviour
         float amount = (ammoVal / .5f) * 180f / 360;
         SprayAmmoBar.fillAmount = amount;
     }
-    public void updateShoveUI( float shoveCooldown)
+    public void updateShoveUI(float shoveCooldown)
     {
-        
-        slider.value = Mathf.Lerp(slider.minValue, slider.maxValue, fillTime );
+
+        slider.value = Mathf.Lerp(slider.minValue, slider.maxValue, fillTime);
         fillTime += 0.5f * Time.deltaTime;
     }
     public void ResetShoveUI()
@@ -285,9 +353,9 @@ public class GameManager : MonoBehaviour
     {
         ammoCurr.text = _curr.ToString("F0");
         float ammoVal = _curr / (_ammoMax * 1.0f);
-       //Debug.Log("ammo curr:" + _curr);
-       //Debug.Log("ammo max:" + _ammoMax);
-       //Debug.Log("ammo value:" + ammoVal);
+        //Debug.Log("ammo curr:" + _curr);
+        //Debug.Log("ammo max:" + _ammoMax);
+        //Debug.Log("ammo value:" + ammoVal);
         float amount = (ammoVal / .5f) * 180f / 360;
         _MainWeaponbar.fillAmount = amount;
 
