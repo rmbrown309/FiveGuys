@@ -58,8 +58,7 @@ public class ButtonFunction : MonoBehaviour
     }
     public void NextLevel()
     {
-        
-        Debug.Log(SceneManager.GetActiveScene().buildIndex);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+        GameManager.instance.NextLevel();
     }
 }

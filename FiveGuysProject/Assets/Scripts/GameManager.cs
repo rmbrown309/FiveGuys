@@ -219,41 +219,35 @@ public class GameManager : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1)
             {
-                StartCoroutine(winGame());
+                StartCoroutine(NextLevelMenu(winMenu));
 
             }
             else
             {
-                StartCoroutine(NextLevel());
+                
+                StartCoroutine(NextLevelMenu(nextLevelMenu));
 
             }
         }
 
     }
-    public IEnumerator winGame()
-    {
-
-        noEnemies = true;
-
-        yield return new WaitForSeconds(3);
-
-        StatePaused();
-        setActive(winMenu);
-
-
-    }
-    public IEnumerator NextLevel()
+    public IEnumerator NextLevelMenu(GameObject Menu)
     {
         noEnemies = true;
-
         yield return new WaitForSeconds(3);
         StatePaused();
-        setActive(nextLevelMenu);
+        setActive(Menu);
     }
     public void IncreasePlayerScore(int num)
     {
         score += num;
         scoreCount.text = score.ToString("0");
+    }
+    public void NextLevel()
+    {
+        Time.timeScale = origTimeScale;
+        Debug.Log(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public void IncreaseWaveCount(int num)
     {
