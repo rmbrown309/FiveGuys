@@ -34,8 +34,32 @@ public class ButtonFunction : MonoBehaviour
     {
         GameManager.instance.SetSettings();
     }
+    public void HelpMenu()
+    {
+        GameManager.instance.SetHelpMenu();
+    }
     public void SaveSettings()
     {
         GameManager.instance.SaveSettings();
+    }
+    public void ControlsMenu()
+    {
+        
+        GameManager.instance.SetControlsMenu();
+    }
+    public void ObjectivesMenu()
+    {
+        GameManager.instance.SetObjectiveMenu();
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(sceneBuildIndex: 0);
+    }
+    public void NextLevel()
+    {
+        
+        Debug.Log(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
