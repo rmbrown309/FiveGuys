@@ -2913,7 +2913,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8817074539082394171}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.99331033, z: -0, w: 0.115475565}
+  m_LocalRotation: {x: 0, y: 0.9933105, z: 0, w: 0.1154746}
   m_LocalPosition: {x: -29.396612, y: -0.0000038146973, z: -9.817581}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
@@ -2968,7 +2968,7 @@ MonoBehaviour:
   HP: 3
   targetFaceSpeed: 3
   viewAngle: 90
-  roamDist: 12
+  roamDist: 10
   roamPauseTime: 3
   despawnTime: 10
   pushBackResolve: 8

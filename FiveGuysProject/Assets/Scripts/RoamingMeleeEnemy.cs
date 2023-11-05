@@ -38,12 +38,10 @@ public class RoamingMeleeEnemy : MonoBehaviour, IDamage, IPhysics
     bool playerInRange;
     float angleToPlayer;
     bool destinationChosen;
-    Vector3 startingPos;
     float stoppingDistOrig;
 
     void Start()
     {
-        startingPos = transform.position;
         stoppingDistOrig = agent.stoppingDistance;
 
     }
@@ -133,7 +131,7 @@ public class RoamingMeleeEnemy : MonoBehaviour, IDamage, IPhysics
             agent.stoppingDistance = 0;
             yield return new WaitForSeconds(roamPauseTime);
             Vector3 randomPos = Random.insideUnitSphere * roamDist;
-            randomPos += startingPos;
+            randomPos += transform.position;
             NavMeshHit hit;
             NavMesh.SamplePosition(randomPos, out hit, roamDist, 1);
             agent.SetDestination(hit.position);
