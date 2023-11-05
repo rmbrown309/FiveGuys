@@ -11,6 +11,5 @@ public interface IPower
     void EnemyHealthDown(int damage);
     void AmmoRefillPower();
     void SuperWeapons();
+    void SpeedReduction(float speed);
 }
-
-

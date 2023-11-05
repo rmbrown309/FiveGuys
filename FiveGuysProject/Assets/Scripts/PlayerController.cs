@@ -557,6 +557,23 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         powerUpCorutine[1] = SpeedPowerCooldown();
         StartCoroutine(powerUpCorutine[1]);
     }
+    public void SpeedReduction(float speed)
+    {
+        if (powerUpCorutine[1] != null)
+        {
+            StopCoroutine(powerUpCorutine[1]);
+            StopCoroutine(PowerTextCD("Speed Reduced"));
+        }
+        playerSpeed = speed;
+        if (isSprinting)
+        {
+            playerSpeed = speed * sprintMod;
+        }
+
+        StartCoroutine(PowerTextCD("Speed Reduced"));
+        powerUpCorutine[1] = SpeedPowerCooldown();
+        StartCoroutine(powerUpCorutine[1]);
+    }
     public void Invulnerability()
     {
         if (powerUpCorutine[2] != null)

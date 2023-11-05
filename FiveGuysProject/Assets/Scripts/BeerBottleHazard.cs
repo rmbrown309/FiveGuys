@@ -7,20 +7,20 @@ public class BeerBottleHazard : MonoBehaviour
     [SerializeField] int slowSpeed;
     [SerializeField] ParticleSystem beerPuddle;
 
-    //void Start()
-    //{
-    //    StartCoroutine(DestroyPuddle());
-    //}
+    void Start()
+    {
+        StartCoroutine(DestroyPuddle());
+    }
 
-    //IEnumerator DestroyPuddle()
-    //{
-    //    //if (beerPuddle != null)
-    //    //{
-    //    //    Instantiate(beerPuddle, transform.position, beerPuddle.transform.rotation);
-    //    //}
-    //    yield return new WaitForSeconds(0.1f);
-    //    Destroy(gameObject);
-    //}
+    IEnumerator DestroyPuddle()
+    {
+        //if (beerPuddle != null)
+        //{
+        //    Instantiate(beerPuddle, transform.position, beerPuddle.transform.rotation);
+        //}
+        yield return new WaitForSeconds(0.1f);
+        Destroy(gameObject, 5f);
+    }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -29,7 +29,7 @@ public class BeerBottleHazard : MonoBehaviour
             return;
         }
         IPower powerUp = other.GetComponent<IPower>();
-        powerUp?.SpeedBoost(slowSpeed);
+        powerUp?.SpeedReduction(slowSpeed);
         Destroy(gameObject);
     }
 }
