@@ -13,6 +13,7 @@ public class CEOBoss : MonoBehaviour, IDamage, IPhysics
     [SerializeField] Transform headPos;
     [SerializeField] Animator anim;
     [SerializeField] Collider damageCol;
+    [SerializeField] GameObject shockwave;
 
     [Header("----- Enemy Stats -----")]
     [SerializeField] float HP;
@@ -20,12 +21,14 @@ public class CEOBoss : MonoBehaviour, IDamage, IPhysics
     [SerializeField] int viewAngle;
     [SerializeField] float despawnTime;
     [SerializeField] int pushBackResolve;
+    //[SerializeField] float invulnerableTime;
+    [SerializeField] float shockWaveTime;
 
     [Header("----- Melee Stats -----")]
     [SerializeField] float hitRate;
     [SerializeField] int hitAngle;
     [SerializeField] int meleeDamage;
-    [SerializeField] int meleeRange; //advised to keep the stoping and melee range short
+    [SerializeField] int meleeRange;
     [SerializeField] Collider meleeCol;
 
     bool isMeleeing;
@@ -34,6 +37,9 @@ public class CEOBoss : MonoBehaviour, IDamage, IPhysics
     bool playerInRange;
     float angleToPlayer;
     Vector3 spawnPos;
+    //private bool isInvulnerable;
+    private bool isUsingShockWave;
+    //private bool immortalModeDoneOnce = false;
 
     void Start()
     {
@@ -41,7 +47,6 @@ public class CEOBoss : MonoBehaviour, IDamage, IPhysics
     }
     void Update()
     {
-        //checks to see if enemy is alive
         if (agent.isActiveAndEnabled)
         {
             anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
@@ -56,10 +61,25 @@ public class CEOBoss : MonoBehaviour, IDamage, IPhysics
                 faceTarget();
             }
 
+            if (!isUsingShockWave && HP == 100 || HP == 75 || HP == 25)
+            {
+                StartCoroutine(ShockWaveTime());
+                GameObject shockwave2 = Instantiate(shockwave, transform.position, Quaternion.identity);
+                Destroy(shockwave2, 5f);
+            }
+
             if (angleToPlayer <= hitAngle && !isMeleeing && playerInRange && damageCol.enabled)
             {
+                StopCoroutine(ShockWaveTime());
                 StartCoroutine(melee());
             }
+
+            //if (!isInvulnerable && HP == 50)
+            //{
+            //    isInvulnerable = true;
+            //    StartCoroutine(InvulnerableMode());
+            //    HP = 125;
+            //}
 
             agent.Move((pushBack * 2) * Time.deltaTime);
         }
@@ -117,6 +137,23 @@ public class CEOBoss : MonoBehaviour, IDamage, IPhysics
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
         model.material.color = Color.white;
+    }
+    //IEnumerator InvulnerableMode()
+    //{
+    //    if (immortalModeDoneOnce == false && HP == 50)
+    //    {
+    //        immortalModeDoneOnce = true;
+    //        isInvulnerable = true;
+    //        anim.SetTrigger("Immunity");
+    //    }
+    //    yield return new WaitForSeconds(invulnerableTime);
+    //}
+    IEnumerator ShockWaveTime()
+    {
+        isUsingShockWave = true;
+        anim.SetTrigger("ShockWave");
+        yield return new WaitForSeconds(shockWaveTime);
+        isUsingShockWave = false;
     }
     void faceTarget()
     {
