@@ -38,16 +38,13 @@ public class GameManager : MonoBehaviour
     [SerializeField] TMP_Text scoreCount;
     [SerializeField] TMP_Text currentWaveCount;
     [SerializeField] TMP_Text pDamageUpCounter;
-    [SerializeField] TMP_Text pMaxHealthCounter;
-    [SerializeField] TMP_Text pRegenCounter;
-    [SerializeField] TMP_Text pSpeedCounter;
+    [SerializeField] GameObject pMaxHealthOverlay;
+    [SerializeField] GameObject pRegenOverlay;
+    [SerializeField] GameObject pSpeedOverlay;
 
     public GameObject waveUIText;
     public TMP_Text WaveUIText;
     private int pDamage;
-    private int pHealth;
-    private int pRegen;
-    private int pSpeed;
     [Header("-----Main Weapon UI-----")]
     [SerializeField] TMP_Text ammoCurr;
     [SerializeField] Image _MainWeaponbar;
@@ -275,18 +272,15 @@ public class GameManager : MonoBehaviour
     }
     public void IncreaseHealthPickUpCounter()
     {
-        pHealth++;
-        pMaxHealthCounter.text = pHealth.ToString("0");
+        pMaxHealthOverlay.SetActive(false);
     }
     public void IncreaseRegenPickUpCounter()
     {
-        pRegen++;
-        pRegenCounter.text = pRegen.ToString("0");
+        pRegenOverlay.SetActive(false);
     }
     public void IncreaseSpeedPickUpCounter()
     {
-        pSpeed++;
-        pSpeedCounter.text = pSpeed.ToString("0");
+        pSpeedOverlay.SetActive(false);
     }
     public void JumpPowerCoolDown(float coolDown)
     {
