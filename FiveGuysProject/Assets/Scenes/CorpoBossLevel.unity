@@ -2886,63 +2886,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1697748651}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &918857984
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1137695646256921515, guid: 7c0ed42aadef3384ba949fb2bfb825d6, type: 3}
-      propertyPath: m_Name
-      value: CEO Boss
-      objectReference: {fileID: 0}
-    - target: {fileID: 2081023249073442563, guid: 7c0ed42aadef3384ba949fb2bfb825d6, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -22.087582
-      objectReference: {fileID: 0}
-    - target: {fileID: 2081023249073442563, guid: 7c0ed42aadef3384ba949fb2bfb825d6, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.0000038146973
-      objectReference: {fileID: 0}
-    - target: {fileID: 2081023249073442563, guid: 7c0ed42aadef3384ba949fb2bfb825d6, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.95209265
-      objectReference: {fileID: 0}
-    - target: {fileID: 2081023249073442563, guid: 7c0ed42aadef3384ba949fb2bfb825d6, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2081023249073442563, guid: 7c0ed42aadef3384ba949fb2bfb825d6, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2081023249073442563, guid: 7c0ed42aadef3384ba949fb2bfb825d6, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2081023249073442563, guid: 7c0ed42aadef3384ba949fb2bfb825d6, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2081023249073442563, guid: 7c0ed42aadef3384ba949fb2bfb825d6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2081023249073442563, guid: 7c0ed42aadef3384ba949fb2bfb825d6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2081023249073442563, guid: 7c0ed42aadef3384ba949fb2bfb825d6, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7c0ed42aadef3384ba949fb2bfb825d6, type: 3}
 --- !u!1001 &968442337
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3045,6 +2988,63 @@ PrefabInstance:
       addedObject: {fileID: 1265803655}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e2a57b18f852ce9489be17ece1fef0f4, type: 3}
+--- !u!1001 &987967878
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4851787662098984154, guid: a40d5f818578aa244aa2295fb730f35b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -24.939777
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851787662098984154, guid: a40d5f818578aa244aa2295fb730f35b, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851787662098984154, guid: a40d5f818578aa244aa2295fb730f35b, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.14472389
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851787662098984154, guid: a40d5f818578aa244aa2295fb730f35b, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851787662098984154, guid: a40d5f818578aa244aa2295fb730f35b, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851787662098984154, guid: a40d5f818578aa244aa2295fb730f35b, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851787662098984154, guid: a40d5f818578aa244aa2295fb730f35b, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851787662098984154, guid: a40d5f818578aa244aa2295fb730f35b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851787662098984154, guid: a40d5f818578aa244aa2295fb730f35b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4851787662098984154, guid: a40d5f818578aa244aa2295fb730f35b, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7099670431000955708, guid: a40d5f818578aa244aa2295fb730f35b, type: 3}
+      propertyPath: m_Name
+      value: CEO Boss
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a40d5f818578aa244aa2295fb730f35b, type: 3}
 --- !u!1 &992935733
 GameObject:
   m_ObjectHideFlags: 0
@@ -15792,14 +15792,22 @@ MonoBehaviour:
   winMenu: {fileID: 672573223930845765}
   loseMenu: {fileID: 414648694070380956}
   settingsMenu: {fileID: 3527239814061760242}
+  nextLevelMenu: {fileID: 0}
+  helpMenu: {fileID: 0}
+  objectiveMenu: {fileID: 0}
+  controlsMenu: {fileID: 0}
+  objectiveText: {fileID: 0}
+  levelOneObjective: 
+  levelTwoObjective: 
+  levelThreeObjective: 
   healthActive: {fileID: 3729133006492731097}
   enemiesRemainText: {fileID: 0}
   scoreCount: {fileID: 2869905673014111239}
   currentWaveCount: {fileID: 0}
   pDamageUpCounter: {fileID: 7937428349477988776}
-  pMaxHealthCounter: {fileID: 6457664400864789105}
-  pRegenCounter: {fileID: 3183652947616784693}
-  pSpeedCounter: {fileID: 1131734286494485558}
+  pMaxHealthOverlay: {fileID: 0}
+  pRegenOverlay: {fileID: 0}
+  pSpeedOverlay: {fileID: 0}
   waveUIText: {fileID: 0}
   WaveUIText: {fileID: 0}
   ammoCurr: {fileID: 6501455694815557504}
@@ -15833,6 +15841,7 @@ MonoBehaviour:
   waves: 0
   noEnemies: 0
   isPaused: 0
+  FinalBossDead: 0
   enemiesRemain: 0
   score: 0
   shoveBar: {fileID: 0}
@@ -25271,10 +25280,10 @@ SceneRoots:
   - {fileID: 1008892704}
   - {fileID: 1125785531}
   - {fileID: 968442337}
-  - {fileID: 918857984}
   - {fileID: 992935735}
   - {fileID: 1904700046}
   - {fileID: 2079312969}
   - {fileID: 678556100}
   - {fileID: 1557559652}
   - {fileID: 1151187911}
+  - {fileID: 987967878}

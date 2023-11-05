@@ -63,6 +63,7 @@ public class CEOBoss : MonoBehaviour, IDamage, IPhysics
 
             if (!isUsingShockWave && HP == 100 || HP == 75 || HP == 25)
             {
+                HP--;
                 StartCoroutine(ShockWaveTime());
                 GameObject shockwave2 = Instantiate(shockwave, transform.position, Quaternion.identity);
                 Destroy(shockwave2, 5f);
