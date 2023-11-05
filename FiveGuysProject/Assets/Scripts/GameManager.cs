@@ -166,7 +166,8 @@ public class GameManager : MonoBehaviour
     {
         //add a counter to the enemies 
         enemiesRemain += amount;
-        enemiesRemainText.text = enemiesRemain.ToString("0");
+        if(enemiesRemainText != null)
+            enemiesRemainText.text = enemiesRemain.ToString("0");
         //when there are no enemies or waves remaining pull the win menu up
         if(enemiesRemain < 1 && waves == maxWaves)
         {
@@ -194,7 +195,8 @@ public class GameManager : MonoBehaviour
         if (num <= maxWaves)
         {
             waves = num;
-            currentWaveCount.text = waves.ToString("0");
+            if(currentWaveCount != null)
+                currentWaveCount.text = waves.ToString("0");
             enableWaveUIText();
         }
     }
