@@ -297,7 +297,8 @@ public class GameManager : MonoBehaviour
     // Next two methids control the Giant Text for each new wave
     public void enableWaveUIText()
     {
-        StartCoroutine(WaveUISpawnRoutine());
+        if(waveUIText != null)
+            StartCoroutine(WaveUISpawnRoutine());
     }
 
     IEnumerator WaveUISpawnRoutine()
