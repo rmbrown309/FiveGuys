@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject pRegenOverlay;
     [SerializeField] GameObject pSpeedOverlay;
 
+
     public GameObject waveUIText;
     public TMP_Text WaveUIText;
     private int pDamage;
@@ -54,6 +55,10 @@ public class GameManager : MonoBehaviour
     [Header("-----PickUps UI-----")]
     public GameObject pickupLabel;
     public TMP_Text pickupText;
+    [SerializeField] TMP_Text currentCollectible;
+    [SerializeField] TMP_Text maxCollectible;
+    [SerializeField] int maxCollectables;
+    [SerializeField] int collected;
     [Header("-----PowerUps UI-----")]
     public GameObject powerJumpActive;
     public GameObject powerSpeedActive;
@@ -93,6 +98,7 @@ public class GameManager : MonoBehaviour
     {
         //initiallize player variables;
         FadePowerups();
+        maxCollectible.SetText(maxCollectables.ToString("0"));
         healthActive.SetActive(true);
         origTimeScale = Time.timeScale;
         instance = this;
@@ -198,13 +204,17 @@ public class GameManager : MonoBehaviour
     }
     public void SetControlsMenu()
     {
-
         activeMenu.SetActive(false);
         setActive(controlsMenu);
     }
     public void SetText(TMP_Text text, string textToSet)
     {
         text.SetText(textToSet);
+    }
+    public void AddCurrentCollectables()
+    {
+        collected++;
+        currentCollectible.SetText(collected.ToString("0"));
     }
     public void UpdateWinCondition(int amount)
     {

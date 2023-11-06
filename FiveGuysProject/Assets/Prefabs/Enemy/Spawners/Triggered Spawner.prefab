@@ -93,10 +93,6 @@ MonoBehaviour:
   spawnRate: 1
   spawnRange: 1
   rats: 0
-  collectibleCost: 5
-  collectibles: []
-  collectibleSpawning: 0
-  gameEnding: 1
 --- !u!33 &4067305265957033002
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -125,7 +121,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 60a672f623fa1f047a408a7d08aa5fa0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

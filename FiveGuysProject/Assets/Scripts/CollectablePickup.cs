@@ -29,11 +29,17 @@ public class CollectablePickup : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        player.GetComponent<PlayerController>().SetCollectables(itemsCollected);
-        if (player.GetComponent<PlayerController>().GetCollectables() > 0)
+        if (other.CompareTag("Player"))
         {
-            GameManager.instance.enableCollectable(true);
+            GameManager.instance.pickupText.text = "[E]";
+            GameManager.instance.pickupLabel.SetActive(true);
+            player.GetComponent<PlayerController>().SetCollectables(itemsCollected);
+            if (player.GetComponent<PlayerController>().GetCollectables() > 0)
+            {
+                GameManager.instance.enableCollectable(true);
+            }
+            GameManager.instance.AddCurrentCollectables();
+            Destroy(gameObject);
         }
-        Destroy(gameObject);
     }
 }

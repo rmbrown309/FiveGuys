@@ -31,6 +31,7 @@ public class ButtonSwitch : MonoBehaviour
         //}
         if (Input.GetButtonUp("Interact") && SwitchState == false && onTrigger)
         {
+
             if ((collectibleCost == 0 || GameManager.instance.playerScript.GetCollectables() >= collectibleCost))
             {
                 SwitchState = !SwitchState;
@@ -53,6 +54,8 @@ public class ButtonSwitch : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            GameManager.instance.pickupText.text = "[E]";
+            GameManager.instance.pickupLabel.SetActive(true);
             onTrigger = true;
             Debug.Log("Switch In");
         }
@@ -62,6 +65,7 @@ public class ButtonSwitch : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             onTrigger = false;
+            GameManager.instance.pickupLabel.SetActive(false);
             Debug.Log("Switch In");
         }
     }
