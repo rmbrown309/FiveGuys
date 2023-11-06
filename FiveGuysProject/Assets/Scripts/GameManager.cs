@@ -97,6 +97,7 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         //initiallize player variables;
+        collected = 0;
         FadePowerups();
         maxCollectible.SetText(maxCollectables.ToString("0"));
         healthActive.SetActive(true);

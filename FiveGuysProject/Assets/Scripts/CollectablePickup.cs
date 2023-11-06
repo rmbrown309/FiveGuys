@@ -31,8 +31,6 @@ public class CollectablePickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.instance.pickupText.text = "[E]";
-            GameManager.instance.pickupLabel.SetActive(true);
             player.GetComponent<PlayerController>().SetCollectables(itemsCollected);
             if (player.GetComponent<PlayerController>().GetCollectables() > 0)
             {

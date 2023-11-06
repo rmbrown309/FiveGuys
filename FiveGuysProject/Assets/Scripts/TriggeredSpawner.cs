@@ -79,7 +79,7 @@ public class TriggeredSpawner : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.instance.AddCurrentCollectables();
+            
             isTriggered = true;
         }
     }
