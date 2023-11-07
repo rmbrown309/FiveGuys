@@ -33,14 +33,15 @@ public class WaveSpawner : MonoBehaviour
         // allows next wave to begin
         if (spawnStopped && GameManager.instance.enemiesRemain == 0)
         {
-            if(GameManager.instance.waves != GameManager.instance.maxWaves)
-                GameManager.instance.IncreaseWaveCount(waveStart + 1);
-
             if(continuousSpawning)
             {
                 waveStart++;
+                numOfEnemies++;
                 isWaveActive = true;
             }
+
+            if (GameManager.instance.waves != GameManager.instance.maxWaves)
+                GameManager.instance.IncreaseWaveCount(waveStart + 1);
 
             spawnStopped = false; // stops waves from being reset to a previous value
         }

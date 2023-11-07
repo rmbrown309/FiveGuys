@@ -7,11 +7,12 @@ public class Pickups : MonoBehaviour
 {
     enum PickupType
     {
-        HealthUp, SpeedUp, QuickRegen, DamageUp, AmmoRefill, SprayWeapon
+        HealthUp, SpeedUp, QuickRegen, DamageUp, AmmoRefill, SprayWeapon, Debris
     }
 
     [SerializeField] PickupType pickupType;
     [SerializeField] int pickupCost;
+    [SerializeField] GameObject linkedDebris;
 
     [Header("----- Audio Stuff -----")]
     [SerializeField] AudioSource aud;
@@ -81,6 +82,16 @@ public class Pickups : MonoBehaviour
                     pickedUp = true;
 
                     break;
+                case PickupType.Debris:
+                    gameObject.GetComponent<Renderer>().enabled = false;
+                    gameObject.GetComponent<Collider>().enabled = false;
+                    if(linkedDebris != null)
+                        linkedDebris.SetActive(false);
+
+                    // remove label to show that pickup was bought
+                    if (GameManager.instance.pickupLabel != null)
+                        GameManager.instance.pickupLabel.SetActive(false);
+                    break;
             }
 
             aud.PlayOneShot(audCash, audCashVol);
@@ -110,6 +121,9 @@ public class Pickups : MonoBehaviour
                 break;
             case PickupType.SprayWeapon:
                 GameManager.instance.pickupText.text = "[E] Acquire Rat Killer: " + pickupCost + " Points";
+                break;
+            case PickupType.Debris:
+                GameManager.instance.pickupText.text = "[E] Clear Blocked Path: " + pickupCost + " Points";
                 break;
         }
         if (other.CompareTag("Player") && !pickedUp)
