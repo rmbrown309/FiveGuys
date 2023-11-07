@@ -15,6 +15,7 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
     [Range(0, 1)][SerializeField] float powerSpawnPercentage;
     [SerializeField] Animator anim;
     [SerializeField] Collider damageCol;
+    [SerializeField] GameObject ragdoll;
 
     [Header("----- Enemy Stats -----")]
     [SerializeField] float HP;
@@ -22,13 +23,30 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] int viewAngle;
     [SerializeField] float despawnTime;
     [SerializeField] int pushBackResolve;
+    //dmg bounce
+    [SerializeField] float squishOnY; 
+    [SerializeField] float timeToReturnY;
+    [SerializeField] AnimationCurve curve;
+
+    //[SerializeField] float squishSpeed;
 
     [Header("----- Gun Stats -----")]
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
     [SerializeField] int shootAngle;
 
+    [Header("----- Audio Stuff -----")]
+    [SerializeField] AudioSource aud;
+    [Range(0, 1)] [SerializeField] float hitVol;
+    [SerializeField] AudioClip[] hitAud;
+    [Range(0, 1)] [SerializeField] float idleChatterVol;
+    [SerializeField] AudioClip[] idleChatter;
+    [Range(0, 1)] [SerializeField] float idleChatterPlayPercentage;
+    [SerializeField] float idleCoolDown;
+
+
     bool isShooting;
+    bool damaged;
     private Vector3 pushBack;
     Vector3 playerDir;
     bool playerInRange;
@@ -54,6 +72,10 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
             angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
 
             agent.SetDestination(GameManager.instance.player.transform.position);
+            if (Random.value < idleChatterPlayPercentage)
+            {
+                StartCoroutine(RandomIdleChat());
+            }
 
             if (agent.remainingDistance < agent.stoppingDistance)
                 faceTarget();
@@ -62,9 +84,12 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
                 StartCoroutine(shoot());
 
             agent.Move((pushBack) * Time.deltaTime);
+
         }
-            
-        
+
+    
+
+
     }
 
     //bool canSeePlayer()
@@ -117,6 +142,7 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
     //triggers the flash for when the enemy takes damage and flashs to let the player know. 
     public void takeDamage(float amount)
     {
+
         HP -= amount;
         agent.SetDestination(GameManager.instance.player.transform.position);
         if (agent.remainingDistance < agent.stoppingDistance) 
@@ -126,11 +152,13 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
             faceTarget();
         }
 
+        StartCoroutine(Squish());
         StartCoroutine(flashDamage());
 
         if (HP <= 0)
         {
             //it's dead; Needs trigger from game manager to indicate to gameManager that it died and flash win screen.
+            gameObject.transform.localScale += new Vector3(0, squishOnY, 0);
             anim.SetBool("Dead", true);
             GameManager.instance.UpdateWinCondition(-1);
             if (Random.value < powerSpawnPercentage)
@@ -138,16 +166,21 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
                 spawnPos = new Vector3(transform.position.x, 1, transform.position.z);
                 GameObject PowerSpawn = Instantiate(powerSpawn, spawnPos , Quaternion.identity);
             }
-            //Destroy(gameObject);
             agent.enabled = false;
             damageCol.enabled = false;
             StopAllCoroutines();
             StartCoroutine(Despawn());
+
+
             GameManager.instance.IncreasePlayerScore(1);
         }
         else
         {
+            damaged = true;
+
             anim.SetTrigger("Damage");
+            damaged = false;
+
         }
     }
 
@@ -160,6 +193,11 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
     //Destroys the enemy after a specified amount of time
     IEnumerator Despawn()
     {
+        //Vector3 posAtDeath = new Vector3(transform.position.x, 0, transform.position.z);
+        //Quaternion rotAtDeath = transform.rotation;
+        //Destroy(gameObject);
+        //GameObject corpse = Instantiate(ragdoll, posAtDeath, rotAtDeath);
+     
         yield return new WaitForSeconds(despawnTime);
         Destroy(gameObject);
     }
@@ -172,6 +210,58 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
         model.material.color = Color.white;
 
     }
+
+    IEnumerator Squish()
+    {
+        Vector3 origScale = new Vector3(gameObject.transform.localScale.x, 0.5f, gameObject.transform.localScale.z);
+        Vector3 toSquish = new Vector3(gameObject.transform.localScale.x, gameObject.transform.localScale.y - squishOnY, gameObject.transform.localScale.z);
+
+        //setting the scale using lerp?
+        //gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, toSquish, 0.5f);
+        //yield return new WaitForSeconds(timeToReturnY);
+        //gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, origScale, 1);
+
+        float timeElapsed = 0;
+
+        while(timeElapsed < timeToReturnY)
+        {
+            float t = timeElapsed / timeToReturnY;
+            gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, toSquish, curve.Evaluate(t));
+            timeElapsed += Time.deltaTime;
+
+        }
+        yield return new WaitForSeconds(0.25f);
+
+        timeElapsed = 0;
+        while (timeElapsed < timeToReturnY)
+        {
+            float t = timeElapsed / timeToReturnY;
+            gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, origScale, curve.Evaluate(t));
+            timeElapsed += Time.deltaTime;
+
+        }
+        yield return new WaitForSeconds(0.1f);
+
+        //setting the scale outright
+        //gameObject.transform.localScale += new Vector3(0, squishOnY, 0);
+        //yield return new WaitForSeconds(timeToReturnY);
+        //gameObject.transform.localScale += new Vector3(0, -squishOnY, 0);
+
+    }
+
+    IEnumerator RandomIdleChat()
+    {
+        if (Random.value < idleChatterPlayPercentage)
+        {
+            float randPitch = Random.Range(0.95f, 1.05f);
+
+            aud.pitch = randPitch;
+            aud.PlayOneShot(idleChatter[Random.Range(0, idleChatter.Length)], idleChatterVol);
+        }
+        yield return new WaitForSeconds(idleCoolDown);
+
+    }
+
     void faceTarget()
     {
         Quaternion rot = Quaternion.LookRotation(playerDir);

@@ -12,6 +12,12 @@ public class RatPatrolAI : MonoBehaviour, ISpray
 
     [SerializeField] int damage;
 
+    [Header("----- Audio Stuff -----")]
+    [SerializeField] AudioSource aud;
+    [Range(0, 1)] [SerializeField] float idleChatterVol;
+    [SerializeField] AudioClip[] idleChatter;
+    [Range(0, 1)] [SerializeField] float idleChatterPlayPercentage;
+
     void Start()
     {
         

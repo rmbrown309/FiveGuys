@@ -30,6 +30,13 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] int meleeRange; //advised to keep the stoping and melee range short
     [SerializeField] Collider meleeCol;
 
+    [Header("----- Audio Stuff -----")]
+    [SerializeField] AudioSource aud;
+    [Range(0, 1)] [SerializeField] float idleChatterVol;
+    [SerializeField] AudioClip[] idleChatter;
+    [Range(0, 1)] [SerializeField] float idleChatterPlayPercentage;
+    [SerializeField] float idleCoolDown;
+
     bool isMeleeing;
     private Vector3 pushBack;
     Vector3 playerDir;
@@ -54,6 +61,11 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage, IPhysics
             angelToPlayer = Vector3.Angle(playerDir, transform.forward);
 
             agent.SetDestination(GameManager.instance.player.transform.position);
+
+            if (Random.value < idleChatterPlayPercentage)
+            {
+                StartCoroutine(RandomIdleChat());
+            }
 
             if (agent.remainingDistance <= agent.stoppingDistance)
                 faceTarget();
@@ -143,6 +155,19 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage, IPhysics
         model.material.color = Color.red;
         yield return new WaitForSeconds(0.1f);
         model.material.color = Color.white;
+    }
+
+    IEnumerator RandomIdleChat()
+    {
+        if (Random.value < idleChatterPlayPercentage)
+        {
+            float randPitch = Random.Range(0.95f, 1.05f);
+
+            aud.pitch = randPitch;
+            aud.PlayOneShot(idleChatter[Random.Range(0, idleChatter.Length)], idleChatterVol);
+        }
+        yield return new WaitForSeconds(idleCoolDown);
+
     }
 
     void faceTarget()

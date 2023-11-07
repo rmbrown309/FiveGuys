@@ -30,12 +30,21 @@ public class BigSmelly : MonoBehaviour, IDamage, IPhysics
     [SerializeField] float shootRate;
     [SerializeField] int shootAngle;
 
+    [Header("----- Audio Stuff -----")]
+    [SerializeField] AudioSource aud;
+    [Range(0, 1)] [SerializeField] float idleChatterVol;
+    [SerializeField] AudioClip[] idleChatter;
+    [Range(0, 1)] [SerializeField] float idleChatterPlayPercentage;
+    [SerializeField] float idleCoolDown;
+
     bool isShooting;
     private Vector3 pushBack;
     Vector3 playerDir;
     bool playerInRange;
     float angleToPlayer;
     Vector3 spawnPos;
+
+
 
     void Start()
     {
@@ -52,6 +61,11 @@ public class BigSmelly : MonoBehaviour, IDamage, IPhysics
             angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
 
             agent.SetDestination(GameManager.instance.player.transform.position);
+
+            if (Random.value < idleChatterPlayPercentage)
+            {
+                StartCoroutine(RandomIdleChat());
+            }
 
             if (agent.remainingDistance <= agent.stoppingDistance)
             {
@@ -128,6 +142,20 @@ public class BigSmelly : MonoBehaviour, IDamage, IPhysics
         yield return new WaitForSeconds(0.1f);
         model.material.color = Color.white;
     }
+
+    IEnumerator RandomIdleChat()
+    {
+        if (Random.value < idleChatterPlayPercentage)
+        {
+            float randPitch = Random.Range(0.95f, 1.05f);
+
+            aud.pitch = randPitch;
+            aud.PlayOneShot(idleChatter[Random.Range(0, idleChatter.Length)], idleChatterVol);
+        }
+        yield return new WaitForSeconds(idleCoolDown);
+
+    }
+
     void faceTarget()
     {
         Quaternion rot = Quaternion.LookRotation(playerDir);

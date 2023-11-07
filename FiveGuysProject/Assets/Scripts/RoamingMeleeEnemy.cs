@@ -32,6 +32,14 @@ public class RoamingMeleeEnemy : MonoBehaviour, IDamage, IPhysics
     [SerializeField] int shootAngle;
     [SerializeField] Collider meleeCol;
 
+    [Header("----- Audio Stuff -----")]
+    [SerializeField] AudioSource aud;
+    [Range(0, 1)] [SerializeField] float idleChatterVol;
+    [SerializeField] AudioClip[] idleChatter;
+    [Range(0, 1)] [SerializeField] float idleChatterPlayPercentage;
+    [SerializeField] float idleCoolDown;
+
+
     bool isMeleeing;
     private Vector3 pushBack;
     Vector3 playerDir;
@@ -54,28 +62,16 @@ public class RoamingMeleeEnemy : MonoBehaviour, IDamage, IPhysics
             if (playerInRange && !canSeePlayer())
             {
                 StartCoroutine(roam());
+
             }
             else if (!playerInRange)
             {
                 StartCoroutine(roam());
+
             }
 
-            //anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
 
-            //pushBack = Vector3.Lerp(pushBack, Vector3.zero, Time.deltaTime * pushBackResolve);
 
-            //playerDir = GameManager.instance.player.transform.position - headPos.position;
-            //angleToPlayer = Vector3.Angle(playerDir, transform.forward);
-
-            //agent.SetDestination(GameManager.instance.player.transform.position);
-
-            //if (agent.remainingDistance <= agent.stoppingDistance)
-            //    faceTarget();
-
-            //if (angleToPlayer <= hitAngle && !isMeleeing && playerInRange && damageCol.enabled)
-            //    StartCoroutine(melee());
-
-            //agent.Move((pushBack * 2) * Time.deltaTime);
         }
     }
     bool canSeePlayer()
@@ -125,6 +121,10 @@ public class RoamingMeleeEnemy : MonoBehaviour, IDamage, IPhysics
 
     IEnumerator roam()
     {
+        if (Random.value < idleChatterPlayPercentage)
+        {
+            StartCoroutine(RandomIdleChat());
+        }
         if (agent.remainingDistance < 0.05f && !destinationChosen)
         {
             destinationChosen = true;
@@ -173,7 +173,7 @@ public class RoamingMeleeEnemy : MonoBehaviour, IDamage, IPhysics
             //is dead
             GameManager.instance.UpdateWinCondition(-1);
             anim.SetBool("Dead", true);
-            if (Random.value < powerSpawnPercentage)
+            if (Random.value < idleChatterPlayPercentage)
             {
                 GameObject PowerSpawn = Instantiate(powerSpawn, shootPos.position, Quaternion.identity);
             }
@@ -230,4 +230,18 @@ public class RoamingMeleeEnemy : MonoBehaviour, IDamage, IPhysics
             playerInRange = false;
         }
     }
+
+    IEnumerator RandomIdleChat()
+    {
+        if (Random.value < idleChatterPlayPercentage)
+        {
+            float randPitch = Random.Range(0.95f, 1.05f);
+
+            aud.pitch = randPitch;
+            aud.PlayOneShot(idleChatter[Random.Range(0, idleChatter.Length)], idleChatterVol);
+        }
+        yield return new WaitForSeconds(idleCoolDown);
+
+    }
+
 }
