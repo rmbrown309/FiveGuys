@@ -8,6 +8,7 @@ public class HudAnimate : MonoBehaviour
 {
     private Animator mAnimator;
     [SerializeField] GameObject mainWeapon;
+    [SerializeField] GameObject jumpPower;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,7 @@ public class HudAnimate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         if (mAnimator != null)
         {
             if (Input.GetButtonDown("Tab"))
@@ -30,6 +32,38 @@ public class HudAnimate : MonoBehaviour
             if (Input.GetButtonUp("Tab"))
             {
                 mAnimator.SetBool("isInformed", false);
+            }
+            if (GameManager.instance.jumpPower)
+            {
+                mAnimator.SetBool("isJumpOn", true);
+            }
+            else
+            {
+                mAnimator.SetBool("isJumpOn", false);
+            }
+            if (GameManager.instance.speedPower)
+            {
+                mAnimator.SetBool("isSpeedOn", true);
+            }
+            else
+            {
+               mAnimator.SetBool("isSpeedOn", false);
+            }
+            if (GameManager.instance.invulnerablePower)
+            {
+                mAnimator.SetBool("isInvulPowerOn", true);
+            }
+            else
+            {
+                mAnimator.SetBool("isInvulPowerOn", false);
+            }
+            if (GameManager.instance.fireSpeedPower)
+            {
+                mAnimator.SetBool("isFireRatePowerOn", true);
+            }
+            else
+            {
+                mAnimator.SetBool("isFireRatePowerOn", false);
             }
         }
     }

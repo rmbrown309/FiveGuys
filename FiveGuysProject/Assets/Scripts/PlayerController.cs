@@ -384,6 +384,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             CD--;
             if (CD <= 1)
             {
+                GameManager.instance.jumpPower = false;
                 GameManager.instance.jumpPowerCoolDown.CrossFadeAlpha(0, 1, false);
                 GameManager.instance.jumpPowerImage.CrossFadeAlpha(0, 1, false);
             }
@@ -391,7 +392,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             //if the player got damaged while regen, exit regen state
         }
 
-        GameManager.instance.powerJumpActive.SetActive(false);
+       // GameManager.instance.powerJumpActive.SetActive(false);
         jumpMax = origJump;
     }
     IEnumerator SpeedPowerCooldown()
@@ -409,6 +410,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             CD--;
             if (CD <= 1)
             {
+                GameManager.instance.speedPower = false;
                 GameManager.instance.speedPowerCoolDown.CrossFadeAlpha(0, 1, false);
                 GameManager.instance.speedPowerImage.CrossFadeAlpha(0, 1, false);
             }
@@ -417,7 +419,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             //if the player got damaged while regen, exit regen state
         }
 
-        GameManager.instance.powerSpeedActive.SetActive(false);
+       // GameManager.instance.powerSpeedActive.SetActive(false);
 
         playerSpeed = OrigSpeed;
         if (isSprinting)
@@ -441,6 +443,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             CD--;
             if (CD <= 1)
             {
+                GameManager.instance.invulnerablePower = false;
                 GameManager.instance.healthPowerCoolDown.CrossFadeAlpha(0, 1, false);
                 GameManager.instance.healthPowerImage.CrossFadeAlpha(0, 1, false);
             }
@@ -448,7 +451,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             //if the player got damaged while regen, exit regen state
         }
 
-        GameManager.instance.powerHealthActive.SetActive(false);
+        //GameManager.instance.powerHealthActive.SetActive(false);
         isInvulnerable = false;
     }
     IEnumerator ShootRatePowerCooldown()
@@ -465,6 +468,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             CD--;
             if (CD <= 1)
             {
+                GameManager.instance.fireSpeedPower = false;
                 GameManager.instance.shootPowerCoolDown.CrossFadeAlpha(0, 1, false);
                 GameManager.instance.shootPowerImage.CrossFadeAlpha(0, 1, false);
             }
@@ -472,7 +476,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             //if the player got damaged while regen, exit regen state
         }
 
-        GameManager.instance.powerShootActive.SetActive(false);
+       //GameManager.instance.powerShootActive.SetActive(false);
         shootRate = gunList[selectedGun].shootRate;
     }
     IEnumerator EnemyHpPowerCooldown()
@@ -522,12 +526,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     IEnumerator PowerTextCD(string typeCD)
     {
         GameManager.instance.SetPowerText(typeCD);
+        GameManager.instance.powerText = true;
         GameManager.instance.PowerText.SetActive(true);
-        Debug.Log(true);
+        //Debug.Log(true);
         yield return new WaitForSeconds(2);
-        Debug.Log(typeCD);
+        //Debug.Log(typeCD);
+
+        //GameManager.instance.powerText = false;
         GameManager.instance.PowerText.SetActive(false);
-        Debug.Log(false);
+        //Debug.Log(false);
     }
     public void JumpPower(int jumps)
     {
@@ -536,6 +543,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             StopCoroutine(powerUpCorutine[0]);
             StopCoroutine(PowerTextCD("Double Jump"));
         }
+        GameManager.instance.jumpPower = true;
         jumpMax = jumps;
         StartCoroutine(PowerTextCD("Double Jump"));
         powerUpCorutine[0] = JumpPowerCooldown();
@@ -553,7 +561,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         {
             playerSpeed = speed * sprintMod;
         }
-
+        GameManager.instance.speedPower = true;
         StartCoroutine(PowerTextCD("Speed Boost"));
         powerUpCorutine[1] = SpeedPowerCooldown();
         StartCoroutine(powerUpCorutine[1]);
@@ -583,6 +591,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             StopCoroutine(PowerTextCD("Invulnerable"));
         }
         isInvulnerable = true;
+        GameManager.instance.invulnerablePower = true;
         StartCoroutine(PowerTextCD("Invulnerable"));
         powerUpCorutine[2] = InvulnerableCooldown();
         StartCoroutine(powerUpCorutine[2]);
@@ -594,6 +603,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             StopCoroutine(powerUpCorutine[3]);
             StopCoroutine(PowerTextCD("Rapid Fire"));
         }
+        GameManager.instance.fireSpeedPower = true;
         shootRate /= shoot;
         StartCoroutine(PowerTextCD("Rapid Fire"));
         powerUpCorutine[3] = ShootRatePowerCooldown();

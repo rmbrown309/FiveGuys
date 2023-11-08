@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] Image SprayAmmoBar;
     [Header("-----PickUps UI-----")]
     public GameObject pickupLabel;
+    public GameObject pickupLabelContainer;
     public TMP_Text pickupText;
     [SerializeField] TMP_Text currentCollectible;
     [SerializeField] TMP_Text maxCollectible;
@@ -79,6 +80,12 @@ public class GameManager : MonoBehaviour
     public Image dmgPowerImage;
     public Image playerHealthBar;
     public GameObject collectable;
+    public bool jumpPower { get;  set; }
+    public bool speedPower { get; set; }
+    public bool invulnerablePower { get; set; }
+    public bool fireSpeedPower { get; set; }
+    public bool powerText { get; set; }
+
     [Header("-----Quest Text-----")]
     [SerializeField] GameObject quest;
     public TMP_Text questText;

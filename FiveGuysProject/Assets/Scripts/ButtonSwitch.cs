@@ -56,6 +56,7 @@ public class ButtonSwitch : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             GameManager.instance.pickupText.text = "[E]";
+            GameManager.instance.pickupLabelContainer.SetActive(true);
             GameManager.instance.pickupLabel.SetActive(true);
             onTrigger = true;
             Debug.Log("Switch In");
@@ -66,6 +67,7 @@ public class ButtonSwitch : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             onTrigger = false;
+            GameManager.instance.pickupLabelContainer.SetActive(false);
             GameManager.instance.pickupLabel.SetActive(false);
             Debug.Log("Switch In");
         }

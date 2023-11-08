@@ -55,8 +55,8 @@ public class PowerUp : MonoBehaviour
             {
                 case 1:
                     //Debug.Log("jump");
+                    
                     powerUp.JumpPower(newJumpMax);
-
                     Destroy(gameObject);
                     break;
                 case 2:

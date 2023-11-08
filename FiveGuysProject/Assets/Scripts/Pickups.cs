@@ -130,7 +130,11 @@ public class Pickups : MonoBehaviour
         {
             playerInTrigger = true;
             if (GameManager.instance.pickupLabel != null)
+            {
+                GameManager.instance.pickupLabelContainer.SetActive(true);
                 GameManager.instance.pickupLabel.SetActive(true);
+            }
+                
         }
     }
 
@@ -140,7 +144,10 @@ public class Pickups : MonoBehaviour
         {
             playerInTrigger = false;
             if (GameManager.instance.pickupLabel != null)
+            {
+                GameManager.instance.pickupLabelContainer.SetActive(false);
                 GameManager.instance.pickupLabel.SetActive(false);
+            }
         }
     }
     public void SetAudio(float newVolume)

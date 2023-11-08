@@ -28,7 +28,10 @@ public class GunPickups : MonoBehaviour
         if (Input.GetButtonDown("Interact") && playerInTrigger && !pickedUp && GameManager.instance.score >= gun.cost)
         {
             if (GameManager.instance.pickupLabel != null)
+            {
+                GameManager.instance.pickupLabelContainer.SetActive(false);
                 GameManager.instance.pickupLabel.SetActive(false);
+            }
             //pickedUp = true;
             WeaponOffAnimation(GameManager.instance.playerScript.GetGunID());
             //Debug.Log(GameManager.instance.playerScript.GetGunID());
@@ -51,7 +54,12 @@ public class GunPickups : MonoBehaviour
         {
             playerInTrigger = true;
             if (GameManager.instance.pickupLabel != null)
+            {
+                GameManager.instance.pickupLabelContainer.SetActive(true);
                 GameManager.instance.pickupLabel.SetActive(true);
+            }
+
+                
         }
     }
 
@@ -61,7 +69,11 @@ public class GunPickups : MonoBehaviour
         {
             playerInTrigger = false;
             if (GameManager.instance.pickupLabel != null)
+            {
+                GameManager.instance.pickupLabelContainer.SetActive(false);
                 GameManager.instance.pickupLabel.SetActive(false);
+            }
+
         }
     }
     IEnumerator Wait()
