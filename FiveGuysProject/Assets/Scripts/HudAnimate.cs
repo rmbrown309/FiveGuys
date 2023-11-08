@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class HudAnimate : MonoBehaviour
@@ -9,10 +10,17 @@ public class HudAnimate : MonoBehaviour
     private Animator mAnimator;
     [SerializeField] GameObject mainWeapon;
     [SerializeField] GameObject jumpPower;
+    [SerializeField] SavedSettings settings;
+
+    [SerializeField] AudioSource hudSounds;
+    [SerializeField] AudioClip informationSwipe;
+    [SerializeField] AudioClip informationReverseSwipe;
+    [SerializeField] AudioClip[] powerUpSound;
     // Start is called before the first frame update
     void Start()
     {
         mAnimator = GetComponent<Animator>();
+        
         if(mAnimator != null)
         {
             mAnimator.SetTrigger("isStart");
@@ -28,14 +36,18 @@ public class HudAnimate : MonoBehaviour
             if (Input.GetButtonDown("Tab"))
             {
                 mAnimator.SetBool("isInformed", true);
+                PlaySwipingSound(informationSwipe);
             }
             if (Input.GetButtonUp("Tab"))
             {
                 mAnimator.SetBool("isInformed", false);
+                PlaySwipingSound(informationReverseSwipe);
+
             }
             if (GameManager.instance.jumpPower)
             {
                 mAnimator.SetBool("isJumpOn", true);
+                
             }
             else
             {
@@ -110,5 +122,11 @@ public class HudAnimate : MonoBehaviour
     public void TurnOffPowerWeapons()
     {
         mAnimator.SetBool("isPowerGunOn", false);
+    }
+    public void PlaySwipingSound(AudioClip clip)
+    {
+        hudSounds.pitch = UnityEngine.Random.Range(1f, 2f);
+        hudSounds.volume = settings.SoundEffectVoulume;
+        hudSounds.PlayOneShot(clip, 2);
     }
 }
