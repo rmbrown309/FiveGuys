@@ -39,7 +39,10 @@ public class Pickups : MonoBehaviour
 
                     // remove label to show that pickup was bought
                     if (GameManager.instance.pickupLabel != null)
+                    {
                         GameManager.instance.pickupLabel.SetActive(false);
+                        GameManager.instance.pickupLabelContainer.SetActive(false);
+                    }
                     pickedUp = true;
 
                     break;
@@ -49,7 +52,10 @@ public class Pickups : MonoBehaviour
 
                     // remove label to show that pickup was bought
                     if (GameManager.instance.pickupLabel != null)
+                    {
                         GameManager.instance.pickupLabel.SetActive(false);
+                        GameManager.instance.pickupLabelContainer.SetActive(false);
+                    }
                     pickedUp = true;
 
                     break;
@@ -59,7 +65,10 @@ public class Pickups : MonoBehaviour
 
                     // remove label to show that pickup was bought
                     if (GameManager.instance.pickupLabel != null)
+                    {
                         GameManager.instance.pickupLabel.SetActive(false);
+                        GameManager.instance.pickupLabelContainer.SetActive(false);
+                    }
                     pickedUp = true;
 
                     break;
@@ -77,8 +86,10 @@ public class Pickups : MonoBehaviour
                     GameManager.instance.playerScript.GetRatKiller();
 
                     // remove label to show that pickup was bought
-                    if (GameManager.instance.pickupLabel != null)
-                        GameManager.instance.pickupLabel.SetActive(false);
+                    if (GameManager.instance.pickupLabel != null) { 
+                    GameManager.instance.pickupLabel.SetActive(false);
+                    GameManager.instance.pickupLabelContainer.SetActive(false);
+                    }
                     pickedUp = true;
 
                     break;
@@ -90,7 +101,11 @@ public class Pickups : MonoBehaviour
 
                     // remove label to show that pickup was bought
                     if (GameManager.instance.pickupLabel != null)
+                    {
                         GameManager.instance.pickupLabel.SetActive(false);
+                        GameManager.instance.pickupLabelContainer.SetActive(false);
+                    }
+                        
                     break;
             }
 
