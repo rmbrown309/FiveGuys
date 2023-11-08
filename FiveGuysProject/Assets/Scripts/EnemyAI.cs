@@ -46,7 +46,6 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
 
 
     bool isShooting;
-    bool damaged;
     private Vector3 pushBack;
     Vector3 playerDir;
     bool playerInRange;
@@ -176,11 +175,7 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
         }
         else
         {
-            damaged = true;
-
             anim.SetTrigger("Damage");
-            damaged = false;
-
         }
     }
 

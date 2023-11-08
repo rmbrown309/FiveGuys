@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class BossAI : MonoBehaviour, IDamage
+public class BossAI : MonoBehaviour, IDamage, IPhysics
 {
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
@@ -15,6 +16,7 @@ public class BossAI : MonoBehaviour, IDamage
 
     [Header("----- Enemy Stats -----")]
     [SerializeField] float HP;
+    [SerializeField] float speed;
     [SerializeField] int targetFaceSpeed;
     [SerializeField] int viewAngle;
     [SerializeField] int despawnTime;
@@ -30,22 +32,39 @@ public class BossAI : MonoBehaviour, IDamage
     [SerializeField] float jumpMinDistance = 2f;
     [SerializeField] float jumpMaxDistance = 15f;
     [SerializeField] float jumpSpeed = 1f;
+    [SerializeField] float jumpHeight = 1f;
     [SerializeField] float jumpCooldown = 4f;
+    [SerializeField] float jumpQuakeRadius = 4f;
     [SerializeField] int jumpDamage = 1;
     public AnimationCurve jumpCurve;
     public bool isJumping;
 
+    [Header("----- Guard Stats -----")]
+    [SerializeField] float minRunawayDistance = 10f;
+    [SerializeField] float maxRunawayDistance = 30f;
+    [SerializeField] float runawaySpeed = 9f;
+    [SerializeField] float guardCooldown = 20f;
+    [SerializeField] float guardHealRate = 1f;
+    [SerializeField] float guardHealAmount = 1f;
+    [SerializeField] float guardQuakeRadius = 15f;
+    [SerializeField] int guardQuakeDamage = 1;
+    [SerializeField] float stunnedTime = 3f;
+    public bool isGuarding;
+    public bool isStunned;
+
     float jumpTime;
+    float guardTime;
 
     bool isMeleeing;
-    private Vector3 pushBack;
+    float OrigHP;
     Vector3 playerDir;
     bool playerInRange;
     float angelToPlayer;
 
     void Start()
     {
-
+        agent.speed = speed;
+        OrigHP = HP;
     }
 
     void Update()
@@ -58,9 +77,16 @@ public class BossAI : MonoBehaviour, IDamage
             playerDir = GameManager.instance.player.transform.position - headPos.position;
             angelToPlayer = Vector3.Angle(playerDir, transform.forward);
 
-            agent.SetDestination(GameManager.instance.player.transform.position);
+            if(!isGuarding)
+                agent.SetDestination(GameManager.instance.player.transform.position);
 
-            if (agent.remainingDistance <= agent.stoppingDistance)
+            if (!isGuarding && !isStunned && (guardTime + guardCooldown < Time.time) && HP < OrigHP)
+                StartCoroutine(Guard());
+            
+            if(isStunned)
+                StartCoroutine(Stunned());
+
+            if (!isGuarding && !isStunned && agent.remainingDistance <= agent.stoppingDistance)
                 faceTarget();
 
             if (!isJumping && (jumpTime + jumpCooldown < Time.time) && (agent.remainingDistance >= jumpMinDistance) && (agent.remainingDistance <= jumpMaxDistance))
@@ -71,7 +97,7 @@ public class BossAI : MonoBehaviour, IDamage
         }
     }
 
-    private IEnumerator Jump(Vector3 targetPosition)
+    IEnumerator Jump(Vector3 targetPosition)
     {
         isJumping = true;
         agent.enabled = false;
@@ -84,7 +110,7 @@ public class BossAI : MonoBehaviour, IDamage
 
         for (float time = 0; time < 1; time += Time.deltaTime * jumpSpeed)
         {
-            transform.position = Vector3.Lerp(startingPosition, (targetPosition), time) + Vector3.up * jumpCurve.Evaluate(time);
+            transform.position = Vector3.Lerp(startingPosition, (targetPosition), time) + (Vector3.up * jumpHeight) * jumpCurve.Evaluate(time);
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(targetPosition - transform.position), time);
 
             yield return null;
@@ -95,12 +121,73 @@ public class BossAI : MonoBehaviour, IDamage
 
         agent.enabled = true;
 
-        if (NavMesh.SamplePosition(targetPosition, out NavMeshHit hit, 1f, agent.areaMask))
+        if (NavMesh.SamplePosition(targetPosition, out NavMeshHit hit, 1f, NavMesh.AllAreas))
         {
             agent.Warp(hit.position);
         }
 
+        Collider[] hits = Physics.OverlapSphere(transform.position, jumpQuakeRadius);
+        foreach (Collider c in hits)
+        {
+            PlayerController playerHit = c.GetComponent<PlayerController>();
+            if (playerHit != null && playerHit.jumpedTimes == 0)
+                playerHit.takeDamage(jumpDamage);
+        }
+
         isJumping = false;
+
+    }
+
+    IEnumerator Guard()
+    {
+        isGuarding = true;
+        model.material.color = Color.green;
+
+        Vector3 randomPoint = transform.position + Random.insideUnitSphere * maxRunawayDistance;
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(randomPoint, out hit, minRunawayDistance, NavMesh.AllAreas))
+        {
+            agent.SetDestination(hit.position);
+            agent.speed = runawaySpeed;
+        }
+
+        if (agent.remainingDistance <= agent.stoppingDistance)
+         agent.enabled = false;
+
+        while(!isStunned && HP < OrigHP)
+        {
+            yield return new WaitForSeconds(guardHealRate);
+            HP += guardHealAmount;
+            Collider[] hits = Physics.OverlapSphere(transform.position, guardQuakeRadius);
+            foreach (Collider c in hits)
+            {
+                PlayerController playerHit = c.GetComponent<PlayerController>();
+                if (playerHit != null && playerHit.jumpedTimes == 0)
+                    playerHit.takeDamage(guardQuakeDamage);
+            }
+        }
+
+        guardTime = Time.time;
+        isGuarding = false;
+
+        if(!isStunned)
+        {
+            model.material.color = Color.white;
+            agent.enabled = true;
+        }
+    }
+
+    IEnumerator Stunned()
+    {
+        model.material.color = Color.black;
+        agent.enabled = false;
+        GameManager.instance.playerScript.ShootRate(2);
+
+        yield return new WaitForSeconds(stunnedTime);
+
+        model.material.color = Color.white;
+        agent.enabled = true;
+        isStunned = false;
     }
 
     //stab time
@@ -134,31 +221,40 @@ public class BossAI : MonoBehaviour, IDamage
     }
     public void takeDamage(float amount)
     {
-        HP -= amount;
-        //To fix bug of not turning the hit collider off when taking damage
-        if (meleeCol != null)
+        if (!isGuarding)
         {
-            hitColOff();
+            HP -= amount;
+            //To fix bug of not turning the hit collider off when taking damage
+            if (meleeCol != null)
+            {
+                hitColOff();
+            }
+            StartCoroutine(flashDamage());
+            agent.SetDestination(GameManager.instance.player.transform.position);
+            if (HP <= 0)
+            {
+                //is dead
+                GameManager.instance.UpdateWinCondition(-1);
+                //anim.SetBool("Dead", true);
+
+                //Destroy(gameObject);
+                agent.enabled = false;
+                damageCol.enabled = false;
+                StopAllCoroutines();
+                StartCoroutine(Despawn());
+                GameManager.instance.IncreasePlayerScore(1);
+            }
+            else
+            {
+                //anim.SetTrigger("Damage");
+            }
         }
-        StartCoroutine(flashDamage());
-        agent.SetDestination(GameManager.instance.player.transform.position);
-        if (HP <= 0)
-        {
-            //is dead
-            GameManager.instance.UpdateWinCondition(-1);
-            //anim.SetBool("Dead", true);
-            
-            //Destroy(gameObject);
-            agent.enabled = false;
-            damageCol.enabled = false;
-            StopAllCoroutines();
-            StartCoroutine(Despawn());
-            GameManager.instance.IncreasePlayerScore(1);
-        }
-        else
-        {
-            //anim.SetTrigger("Damage");
-        }
+    }
+
+    public void TakePhysics(Vector3 amount)
+    {
+        if(isGuarding)
+            isStunned = true;
     }
 
     //Destorys the enemy after a specified amount of time

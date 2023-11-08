@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [Range(1, 3)] [SerializeField] int jumpMax; // number of jumps player can perform before landing
     [Range(8, 30)] [SerializeField] float jumpHeight;
     [Range(-10, -40)] [SerializeField] float gravityValue;
+    public int jumpedTimes;
     [SerializeField] float healthRegainSpeed;
     [SerializeField] int collectedItems;
     [Header("----- Gun Stats -----")]
@@ -63,7 +64,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     private Vector3 move;
-    private int jumpedTimes;
     private float gunDamage;
     private float extraDamage;
 
