@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: BurgerSubGunStats
   m_EditorClassIdentifier: 
   weaponID: 1
+  ammoID: 1
   shootRate: 0.25
   shootDamage: 1
   shootTime: 3
@@ -21,6 +22,8 @@ MonoBehaviour:
   cost: 15
   gunName: Burger SubGun
   isShotgun: 0
+  isM16: 0
+  isPowerWeapon: 0
   numOfPellets: 1
   horizSpread: 0
   vertSpread: 0
@@ -30,3 +33,6 @@ MonoBehaviour:
   hitEffect: {fileID: 6327853518906024368, guid: 349d4a817e629c04696c63e33888d7ad, type: 3}
   shootSound: {fileID: 8300000, guid: 402f7596ae9111b429d9d4fd262d7af0, type: 3}
   audShotVol: 0.1
+  xOffset: 0
+  yOffset: 0
+  zOffset: 0

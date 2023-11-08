@@ -85,6 +85,7 @@ public class GameManager : MonoBehaviour
     public bool invulnerablePower { get; set; }
     public bool fireSpeedPower { get; set; }
     public bool powerText { get; set; }
+    public bool weaponPower { get; set; }
 
     [Header("-----Quest Text-----")]
     [SerializeField] GameObject quest;

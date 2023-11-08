@@ -82,7 +82,7 @@ public class PowerUp : MonoBehaviour
                     //powerUp.EnemyHealthDown(newEnemyHealthDown);
                     //
                     //Destroy(gameObject);
-
+                    //GameManager.instance.weaponPower = true;
                     powerUp.SuperWeapons();
                     Destroy(gameObject);
                     break;

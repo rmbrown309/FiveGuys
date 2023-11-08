@@ -6,12 +6,14 @@ public class Grenade : MonoBehaviour
 {
     [Header("----- Components -----")]
     [SerializeField] Rigidbody rb;
+    [SerializeField] GameObject explosion;
     [Header("----- Grenade Stats -----")]
     [SerializeField] float speed;
     [SerializeField] float destroyTime;
     [SerializeField] float velUp;
 
-    [SerializeField] GameObject explosion;
+    bool isShoving;
+
     public bool isRocket;
     public Vector3 targetDir;
 
@@ -67,4 +69,8 @@ public class Grenade : MonoBehaviour
         //}
        
     }
+
+  
+
+  
 }

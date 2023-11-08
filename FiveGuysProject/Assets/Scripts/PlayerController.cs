@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [SerializeField] float shootRate;
     [SerializeField] float startDamage;
     int weaponID;
+    public int ammoID { get; set; }
     [Header("----- Grenade Stats -----")]
     [SerializeField] GameObject grenade;
     [SerializeField] float tossRate;
@@ -138,6 +139,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
                 else
                 {
                     StartCoroutine(Shoot());
+
+       
                 }
             }
             if (gunList[selectedGun].ammoCur != 0 && gunList[selectedGun].isShotgun)
@@ -787,7 +790,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             bullet.GetComponent<PlayerBullet>().damage = gun.shootDamage + extraDamage;
             bullet.GetComponent<PlayerBullet>().setDestroyTime(gun.shootTime);
             bullet.GetComponent<PlayerBullet>().sethitEffect(gun.hitEffect);
+            bullet.GetComponent<PlayerBullet>().setForceMagnitude(gun.forceMagnitude);
+
         }
+        ammoID = gun.ammoID;
         weaponID = gun.weaponID;
         shootRate = gun.shootRate;
         //model
@@ -803,6 +809,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     {
         return weaponID;
     }
+    
 
     IEnumerator Burst()
     {
@@ -919,35 +926,5 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     {
         return collectedItems;
     }
-    //void selectGun()
-    //{
-    //    if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
-    //    {
-    //        selectedGun++;
-    //        changeGun();
-
-    //    }
-    //    else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
-    //    {
-    //        selectedGun--;
-    //        changeGun();
-    //    }
-    //}
-
-    //void changeGun()
-    //{
-    //    startDamage = gunList[selectedGun].shootDamage;
-    //    shootRate = gunList[selectedGun].shootRate;
-    //    bullet = gunList[selectedGun].bullet;
-    //    bullet.GetComponent<PlayerBullet>().damage = gunList[selectedGun].shootDamage;
-    //    bullet.GetComponent<PlayerBullet>().setDestroyTime(gunList[selectedGun].shootTime);
-    //    bullet.GetComponent<PlayerBullet>().sethitEffect(gunList[selectedGun].hitEffect);
-
-
-
-
-    //    //model
-    //    gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].model.GetComponent<MeshFilter>().sharedMesh;
-    //    gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[selectedGun].model.GetComponent<MeshRenderer>().sharedMaterial;
-    //}
+    
 }

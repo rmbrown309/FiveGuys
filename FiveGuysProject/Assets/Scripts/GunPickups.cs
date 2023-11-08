@@ -13,8 +13,8 @@ public class GunPickups : MonoBehaviour
     GameObject animate;
     bool playerInTrigger;
     bool pickedUp;
-
-
+    bool isPowerWeapon;
+    int lastWeaponID;
     // Start is called before the first frame update
     void Start()
     {
@@ -33,14 +33,27 @@ public class GunPickups : MonoBehaviour
                 GameManager.instance.pickupLabel.SetActive(false);
             }
             //pickedUp = true;
-            WeaponOffAnimation(GameManager.instance.playerScript.GetGunID());
+            WeaponOffAnimation(GameManager.instance.playerScript.ammoID);
+            
             //Debug.Log(GameManager.instance.playerScript.GetGunID());
             GameManager.instance.IncreasePlayerScore(-gun.cost);
             GameManager.instance.playerScript.setGunStats(gun);
-            WeaponOnAnimation(GameManager.instance.playerScript.GetGunID());
-            Debug.Log(GameManager.instance.playerScript.GetGunID());
+            lastWeaponID = GameManager.instance.playerScript.ammoID;
+            WeaponOnAnimation(GameManager.instance.playerScript.ammoID);
+            //Debug.Log(GameManager.instance.playerScript.GetGunID());
             aud.PlayOneShot(audCash, audCashVol);
             //Destroy(gameObject);
+        }
+        if(GameManager.instance.playerScript.ammoID == 4)
+        {
+            //Debug.Log("isPowerWeapon");
+            WeaponOffAnimation(lastWeaponID);
+            WeaponOnAnimation(GameManager.instance.playerScript.ammoID);
+            isPowerWeapon = true;
+        }else if(GameManager.instance.playerScript.ammoID < 4 && isPowerWeapon == true)
+        {
+            WeaponOffAnimation(4);
+            WeaponOnAnimation(GameManager.instance.playerScript.ammoID);
         }
 
     }
@@ -81,12 +94,12 @@ public class GunPickups : MonoBehaviour
 
         yield return new WaitForSeconds(3);
     }
-    private void WeaponOffAnimation(int weaponID)
+    private void WeaponOffAnimation(int ammoID)
     {
         HudAnimate animation = weaponAnimation.GetComponent<HudAnimate>();
         if(animation != null)
         {
-            switch (weaponID)
+            switch (ammoID)
             {
                 case 0:
                     animation.TurnOffMainWeapon();
@@ -101,18 +114,18 @@ public class GunPickups : MonoBehaviour
                     animation.TurnOffShotGunWeapon();
                     break;
                 case 4:
-                    animation.TurnOffShotGunWeapon();
+                    animation.TurnOffPowerWeapons();
                     break;
             }
         }
     }
-    private void WeaponOnAnimation(int weaponID)
+    private void WeaponOnAnimation(int ammoID)
     {
         //GameObject animate = weaponAnimation.transform.GetChild(2).gameObject;
         HudAnimate animation = weaponAnimation.GetComponent<HudAnimate>();
         if(animation != null)
         {
-            switch (weaponID)
+            switch (ammoID)
             {
                 case 0:
                     animation.TurnOnMainWeapon();
@@ -127,7 +140,7 @@ public class GunPickups : MonoBehaviour
                     animation.TurnOnShotGunWeapon();
                     break;
                 case 4:
-                    animation.TurnOnShotGunWeapon();
+                    animation.TurnOnPowerWeapons();
                     break;
             }
         }
