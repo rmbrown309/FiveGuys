@@ -12,7 +12,7 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] GameObject phaseTwoWeapon;
     [SerializeField] Transform shootPos;
     [SerializeField] Transform headPos;
-    //[SerializeField] Animator anim;
+    [SerializeField] Animator anim;
     [SerializeField] Collider damageCol;
 
     [Header("----- Enemy Stats -----")]
@@ -82,7 +82,7 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
         //Checks to see if enemy is alive
         if (agent.isActiveAndEnabled)
         {
-            //anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
+            anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
 
             playerDir = GameManager.instance.player.transform.position - headPos.position;
             angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
@@ -93,7 +93,7 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
             if (!isGuarding && !isStunned)
                 agent.SetDestination(GameManager.instance.player.transform.position);
 
-            if (!isGuarding && !isStunned && (guardTime + guardCooldown < Time.time) && HP < OrigHP)
+            if (!isGuarding && !isStunned && !isMeleeing && !isShooting && !isJumping && (guardTime + guardCooldown < Time.time) && HP < OrigHP)
                 StartCoroutine(Guard());
 
             if (!isGuarding && !isStunned && agent.remainingDistance <= agent.stoppingDistance)
@@ -103,11 +103,15 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
                 && (agent.remainingDistance >= jumpMinDistance) && (agent.remainingDistance <= jumpMaxDistance))
                 StartCoroutine(Jump(GameManager.instance.player.transform.position));
 
-            if (phaseOne && angleToPlayer <= hitAngle && !isMeleeing && playerInRange && damageCol.enabled)
+            if (phaseOne && angleToPlayer <= hitAngle && !isMeleeing && !isJumping && !isGuarding && !isStunned && playerInRange && damageCol.enabled)
                 StartCoroutine(melee());
 
-            if (phaseTwo && angleToPlayer <= shootAngle && !isShooting && playerInRange && damageCol.enabled)
+            if (phaseTwo && angleToPlayer <= shootAngle && !isShooting && !isGuarding && !isStunned && playerInRange && damageCol.enabled)
                 StartCoroutine(shoot());
+
+            if (phaseOne && HP <= 0 && !isJumping)
+                StartCoroutine(PhaseChange());
+            
         }
     }
 
@@ -115,8 +119,6 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
     {
         isJumping = true;
         agent.enabled = false;
-
-        //anim.SetTrigger("Jump");
 
         Vector3 startingPosition = transform.position;
 
@@ -129,7 +131,6 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
 
             yield return null;
         }
-        //anim.SetTrigger("Landed");
 
         jumpTime = Time.time;
 
@@ -166,9 +167,13 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
         }
 
         if (agent.remainingDistance <= agent.stoppingDistance)
-         agent.enabled = false;
+        {
+            agent.enabled = false;
+        }
 
-        while(!isStunned && HP < OrigHP)
+        anim.SetBool("Guard", true);
+
+        while (!isStunned && HP < OrigHP)
         {
             yield return new WaitForSeconds(guardHealRate);
             HP += guardHealAmount;
@@ -186,13 +191,17 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
 
         if(!isStunned)
         {
+            anim.SetBool("Guard", false);
             model.material.color = Color.white;
             agent.enabled = true;
+            agent.speed = speed;
         }
     }
 
     IEnumerator Stunned()
     {
+        anim.SetBool("Guard", false);
+        anim.SetBool("Stunned", true);
         model.material.color = Color.black;
         agent.enabled = false;
         GameManager.instance.playerScript.ShootRate(2);
@@ -200,7 +209,9 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
         yield return new WaitForSeconds(stunnedTime);
 
         model.material.color = Color.white;
+        anim.SetBool("Stunned", false);
         agent.enabled = true;
+        agent.speed = speed;
         isStunned = false;
     }
 
@@ -209,7 +220,7 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
     {
         isMeleeing = true;
         //plays animation in which the "hitColOn/Off" functions are called
-        //anim.SetTrigger("Melee");
+        anim.SetTrigger("Kick");
         yield return new WaitForSeconds(hitRate);
         isMeleeing = false;
     }
@@ -265,11 +276,7 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
             StartCoroutine(flashDamage());
             if(!isJumping && !isStunned)
                 agent.SetDestination(GameManager.instance.player.transform.position);
-            if (phaseOne && HP <= 0)
-            {
-                StartCoroutine(PhaseChange());
-            }
-            else if (phaseTwo && HP <= 0)
+            if (phaseTwo && HP <= 0)
             {
                 //is dead
                 GameManager.instance.FinalBossDead = true;
@@ -298,12 +305,22 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
 
     IEnumerator PhaseChange()
     {
+        if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 5f, NavMesh.AllAreas))
+            agent.Warp(hit.position);
+
+        anim.SetBool("Guard", true);
+        anim.SetBool("Stunned", false);
         phaseOne = false;
         agent.enabled = false;
         damageCol.enabled = false;
-        yield return new WaitForSeconds(4);
+        yield return new WaitForSeconds(3);
 
-        HP = OrigHP * 2;
+        anim.SetBool("Guard", false);
+        yield return new WaitForSeconds(0.5f);
+
+        anim.SetBool("GlockOut", true);
+        OrigHP *= 2;
+        HP = OrigHP;
         phaseTwoWeapon.SetActive(true);
         agent.enabled = true;
         damageCol.enabled = true;
