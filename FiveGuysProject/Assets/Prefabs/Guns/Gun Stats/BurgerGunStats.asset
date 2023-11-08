@@ -21,6 +21,8 @@ MonoBehaviour:
   cost: 15
   gunName: Def Burger Gun
   isShotgun: 1
+  isM16: 0
+  isPowerWeapon: 0
   numOfPellets: 1
   horizSpread: 0
   vertSpread: 0
@@ -30,3 +32,7 @@ MonoBehaviour:
   hitEffect: {fileID: 6327853518906024368, guid: 349d4a817e629c04696c63e33888d7ad, type: 3}
   shootSound: {fileID: 8300000, guid: 6fe3040ce47e8f2448dacb0e96aa0ea4, type: 3}
   audShotVol: 0.5
+  xOffset: 0
+  yOffset: 0
+  zOffset: 0
+  forceMagnitude: 5

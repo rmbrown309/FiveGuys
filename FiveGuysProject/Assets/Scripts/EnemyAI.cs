@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,7 +16,7 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
     [Range(0, 1)][SerializeField] float powerSpawnPercentage;
     [SerializeField] Animator anim;
     [SerializeField] Collider damageCol;
-    [SerializeField] GameObject ragdoll;
+    //[SerializeField] GameObject ragdoll;
 
     [Header("----- Enemy Stats -----")]
     [SerializeField] float HP;
@@ -26,9 +27,8 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
     //dmg bounce
     [SerializeField] float squishOnY; 
     [SerializeField] float timeToReturnY;
+    [SerializeField] float afterHitTime;
     [SerializeField] AnimationCurve curve;
-
-    //[SerializeField] float squishSpeed;
 
     [Header("----- Gun Stats -----")]
     [SerializeField] GameObject bullet;
@@ -44,6 +44,9 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
     [Range(0, 1)] [SerializeField] float idleChatterPlayPercentage;
     [SerializeField] float idleCoolDown;
 
+    //ragdoll shennanigans
+    private Rigidbody[] rigidBodies;
+    private CharacterController charController; 
 
     bool isShooting;
     private Vector3 pushBack;
@@ -52,9 +55,14 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
     float angleToPlayer;
     Vector3 spawnPos;
 
+    void Awake()
+    {
+        rigidBodies = GetComponentsInChildren<Rigidbody>();
+        charController = GetComponent<CharacterController>();
+        DisableRagDoll();
+    }
     void Start()
     {
-        
     }
 
     void Update()
@@ -91,33 +99,6 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
 
     }
 
-    //bool canSeePlayer()
-    //{
-    //    playerDir = GameManager.instance.player.transform.position - headPos.position;
-    //    angleToPlayer = Vector3.Angle(playerDir, transform.forward);
-
-
-    //    Debug.DrawRay(headPos.position, playerDir);
-    //    Debug.Log(angleToPlayer);
-
-    //    RaycastHit hit;
-    //    if (Physics.Raycast(headPos.position, playerDir, out hit))
-    //    {
-    //        if (hit.collider.CompareTag("Player") && angleToPlayer <= viewAngle)
-    //        {
-    //            agent.SetDestination(GameManager.instance.player.transform.position);
-
-    //            if (agent.remainingDistance < agent.stoppingDistance)
-    //                faceTarget();
-
-    //            if (angleToPlayer <= shootAngle && !isShooting)
-    //                StartCoroutine(shoot());
-    //            return true;
-    //        }
-    //    }
-    //    return false;
-    //}
-
     //sheeet we shootin. Shoots the bullet.
     IEnumerator shoot()
     {
@@ -141,7 +122,6 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
     //triggers the flash for when the enemy takes damage and flashs to let the player know. 
     public void takeDamage(float amount)
     {
-
         HP -= amount;
         agent.SetDestination(GameManager.instance.player.transform.position);
         if (agent.remainingDistance < agent.stoppingDistance) 
@@ -151,19 +131,24 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
             faceTarget();
         }
 
-        StartCoroutine(Squish());
+        if (HP > 0)
+            StartCoroutine(Squish());
+        
         StartCoroutine(flashDamage());
+
 
         if (HP <= 0)
         {
             //it's dead; Needs trigger from game manager to indicate to gameManager that it died and flash win screen.
-            gameObject.transform.localScale += new Vector3(0, squishOnY, 0);
-            anim.SetBool("Dead", true);
+            Vector3 origScale = new Vector3(0.5f, 0.5f, 0.5f);
+
+            gameObject.transform.localScale = origScale;
+            //anim.SetBool("Dead", true);
             GameManager.instance.UpdateWinCondition(-1);
             if (Random.value < powerSpawnPercentage)
             {
                 spawnPos = new Vector3(transform.position.x, 1, transform.position.z);
-                GameObject PowerSpawn = Instantiate(powerSpawn, spawnPos , Quaternion.identity);
+                GameObject PowerSpawn = Instantiate(powerSpawn, spawnPos, Quaternion.identity);
             }
             agent.enabled = false;
             damageCol.enabled = false;
@@ -175,8 +160,11 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
         }
         else
         {
-            anim.SetTrigger("Damage");
+            anim.SetBool("Damage", true);
+
+
         }
+
     }
 
     //Take damage and get pushed back
@@ -188,11 +176,9 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
     //Destroys the enemy after a specified amount of time
     IEnumerator Despawn()
     {
-        //Vector3 posAtDeath = new Vector3(transform.position.x, 0, transform.position.z);
-        //Quaternion rotAtDeath = transform.rotation;
-        //Destroy(gameObject);
-        //GameObject corpse = Instantiate(ragdoll, posAtDeath, rotAtDeath);
-     
+  
+
+        EnableRagdoll();
         yield return new WaitForSeconds(despawnTime);
         Destroy(gameObject);
     }
@@ -211,10 +197,7 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
         Vector3 origScale = new Vector3(gameObject.transform.localScale.x, 0.5f, gameObject.transform.localScale.z);
         Vector3 toSquish = new Vector3(gameObject.transform.localScale.x, gameObject.transform.localScale.y - squishOnY, gameObject.transform.localScale.z);
 
-        //setting the scale using lerp?
-        //gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, toSquish, 0.5f);
-        //yield return new WaitForSeconds(timeToReturnY);
-        //gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, origScale, 1);
+  
 
         float timeElapsed = 0;
 
@@ -225,7 +208,7 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
             timeElapsed += Time.deltaTime;
 
         }
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.1f);
 
         timeElapsed = 0;
         while (timeElapsed < timeToReturnY)
@@ -237,10 +220,7 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
         }
         yield return new WaitForSeconds(0.1f);
 
-        //setting the scale outright
-        //gameObject.transform.localScale += new Vector3(0, squishOnY, 0);
-        //yield return new WaitForSeconds(timeToReturnY);
-        //gameObject.transform.localScale += new Vector3(0, -squishOnY, 0);
+
 
     }
 
@@ -256,6 +236,7 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
         yield return new WaitForSeconds(idleCoolDown);
 
     }
+
 
     void faceTarget()
     {
@@ -284,5 +265,38 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
         {
             playerInRange = false;
         }
+    }
+
+    void DisableRagDoll()
+    {
+        foreach (var rigidbody in rigidBodies)
+        {
+            rigidbody.isKinematic = true;
+        }
+        //anim.enabled = true;
+        //charController.enabled = true;
+    }
+
+    void EnableRagdoll()
+    {
+        anim.enabled = false;
+        if (charController != null)
+        {
+            charController.enabled = false;
+        }
+        foreach (var rigidbody in rigidBodies)
+        {
+            rigidbody.isKinematic = false;
+        }
+
+     
+
+    }
+
+    public void TriggerRagdoll(Vector3 force, Vector3 hitPoint) 
+    {
+        EnableRagdoll();
+        Rigidbody hitRigidBody = rigidBodies.OrderBy(rigidbody => Vector3.Distance(rigidbody.position, hitPoint)).First();
+        hitRigidBody.AddForceAtPosition(force, hitPoint, ForceMode.Impulse);
     }
 }
