@@ -29,6 +29,7 @@ public class gunStats : ScriptableObject
     public float xOffset;
     public float yOffset;
     public float zOffset;
+    public float forceMagnitude;
 
 
 
