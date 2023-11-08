@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5691c4d8c7a7e440b03620d68a535b9, type: 3}
   m_Name: DoubleShottyStats
   m_EditorClassIdentifier: 
-  weaponID: 6
+  weaponID: 4
+  ammoID: 3
   shootRate: 0.7
   shootDamage: 0.5
   shootTime: 0.3
@@ -22,6 +23,7 @@ MonoBehaviour:
   gunName: Double Barrel Shotgun
   isShotgun: 1
   isM16: 1
+  isPowerWeapon: 0
   numOfPellets: 6
   horizSpread: 2
   vertSpread: 1

@@ -9,6 +9,7 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
     [Header("----- Components -----")]
     [SerializeField] Renderer model;
     [SerializeField] UnityEngine.AI.NavMeshAgent agent;
+    [SerializeField] GameObject phaseTwoWeapon;
     [SerializeField] Transform shootPos;
     [SerializeField] Transform headPos;
     //[SerializeField] Animator anim;
@@ -27,6 +28,11 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] int meleeDamage;
     [SerializeField] int meleeRange; //advised to keep the stoping and melee range short
     [SerializeField] Collider meleeCol;
+
+    [Header("----- Gun Stats -----")]
+    [SerializeField] GameObject bullet;
+    [SerializeField] float shootRate;
+    [SerializeField] int shootAngle;
 
     [Header("----- Jump Stats -----")]
     [SerializeField] float jumpMinDistance = 2f;
@@ -55,11 +61,15 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
     float jumpTime;
     float guardTime;
 
+    bool phaseOne = true;
+    bool phaseTwo = false;
+
     bool isMeleeing;
+    bool isShooting;
     float OrigHP;
     Vector3 playerDir;
     bool playerInRange;
-    float angelToPlayer;
+    float angleToPlayer;
 
     void Start()
     {
@@ -75,25 +85,29 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
             //anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
 
             playerDir = GameManager.instance.player.transform.position - headPos.position;
-            angelToPlayer = Vector3.Angle(playerDir, transform.forward);
+            angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
 
-            if(!isGuarding)
+            if (isStunned)
+                StartCoroutine(Stunned());
+
+            if (!isGuarding && !isStunned)
                 agent.SetDestination(GameManager.instance.player.transform.position);
 
             if (!isGuarding && !isStunned && (guardTime + guardCooldown < Time.time) && HP < OrigHP)
                 StartCoroutine(Guard());
-            
-            if(isStunned)
-                StartCoroutine(Stunned());
 
             if (!isGuarding && !isStunned && agent.remainingDistance <= agent.stoppingDistance)
                 faceTarget();
 
-            if (!isJumping && (jumpTime + jumpCooldown < Time.time) && (agent.remainingDistance >= jumpMinDistance) && (agent.remainingDistance <= jumpMaxDistance))
+            if (!isGuarding && !isStunned && !isMeleeing && !isShooting && !isJumping && (jumpTime + jumpCooldown < Time.time) 
+                && (agent.remainingDistance >= jumpMinDistance) && (agent.remainingDistance <= jumpMaxDistance))
                 StartCoroutine(Jump(GameManager.instance.player.transform.position));
 
-            if (angelToPlayer <= hitAngle && !isMeleeing && playerInRange && damageCol.enabled)
+            if (phaseOne && angleToPlayer <= hitAngle && !isMeleeing && playerInRange && damageCol.enabled)
                 StartCoroutine(melee());
+
+            if (phaseTwo && angleToPlayer <= shootAngle && !isShooting && playerInRange && damageCol.enabled)
+                StartCoroutine(shoot());
         }
     }
 
@@ -200,6 +214,25 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
         isMeleeing = false;
     }
 
+    IEnumerator shoot()
+    {
+        isShooting = true;
+        //anim.SetTrigger("Shoot");
+
+        GameObject currBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
+        currBullet.transform.forward = playerDir.normalized;
+        yield return new WaitForSeconds(0.08f);
+        currBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
+        currBullet.transform.forward = playerDir.normalized;
+        yield return new WaitForSeconds(0.08f);
+        currBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
+        currBullet.transform.forward = playerDir.normalized;
+
+        yield return new WaitForSeconds(shootRate);
+        isShooting = false;
+
+    }
+
     //Turns hit collider on and off
     public void hitColOn()
     {
@@ -230,11 +263,17 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
                 hitColOff();
             }
             StartCoroutine(flashDamage());
-            agent.SetDestination(GameManager.instance.player.transform.position);
-            if (HP <= 0)
+            if(!isJumping && !isStunned)
+                agent.SetDestination(GameManager.instance.player.transform.position);
+            if (phaseOne && HP <= 0)
+            {
+                StartCoroutine(PhaseChange());
+            }
+            else if (phaseTwo && HP <= 0)
             {
                 //is dead
-                GameManager.instance.UpdateWinCondition(-1);
+                GameManager.instance.FinalBossDead = true;
+                GameManager.instance.UpdateWinCondition(-GameManager.instance.enemiesRemain);
                 //anim.SetBool("Dead", true);
 
                 //Destroy(gameObject);
@@ -242,7 +281,7 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
                 damageCol.enabled = false;
                 StopAllCoroutines();
                 StartCoroutine(Despawn());
-                GameManager.instance.IncreasePlayerScore(1);
+                GameManager.instance.IncreasePlayerScore(100);
             }
             else
             {
@@ -255,6 +294,21 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
     {
         if(isGuarding)
             isStunned = true;
+    }
+
+    IEnumerator PhaseChange()
+    {
+        phaseOne = false;
+        agent.enabled = false;
+        damageCol.enabled = false;
+        yield return new WaitForSeconds(4);
+
+        HP = OrigHP * 2;
+        phaseTwoWeapon.SetActive(true);
+        agent.enabled = true;
+        damageCol.enabled = true;
+        gameObject.GetComponent<SphereCollider>().radius = 6;
+        phaseTwo = true;
     }
 
     //Destorys the enemy after a specified amount of time

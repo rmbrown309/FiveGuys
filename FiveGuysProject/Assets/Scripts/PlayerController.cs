@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [SerializeField] float shootRate;
     [SerializeField] float startDamage;
     int weaponID;
+    public int ammoID { get; set; }
     [Header("----- Grenade Stats -----")]
     [SerializeField] GameObject grenade;
     [SerializeField] float tossRate;
@@ -792,6 +793,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             bullet.GetComponent<PlayerBullet>().setForceMagnitude(gun.forceMagnitude);
 
         }
+        ammoID = gun.ammoID;
         weaponID = gun.weaponID;
         shootRate = gun.shootRate;
         //model
@@ -807,6 +809,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     {
         return weaponID;
     }
+    
 
     IEnumerator Burst()
     {
