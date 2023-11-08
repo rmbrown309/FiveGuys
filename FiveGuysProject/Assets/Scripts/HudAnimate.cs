@@ -102,6 +102,13 @@ public class HudAnimate : MonoBehaviour
     public void TurnOffShotGunWeapon()
     {
         mAnimator.SetBool("isShotGunOn", false);
-
+    }
+    public void TurnOnPowerWeapons()
+    {
+        mAnimator.SetBool("isPowerGunOn", true);
+    }
+    public void TurnOffPowerWeapons()
+    {
+        mAnimator.SetBool("isPowerGunOn", false);
     }
 }
