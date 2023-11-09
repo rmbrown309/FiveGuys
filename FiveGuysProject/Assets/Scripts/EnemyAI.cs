@@ -24,7 +24,8 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] int viewAngle;
     [SerializeField] float despawnTime;
     [SerializeField] int pushBackResolve;
-    //dmg bounce
+
+    [Header("----- Squish Stats -----")]
     [SerializeField] float squishOnY; 
     [SerializeField] float timeToReturnY;
     [SerializeField] float afterHitTime;
@@ -104,10 +105,10 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
     {
         isShooting = true;
         anim.SetTrigger("Shoot");
+        //CreateBullet();
         //GameObject currBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
         //allows enemies to shoot vertically toward player
         //currBullet.transform.forward = playerDir.normalized;
-
         yield return new WaitForSeconds(shootRate);
         isShooting = false;
 
@@ -133,9 +134,8 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
 
         if (HP > 0)
             StartCoroutine(Squish());
-        
-        StartCoroutine(flashDamage());
 
+        StartCoroutine(flashDamage());
 
         if (HP <= 0)
         {
@@ -154,8 +154,6 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
             damageCol.enabled = false;
             StopAllCoroutines();
             StartCoroutine(Despawn());
-
-
             GameManager.instance.IncreasePlayerScore(1);
         }
         else
@@ -293,10 +291,5 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
 
     }
 
-    public void TriggerRagdoll(Vector3 force, Vector3 hitPoint) 
-    {
-        EnableRagdoll();
-        Rigidbody hitRigidBody = rigidBodies.OrderBy(rigidbody => Vector3.Distance(rigidbody.position, hitPoint)).First();
-        hitRigidBody.AddForceAtPosition(force, hitPoint, ForceMode.Impulse);
-    }
+    
 }
