@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 682545300652773322}
-  speed: 15
+  speed: 20
   destroyTime: 1
   explosion: {fileID: 8770134330894254788, guid: bb3134dd533136a41ba1cc91f9dedaa8, type: 3}
   beerPuddle: {fileID: 8465202838998707974, guid: 3d39aab7a0b7c5044ab0404895c80e3f, type: 3}

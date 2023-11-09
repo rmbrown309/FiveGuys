@@ -25,6 +25,12 @@ public class BigSmelly : MonoBehaviour, IDamage, IPhysics
     [SerializeField] float despawnTime;
     [SerializeField] int pushBackResolve;
 
+    //[Header("----- Squish Stats -----")]
+    //[SerializeField] float squishOnY;
+    //[SerializeField] float timeToReturnY;
+    //[SerializeField] float afterHitTime;
+    //[SerializeField] AnimationCurve curve;
+
     [Header("----- Gun Stats -----")]
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
@@ -32,9 +38,9 @@ public class BigSmelly : MonoBehaviour, IDamage, IPhysics
 
     [Header("----- Audio Stuff -----")]
     [SerializeField] AudioSource aud;
-    [Range(0, 1)] [SerializeField] float idleChatterVol;
+    [Range(0, 1)][SerializeField] float idleChatterVol;
     [SerializeField] AudioClip[] idleChatter;
-    [Range(0, 1)] [SerializeField] float idleChatterPlayPercentage;
+    [Range(0, 1)][SerializeField] float idleChatterPlayPercentage;
     [SerializeField] float idleCoolDown;
 
     bool isShooting;
@@ -43,8 +49,6 @@ public class BigSmelly : MonoBehaviour, IDamage, IPhysics
     bool playerInRange;
     float angleToPlayer;
     Vector3 spawnPos;
-
-
 
     void Start()
     {
@@ -89,6 +93,10 @@ public class BigSmelly : MonoBehaviour, IDamage, IPhysics
     }
     public void CreateBullet()
     {
+        //if (isShooting = true && HP > 0)
+        //{
+        //    StartCoroutine(Squish());
+        //}
         GameObject currBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
         currBullet.transform.forward = playerDir.normalized;
     }
@@ -120,7 +128,7 @@ public class BigSmelly : MonoBehaviour, IDamage, IPhysics
             damageCol.enabled = false;
             StopAllCoroutines();
             StartCoroutine(Despawn());
-            GameManager.instance.IncreasePlayerScore(1);
+            GameManager.instance.IncreasePlayerScore(2);
         }
         else
         {
@@ -142,20 +150,37 @@ public class BigSmelly : MonoBehaviour, IDamage, IPhysics
         yield return new WaitForSeconds(0.1f);
         model.material.color = Color.white;
     }
-
+    //IEnumerator Squish()
+    //{
+    //    Vector3 origScale = new(gameObject.transform.localScale.x, 0.5f, gameObject.transform.localScale.z);
+    //    Vector3 toSquish = new(gameObject.transform.localScale.x, gameObject.transform.localScale.y - squishOnY, gameObject.transform.localScale.z);
+    //    float timeElapsed = 0;
+    //    while (timeElapsed < timeToReturnY)
+    //    {
+    //        float t = timeElapsed / timeToReturnY;
+    //        gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, toSquish, curve.Evaluate(t));
+    //        timeElapsed += Time.deltaTime;
+    //    }
+    //    yield return new WaitForSeconds(0.1f);
+    //    timeElapsed = 0;
+    //    while (timeElapsed < timeToReturnY)
+    //    {
+    //        float t = timeElapsed / timeToReturnY;
+    //        gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, origScale, curve.Evaluate(t));
+    //        timeElapsed += Time.deltaTime;
+    //    }
+    //    yield return new WaitForSeconds(0.1f);
+    //}
     IEnumerator RandomIdleChat()
     {
         if (Random.value < idleChatterPlayPercentage)
         {
             float randPitch = Random.Range(0.95f, 1.05f);
-
             aud.pitch = randPitch;
             aud.PlayOneShot(idleChatter[Random.Range(0, idleChatter.Length)], idleChatterVol);
         }
         yield return new WaitForSeconds(idleCoolDown);
-
     }
-
     void faceTarget()
     {
         Quaternion rot = Quaternion.LookRotation(playerDir);

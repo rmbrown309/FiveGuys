@@ -14,10 +14,6 @@ public class BeerBottleHazard : MonoBehaviour
 
     IEnumerator DestroyPuddle()
     {
-        //if (beerPuddle != null)
-        //{
-        //    Instantiate(beerPuddle, transform.position, beerPuddle.transform.rotation);
-        //}
         yield return new WaitForSeconds(0.1f);
         Destroy(gameObject, 5f);
     }

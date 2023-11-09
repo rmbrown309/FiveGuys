@@ -637,6 +637,42 @@ MonoBehaviour:
   viewAngle: 90
   despawnTime: 0.2
   pushBackResolve: 0
+  squishOnY: 0.05
+  timeToReturnY: 5
+  afterHitTime: 0.1
+  curve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 3.4339623
+      outSlope: 3.4339623
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.125
+    - serializedVersion: 3
+      time: 0.4958313
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.40335894
+      outWeight: 0.36666667
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -4.025369
+      outSlope: -4.025369
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.064045876
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   bullet: {fileID: 1214147759416653589, guid: 52c43b34cef97b3449fec611bd559a3e, type: 3}
   shootRate: 0.5
   shootAngle: 30

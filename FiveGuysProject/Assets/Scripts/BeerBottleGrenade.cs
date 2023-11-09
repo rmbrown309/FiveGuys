@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class BeerBottleGrenade : MonoBehaviour
 {
+    //[Header("----- Raycast Position -----")]
+    //public LayerMask groundLayer;
+
     [Header("----- Components -----")]
     [SerializeField] Rigidbody rb;
 
     [Header("----- Bullet Stats -----")]
     [SerializeField] int speed;
-    [SerializeField] int destroyTime;
+    [SerializeField] float destroyTime;
     [SerializeField] GameObject explosion;
     [SerializeField] GameObject beerPuddle;
     [SerializeField] int VelUp;
@@ -29,9 +33,18 @@ public class BeerBottleGrenade : MonoBehaviour
             Instantiate(explosion, transform.position, explosion.transform.rotation);
         }
         if (beerPuddle != null) 
-        { 
-            Instantiate(beerPuddle, transform.position, beerPuddle.transform.rotation);
+        {
+            //PuddleOnGround(targetDir);
+            Instantiate(beerPuddle, (transform.position * 0.97f), beerPuddle.transform.rotation);
         }
-        Destroy(gameObject, 1f);
+        Destroy(gameObject, destroyTime);
     }
+    //void PuddleOnGround(Vector3 position)
+    //{
+    //    if (Physics.Raycast(position, Vector3.down, out RaycastHit hit, Mathf.Infinity, groundLayer))
+    //    {
+    //        Vector3 groundSpot = transform.position - hit.point + Vector3.up * .005f;
+    //        Instantiate(beerPuddle, groundSpot, beerPuddle.transform.rotation);
+    //    }
+    //}
 }
