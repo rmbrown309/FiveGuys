@@ -267,8 +267,5 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage, IPhysics
         {
             rigidbody.isKinematic = false;
         }
-
-
-
     }
 }

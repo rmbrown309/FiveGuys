@@ -174,8 +174,6 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
     //Destroys the enemy after a specified amount of time
     IEnumerator Despawn()
     {
-  
-
         EnableRagdoll();
         yield return new WaitForSeconds(despawnTime);
         Destroy(gameObject);
@@ -286,9 +284,6 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
         {
             rigidbody.isKinematic = false;
         }
-
-     
-
     }
 
     

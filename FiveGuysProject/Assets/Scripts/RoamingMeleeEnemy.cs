@@ -24,6 +24,12 @@ public class RoamingMeleeEnemy : MonoBehaviour, IDamage, IPhysics
     [SerializeField] int despawnTime;
     [SerializeField] int pushBackResolve;
 
+    [Header("----- Squish Stats -----")]
+    [SerializeField] float squishOnY;
+    [SerializeField] float timeToReturnY;
+    [SerializeField] float afterHitTime;
+    [SerializeField] AnimationCurve curve;
+
     [Header("----- Melee Stats -----")]
     [SerializeField] float hitRate;
     [SerializeField] int hitAngle;
@@ -39,6 +45,9 @@ public class RoamingMeleeEnemy : MonoBehaviour, IDamage, IPhysics
     [Range(0, 1)] [SerializeField] float idleChatterPlayPercentage;
     [SerializeField] float idleCoolDown;
 
+    //ragdoll shennanigans
+    private Rigidbody[] rigidBodies;
+    private CharacterController charController;
 
     bool isMeleeing;
     private Vector3 pushBack;
@@ -47,6 +56,13 @@ public class RoamingMeleeEnemy : MonoBehaviour, IDamage, IPhysics
     float angleToPlayer;
     bool destinationChosen;
     float stoppingDistOrig;
+
+    void Awake()
+    {
+        rigidBodies = GetComponentsInChildren<Rigidbody>();
+        charController = GetComponent<CharacterController>();
+        DisableRagDoll();
+    }
 
     void Start()
     {
@@ -166,11 +182,17 @@ public class RoamingMeleeEnemy : MonoBehaviour, IDamage, IPhysics
         {
             hitColOff();
         }
+
+        if (HP > 0)
+            StartCoroutine(Squish());
+
         StartCoroutine(flashDamage());
         agent.SetDestination(GameManager.instance.player.transform.position);
         if (HP <= 0)
         {
             //is dead
+            Vector3 origScale = new Vector3(0.5f, 0.5f, 0.5f);
+            gameObject.transform.localScale = origScale;
             GameManager.instance.UpdateWinCondition(-1);
             anim.SetBool("Dead", true);
             if (Random.value < idleChatterPlayPercentage)
@@ -198,6 +220,7 @@ public class RoamingMeleeEnemy : MonoBehaviour, IDamage, IPhysics
     //Destorys the enemy after a specified amount of time
     IEnumerator Despawn()
     {
+        EnableRagdoll();
         yield return new WaitForSeconds(despawnTime);
         Destroy(gameObject);
     }
@@ -243,5 +266,58 @@ public class RoamingMeleeEnemy : MonoBehaviour, IDamage, IPhysics
         yield return new WaitForSeconds(idleCoolDown);
 
     }
+    IEnumerator Squish()
+    {
+        Vector3 origScale = new Vector3(gameObject.transform.localScale.x, 0.5f, gameObject.transform.localScale.z);
+        Vector3 toSquish = new Vector3(gameObject.transform.localScale.x, gameObject.transform.localScale.y - squishOnY, gameObject.transform.localScale.z);
 
+
+
+        float timeElapsed = 0;
+
+        while (timeElapsed < timeToReturnY)
+        {
+            float t = timeElapsed / timeToReturnY;
+            gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, toSquish, curve.Evaluate(t));
+            timeElapsed += Time.deltaTime;
+
+        }
+        yield return new WaitForSeconds(0.1f);
+
+        timeElapsed = 0;
+        while (timeElapsed < timeToReturnY)
+        {
+            float t = timeElapsed / timeToReturnY;
+            gameObject.transform.localScale = Vector3.Lerp(gameObject.transform.localScale, origScale, curve.Evaluate(t));
+            timeElapsed += Time.deltaTime;
+
+        }
+        yield return new WaitForSeconds(0.1f);
+
+
+
+    }
+
+    void DisableRagDoll()
+    {
+        foreach (var rigidbody in rigidBodies)
+        {
+            rigidbody.isKinematic = true;
+        }
+        //anim.enabled = true;
+        //charController.enabled = true;
+    }
+
+    void EnableRagdoll()
+    {
+        anim.enabled = false;
+        if (charController != null)
+        {
+            charController.enabled = false;
+        }
+        foreach (var rigidbody in rigidBodies)
+        {
+            rigidbody.isKinematic = false;
+        }
+    }
 }
