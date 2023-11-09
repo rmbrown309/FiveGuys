@@ -13,14 +13,17 @@ MonoBehaviour:
   m_Name: BurgerGunStats
   m_EditorClassIdentifier: 
   weaponID: 0
+  ammoID: 0
   shootRate: 0.75
   shootDamage: 2
   shootTime: 3
   ammoCur: 49
   ammoMax: 50
-  cost: 15
+  cost: 0
   gunName: Def Burger Gun
   isShotgun: 1
+  isM16: 0
+  isPowerWeapon: 0
   numOfPellets: 1
   horizSpread: 0
   vertSpread: 0
@@ -29,4 +32,7 @@ MonoBehaviour:
   bullet: {fileID: 3773670445560834378, guid: 11797fb46023f3445838bd4a651a02d3, type: 3}
   hitEffect: {fileID: 6327853518906024368, guid: 349d4a817e629c04696c63e33888d7ad, type: 3}
   shootSound: {fileID: 8300000, guid: 6fe3040ce47e8f2448dacb0e96aa0ea4, type: 3}
-  audShotVol: 0.5
+  audShotVol: 0.526
+  xOffset: 0
+  yOffset: 0
+  zOffset: 0

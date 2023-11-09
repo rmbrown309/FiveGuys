@@ -49,6 +49,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 5
+  explosionForce: 30
   explosionFX: {fileID: 7843444501013094997, guid: f71450226ad8dcf4f8fa6574bc8fdf8f, type: 3}
 --- !u!33 &1422047076266781535
 MeshFilter:

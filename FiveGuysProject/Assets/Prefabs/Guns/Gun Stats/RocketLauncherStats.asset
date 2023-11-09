@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: RocketLauncherStats
   m_EditorClassIdentifier: 
   weaponID: 7
+  ammoID: 4
   shootRate: 1
   shootDamage: 5
   shootTime: 1

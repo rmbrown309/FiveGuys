@@ -17,6 +17,8 @@ public class PowerUp : MonoBehaviour
     [SerializeField] float rotationSpeed;
     [SerializeField] float duration;
     [SerializeField] float heightUp;
+    [SerializeField] GameObject hudSound;
+    [SerializeField] AudioClip[] pickedUpSound;
     float rand;
     Vector3 origPosition;
     // Start is called before the first frame update
@@ -55,8 +57,8 @@ public class PowerUp : MonoBehaviour
             {
                 case 1:
                     //Debug.Log("jump");
+                    
                     powerUp.JumpPower(newJumpMax);
-
                     Destroy(gameObject);
                     break;
                 case 2:
@@ -82,7 +84,7 @@ public class PowerUp : MonoBehaviour
                     //powerUp.EnemyHealthDown(newEnemyHealthDown);
                     //
                     //Destroy(gameObject);
-
+                    //GameManager.instance.weaponPower = true;
                     powerUp.SuperWeapons();
                     Destroy(gameObject);
                     break;

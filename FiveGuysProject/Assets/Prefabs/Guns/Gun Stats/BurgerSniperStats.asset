@@ -13,14 +13,17 @@ MonoBehaviour:
   m_Name: BurgerSniperStats
   m_EditorClassIdentifier: 
   weaponID: 2
+  ammoID: 2
   shootRate: 1.5
   shootDamage: 5
   shootTime: 3
   ammoCur: 25
   ammoMax: 25
-  cost: 25
+  cost: 0
   gunName: Burger Sniper
   isShotgun: 0
+  isM16: 0
+  isPowerWeapon: 0
   numOfPellets: 1
   horizSpread: 0
   vertSpread: 0
@@ -29,4 +32,7 @@ MonoBehaviour:
   bullet: {fileID: 3773670445560834378, guid: 3905d5c52e14c9e4783a2daa23db404e, type: 3}
   hitEffect: {fileID: 6327853518906024368, guid: 349d4a817e629c04696c63e33888d7ad, type: 3}
   shootSound: {fileID: 8300000, guid: ab7331ded0d25d04e8b3a32ff427af4a, type: 3}
-  audShotVol: 0.179
+  audShotVol: 0.526
+  xOffset: 0
+  yOffset: 0
+  zOffset: 0

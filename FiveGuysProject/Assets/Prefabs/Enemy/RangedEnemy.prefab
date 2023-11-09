@@ -723,7 +723,6 @@ MonoBehaviour:
   powerSpawnPercentage: 0.197
   anim: {fileID: 3107407739961388398}
   damageCol: {fileID: 461651059367234356}
-  ragdoll: {fileID: 3344540303277351420, guid: 81cd1f5b0df51b44086e856a53b90cc1, type: 3}
   HP: 3
   targetFaceSpeed: 6
   viewAngle: 90
@@ -731,6 +730,7 @@ MonoBehaviour:
   pushBackResolve: 4
   squishOnY: 0.1
   timeToReturnY: 5
+  afterHitTime: 0
   curve:
     serializedVersion: 2
     m_Curve:

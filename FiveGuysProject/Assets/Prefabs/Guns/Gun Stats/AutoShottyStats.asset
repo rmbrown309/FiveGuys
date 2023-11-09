@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: AutoShottyStats
   m_EditorClassIdentifier: 
   weaponID: 4
+  ammoID: 3
   shootRate: 0.25
   shootDamage: 0.38
   shootTime: 0.4
@@ -21,6 +22,8 @@ MonoBehaviour:
   cost: 0
   gunName: Automatic Shotgun
   isShotgun: 1
+  isM16: 0
+  isPowerWeapon: 0
   numOfPellets: 6
   horizSpread: 0
   vertSpread: 0.5
@@ -30,3 +33,6 @@ MonoBehaviour:
   hitEffect: {fileID: 0}
   shootSound: {fileID: 0}
   audShotVol: 0.5
+  xOffset: 0
+  yOffset: 0
+  zOffset: 0

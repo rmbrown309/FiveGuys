@@ -11,6 +11,8 @@ public class PlayerBullet : MonoBehaviour
     [SerializeField] int speed;
     [SerializeField] float destroyTime;
     [SerializeField] ParticleSystem hitEffect;
+    public float forceMagnitude;
+
 
 
     void Start()
@@ -31,6 +33,7 @@ public class PlayerBullet : MonoBehaviour
 
         if (damageable != null)
         {
+    
             damageable.takeDamage(damage);
 
         }
@@ -39,6 +42,8 @@ public class PlayerBullet : MonoBehaviour
         {
             Instantiate(hitEffect, transform.position, Quaternion.identity);
         }
+
+      
 
         Destroy(gameObject);
     }
@@ -51,5 +56,10 @@ public class PlayerBullet : MonoBehaviour
     public void sethitEffect(ParticleSystem gunHitEffect)
     {
         hitEffect = gunHitEffect;
+    }
+
+    public void setForceMagnitude(float mag)
+    {
+        forceMagnitude = mag;
     }
 }

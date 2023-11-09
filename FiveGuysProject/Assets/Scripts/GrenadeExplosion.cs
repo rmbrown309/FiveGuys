@@ -5,6 +5,7 @@ using UnityEngine;
 public class GrenadeExplosion : MonoBehaviour
 {
     [SerializeField] float damage;
+    [SerializeField] float explosionForce;
     [SerializeField] ParticleSystem explosionFX;
 
     // Start is called before the first frame update
@@ -36,8 +37,10 @@ public class GrenadeExplosion : MonoBehaviour
         IPhysics phys = other.GetComponent<IPhysics>();
         if (phys != null)
         {
-            phys.TakePhysics((transform.position - other.transform.position).normalized * (damage * 15));
+            phys.TakePhysics((transform.position - other.transform.position).normalized * (damage * explosionForce));
         }
         Destroy(gameObject);
     }
+
+
 }

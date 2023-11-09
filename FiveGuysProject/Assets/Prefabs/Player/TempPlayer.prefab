@@ -255,7 +255,9 @@ MonoBehaviour:
   jumpMax: 1
   jumpHeight: 10
   gravityValue: -25
+  jumpedTimes: 0
   healthRegainSpeed: 4
+  collectedItems: 0
   gunList: []
   defGun: {fileID: 11400000, guid: bb4956d9fec47224d896cb688ed78b87, type: 2}
   SuperGuns:
@@ -273,6 +275,7 @@ MonoBehaviour:
   maxSprayAmmo: 20
   currSprayAmmo: 0
   sprayRegenSpeed: 2
+  sprayWeaponActive: 0
   shoveCooldown: 2
   shoveForce: 30
   waitT: 8
@@ -424,7 +427,7 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
+  MinDistance: 14.784351
   MaxDistance: 500
   Pan2D: 0
   rolloffMode: 0

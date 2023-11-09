@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [Range(1, 3)] [SerializeField] int jumpMax; // number of jumps player can perform before landing
     [Range(8, 30)] [SerializeField] float jumpHeight;
     [Range(-10, -40)] [SerializeField] float gravityValue;
+    public int jumpedTimes;
     [SerializeField] float healthRegainSpeed;
     [SerializeField] int collectedItems;
     [Header("----- Gun Stats -----")]
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [SerializeField] float shootRate;
     [SerializeField] float startDamage;
     int weaponID;
+    public int ammoID { get; set; }
     [Header("----- Grenade Stats -----")]
     [SerializeField] GameObject grenade;
     [SerializeField] float tossRate;
@@ -63,7 +65,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     private Vector3 move;
-    private int jumpedTimes;
     private float gunDamage;
     private float extraDamage;
 
@@ -138,6 +139,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
                 else
                 {
                     StartCoroutine(Shoot());
+
+       
                 }
             }
             if (gunList[selectedGun].ammoCur != 0 && gunList[selectedGun].isShotgun)
@@ -384,6 +387,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             CD--;
             if (CD <= 1)
             {
+                GameManager.instance.jumpPower = false;
                 GameManager.instance.jumpPowerCoolDown.CrossFadeAlpha(0, 1, false);
                 GameManager.instance.jumpPowerImage.CrossFadeAlpha(0, 1, false);
             }
@@ -391,7 +395,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             //if the player got damaged while regen, exit regen state
         }
 
-        GameManager.instance.powerJumpActive.SetActive(false);
+       // GameManager.instance.powerJumpActive.SetActive(false);
         jumpMax = origJump;
     }
     IEnumerator SpeedPowerCooldown()
@@ -409,6 +413,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             CD--;
             if (CD <= 1)
             {
+                GameManager.instance.speedPower = false;
                 GameManager.instance.speedPowerCoolDown.CrossFadeAlpha(0, 1, false);
                 GameManager.instance.speedPowerImage.CrossFadeAlpha(0, 1, false);
             }
@@ -417,7 +422,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             //if the player got damaged while regen, exit regen state
         }
 
-        GameManager.instance.powerSpeedActive.SetActive(false);
+       // GameManager.instance.powerSpeedActive.SetActive(false);
 
         playerSpeed = OrigSpeed;
         if (isSprinting)
@@ -441,6 +446,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             CD--;
             if (CD <= 1)
             {
+                GameManager.instance.invulnerablePower = false;
                 GameManager.instance.healthPowerCoolDown.CrossFadeAlpha(0, 1, false);
                 GameManager.instance.healthPowerImage.CrossFadeAlpha(0, 1, false);
             }
@@ -448,7 +454,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             //if the player got damaged while regen, exit regen state
         }
 
-        GameManager.instance.powerHealthActive.SetActive(false);
+        //GameManager.instance.powerHealthActive.SetActive(false);
         isInvulnerable = false;
     }
     IEnumerator ShootRatePowerCooldown()
@@ -465,6 +471,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             CD--;
             if (CD <= 1)
             {
+                GameManager.instance.fireSpeedPower = false;
                 GameManager.instance.shootPowerCoolDown.CrossFadeAlpha(0, 1, false);
                 GameManager.instance.shootPowerImage.CrossFadeAlpha(0, 1, false);
             }
@@ -472,7 +479,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             //if the player got damaged while regen, exit regen state
         }
 
-        GameManager.instance.powerShootActive.SetActive(false);
+       //GameManager.instance.powerShootActive.SetActive(false);
         shootRate = gunList[selectedGun].shootRate;
     }
     IEnumerator EnemyHpPowerCooldown()
@@ -522,12 +529,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     IEnumerator PowerTextCD(string typeCD)
     {
         GameManager.instance.SetPowerText(typeCD);
+        GameManager.instance.powerText = true;
         GameManager.instance.PowerText.SetActive(true);
-        Debug.Log(true);
+        //Debug.Log(true);
         yield return new WaitForSeconds(2);
-        Debug.Log(typeCD);
+        //Debug.Log(typeCD);
+
+        //GameManager.instance.powerText = false;
         GameManager.instance.PowerText.SetActive(false);
-        Debug.Log(false);
+        //Debug.Log(false);
     }
     public void JumpPower(int jumps)
     {
@@ -536,6 +546,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             StopCoroutine(powerUpCorutine[0]);
             StopCoroutine(PowerTextCD("Double Jump"));
         }
+        GameManager.instance.jumpPower = true;
         jumpMax = jumps;
         StartCoroutine(PowerTextCD("Double Jump"));
         powerUpCorutine[0] = JumpPowerCooldown();
@@ -553,7 +564,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         {
             playerSpeed = speed * sprintMod;
         }
-
+        GameManager.instance.speedPower = true;
         StartCoroutine(PowerTextCD("Speed Boost"));
         powerUpCorutine[1] = SpeedPowerCooldown();
         StartCoroutine(powerUpCorutine[1]);
@@ -583,6 +594,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             StopCoroutine(PowerTextCD("Invulnerable"));
         }
         isInvulnerable = true;
+        GameManager.instance.invulnerablePower = true;
         StartCoroutine(PowerTextCD("Invulnerable"));
         powerUpCorutine[2] = InvulnerableCooldown();
         StartCoroutine(powerUpCorutine[2]);
@@ -594,6 +606,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             StopCoroutine(powerUpCorutine[3]);
             StopCoroutine(PowerTextCD("Rapid Fire"));
         }
+        GameManager.instance.fireSpeedPower = true;
         shootRate /= shoot;
         StartCoroutine(PowerTextCD("Rapid Fire"));
         powerUpCorutine[3] = ShootRatePowerCooldown();
@@ -777,7 +790,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             bullet.GetComponent<PlayerBullet>().damage = gun.shootDamage + extraDamage;
             bullet.GetComponent<PlayerBullet>().setDestroyTime(gun.shootTime);
             bullet.GetComponent<PlayerBullet>().sethitEffect(gun.hitEffect);
+
         }
+        ammoID = gun.ammoID;
         weaponID = gun.weaponID;
         shootRate = gun.shootRate;
         //model
@@ -793,6 +808,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     {
         return weaponID;
     }
+    
 
     IEnumerator Burst()
     {
@@ -909,35 +925,5 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     {
         return collectedItems;
     }
-    //void selectGun()
-    //{
-    //    if (Input.GetAxis("Mouse ScrollWheel") > 0 && selectedGun < gunList.Count - 1)
-    //    {
-    //        selectedGun++;
-    //        changeGun();
-
-    //    }
-    //    else if (Input.GetAxis("Mouse ScrollWheel") < 0 && selectedGun > 0)
-    //    {
-    //        selectedGun--;
-    //        changeGun();
-    //    }
-    //}
-
-    //void changeGun()
-    //{
-    //    startDamage = gunList[selectedGun].shootDamage;
-    //    shootRate = gunList[selectedGun].shootRate;
-    //    bullet = gunList[selectedGun].bullet;
-    //    bullet.GetComponent<PlayerBullet>().damage = gunList[selectedGun].shootDamage;
-    //    bullet.GetComponent<PlayerBullet>().setDestroyTime(gunList[selectedGun].shootTime);
-    //    bullet.GetComponent<PlayerBullet>().sethitEffect(gunList[selectedGun].hitEffect);
-
-
-
-
-    //    //model
-    //    gunModel.GetComponent<MeshFilter>().sharedMesh = gunList[selectedGun].model.GetComponent<MeshFilter>().sharedMesh;
-    //    gunModel.GetComponent<MeshRenderer>().sharedMaterial = gunList[selectedGun].model.GetComponent<MeshRenderer>().sharedMaterial;
-    //}
+    
 }

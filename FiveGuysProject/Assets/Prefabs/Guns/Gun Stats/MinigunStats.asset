@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: MinigunStats
   m_EditorClassIdentifier: 
   weaponID: 9
+  ammoID: 4
   shootRate: 0.03
   shootDamage: 0.8
   shootTime: 1
