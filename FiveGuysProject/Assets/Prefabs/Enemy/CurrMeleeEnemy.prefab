@@ -3232,7 +3232,7 @@ GameObject:
   - component: {fileID: 8243186870551838647}
   - component: {fileID: -9136308072417195831}
   m_Layer: 6
-  m_Name: MeleeEnemy.V2
+  m_Name: CurrMeleeEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3392,7 +3392,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1fb3bfbe057803d4ca7960e92239d55f, type: 3}
   - {fileID: 8300000, guid: f41fdfe3b1071df499c6887a0bcb09c8, type: 3}
   - {fileID: 8300000, guid: 3d0ebe4c7a285c94f9a9341b6215d6d0, type: 3}
-  idleChatterPlayPercentage: 0.03
+  idleChatterPlayPercentage: 0.025
   idleCoolDown: 5
 --- !u!136 &2106942561573662265
 CapsuleCollider:
