@@ -17,6 +17,8 @@ public class PowerUp : MonoBehaviour
     [SerializeField] float rotationSpeed;
     [SerializeField] float duration;
     [SerializeField] float heightUp;
+    [SerializeField] GameObject hudSound;
+    [SerializeField] AudioClip[] pickedUpSound;
     float rand;
     Vector3 origPosition;
     // Start is called before the first frame update

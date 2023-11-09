@@ -47,6 +47,7 @@ public class GunPickups : MonoBehaviour
         if(GameManager.instance.playerScript.ammoID == 4)
         {
             //Debug.Log("isPowerWeapon");
+            
             WeaponOffAnimation(lastWeaponID);
             WeaponOnAnimation(GameManager.instance.playerScript.ammoID);
             isPowerWeapon = true;

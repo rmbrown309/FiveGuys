@@ -6768,6 +6768,42 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1429062012567062439, guid: e3f1fce89b85f1c4b953ab1de12a5350, type: 3}
+      propertyPath: m_Center.x
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1429062012567062439, guid: e3f1fce89b85f1c4b953ab1de12a5350, type: 3}
+      propertyPath: m_Center.y
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1429062012567062439, guid: e3f1fce89b85f1c4b953ab1de12a5350, type: 3}
+      propertyPath: m_Direction
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3370799874020785060, guid: e3f1fce89b85f1c4b953ab1de12a5350, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.525
+      objectReference: {fileID: 0}
+    - target: {fileID: 3370799874020785060, guid: e3f1fce89b85f1c4b953ab1de12a5350, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4565666117487211072, guid: e3f1fce89b85f1c4b953ab1de12a5350, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5788928004669582560, guid: e3f1fce89b85f1c4b953ab1de12a5350, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5788928004669582560, guid: e3f1fce89b85f1c4b953ab1de12a5350, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5788928004669582560, guid: e3f1fce89b85f1c4b953ab1de12a5350, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5788928004669582560, guid: e3f1fce89b85f1c4b953ab1de12a5350, type: 3}
       propertyPath: m_LocalPosition.x
       value: -24.660877
@@ -6808,14 +6844,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7976005292892088786, guid: e3f1fce89b85f1c4b953ab1de12a5350, type: 3}
-      propertyPath: HP
-      value: 4
+    - target: {fileID: 7452925242223131254, guid: e3f1fce89b85f1c4b953ab1de12a5350, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.25
       objectReference: {fileID: 0}
-    - target: {fileID: 7976005292892088786, guid: e3f1fce89b85f1c4b953ab1de12a5350, type: 3}
-      propertyPath: bullet
-      value: 
-      objectReference: {fileID: 5733821045603122584, guid: 3d842c8ae8dd76444a75106a6c7f4488, type: 3}
+    - target: {fileID: 7452925242223131254, guid: e3f1fce89b85f1c4b953ab1de12a5350, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.35
+      objectReference: {fileID: 0}
+    - target: {fileID: 7452925242223131254, guid: e3f1fce89b85f1c4b953ab1de12a5350, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.85
+      objectReference: {fileID: 0}
     - target: {fileID: 8097287626997402112, guid: e3f1fce89b85f1c4b953ab1de12a5350, type: 3}
       propertyPath: m_Name
       value: BossCEO
