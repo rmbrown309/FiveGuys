@@ -16,6 +16,26 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] Collider damageCol;
     [SerializeField] ParticleSystem fireworks;
 
+    [Header("----- Audio Stuff -----")]
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip audShoot;
+    [Range(0, 1)][SerializeField] float audShootVol;
+    [SerializeField] AudioClip[] audDamage;
+    [Range(0, 1)][SerializeField] float audDamageVol;
+    [SerializeField] AudioClip audJump;
+    [Range(0, 1)][SerializeField] float audJumpVol;
+    [SerializeField] AudioClip audQuake;
+    [Range(0, 1)][SerializeField] float audQuakeVol;
+    [SerializeField] AudioClip audStunned;
+    [Range(0, 1)][SerializeField] float audStunnedVol;
+    [SerializeField] AudioClip audChargeUp;
+    [Range(0, 1)][SerializeField] float audChargeUpVol;
+    [SerializeField] AudioClip audPhaseChange;
+    [Range(0, 1)][SerializeField] float audPhaseChangeVol;
+    [SerializeField] AudioClip audFireworks;
+    [Range(0, 1)][SerializeField] float audFireworksVol;
+
+
     [Header("----- Enemy Stats -----")]
     [SerializeField] float HP;
     [SerializeField] float speed;
@@ -124,6 +144,8 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
 
         targetPosition -= new Vector3(1, 1, 1);
 
+        aud.PlayOneShot(audJump, audJumpVol);
+
         for (float time = 0; time < 1; time += Time.deltaTime * jumpSpeed)
         {
             transform.position = Vector3.Lerp(startingPosition, (targetPosition), time) + (Vector3.up * jumpHeight) * jumpCurve.Evaluate(time);
@@ -149,6 +171,7 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
                 playerHit.takeDamage(jumpDamage);
         }
 
+        aud.PlayOneShot(audQuake, audQuakeVol);
         jumpQuake.Play();
 
         isJumping = false;
@@ -182,10 +205,17 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
         while (!isStunned && HP < OrigHP)
         {
             guardChargeUp.Play();
+            aud.PlayOneShot(audChargeUp, audChargeUpVol);
+            if (isStunned)
+            {
+                guardChargeUp.Stop();
+                break;
+            }
             yield return new WaitForSeconds(guardHealRate);
             guardChargeUp.Stop();
             if (isStunned) break;
             HP += guardHealAmount;
+            aud.PlayOneShot(audQuake, audQuakeVol);
             guardQuake.Play();
             Collider[] hits = Physics.OverlapSphere(transform.position, guardQuakeRadius);
             foreach (Collider c in hits)
@@ -214,7 +244,7 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
     {
         anim.SetBool("Guard", false);
         anim.SetBool("Stunned", true);
-        model.material.color = Color.black;
+        aud.PlayOneShot(audStunned, audStunnedVol);
         agent.enabled = false;
         GameManager.instance.playerScript.ShootRate(2);
 
@@ -244,12 +274,15 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
         anim.SetTrigger("Shoot");
 
         yield return new WaitForSeconds(0.2f);
+        aud.PlayOneShot(audShoot, audShootVol);
         GameObject currBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
         currBullet.transform.forward = playerDir.normalized;
         yield return new WaitForSeconds(0.08f);
+        aud.PlayOneShot(audShoot, audShootVol);
         currBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
         currBullet.transform.forward = playerDir.normalized;
         yield return new WaitForSeconds(0.08f);
+        aud.PlayOneShot(audShoot, audShootVol);
         currBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
         currBullet.transform.forward = playerDir.normalized;
 
@@ -281,6 +314,7 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
     {
         if (!isGuarding)
         {
+            aud.PlayOneShot(audDamage[Random.Range(0, audDamage.Length)], audDamageVol);
             HP -= amount;
             //To fix bug of not turning the hit collider off when taking damage
             if (meleeCol != null)
@@ -301,6 +335,7 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
                 anim.SetBool("Dead", true);
                 
                 fireworks.Play();
+                aud.PlayOneShot(audFireworks, audFireworksVol);
 
                 StopAllCoroutines();
                 GameManager.instance.IncreasePlayerScore(100);
@@ -324,6 +359,7 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
         phaseOne = false;
         agent.enabled = false;
         damageCol.enabled = false;
+        aud.PlayOneShot(audPhaseChange, audPhaseChangeVol);
         yield return new WaitForSeconds(3);
 
         anim.SetBool("Guard", false);
