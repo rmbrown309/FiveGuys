@@ -42,6 +42,8 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] AudioClip[] idleChatter;
     [Range(0, 1)] [SerializeField] float idleChatterPlayPercentage;
     [SerializeField] float idleCoolDown;
+    [Range(0, 1)] [SerializeField] float hitMarkerVol;
+    [SerializeField] AudioClip[] hitMarkerAud;
 
     //ragdoll shennanigans
     private Rigidbody[] rigidBodies;
@@ -125,6 +127,8 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage, IPhysics
     }
     public void takeDamage(float amount)
     {
+        aud.pitch = Random.Range(0.95f, 1.05f);
+        aud.PlayOneShot(hitMarkerAud[Random.Range(0, hitMarkerAud.Length)], hitMarkerVol);
         HP -= amount;
         //To fix bug of not turning the hit collider off when taking damage
         if (meleeCol != null)

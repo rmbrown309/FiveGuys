@@ -42,6 +42,8 @@ public class BigSmelly : MonoBehaviour, IDamage, IPhysics
     [SerializeField] AudioClip[] idleChatter;
     [Range(0, 1)][SerializeField] float idleChatterPlayPercentage;
     [SerializeField] float idleCoolDown;
+    [Range(0, 1)] [SerializeField] float hitMarkerVol;
+    [SerializeField] AudioClip[] hitMarkerAud;
 
     bool isShooting;
     private Vector3 pushBack;
@@ -102,6 +104,8 @@ public class BigSmelly : MonoBehaviour, IDamage, IPhysics
     }
     public void takeDamage(float amount)
     {
+        aud.pitch = Random.Range(0.95f, 1.05f);
+        aud.PlayOneShot(hitMarkerAud[Random.Range(0, hitMarkerAud.Length)], hitMarkerVol);
         HP -= amount;
         agent.SetDestination(GameManager.instance.player.transform.position);
         if (agent.remainingDistance < agent.stoppingDistance)

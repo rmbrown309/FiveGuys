@@ -27,6 +27,8 @@ public class BigDrunk : MonoBehaviour, IDamage
     [SerializeField] AudioSource aud;
     [SerializeField] AudioClip[] bossbark;
     [Range(0, 1)][SerializeField] float bossBarkVol;
+    [Range(0, 1)] [SerializeField] float hitMarkerVol;
+    [SerializeField] AudioClip[] hitMarkerAud;
 
     private Rigidbody[] rigidBodies;
     private CharacterController charController;
@@ -84,6 +86,8 @@ public class BigDrunk : MonoBehaviour, IDamage
     }
     public void takeDamage(float amount)
     {
+        aud.pitch = Random.Range(0.95f, 1.05f);
+        aud.PlayOneShot(hitMarkerAud[Random.Range(0, hitMarkerAud.Length)], hitMarkerVol);
         HP -= amount;
         agent.SetDestination(GameManager.instance.player.transform.position);
         if (agent.remainingDistance < agent.stoppingDistance)

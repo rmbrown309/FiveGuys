@@ -3394,6 +3394,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3d0ebe4c7a285c94f9a9341b6215d6d0, type: 3}
   idleChatterPlayPercentage: 0.025
   idleCoolDown: 5
+  hitMarkerVol: 0.2
+  hitMarkerAud:
+  - {fileID: 8300000, guid: bd6250eaaeb1ac94e83a3c5bc3b22e61, type: 3}
 --- !u!136 &2106942561573662265
 CapsuleCollider:
   m_ObjectHideFlags: 0

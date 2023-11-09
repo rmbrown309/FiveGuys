@@ -16,6 +16,8 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
     [Range(0, 1)][SerializeField] float powerSpawnPercentage;
     [SerializeField] Animator anim;
     [SerializeField] Collider damageCol;
+    [SerializeField] ParticleSystem spawnFx;
+
     //[SerializeField] GameObject ragdoll;
 
     [Header("----- Enemy Stats -----")]
@@ -44,6 +46,10 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] AudioClip[] idleChatter;
     [Range(0, 1)] [SerializeField] float idleChatterPlayPercentage;
     [SerializeField] float idleCoolDown;
+    [Range(0, 1)] [SerializeField] float throwVol;
+    [SerializeField] AudioClip[] throwAud;
+    [Range(0, 1)] [SerializeField] float hitMarkerVol;
+    [SerializeField] AudioClip[] hitMarkerAud;
 
     //ragdoll shennanigans
     private Rigidbody[] rigidBodies;
@@ -61,6 +67,9 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
         rigidBodies = GetComponentsInChildren<Rigidbody>();
         charController = GetComponent<CharacterController>();
         DisableRagDoll();
+        Vector3 pos = new Vector3(transform.position.x, transform.position.y+0.1f, transform.position.z);
+        //Instantiate(spawnFx, pos, transform.rotation);
+
     }
     void Start()
     {
@@ -104,6 +113,10 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
     IEnumerator shoot()
     {
         isShooting = true;
+ 
+        aud.pitch = Random.Range(0.95f, 1.05f);
+        aud.PlayOneShot(throwAud[Random.Range(0, throwAud.Length)], throwVol);
+
         anim.SetTrigger("Shoot");
         //CreateBullet();
         //GameObject currBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
@@ -123,6 +136,8 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
     //triggers the flash for when the enemy takes damage and flashs to let the player know. 
     public void takeDamage(float amount)
     {
+        aud.pitch = Random.Range(0.95f, 1.05f);
+        aud.PlayOneShot(hitMarkerAud[Random.Range(0, hitMarkerAud.Length)], hitMarkerVol);
         HP -= amount;
         agent.SetDestination(GameManager.instance.player.transform.position);
         if (agent.remainingDistance < agent.stoppingDistance) 

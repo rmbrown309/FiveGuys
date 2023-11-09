@@ -576,7 +576,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2833051387856501238}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 15.271823, y: -0.061476707, z: -25.586761}
   m_LocalScale: {x: 1, y: 1.8992, z: 1.8119}
   m_ConstrainProportionsScale: 0
@@ -637,42 +637,6 @@ MonoBehaviour:
   viewAngle: 90
   despawnTime: 0.2
   pushBackResolve: 0
-  squishOnY: 0.05
-  timeToReturnY: 5
-  afterHitTime: 0.1
-  curve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 3.4339623
-      outSlope: 3.4339623
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.125
-    - serializedVersion: 3
-      time: 0.4958313
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.40335894
-      outWeight: 0.36666667
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: -4.025369
-      outSlope: -4.025369
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.064045876
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
   bullet: {fileID: 1214147759416653589, guid: 52c43b34cef97b3449fec611bd559a3e, type: 3}
   shootRate: 0.5
   shootAngle: 30
@@ -704,6 +668,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 3d0ebe4c7a285c94f9a9341b6215d6d0, type: 3}
   idleChatterPlayPercentage: 0.02
   idleCoolDown: 10
+  hitMarkerVol: 0.2
+  hitMarkerAud:
+  - {fileID: 8300000, guid: bd6250eaaeb1ac94e83a3c5bc3b22e61, type: 3}
 --- !u!135 &1182542226341216420
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -14,7 +14,6 @@ public class PlayerBullet : MonoBehaviour
     public float forceMagnitude;
 
 
-
     void Start()
     {
         rb.velocity = transform.forward * speed;

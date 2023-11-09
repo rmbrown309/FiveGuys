@@ -1533,6 +1533,7 @@ MonoBehaviour:
   powerSpawnPercentage: 0.197
   anim: {fileID: 1530286242979452941}
   damageCol: {fileID: 8453301650247061075}
+  spawnFx: {fileID: 0}
   HP: 3
   targetFaceSpeed: 6
   viewAngle: 90
@@ -1605,8 +1606,16 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 1fb3bfbe057803d4ca7960e92239d55f, type: 3}
   - {fileID: 8300000, guid: f41fdfe3b1071df499c6887a0bcb09c8, type: 3}
   - {fileID: 8300000, guid: 3d0ebe4c7a285c94f9a9341b6215d6d0, type: 3}
-  idleChatterPlayPercentage: 0.025
-  idleCoolDown: 15
+  idleChatterPlayPercentage: 0.001
+  idleCoolDown: 30
+  throwVol: 0.4
+  throwAud:
+  - {fileID: 8300000, guid: 8bb0ca97653d55a4eaaff060f00c7ef0, type: 3}
+  - {fileID: 8300000, guid: 9b41e2f974b85ec4fb034814bb26f9eb, type: 3}
+  - {fileID: 8300000, guid: c931741c56ce2874d8c48c0c57823307, type: 3}
+  hitMarkerVol: 0.2
+  hitMarkerAud:
+  - {fileID: 8300000, guid: bd6250eaaeb1ac94e83a3c5bc3b22e61, type: 3}
 --- !u!82 &1333015283895114980
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1663,7 +1672,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.8
       inSlope: 0
       outSlope: 0
       tangentMode: 0
