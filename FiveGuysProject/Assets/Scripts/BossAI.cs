@@ -14,13 +14,13 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] Transform headPos;
     [SerializeField] Animator anim;
     [SerializeField] Collider damageCol;
+    [SerializeField] ParticleSystem fireworks;
 
     [Header("----- Enemy Stats -----")]
     [SerializeField] float HP;
     [SerializeField] float speed;
     [SerializeField] int targetFaceSpeed;
     [SerializeField] int viewAngle;
-    [SerializeField] int despawnTime;
 
     [Header("----- Melee Stats -----")]
     [SerializeField] float hitRate;
@@ -42,6 +42,7 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] float jumpCooldown = 4f;
     [SerializeField] float jumpQuakeRadius = 4f;
     [SerializeField] int jumpDamage = 1;
+    [SerializeField] ParticleSystem jumpQuake;
     public AnimationCurve jumpCurve;
     public bool isJumping;
 
@@ -55,6 +56,8 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] float guardQuakeRadius = 15f;
     [SerializeField] int guardQuakeDamage = 1;
     [SerializeField] float stunnedTime = 3f;
+    [SerializeField] ParticleSystem guardChargeUp;
+    [SerializeField] ParticleSystem guardQuake;
     public bool isGuarding;
     public bool isStunned;
 
@@ -87,13 +90,10 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
             playerDir = GameManager.instance.player.transform.position - headPos.position;
             angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
 
-            if (isStunned)
-                StartCoroutine(Stunned());
-
             if (!isGuarding && !isStunned)
                 agent.SetDestination(GameManager.instance.player.transform.position);
 
-            if (!isGuarding && !isStunned && !isMeleeing && !isShooting && !isJumping && (guardTime + guardCooldown < Time.time) && HP < OrigHP)
+            if (!isGuarding && !isStunned && !isMeleeing && !isShooting && !isJumping && (guardTime + guardCooldown < Time.time) && HP < OrigHP && HP > 0)
                 StartCoroutine(Guard());
 
             if (!isGuarding && !isStunned && agent.remainingDistance <= agent.stoppingDistance)
@@ -149,6 +149,8 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
                 playerHit.takeDamage(jumpDamage);
         }
 
+        jumpQuake.Play();
+
         isJumping = false;
 
     }
@@ -171,12 +173,20 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
             agent.enabled = false;
         }
 
+        if (NavMesh.SamplePosition(transform.position, out hit, 1f, NavMesh.AllAreas))
+        {
+            agent.Warp(hit.position);
+        }
         anim.SetBool("Guard", true);
 
         while (!isStunned && HP < OrigHP)
         {
+            guardChargeUp.Play();
             yield return new WaitForSeconds(guardHealRate);
+            guardChargeUp.Stop();
+            if (isStunned) break;
             HP += guardHealAmount;
+            guardQuake.Play();
             Collider[] hits = Physics.OverlapSphere(transform.position, guardQuakeRadius);
             foreach (Collider c in hits)
             {
@@ -189,7 +199,9 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
         guardTime = Time.time;
         isGuarding = false;
 
-        if(!isStunned)
+        if(isStunned)
+            StartCoroutine(Stunned());
+        else if(!isStunned)
         {
             anim.SetBool("Guard", false);
             model.material.color = Color.white;
@@ -228,8 +240,10 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
     IEnumerator shoot()
     {
         isShooting = true;
-        //anim.SetTrigger("Shoot");
 
+        anim.SetTrigger("Shoot");
+
+        yield return new WaitForSeconds(0.2f);
         GameObject currBullet = Instantiate(bullet, shootPos.position, Quaternion.identity);
         currBullet.transform.forward = playerDir.normalized;
         yield return new WaitForSeconds(0.08f);
@@ -281,18 +295,15 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
                 //is dead
                 GameManager.instance.FinalBossDead = true;
                 GameManager.instance.UpdateWinCondition(-GameManager.instance.enemiesRemain);
-                //anim.SetBool("Dead", true);
 
-                //Destroy(gameObject);
                 agent.enabled = false;
                 damageCol.enabled = false;
+                anim.SetBool("Dead", true);
+                
+                fireworks.Play();
+
                 StopAllCoroutines();
-                StartCoroutine(Despawn());
                 GameManager.instance.IncreasePlayerScore(100);
-            }
-            else
-            {
-                //anim.SetTrigger("Damage");
             }
         }
     }
@@ -318,7 +329,7 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
         anim.SetBool("Guard", false);
         yield return new WaitForSeconds(0.5f);
 
-        anim.SetBool("GlockOut", true);
+        anim.SetTrigger("GlockOut");
         OrigHP *= 2;
         HP = OrigHP;
         phaseTwoWeapon.SetActive(true);
@@ -326,13 +337,6 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
         damageCol.enabled = true;
         gameObject.GetComponent<SphereCollider>().radius = 6;
         phaseTwo = true;
-    }
-
-    //Destorys the enemy after a specified amount of time
-    IEnumerator Despawn()
-    {
-        yield return new WaitForSeconds(despawnTime);
-        Destroy(gameObject);
     }
 
     IEnumerator flashDamage()
