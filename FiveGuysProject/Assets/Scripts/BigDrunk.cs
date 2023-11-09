@@ -28,11 +28,21 @@ public class BigDrunk : MonoBehaviour, IDamage
     [SerializeField] AudioClip[] bossbark;
     [Range(0, 1)][SerializeField] float bossBarkVol;
 
+    private Rigidbody[] rigidBodies;
+    private CharacterController charController;
+
     bool isShooting;
     Vector3 playerDir;
     bool playerInRange;
     float angleToPlayer;
     Vector3 spawnPos;
+
+    void Awake()
+    {
+        rigidBodies = GetComponentsInChildren<Rigidbody>();
+        charController = GetComponent<CharacterController>();
+        DisableRagDoll();
+    }
 
     void Start()
     {
@@ -101,6 +111,7 @@ public class BigDrunk : MonoBehaviour, IDamage
     }
     IEnumerator Despawn()
     {
+        EnableRagdoll();
         yield return new WaitForSeconds(despawnTime);
         Destroy(gameObject);
     }
@@ -137,6 +148,29 @@ public class BigDrunk : MonoBehaviour, IDamage
         if (other.CompareTag("Player"))
         {
             playerInRange = false;
+        }
+    }
+
+    void DisableRagDoll()
+    {
+        foreach (var rigidbody in rigidBodies)
+        {
+            rigidbody.isKinematic = true;
+        }
+        //anim.enabled = true;
+        //charController.enabled = true;
+    }
+
+    void EnableRagdoll()
+    {
+        anim.enabled = false;
+        if (charController != null)
+        {
+            charController.enabled = false;
+        }
+        foreach (var rigidbody in rigidBodies)
+        {
+            rigidbody.isKinematic = false;
         }
     }
 }
