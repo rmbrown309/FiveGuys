@@ -11604,13 +11604,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2229921067853321028}
-  m_LocalRotation: {x: -0, y: -0, z: -0.0066232956, w: 0.99997807}
+  m_LocalRotation: {x: 0, y: 0, z: -0.0037523643, w: 0.99999297}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3.3590126, y: 0.19977012, z: 0.50401694}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1547003889592521855}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.759}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.43}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -412.57205, y: 126.932495}
@@ -26986,7 +26986,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7069118370208078179}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0.000000014901161, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.9851078, y: 2.0223346, z: 1.3801}
   m_ConstrainProportionsScale: 0
@@ -26999,7 +26999,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 819, y: 184.3}
+  m_AnchoredPosition: {x: 819, y: 227.9}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7084762403639166389
@@ -34011,13 +34011,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8002339978157781644}
-  m_LocalRotation: {x: -0, y: -0, z: -0.0071768905, w: 0.99997425}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3.590173, y: 0.2833963, z: 0.7245852}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1547003889592521855}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -0.822}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -412.57205, y: 126.932495}

@@ -1401,6 +1401,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 983847117315841641, guid: 089f673d38393c44d864c90346443dae, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3729133005928354883, guid: 089f673d38393c44d864c90346443dae, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4329847803612284773, guid: 089f673d38393c44d864c90346443dae, type: 3}
       propertyPath: WaveUIText
       value: 
@@ -1427,6 +1435,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5816811560092535341, guid: 089f673d38393c44d864c90346443dae, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7069118370208078179, guid: 089f673d38393c44d864c90346443dae, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7594770200883692418, guid: 089f673d38393c44d864c90346443dae, type: 3}
@@ -3024,7 +3036,7 @@ PrefabInstance:
     - target: {fileID: 3717848877053022123, guid: e2a57b18f852ce9489be17ece1fef0f4, type: 3}
       propertyPath: enemy.Array.data[0]
       value: 
-      objectReference: {fileID: 8817074539082394171, guid: 9801edb1cb5cf7046a3e0a34a5c6e3c0, type: 3}
+      objectReference: {fileID: 5695519092811183051, guid: a1f81af3db6385e49b62f0032363f070, type: 3}
     - target: {fileID: 3717848877053022123, guid: e2a57b18f852ce9489be17ece1fef0f4, type: 3}
       propertyPath: posToSpawn.Array.size
       value: 4

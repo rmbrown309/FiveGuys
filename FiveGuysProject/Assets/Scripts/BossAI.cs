@@ -71,7 +71,7 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
     [SerializeField] float maxRunawayDistance = 30f;
     [SerializeField] float runawaySpeed = 9f;
     [SerializeField] float guardCooldown = 20f;
-    [SerializeField] float guardHealRate = 1f;
+    [SerializeField] float guardQuakeRate = 1f;
     [SerializeField] float guardHealAmount = 1f;
     [SerializeField] float guardQuakeRadius = 15f;
     [SerializeField] int guardQuakeDamage = 1;
@@ -120,6 +120,9 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
             if (!isGuarding && !isStunned && agent.remainingDistance <= agent.stoppingDistance)
                 faceTarget();
 
+            if (phaseOne && HP <= 0 && !isJumping)
+                StartCoroutine(PhaseChange());
+
             if (!isGuarding && !isStunned && !isMeleeing && !isShooting && !isJumping && (jumpTime + jumpCooldown < Time.time) 
                 && (agent.remainingDistance >= jumpMinDistance) && (agent.remainingDistance <= jumpMaxDistance))
                 StartCoroutine(Jump(GameManager.instance.player.transform.position));
@@ -129,9 +132,6 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
 
             if (phaseTwo && angleToPlayer <= shootAngle && !isShooting && !isGuarding && !isStunned && playerInRange && damageCol.enabled)
                 StartCoroutine(shoot());
-
-            if (phaseOne && HP <= 0 && !isJumping)
-                StartCoroutine(PhaseChange());
             
         }
     }
@@ -212,10 +212,19 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
                 guardChargeUp.Stop();
                 break;
             }
-            yield return new WaitForSeconds(guardHealRate);
+            yield return new WaitForSeconds(guardQuakeRate / 2);
+            HP += guardHealAmount;
+            GameManager.instance.SetBossHealthBar(HP / OrigHP);
+            if (isStunned)
+            {
+                guardChargeUp.Stop();
+                break;
+            }
+            yield return new WaitForSeconds(guardQuakeRate / 2);
             guardChargeUp.Stop();
             if (isStunned) break;
             HP += guardHealAmount;
+            GameManager.instance.SetBossHealthBar(HP / OrigHP);
             aud.PlayOneShot(audQuake, audQuakeVol);
             guardQuake.Play();
             Collider[] hits = Physics.OverlapSphere(transform.position, guardQuakeRadius);
@@ -324,8 +333,6 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
                 hitColOff();
             }
             StartCoroutine(flashDamage());
-            if(!isJumping && !isStunned)
-                agent.SetDestination(GameManager.instance.player.transform.position);
             if (phaseTwo && HP <= 0)
             {
                 //is dead

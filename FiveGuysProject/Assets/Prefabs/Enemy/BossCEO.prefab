@@ -30018,7 +30018,7 @@ MonoBehaviour:
   audPhaseChangeVol: 0.35
   audFireworks: {fileID: 8300000, guid: a4cbac6c9854d5a40b6d2bf1716dc685, type: 3}
   audFireworksVol: 0.8
-  HP: 16
+  HP: 30
   speed: 8
   targetFaceSpeed: 4
   viewAngle: 90
@@ -30076,7 +30076,7 @@ MonoBehaviour:
   maxRunawayDistance: 30
   runawaySpeed: 10
   guardCooldown: 20
-  guardHealRate: 2
+  guardQuakeRate: 2
   guardHealAmount: 1
   guardQuakeRadius: 15
   guardQuakeDamage: 1
