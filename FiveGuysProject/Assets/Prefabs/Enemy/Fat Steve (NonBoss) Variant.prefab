@@ -74,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5073883104050998310, guid: 4b44e62f91fd75c4d9986c63809cdcf7, type: 3}
       propertyPath: HP
-      value: 7
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5073883104050998310, guid: 4b44e62f91fd75c4d9986c63809cdcf7, type: 3}
       propertyPath: bossBarkVol
