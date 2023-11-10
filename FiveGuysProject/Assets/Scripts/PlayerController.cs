@@ -66,6 +66,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [Range(0, 1)] [SerializeField] float audStepsVol;
     [SerializeField] AudioClip[] audShove;
     [Range(0, 1)][SerializeField] float audShoveVol;
+    [SerializeField] AudioClip[] audDeath;
+    [Range(0, 1)][SerializeField] float audDeathVol;
 
     private Vector3 playerVelocity;
     private bool groundedPlayer;
@@ -729,15 +731,20 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         if (!isInvulnerable)
         {
             HP -= amount;
-            aud.PlayOneShot(audDamage[Random.Range(0, audDamage.Length)], audDamageVol);
-            StartCoroutine(cam.ShakeCam(0.2f, 0.1f));
             isDamaged = true;
             UpdatePlayerUI();
 
             // Future Implementation for when a game over menu needs to appear
             if (HP < 1)
             {
+                aud.PlayOneShot(audDeath[Random.Range(0, audDeath.Length)], audDeathVol);
+                transform.Rotate(Vector3.forward, -75);
                 GameManager.instance.GameOver();
+            }
+            else
+            {
+                StartCoroutine(cam.ShakeCam(0.2f, 0.1f));
+                aud.PlayOneShot(audDamage[Random.Range(0, audDamage.Length)], audDamageVol);
             }
         }
     }
@@ -780,6 +787,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         bullet.GetComponent<PlayerBullet>().damage = gunDamage;
         GameManager.instance.playerHealthBar.CrossFadeAlpha(0, 0, false);
         controller.enabled = false;
+        transform.Rotate(Vector3.forward, 0f);
         transform.position = GameManager.instance.playerSpawnPoint.transform.position;
         controller.enabled = true;
     }
@@ -926,8 +934,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     {
         audDamageVol = newVolume;
         audJumpVol = newVolume;
-        audSprayVol = newVolume;
+        audSprayVol = newVolume/2;
         audStepsVol = newVolume/4;
+        audShoveVol = newVolume * 2;
+        audDeathVol = newVolume * 3;
     }
     public void SetCollectables(int item)
     {

@@ -1430,7 +1430,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 55
+        scalar: 15
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -5322,7 +5322,7 @@ ParticleSystemRenderer:
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MaxParticleSize: 0.05
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
@@ -6424,7 +6424,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 10
+        scalar: 5
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -10316,7 +10316,7 @@ ParticleSystemRenderer:
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MaxParticleSize: 0.05
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
@@ -11576,7 +11576,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 10
+        scalar: 5
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -15468,7 +15468,7 @@ ParticleSystemRenderer:
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MaxParticleSize: 0.05
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
@@ -15756,6 +15756,11 @@ MonoBehaviour:
   - {fileID: 8300000, guid: bf40d9271aba8fb4fa27992ed8f2582a, type: 3}
   - {fileID: 8300000, guid: ed51329ff680e834f9109d8dd84c88b0, type: 3}
   audShoveVol: 1
+  audDeath:
+  - {fileID: 8300000, guid: 9e45b2d6e1019e24bbd9b0f6f72c6dd3, type: 3}
+  - {fileID: 8300000, guid: 00164b6ffb5d7b242a25e87ef9612c47, type: 3}
+  - {fileID: 8300000, guid: ce775ade369addf4699911ab7c01b274, type: 3}
+  audDeathVol: 0.556
   isShoving: 0
   canMove: 0
 --- !u!143 &9198960336271817168
@@ -17048,7 +17053,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 10
+        scalar: 5
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -20940,7 +20945,7 @@ ParticleSystemRenderer:
   m_MeshDistribution: 0
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.5
+  m_MaxParticleSize: 0.05
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2
