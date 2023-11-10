@@ -96,6 +96,7 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
 
     void Start()
     {
+        GameManager.instance.SetBossBossObject(true);
         agent.speed = speed;
         OrigHP = HP;
     }
@@ -316,6 +317,7 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
         {
             aud.PlayOneShot(audDamage[Random.Range(0, audDamage.Length)], audDamageVol);
             HP -= amount;
+            GameManager.instance.SetBossHealthBar(HP/OrigHP);
             //To fix bug of not turning the hit collider off when taking damage
             if (meleeCol != null)
             {
@@ -368,6 +370,7 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
         anim.SetTrigger("GlockOut");
         OrigHP *= 2;
         HP = OrigHP;
+        GameManager.instance.SetBossHealthBar(HP / OrigHP);
         phaseTwoWeapon.SetActive(true);
         agent.enabled = true;
         damageCol.enabled = true;

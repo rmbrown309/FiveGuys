@@ -102,6 +102,8 @@ public class GameManager : MonoBehaviour
     private float fillTime;
     [SerializeField] Image shoveBar;
     [SerializeField] Slider slider;
+    [SerializeField] Image bossHealthBar;
+    [SerializeField] GameObject bossHealthObject;
     void Awake()
     {
         //initiallize player variables;
@@ -238,16 +240,16 @@ public class GameManager : MonoBehaviour
             if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1)
             {
                 StartCoroutine(NextLevelMenu(winMenu));
-
             }
             else
-            {
-                
-                StartCoroutine(NextLevelMenu(nextLevelMenu));
+            {                StartCoroutine(NextLevelMenu(nextLevelMenu));
 
             }
         }
-
+    }
+    public void SetBossBossObject(bool value)
+    {
+        bossHealthObject.SetActive(value);
     }
     public IEnumerator NextLevelMenu(GameObject Menu)
     {
@@ -376,7 +378,10 @@ public class GameManager : MonoBehaviour
         if(waveUIText != null)
             StartCoroutine(WaveUISpawnRoutine());
     }
-
+    public void SetBossHealthBar(float value)
+    {
+        bossHealthBar.fillAmount = value;
+    }
     IEnumerator WaveUISpawnRoutine()
     {
         WaveUIText.text = "Wave " + (waves);

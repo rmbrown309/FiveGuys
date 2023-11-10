@@ -42,12 +42,10 @@ public class HudAnimate : MonoBehaviour
             {
                 mAnimator.SetBool("isInformed", false);
                 PlaySwipingSound(informationReverseSwipe);
-
             }
             if (GameManager.instance.jumpPower)
             {
                 mAnimator.SetBool("isJumpOn", true);
-                
             }
             else
             {
