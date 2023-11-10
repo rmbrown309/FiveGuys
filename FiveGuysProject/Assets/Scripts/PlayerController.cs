@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [SerializeField] CharacterController controller;
     [SerializeField] Transform shootPos;
     [SerializeField] Transform shovePos;
-
+    
     [Header("----- Player Stats -----")]
     [Range(1, 15)] [SerializeField] float HP;
     [Range(1, 10)] [SerializeField] float playerSpeed;
@@ -44,6 +44,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [SerializeField] bool sprayWeaponActive;
 
     [Header("----- Shove Stats -----")]
+    [SerializeField] GameObject shoveHandModel;
+    [SerializeField] ParticleSystem shoveEffect;
     [SerializeField] float shoveCooldown;
     [SerializeField] int shoveForce;
 
@@ -61,6 +63,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [Range(0, 1)] [SerializeField] float audJumpVol;
     [SerializeField] AudioClip[] audSteps;
     [Range(0, 1)] [SerializeField] float audStepsVol;
+    [SerializeField] AudioClip[] audShove;
+    [Range(0, 1)][SerializeField] float audShoveVol;
 
     private Vector3 playerVelocity;
     private bool groundedPlayer;
@@ -362,6 +366,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     IEnumerator Shove()
     {
         isShoving = true;
+        shoveHandModel.SetActive(true);
+        aud.PlayOneShot(audShove[Random.Range(0, audShove.Length)], audShoveVol);
         GameManager.instance.ResetShoveUI();
         Collider[] hits = Physics.OverlapSphere(shovePos.position, 3);
         foreach (Collider c in hits)
@@ -370,7 +376,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             if (shoveable != null)
                 shoveable.TakePhysics(transform.forward * shoveForce);
         }
-        yield return new WaitForSeconds(shoveCooldown);
+        shoveEffect.Play();
+        yield return new WaitForSeconds(shoveCooldown * 0.1f);
+        shoveHandModel.SetActive(false);
+        yield return new WaitForSeconds(shoveCooldown * 0.9f);
         isShoving = false;
     }
     // Power Up functions
