@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [SerializeField] CharacterController controller;
     [SerializeField] Transform shootPos;
     [SerializeField] Transform shovePos;
+    [SerializeField] CameraController cam;
     
     [Header("----- Player Stats -----")]
     [Range(1, 15)] [SerializeField] float HP;
@@ -263,6 +264,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
             //plays gunshot audio and ticks the ammo down for the players current gun
             aud.PlayOneShot(gunList[selectedGun].shootSound, gunList[selectedGun].audShotVol);
+
             if (!gunList[selectedGun].isShotgun && !gunList[selectedGun].isM16)
             {
                 gunList[selectedGun].ammoCur--;
@@ -298,7 +300,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
                 GameObject currBullet = Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
                 currBullet.transform.forward = shootDir.normalized;
             }
-
 
             yield return new WaitForSeconds(shootRate);
             isShooting = false;
@@ -376,6 +377,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             if (shoveable != null)
                 shoveable.TakePhysics(transform.forward * shoveForce);
         }
+        StartCoroutine(cam.ShakeCam(0.2f, 0.05f));
         shoveEffect.Play();
         yield return new WaitForSeconds(shoveCooldown * 0.1f);
         shoveHandModel.SetActive(false);
@@ -728,6 +730,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         {
             HP -= amount;
             aud.PlayOneShot(audDamage[Random.Range(0, audDamage.Length)], audDamageVol);
+            StartCoroutine(cam.ShakeCam(0.2f, 0.1f));
             isDamaged = true;
             UpdatePlayerUI();
 

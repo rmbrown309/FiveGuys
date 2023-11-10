@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public PlayerController playerScript;
     public GameObject playerSpawnPoint;
+
     [Header("-----Menu UI-----")]
     [SerializeField] GameObject activeMenu;
     [SerializeField] GameObject pauseMenu;

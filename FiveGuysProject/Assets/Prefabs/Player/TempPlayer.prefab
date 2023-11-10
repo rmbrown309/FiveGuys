@@ -15680,8 +15680,7 @@ MonoBehaviour:
   controller: {fileID: 9198960336271817168}
   shootPos: {fileID: 603192757935190549}
   shovePos: {fileID: 73639928150320859}
-  shoveHandModel: {fileID: 2148784976865421545}
-  shoveEffect: {fileID: 1696947860566772215}
+  cam: {fileID: 2903120171533337186}
   HP: 6
   playerSpeed: 6
   sprintMod: 2
@@ -15709,6 +15708,8 @@ MonoBehaviour:
   currSprayAmmo: 0
   sprayRegenSpeed: 2
   sprayWeaponActive: 0
+  shoveHandModel: {fileID: 2148784976865421545}
+  shoveEffect: {fileID: 1696947860566772215}
   shoveCooldown: 2
   shoveForce: 30
   waitT: 8
@@ -15729,16 +15730,28 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 2818b58a3b9f79b489dc725c038922b1, type: 3}
   audJumpVol: 0.3
   audSteps:
-  - {fileID: 8300000, guid: 15d4178d33f5deb43839a81db0e4d7f0, type: 3}
-  - {fileID: 8300000, guid: dcd0ee2246285d64c81a39aac3aae1f6, type: 3}
-  - {fileID: 8300000, guid: 15ca8c3cc9f7b3c48bc0c79cb0faff14, type: 3}
-  - {fileID: 8300000, guid: d26adf3852889524491c85c3363b4403, type: 3}
-  - {fileID: 8300000, guid: 3b58226d95c6fcd47aad1cc49bf40bb1, type: 3}
-  - {fileID: 8300000, guid: 91ea4b31d1748ad459099fd1a0e21e87, type: 3}
-  - {fileID: 8300000, guid: 967138874af870041a21d52a49db3e8a, type: 3}
-  - {fileID: 8300000, guid: 246ca93320cb0564e9b588ca525d8796, type: 3}
-  - {fileID: 8300000, guid: 7fc4a81bd08c3f3448342c80aaa5451d, type: 3}
-  audStepsVol: 0.05
+  - {fileID: 8300000, guid: 4d11813f5983ce047873c94858e6a6c1, type: 3}
+  - {fileID: 8300000, guid: 6154d2d90f91ac743a30a16a58f9fa32, type: 3}
+  - {fileID: 8300000, guid: 4544cd1f9b0d00a498e3602ecfffcacc, type: 3}
+  - {fileID: 8300000, guid: 2921c47b0bdded540b5b813c1e60001c, type: 3}
+  - {fileID: 8300000, guid: 825d688f717750646b0a05cb2db4ae16, type: 3}
+  - {fileID: 8300000, guid: df0f02816989a0348b801669beb67362, type: 3}
+  - {fileID: 8300000, guid: 90f0af26cb589f64eaae4a27d022a1d3, type: 3}
+  - {fileID: 8300000, guid: 8ce4499bbd5a13e408937e979191ac28, type: 3}
+  - {fileID: 8300000, guid: b8da35185c17df440a0d9e0309ac22a3, type: 3}
+  - {fileID: 8300000, guid: 209ae35949b251d4a83610a1e5992a2f, type: 3}
+  - {fileID: 8300000, guid: 10485b9efe2bd994f98d392f91dd1a0a, type: 3}
+  - {fileID: 8300000, guid: ed6bb89be19053b4abdfe85ac7daf25f, type: 3}
+  - {fileID: 8300000, guid: 9a7a2d7c3f0efa7408e14bd09744808d, type: 3}
+  - {fileID: 8300000, guid: 27ff539436f259348b7138c14d3885cc, type: 3}
+  - {fileID: 8300000, guid: a6e2596331387124da8e81d37da68ae2, type: 3}
+  - {fileID: 8300000, guid: ec02951caf7cd1f4fbc24fe9960cc69a, type: 3}
+  - {fileID: 8300000, guid: 7250925503d24ac4184011ccade045dd, type: 3}
+  - {fileID: 8300000, guid: 02dc709a1e386674e8d05d3c04baa6f7, type: 3}
+  - {fileID: 8300000, guid: c92fd58ac6b91794ba82b93ef3f4e00e, type: 3}
+  - {fileID: 8300000, guid: a70895712392d4345be385abfae08f28, type: 3}
+  - {fileID: 8300000, guid: b70d04f1f7e251b4f8629b271d71c623, type: 3}
+  audStepsVol: 0.235
   audShove:
   - {fileID: 8300000, guid: bf40d9271aba8fb4fa27992ed8f2582a, type: 3}
   - {fileID: 8300000, guid: ed51329ff680e834f9109d8dd84c88b0, type: 3}
@@ -15787,7 +15800,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7278790523575966485}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0

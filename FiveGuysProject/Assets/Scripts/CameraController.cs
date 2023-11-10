@@ -39,4 +39,24 @@ public class CameraController : MonoBehaviour
         transform.parent.Rotate(Vector3.up * mouseX);
     }
 
+    public IEnumerator ShakeCam(float duration, float strength)
+    {
+        Vector3 origPos = transform.localPosition;
+
+        float elapsed = 0.0f;
+
+        while (elapsed < duration)
+        {
+            float x = Random.Range(-1, 2) * strength;
+            float y = Random.Range(-1, 2) * strength;
+
+            transform.localPosition = new Vector3(x, y + origPos.y, origPos.z);
+
+            elapsed += Time.deltaTime;
+
+            yield return null;
+        }
+
+        transform.localPosition = origPos;
+    }
 }
