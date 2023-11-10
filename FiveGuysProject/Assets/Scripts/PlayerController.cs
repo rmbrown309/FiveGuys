@@ -738,7 +738,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             if (HP < 1)
             {
                 aud.PlayOneShot(audDeath[Random.Range(0, audDeath.Length)], audDeathVol);
-                transform.Rotate(Vector3.forward, -75);
                 GameManager.instance.GameOver();
             }
             else
@@ -787,7 +786,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         bullet.GetComponent<PlayerBullet>().damage = gunDamage;
         GameManager.instance.playerHealthBar.CrossFadeAlpha(0, 0, false);
         controller.enabled = false;
-        transform.Rotate(Vector3.forward, 0f);
         transform.position = GameManager.instance.playerSpawnPoint.transform.position;
         controller.enabled = true;
     }

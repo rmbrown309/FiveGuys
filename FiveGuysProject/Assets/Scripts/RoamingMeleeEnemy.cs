@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -77,19 +78,17 @@ public class RoamingMeleeEnemy : MonoBehaviour, IDamage, IPhysics
         //Checks to see if enemy is alive
         if (agent.isActiveAndEnabled)
         {
-            if (playerInRange && !canSeePlayer())
-            {
-                StartCoroutine(roam());
+            anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
 
-            }
-            else if (!playerInRange)
+            if(GameManager.instance.enemiesRemain <= 5)
             {
-                StartCoroutine(roam());
-
+                agent.SetDestination(GameManager.instance.player.transform.position);
             }
 
-
-
+            if ((playerInRange && !canSeePlayer()) || !playerInRange)
+            {
+                StartCoroutine(roam());
+            }
         }
     }
     bool canSeePlayer()
@@ -97,34 +96,32 @@ public class RoamingMeleeEnemy : MonoBehaviour, IDamage, IPhysics
         playerDir = GameManager.instance.player.transform.position - headPos.position;
         angleToPlayer = Vector3.Angle(new Vector3(playerDir.x, 0, playerDir.z), transform.forward);
 
-        anim.SetFloat("Speed", agent.velocity.normalized.magnitude);
-
         pushBack = Vector3.Lerp(pushBack, Vector3.zero, Time.deltaTime * pushBackResolve);
 
         Debug.DrawRay(headPos.position, playerDir);
         Debug.Log(angleToPlayer);
 
         RaycastHit hit;
-        if (Physics.Raycast(headPos.position, playerDir, out hit))
+
+        if (Physics.Raycast(headPos.position, playerDir, out hit) && (hit.collider.CompareTag("Player") && angleToPlayer <= viewAngle))
         {
-            if (hit.collider.CompareTag("Player") && angleToPlayer <= viewAngle)
-            {
-                agent.stoppingDistance = stoppingDistOrig;
-                agent.SetDestination(GameManager.instance.player.transform.position);
+            agent.stoppingDistance = stoppingDistOrig;
+            agent.SetDestination(GameManager.instance.player.transform.position);
 
-                if (agent.remainingDistance <= agent.stoppingDistance)
-                    faceTarget();
+            if (agent.remainingDistance <= agent.stoppingDistance)
+                faceTarget();
 
-                if (angleToPlayer <= hitAngle && !isMeleeing && playerInRange && damageCol.enabled)
-                    StartCoroutine(melee());
+            if (angleToPlayer <= hitAngle && !isMeleeing && playerInRange && damageCol.enabled)
+                StartCoroutine(melee());
 
-                agent.Move((pushBack * 2) * Time.deltaTime);
+            agent.Move((pushBack * 2) * Time.deltaTime);
 
-                return true;
-            }
+            return true;
         }
-        agent.stoppingDistance = 0;
-        return false;
+        else
+        {
+            return false;
+        }
     }
 
     //stab time
@@ -143,14 +140,14 @@ public class RoamingMeleeEnemy : MonoBehaviour, IDamage, IPhysics
         {
             StartCoroutine(RandomIdleChat());
         }
-        if (agent.remainingDistance < 0.05f && !destinationChosen)
+
+        if (agent.remainingDistance < roamDist && !destinationChosen)
         {
+            NavMeshHit hit, edge;
             destinationChosen = true;
             agent.stoppingDistance = 0;
             yield return new WaitForSeconds(roamPauseTime);
-            Vector3 randomPos = Random.insideUnitSphere * roamDist;
-            randomPos += transform.position;
-            NavMeshHit hit;
+            Vector3 randomPos = transform.position + (Random.insideUnitSphere * roamDist);
             NavMesh.SamplePosition(randomPos, out hit, roamDist, 1);
             agent.SetDestination(hit.position);
             destinationChosen = false;
@@ -191,6 +188,7 @@ public class RoamingMeleeEnemy : MonoBehaviour, IDamage, IPhysics
             StartCoroutine(Squish());
 
         StartCoroutine(flashDamage());
+        playerInRange = true;
         agent.SetDestination(GameManager.instance.player.transform.position);
         if (HP <= 0)
         {
@@ -247,14 +245,6 @@ public class RoamingMeleeEnemy : MonoBehaviour, IDamage, IPhysics
         if (other.CompareTag("Player"))
         {
             playerInRange = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            playerInRange = false;
         }
     }
 

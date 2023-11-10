@@ -16,6 +16,7 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] float spawnRange;
     [SerializeField] bool rats;
     [SerializeField] bool continuousSpawning;
+    [SerializeField] bool finalBossRoom;
   
     bool spawnStopped = false;
     bool isWaveActive = true;
@@ -27,7 +28,12 @@ public class WaveSpawner : MonoBehaviour
         // Spawns enemies only on the correct wave number
         if (isWaveActive && GameManager.instance.waves == waveStart)
         {
-            StartCoroutine(TotalEnemy());
+            StartCoroutine(TotalEnemy(numOfEnemies));
+        }
+
+        if(!isWaveActive && finalBossRoom && GameManager.instance.enemiesRemain < (numOfEnemies - 4))
+        {
+            StartCoroutine(TotalEnemy(1));
         }
 
         // allows next wave to begin
@@ -47,19 +53,20 @@ public class WaveSpawner : MonoBehaviour
         }
     }
 
-    IEnumerator TotalEnemy()
+    IEnumerator TotalEnemy(int amount)
     {
-        Vector3 spawnpoint = posToSpawn[0].position;
 
         // prevents spawner from starting again during the wave
         isWaveActive = false;
 
         // increments remaining enemies by the amount of enemies about to spawn
         if(!rats)
-            GameManager.instance.UpdateWinCondition(numOfEnemies);
+            GameManager.instance.UpdateWinCondition(amount);
+
+        Vector3 spawnpoint = posToSpawn[0].position;
 
         // spawns the specified enemies at the specified rate
-        for (int i = 0; i < numOfEnemies; i++)
+        for (int i = 0; i < amount; i++)
         {
             if (posToSpawn.Length > 1)
             {
