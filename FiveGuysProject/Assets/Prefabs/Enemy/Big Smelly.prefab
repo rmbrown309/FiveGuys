@@ -632,7 +632,7 @@ MonoBehaviour:
   anim: {fileID: 6556778891328261001}
   damageCol: {fileID: 173373367155410453}
   noxiousGas: {fileID: 3666610841265798951, guid: 5a12ebdaa61ee97489332b16253b4ff1, type: 3}
-  HP: 5
+  HP: 15
   targetFaceSpeed: 6
   viewAngle: 90
   despawnTime: 0.2
