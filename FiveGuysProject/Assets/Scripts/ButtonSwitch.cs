@@ -13,7 +13,7 @@ public class ButtonSwitch : MonoBehaviour
     [SerializeField] GameObject[] collectibles;
     [SerializeField] bool collectibleSpawning;
     [SerializeField] bool gameEnding;
-
+    [SerializeField] Material matt;
     // Start is called before the first frame update
     void Start()
     {

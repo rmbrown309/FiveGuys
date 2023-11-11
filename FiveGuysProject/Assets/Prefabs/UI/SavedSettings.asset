@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: SavedSettings
   m_EditorClassIdentifier: 
   masterVolume: 0.109046854
-  MusicVolume: 0.388
-  SoundEffectVoulume: 0.526
+  MusicVolume: 0.12674706
+  SoundEffectVoulume: 0.308
   Sensitivity: 0.2056706

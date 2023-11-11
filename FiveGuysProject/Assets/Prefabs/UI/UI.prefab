@@ -9702,7 +9702,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 8096327349324054164}
         m_TargetAssemblyTypeName: ButtonFunction, Assembly-CSharp
-        m_MethodName: SaveSettings
+        m_MethodName: GameOverMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
