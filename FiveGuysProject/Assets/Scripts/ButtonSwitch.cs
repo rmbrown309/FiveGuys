@@ -47,6 +47,7 @@ public class ButtonSwitch : MonoBehaviour
                         item.SetActive(true);
                 }
                 GameManager.instance.collectable.SetActive(true);
+                GameManager.instance.collectablesActive = true;
             }
         }
     }

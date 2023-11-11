@@ -386,6 +386,7 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
         damageCol.enabled = true;
         gameObject.GetComponent<SphereCollider>().radius = 6;
         phaseTwo = true;
+        GameManager.instance.bossPhaseTwo = true;
         isGuarding = false;
     }
 

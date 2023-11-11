@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -38,7 +39,21 @@ public class AudioManager : MonoBehaviour
             ratty = true;
         }
 
-        if (bossy == false && GameManager.instance.waves == 5)
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(1) && bossy == false && GameManager.instance.waves == 5)
+        {
+            aud.Stop();
+            bossa.Play();
+            bossy = true;
+        }
+
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(2) && bossy == false && GameManager.instance.collectablesActive)
+        {
+            aud.Stop();
+            bossa.Play();
+            bossy = true;
+        }
+
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3) && bossy == false && GameManager.instance.bossPhaseTwo)
         {
             aud.Stop();
             bossa.Play();

@@ -99,6 +99,8 @@ public class GameManager : MonoBehaviour
     public int waves;
     public bool noEnemies;
     public bool isPaused;
+    public bool collectablesActive;
+    public bool bossPhaseTwo;
     public bool FinalBossDead;
     public int enemiesRemain;
     public int score;
