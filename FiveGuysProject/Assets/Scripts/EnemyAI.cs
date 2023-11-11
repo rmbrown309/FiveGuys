@@ -67,8 +67,9 @@ public class EnemyAI : MonoBehaviour, IDamage, IPhysics
         rigidBodies = GetComponentsInChildren<Rigidbody>();
         charController = GetComponent<CharacterController>();
         DisableRagDoll();
-        Vector3 pos = new Vector3(transform.position.x, transform.position.y+0.1f, transform.position.z);
-        //Instantiate(spawnFx, pos, transform.rotation);
+        spawnFx.Play();
+
+        //Vector3 pos = new Vector3(transform.position.x, transform.position.y+0.1f, transform.position.z);
 
     }
     void Start()

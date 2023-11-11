@@ -252,9 +252,9 @@ public class RoamingMeleeEnemy : MonoBehaviour, IDamage, IPhysics
     {
         if (Random.value < idleChatterPlayPercentage)
         {
-            float randPitch = Random.Range(0.95f, 1.05f);
+            
 
-            aud.pitch = randPitch;
+            aud.pitch = Random.Range(0.95f, 1.05f);
             aud.PlayOneShot(idleChatter[Random.Range(0, idleChatter.Length)], idleChatterVol);
         }
         yield return new WaitForSeconds(idleCoolDown);

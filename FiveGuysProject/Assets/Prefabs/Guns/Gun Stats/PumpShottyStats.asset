@@ -31,8 +31,8 @@ MonoBehaviour:
   model: {fileID: 100000, guid: bf2593fe0c804b84688e307cfb1ddfae, type: 3}
   bullet: {fileID: 4307941743950219541, guid: 5b4e996fa04c95641a778f341e077287, type: 3}
   hitEffect: {fileID: 0}
-  shootSound: {fileID: 0}
-  audShotVol: 0.526
+  shootSound: {fileID: 8300000, guid: 26a53028493e67f4f987dea83c468c81, type: 3}
+  audShotVol: 0.05
   xOffset: 1.55
   yOffset: 0.2
   zOffset: 0

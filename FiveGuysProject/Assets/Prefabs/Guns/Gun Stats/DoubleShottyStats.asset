@@ -17,7 +17,7 @@ MonoBehaviour:
   shootRate: 0.7
   shootDamage: 0.5
   shootTime: 0.3
-  ammoCur: 23
+  ammoCur: 25
   ammoMax: 30
   cost: 0
   gunName: Double Barrel Shotgun
@@ -28,11 +28,11 @@ MonoBehaviour:
   horizSpread: 2
   vertSpread: 1
   zSpread: 2
-  model: {fileID: -927199367670048503, guid: d63c91e11d9ebb6469488f1040be7d41, type: 3}
+  model: {fileID: 919132149155446097, guid: 906a28cc2c94f4043aca091fef5d4348, type: 3}
   bullet: {fileID: 4307941743950219541, guid: c23e76ce3b46f4d418a601a195f3219e, type: 3}
   hitEffect: {fileID: 0}
-  shootSound: {fileID: 0}
-  audShotVol: 0
+  shootSound: {fileID: 8300000, guid: faaba985c9d61cc45885c4d0ece4443f, type: 3}
+  audShotVol: 0.03
   xOffset: 0
   yOffset: 0
   zOffset: 0

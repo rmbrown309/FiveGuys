@@ -265,6 +265,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             isShooting = true;
 
             //plays gunshot audio and ticks the ammo down for the players current gun
+            aud.pitch = Random.Range(0.95f, 1.05f);
+
             aud.PlayOneShot(gunList[selectedGun].shootSound, gunList[selectedGun].audShotVol);
 
             if (!gunList[selectedGun].isShotgun && !gunList[selectedGun].isM16)
@@ -730,6 +732,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     {
         if (!isInvulnerable)
         {
+            aud.pitch = Random.Range(0.95f, 1.05f);
             HP -= amount;
             isDamaged = true;
             UpdatePlayerUI();
@@ -835,6 +838,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             isShooting = true;
 
             //plays gunshot audio and ticks the ammo down for the players current gun
+            aud.pitch = Random.Range(0.95f, 1.05f);
+
             aud.PlayOneShot(gunList[selectedGun].shootSound, gunList[selectedGun].audShotVol);
 
             if (!gunList[selectedGun].isShotgun && !gunList[selectedGun].isM16)
@@ -867,7 +872,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             if (bullet != null)
             {
 
-                if (gunList[selectedGun].isM16 && gunList[selectedGun].weaponID != 6)
+                if (gunList[selectedGun].isM16 && gunList[selectedGun].weaponID != 4)
                 {
                     GameObject currBullet = Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
                     currBullet.transform.forward = shootDir.normalized;
@@ -883,11 +888,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
                 }
 
-                if (gunList[selectedGun].weaponID == 6)
+                if (gunList[selectedGun].weaponID == 4)
                 {
+
                     GameObject currBullet = Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
                     currBullet.transform.forward = shootDir.normalized;
                     yield return new WaitForSeconds(0.2f);
+                    aud.PlayOneShot(gunList[selectedGun].shootSound, gunList[selectedGun].audShotVol);
 
                     GameObject nextBullet = Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
                     nextBullet.transform.forward = shootDir.normalized;

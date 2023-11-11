@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5441119150490755892}
+  - component: {fileID: 2061285373119608132}
   - component: {fileID: 2503301372882650860}
   - component: {fileID: 3954050550303626218}
   - component: {fileID: 7250948016701226195}
   - component: {fileID: 2213860000966452110}
-  - component: {fileID: 2061285373119608132}
   - component: {fileID: 8809343998918741540}
   m_Layer: 0
   m_Name: DoubleBarrelShotty
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1578192254591763827}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -32.702, y: 1.224, z: 11.82}
   m_LocalScale: {x: 0.06, y: 0.06, z: 0.06}
   m_ConstrainProportionsScale: 0
@@ -38,6 +38,23 @@ Transform:
   - {fileID: 8103748347292518507}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2061285373119608132
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578192254591763827}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 200ea7af8bb34e1429294e126d1f3184, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gun: {fileID: 11400000, guid: e152db6f04f56fb4e84036c6e2ce8af9, type: 2}
+  weaponAnimation: {fileID: 0}
+  aud: {fileID: 8809343998918741540}
+  audCash: {fileID: 8300000, guid: fe47b3b42df583948969f511890dd8f0, type: 3}
+  audCashVol: 0.5
 --- !u!33 &2503301372882650860
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -45,7 +62,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1578192254591763827}
-  m_Mesh: {fileID: 4300000, guid: d63c91e11d9ebb6469488f1040be7d41, type: 3}
+  m_Mesh: {fileID: -8653722315008560443, guid: 906a28cc2c94f4043aca091fef5d4348, type: 3}
 --- !u!23 &3954050550303626218
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -125,23 +142,6 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 20
   m_Center: {x: 8, y: 0, z: 0.06605482}
---- !u!114 &2061285373119608132
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1578192254591763827}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 200ea7af8bb34e1429294e126d1f3184, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gun: {fileID: 11400000, guid: e152db6f04f56fb4e84036c6e2ce8af9, type: 2}
-  weaponAnimation: {fileID: 0}
-  aud: {fileID: 8809343998918741540}
-  audCash: {fileID: 8300000, guid: fe47b3b42df583948969f511890dd8f0, type: 3}
-  audCashVol: 0.5
 --- !u!82 &8809343998918741540
 AudioSource:
   m_ObjectHideFlags: 0

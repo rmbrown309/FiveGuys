@@ -28,11 +28,11 @@ MonoBehaviour:
   horizSpread: 0
   vertSpread: 0
   zSpread: 0
-  model: {fileID: -7545050450568388386, guid: 6a64651c715edd2428104e893b882c5c, type: 3}
+  model: {fileID: 666828228936411570, guid: 9ec3aa83c7982b74589ef53a1285046a, type: 3}
   bullet: {fileID: 5632428987490490690, guid: 152e546b4dcc1424dbb5c91c6e765873, type: 3}
   hitEffect: {fileID: 0}
-  shootSound: {fileID: 0}
-  audShotVol: 0
+  shootSound: {fileID: 8300000, guid: aa2222adb8ddede45ae052e74bf4c092, type: 3}
+  audShotVol: 0.2
   xOffset: 0
   yOffset: 0
   zOffset: 0
