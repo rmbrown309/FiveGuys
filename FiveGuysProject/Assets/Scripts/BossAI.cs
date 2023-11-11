@@ -360,6 +360,7 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
 
     IEnumerator PhaseChange()
     {
+        isGuarding = true;
         if (NavMesh.SamplePosition(transform.position, out NavMeshHit hit, 5f, NavMesh.AllAreas))
             agent.Warp(hit.position);
 
@@ -383,6 +384,7 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
         damageCol.enabled = true;
         gameObject.GetComponent<SphereCollider>().radius = 6;
         phaseTwo = true;
+        isGuarding = false;
     }
 
     IEnumerator flashDamage()
