@@ -258,6 +258,7 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
         agent.enabled = false;
         GameManager.instance.playerScript.ShootRate(2);
 
+        GameManager.instance.IncreasePlayerScore(10);
         yield return new WaitForSeconds(stunnedTime);
 
         model.material.color = Color.white;
@@ -326,6 +327,7 @@ public class BossAI : MonoBehaviour, IDamage, IPhysics
         {
             aud.PlayOneShot(audDamage[Random.Range(0, audDamage.Length)], audDamageVol);
             HP -= amount;
+            GameManager.instance.IncreasePlayerScore(1);
             GameManager.instance.SetBossHealthBar(HP/OrigHP);
             //To fix bug of not turning the hit collider off when taking damage
             if (meleeCol != null)
