@@ -15,6 +15,7 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage, IPhysics
     [Range(0, 1)][SerializeField] float powerSpawnPercentage;
     [SerializeField] Animator anim;
     [SerializeField] Collider damageCol;
+    [SerializeField] ParticleSystem spawnFx;
 
     [Header("----- Enemy Stats -----")]
     [SerializeField] float HP;
@@ -60,6 +61,7 @@ public class MeleeEnemyAI : MonoBehaviour, IDamage, IPhysics
         rigidBodies = GetComponentsInChildren<Rigidbody>();
         charController = GetComponent<CharacterController>();
         DisableRagDoll();
+        spawnFx.Play();
     }
 
     void Start()

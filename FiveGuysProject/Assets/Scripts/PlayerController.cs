@@ -30,6 +30,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [SerializeField] GameObject bullet;
     [SerializeField] float shootRate;
     [SerializeField] float startDamage;
+    [SerializeField] ParticleSystem muzzleFlash;
+
     int weaponID;
     public int ammoID { get; set; }
     [Header("----- Grenade Stats -----")]
@@ -106,6 +108,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     int powerType;
     //shoot shennanigans
     Transform GunShootPos;
+    ParticleSystem MuzzleFlashPos;
     Vector3 pos;
     Vector3 fungle;
     //Shove
@@ -155,8 +158,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
                         StartCoroutine(Shoot());
 
                     }
-
-
                 }
             }
             if (gunList[selectedGun].ammoCur != 0 && gunList[selectedGun].isShotgun)
@@ -164,14 +165,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
                 gunList[selectedGun].ammoCur--;
                 GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
             }
-            if(gunList[selectedGun].ammoCur == 0)
+            if (gunList[selectedGun].ammoCur == 0 && !isShooting)
             {
                 StartCoroutine(noAmmoSound());
-               
-
             }
 
         }
+
         if (sprayWeaponActive && Input.GetButton("Shoot2") && !isShooting)
             StartCoroutine(Spray());
         if (Input.GetButton("Grenade") && !isTossing)
@@ -313,7 +313,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             // Instantiates bullet object and redirects its rotation toward the shootDir
             if (bullet != null)
             {
-
+                MuzzleFlashPos.Play();
                 GameObject currBullet = Instantiate(bullet, GunShootPos.transform.position, Quaternion.identity);
                 currBullet.transform.forward = shootDir.normalized;
              
@@ -327,7 +327,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             }
 
             yield return new WaitForSeconds(shootRate);
-          
+         
+
             isShooting = false;
 
             if (gunList[selectedGun].isPowerWeapon && gunList[selectedGun].ammoCur == 0)
@@ -900,13 +901,15 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
                 if (gunList[selectedGun].isM16 && gunList[selectedGun].weaponID != 4)
                 {
+                    MuzzleFlashPos.Play();
                     GameObject currBullet = Instantiate(bullet, GunShootPos.transform.position, Quaternion.identity);
                     currBullet.transform.forward = shootDir.normalized;
                     yield return new WaitForSeconds(0.08f);
-
+                    MuzzleFlashPos.Play();
                     GameObject nextBullet = Instantiate(bullet, GunShootPos.transform.position, Quaternion.identity);
                     nextBullet.transform.forward = shootDir.normalized;
                     yield return new WaitForSeconds(0.08f);
+                    MuzzleFlashPos.Play();
 
                     GameObject lastBullet = Instantiate(bullet, GunShootPos.transform.position, Quaternion.identity);
                     lastBullet.transform.forward = shootDir.normalized;
@@ -916,12 +919,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
                 if (gunList[selectedGun].weaponID == 4 )
                 {
-
+                    MuzzleFlashPos.Play();
                     GameObject currBullet = Instantiate(bullet, GunShootPos.transform.position, Quaternion.identity);
                     currBullet.transform.forward = shootDir.normalized;
                     yield return new WaitForSeconds(0.2f);
                     aud.PlayOneShot(gunList[selectedGun].shootSound, gunList[selectedGun].audShotVol);
-
+                    MuzzleFlashPos.Play();
                     GameObject nextBullet = Instantiate(bullet, GunShootPos.transform.position, Quaternion.identity);
                     nextBullet.transform.forward = shootDir.normalized;
                     yield return new WaitForSeconds(0.2f);
@@ -962,9 +965,12 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
     IEnumerator noAmmoSound()
     {
+        isShooting = true;
         aud.pitch = 1;
         aud.PlayOneShot(noAmmo[Random.Range(0, noAmmo.Length)], noAmmoVol);
         yield return new WaitForSeconds(0.25f);
+        isShooting = false;
+
 
     }
 
@@ -996,6 +1002,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             pos.y += gunList[selectedGun].yOffset;
             pos.z += gunList[selectedGun].zOffset;
             GunShootPos = Instantiate(endOfBarrel, pos, shootPos.rotation, Camera.main.transform);
+            MuzzleFlashPos = Instantiate(muzzleFlash, pos, shootPos.rotation, Camera.main.transform);
             fungle = new Vector3(GunShootPos.transform.localPosition.x, GunShootPos.transform.localPosition.y, GunShootPos.transform.localPosition.z);
 
         }
@@ -1006,6 +1013,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         fungle.z += gunList[selectedGun].zOffset;
 
         GunShootPos.transform.localPosition = fungle;
+        MuzzleFlashPos.transform.localPosition = fungle;
 
         fungle.x -= gunList[selectedGun].xOffset;
         fungle.y -= gunList[selectedGun].yOffset;

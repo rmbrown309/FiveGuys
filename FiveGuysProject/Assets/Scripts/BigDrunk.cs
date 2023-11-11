@@ -11,6 +11,7 @@ public class BigDrunk : MonoBehaviour, IDamage
     [SerializeField] Transform headPos;
     [SerializeField] Animator anim;
     [SerializeField] Collider damageCol;
+    [SerializeField] ParticleSystem spawnFx;
 
     [Header("----- Enemy Stats -----")]
     [SerializeField] float HP;
@@ -44,6 +45,7 @@ public class BigDrunk : MonoBehaviour, IDamage
         rigidBodies = GetComponentsInChildren<Rigidbody>();
         charController = GetComponent<CharacterController>();
         DisableRagDoll();
+        spawnFx.Play();
     }
 
     void Start()

@@ -17,6 +17,8 @@ public class BigSmelly : MonoBehaviour, IDamage, IPhysics
     [SerializeField] Animator anim;
     [SerializeField] Collider damageCol;
     [SerializeField] ParticleSystem noxiousGas;
+    [SerializeField] ParticleSystem spawnFx;
+
 
     [Header("----- Enemy Stats -----")]
     [SerializeField] float HP;
@@ -54,7 +56,7 @@ public class BigSmelly : MonoBehaviour, IDamage, IPhysics
 
     void Start()
     {
-
+        spawnFx.Play();
     }
     void Update()
     {

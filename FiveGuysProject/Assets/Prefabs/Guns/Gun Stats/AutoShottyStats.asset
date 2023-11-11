@@ -17,7 +17,7 @@ MonoBehaviour:
   shootRate: 0.25
   shootDamage: 0.38
   shootTime: 0.4
-  ammoCur: 0
+  ammoCur: 50
   ammoMax: 50
   cost: 30
   gunName: Automatic Shotgun
@@ -29,7 +29,7 @@ MonoBehaviour:
   vertSpread: 0.5
   zSpread: 2
   model: {fileID: -927199367670048503, guid: d63c91e11d9ebb6469488f1040be7d41, type: 3}
-  bullet: {fileID: 4307941743950219541, guid: b8fce9a039d17f5488ca5fbb159c20ba, type: 3}
+  bullet: {fileID: 115000959911575240, guid: da7abed9477167b42a533a19ee07d419, type: 3}
   hitEffect: {fileID: 0}
   shootSound: {fileID: 8300000, guid: a2f1a8de5b6012d45a0eb3c2c90b6fdc, type: 3}
   reloadSound: {fileID: 0}

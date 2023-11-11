@@ -29,10 +29,12 @@ MonoBehaviour:
   vertSpread: 1
   zSpread: 2
   model: {fileID: 919132149155446097, guid: 906a28cc2c94f4043aca091fef5d4348, type: 3}
-  bullet: {fileID: 4307941743950219541, guid: c23e76ce3b46f4d418a601a195f3219e, type: 3}
+  bullet: {fileID: 115000959911575240, guid: 83365c5ed80b85a4584b5178ce16e4fe, type: 3}
   hitEffect: {fileID: 0}
   shootSound: {fileID: 8300000, guid: faaba985c9d61cc45885c4d0ece4443f, type: 3}
+  reloadSound: {fileID: 0}
   audShotVol: 0.03
+  audReloadVol: 0
   xOffset: 0
   yOffset: 0.272
   zOffset: 0.976

@@ -51,7 +51,8 @@ MonoBehaviour:
   damage: 1
   speed: 25
   destroyTime: 3
-  hitEffect: {fileID: 0}
+  hitEffect: {fileID: 3624506732799874557, guid: 95e1b57e380bd104692b69cea7257a77, type: 3}
+  forceMagnitude: 0
 --- !u!135 &1274366276285396001
 SphereCollider:
   m_ObjectHideFlags: 0
