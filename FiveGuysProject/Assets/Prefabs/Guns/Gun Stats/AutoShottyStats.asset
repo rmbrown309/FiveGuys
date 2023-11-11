@@ -19,7 +19,7 @@ MonoBehaviour:
   shootTime: 0.4
   ammoCur: 40
   ammoMax: 50
-  cost: 0
+  cost: 30
   gunName: Automatic Shotgun
   isShotgun: 1
   isM16: 0

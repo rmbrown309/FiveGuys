@@ -19,7 +19,7 @@ MonoBehaviour:
   shootTime: 3
   ammoCur: 49
   ammoMax: 50
-  cost: 0
+  cost: 10
   gunName: Def Burger Gun
   isShotgun: 1
   isM16: 0

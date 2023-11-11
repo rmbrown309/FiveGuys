@@ -19,7 +19,7 @@ MonoBehaviour:
   shootTime: 3
   ammoCur: 43
   ammoMax: 50
-  cost: 0
+  cost: 35
   gunName: Burger-16
   isShotgun: 1
   isM16: 1
