@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraController : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] bool invertY;
 
     float xRot;
+    float mouseY;
+    float mouseX;
 
     void Start()
     {
@@ -21,8 +24,16 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         // get input
-        float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * savedSettings.Sensitivity * 1000;
-        float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * savedSettings.Sensitivity * 1000;
+        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(2))
+        {
+            mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * savedSettings.Sensitivity * 1000;
+            mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * savedSettings.Sensitivity * 1000;
+        }
+        else
+        {
+            mouseY = (Input.GetAxis("Mouse Y") * Time.deltaTime * savedSettings.Sensitivity * 1000) / 4;
+            mouseX = (Input.GetAxis("Mouse X") * Time.deltaTime * savedSettings.Sensitivity * 1000) / 3;
+        }
 
         if (invertY)
             xRot += mouseY;
