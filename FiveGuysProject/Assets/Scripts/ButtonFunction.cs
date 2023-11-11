@@ -75,4 +75,8 @@ public class ButtonFunction : MonoBehaviour
     {
         GameManager.instance.SetAgreeMenuLoose();
     }
+    public void GameOverMenu()
+    {
+        GameManager.instance.GameOverMenu();
+    }
 }

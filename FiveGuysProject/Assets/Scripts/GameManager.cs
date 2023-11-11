@@ -214,6 +214,7 @@ public class GameManager : MonoBehaviour
         activeMenu.SetActive(false);
         setActive(agreeMenuLoose);
     }
+
     public void SetObjectiveMenu()
     {
         switch (SceneManager.GetActiveScene().buildIndex)
@@ -235,6 +236,11 @@ public class GameManager : MonoBehaviour
     {
         activeMenu.SetActive(false);
         setActive(controlsMenu);
+    }
+    public void GameOverMenu()
+    {
+        activeMenu.SetActive(false);
+        setActive(loseMenu);
     }
     public void SetText(TMP_Text text, string textToSet)
     {
