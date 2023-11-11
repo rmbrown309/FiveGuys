@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public PlayerController playerScript;
     public GameObject playerSpawnPoint;
-
+    public int numberOfLives { get; set; }
     [Header("-----Menu UI-----")]
     [SerializeField] GameObject activeMenu;
     [SerializeField] GameObject pauseMenu;
@@ -26,6 +26,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject helpMenu;
     [SerializeField] GameObject objectiveMenu;
     [SerializeField] GameObject controlsMenu;
+    [SerializeField] GameObject agreeMenu;
+    [SerializeField] GameObject agreeMenuLoose;
+
 
     [SerializeField] TMP_Text objectiveText;
     [SerializeField] string levelOneObjective;
@@ -105,6 +108,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] Slider slider;
     [SerializeField] Image bossHealthBar;
     [SerializeField] GameObject bossHealthObject;
+    [SerializeField] GameObject[] lives;
+    [SerializeField] GameObject[] livesLoose;
+    [SerializeField] GameObject soundHandlerLoose;
+
     void Awake()
     {
         //initiallize player variables;
@@ -197,6 +204,16 @@ public class GameManager : MonoBehaviour
         activeMenu.SetActive(false);
         setActive(helpMenu);
     }
+    public void SetAgreeMenu()
+    {
+        activeMenu.SetActive(false);
+        setActive(agreeMenu);
+    }
+    public void SetAgreeMenuLoose()
+    {
+        activeMenu.SetActive(false);
+        setActive(agreeMenuLoose);
+    }
     public void SetObjectiveMenu()
     {
         switch (SceneManager.GetActiveScene().buildIndex)
@@ -276,7 +293,7 @@ public class GameManager : MonoBehaviour
         {
             waves = num;
             if(currentWaveCount != null)
-                currentWaveCount.text = waves.ToString("0");
+               currentWaveCount.text = waves.ToString("0");
             enableWaveUIText();
         }
     }
@@ -321,12 +338,18 @@ public class GameManager : MonoBehaviour
     {
         powerTypeText.text = powerType;
     }
-
+    public void SetLives(int life, bool state = false)
+    {
+        lives[life].SetActive(state);
+        livesLoose[life].SetActive(state);
+    }
     public void GameOver()
     {
         //pause the menu
         StatePaused();
         //set the active menu
+        soundHandlerLoose.GetComponent<SoundHandler>().SetVolume();
+
         setActive(loseMenu);
     }
 

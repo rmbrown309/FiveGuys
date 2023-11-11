@@ -88,7 +88,6 @@ public class HudAnimate : MonoBehaviour
     public void TurnOffSubWeapon()
     {
         mAnimator.SetBool("isSubGunOn", false);
-
     }
     public void TurnOnSubWeapon()
     {
@@ -97,7 +96,6 @@ public class HudAnimate : MonoBehaviour
     public void TurnOffSnipeWeapon()
     {
         mAnimator.SetBool("isSniperOn", false);
-
     }
     public void TurnOnSnipeWeapon()
     {

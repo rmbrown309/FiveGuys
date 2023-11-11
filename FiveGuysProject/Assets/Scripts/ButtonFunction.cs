@@ -27,8 +27,14 @@ public class ButtonFunction : MonoBehaviour
     public void Respawn()
     {
         //spawn the player at a spawn point
-        GameManager.instance.playerScript.SpawnPlayer();
-        Resume();
+        if (GameManager.instance.numberOfLives > 0)
+        {
+
+            GameManager.instance.SetLives(GameManager.instance.numberOfLives - 1, false);
+            GameManager.instance.numberOfLives -= 1;
+            GameManager.instance.playerScript.SpawnPlayer();
+            Resume();
+        }
     }
     public void Settings()
     {
@@ -60,5 +66,13 @@ public class ButtonFunction : MonoBehaviour
     {
 
         GameManager.instance.NextLevel();
+    }
+    public void AgreeMenu()
+    {
+        GameManager.instance.SetAgreeMenu();
+    }
+    public void LooseMenu()
+    {
+        GameManager.instance.SetAgreeMenuLoose();
     }
 }

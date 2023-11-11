@@ -108,6 +108,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
     private void Start()
     {
+        GameManager.instance.numberOfLives = 3;
         canMove = true;
         powerUpCorutine = new IEnumerator[5];
         origJump = jumpMax;
