@@ -17,14 +17,14 @@ MonoBehaviour:
   shootRate: 0.75
   shootDamage: 1
   shootTime: 3
-  ammoCur: 43
+  ammoCur: 48
   ammoMax: 50
   cost: 35
   gunName: Burger-16
   isShotgun: 1
   isM16: 1
   isPowerWeapon: 0
-  numOfPellets: 3
+  numOfPellets: 1
   horizSpread: 0
   vertSpread: 0
   zSpread: 0
@@ -34,5 +34,5 @@ MonoBehaviour:
   shootSound: {fileID: 8300000, guid: a4e603ada97712845ae1eb1e55ac031c, type: 3}
   audShotVol: 0.08
   xOffset: 0
-  yOffset: 0
-  zOffset: 0
+  yOffset: 0.1469
+  zOffset: 1.131

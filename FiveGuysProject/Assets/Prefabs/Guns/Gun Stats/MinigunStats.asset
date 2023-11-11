@@ -17,7 +17,7 @@ MonoBehaviour:
   shootRate: 0.03
   shootDamage: 0.8
   shootTime: 1
-  ammoCur: 56
+  ammoCur: 100
   ammoMax: 100
   cost: 0
   gunName: Minigun
@@ -34,5 +34,5 @@ MonoBehaviour:
   shootSound: {fileID: 8300000, guid: 1c6e535d8dadfa545bcfb3a8ce7e3583, type: 3}
   audShotVol: 0.05
   xOffset: 0
-  yOffset: 0
-  zOffset: 0
+  yOffset: 0.13
+  zOffset: 0.0418

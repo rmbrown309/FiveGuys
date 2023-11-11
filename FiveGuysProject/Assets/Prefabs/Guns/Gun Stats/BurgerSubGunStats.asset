@@ -19,7 +19,7 @@ MonoBehaviour:
   shootTime: 3
   ammoCur: 75
   ammoMax: 75
-  cost: 15
+  cost: 0
   gunName: Burger SubGun
   isShotgun: 0
   isM16: 0
@@ -34,5 +34,5 @@ MonoBehaviour:
   shootSound: {fileID: 8300000, guid: 402f7596ae9111b429d9d4fd262d7af0, type: 3}
   audShotVol: 0.1
   xOffset: 0
-  yOffset: 0
-  zOffset: 0
+  yOffset: 0.121
+  zOffset: 0.241

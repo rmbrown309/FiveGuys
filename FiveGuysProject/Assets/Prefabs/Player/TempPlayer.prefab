@@ -15680,6 +15680,7 @@ MonoBehaviour:
   controller: {fileID: 9198960336271817168}
   shootPos: {fileID: 603192757935190549}
   shovePos: {fileID: 73639928150320859}
+  endOfBarrel: {fileID: 4598972740507423590, guid: 393895fe848fb2047a366bdc4f125464, type: 3}
   cam: {fileID: 2903120171533337186}
   HP: 6
   playerSpeed: 6
@@ -15761,6 +15762,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 00164b6ffb5d7b242a25e87ef9612c47, type: 3}
   - {fileID: 8300000, guid: ce775ade369addf4699911ab7c01b274, type: 3}
   audDeathVol: 0.556
+  noAmmo:
+  - {fileID: 8300000, guid: af7315442f6b9ee499a56bf3e4e25641, type: 3}
+  noAmmoVol: 0
   isShoving: 0
   canMove: 0
 --- !u!143 &9198960336271817168

@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponID: 4
   ammoID: 3
-  shootRate: 0.7
-  shootDamage: 0.5
+  shootRate: 0.85
+  shootDamage: 0.65
   shootTime: 0.3
-  ammoCur: 25
+  ammoCur: 30
   ammoMax: 30
   cost: 0
   gunName: Double Barrel Shotgun
@@ -34,5 +34,5 @@ MonoBehaviour:
   shootSound: {fileID: 8300000, guid: faaba985c9d61cc45885c4d0ece4443f, type: 3}
   audShotVol: 0.03
   xOffset: 0
-  yOffset: 0
-  zOffset: 0
+  yOffset: 0.272
+  zOffset: 0.976

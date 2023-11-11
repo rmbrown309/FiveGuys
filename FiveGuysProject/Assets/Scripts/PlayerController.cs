@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [SerializeField] CharacterController controller;
     [SerializeField] Transform shootPos;
     [SerializeField] Transform shovePos;
+    [SerializeField] Transform endOfBarrel;
     [SerializeField] CameraController cam;
     
     [Header("----- Player Stats -----")]
@@ -68,6 +69,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     [Range(0, 1)][SerializeField] float audShoveVol;
     [SerializeField] AudioClip[] audDeath;
     [Range(0, 1)][SerializeField] float audDeathVol;
+    [SerializeField] AudioClip[] noAmmo;
+    [Range(0, 1)] [SerializeField] float noAmmoVol;
 
     private Vector3 playerVelocity;
     private bool groundedPlayer;
@@ -104,6 +107,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     //shoot shennanigans
     Transform GunShootPos;
     Vector3 pos;
+    Vector3 fungle;
     //Shove
 
     private void Start()
@@ -134,7 +138,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     void Update()
     {
         Movement();
-   
+
         if (Input.GetButton("Shoot") && !isShooting && gunList.Count > 0)//if it is a shotgun then fire multiple times
         {
             //by looping the shoot multiple time we instantiate the correct number of pellets to be shot because bullets are only instantiated when shoot is called.
@@ -146,9 +150,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
                 }
                 else
                 {
-                    StartCoroutine(Shoot());
+                    if (!gunList[selectedGun].isM16)
+                    {
+                        StartCoroutine(Shoot());
 
-       
+                    }
+
+
                 }
             }
             if (gunList[selectedGun].ammoCur != 0 && gunList[selectedGun].isShotgun)
@@ -156,6 +164,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
                 gunList[selectedGun].ammoCur--;
                 GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
             }
+            if(gunList[selectedGun].ammoCur == 0)
+            {
+                StartCoroutine(noAmmoSound());
+               
+
+            }
+
         }
         if (sprayWeaponActive && Input.GetButton("Shoot2") && !isShooting)
             StartCoroutine(Spray());
@@ -267,7 +282,6 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
             //plays gunshot audio and ticks the ammo down for the players current gun
             aud.pitch = Random.Range(0.95f, 1.05f);
-
             aud.PlayOneShot(gunList[selectedGun].shootSound, gunList[selectedGun].audShotVol);
 
             if (!gunList[selectedGun].isShotgun && !gunList[selectedGun].isM16)
@@ -299,14 +313,21 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             // Instantiates bullet object and redirects its rotation toward the shootDir
             if (bullet != null)
             {
-                Debug.Log(pos);
 
-         
-                GameObject currBullet = Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
+                GameObject currBullet = Instantiate(bullet, GunShootPos.transform.position, Quaternion.identity);
                 currBullet.transform.forward = shootDir.normalized;
+             
+            }
+            if (gunList[selectedGun].weaponID == 3)
+            {
+                yield return new WaitForSeconds(0.25f);
+
+                aud.pitch = Random.Range(0.95f, 1.05f);
+                aud.PlayOneShot(gunList[selectedGun].reloadSound, gunList[selectedGun].audReloadVol);
             }
 
             yield return new WaitForSeconds(shootRate);
+          
             isShooting = false;
 
             if (gunList[selectedGun].isPowerWeapon && gunList[selectedGun].ammoCur == 0)
@@ -316,6 +337,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
                 setGunStats(gunList[selectedGun]);
             }
         }
+     
     }
 
     IEnumerator Spray()
@@ -803,6 +825,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     //everything involving gun pickup shennanigans \/
     public void setGunStats(gunStats gun)
     {
+
         gunList.Add(gun);
         //stats
         startDamage = gun.shootDamage;
@@ -822,6 +845,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.model.GetComponent<MeshRenderer>().sharedMaterial;
         selectedGun = gunList.Count - 1;
         GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
+        SetGunOffset();
+
         //picked = true;
 
 
@@ -875,29 +900,29 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
                 if (gunList[selectedGun].isM16 && gunList[selectedGun].weaponID != 4)
                 {
-                    GameObject currBullet = Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
+                    GameObject currBullet = Instantiate(bullet, GunShootPos.transform.position, Quaternion.identity);
                     currBullet.transform.forward = shootDir.normalized;
                     yield return new WaitForSeconds(0.08f);
 
-                    GameObject nextBullet = Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
+                    GameObject nextBullet = Instantiate(bullet, GunShootPos.transform.position, Quaternion.identity);
                     nextBullet.transform.forward = shootDir.normalized;
                     yield return new WaitForSeconds(0.08f);
 
-                    GameObject lastBullet = Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
+                    GameObject lastBullet = Instantiate(bullet, GunShootPos.transform.position, Quaternion.identity);
                     lastBullet.transform.forward = shootDir.normalized;
                     yield return new WaitForSeconds(0.08f);
 
                 }
 
-                if (gunList[selectedGun].weaponID == 4)
+                if (gunList[selectedGun].weaponID == 4 )
                 {
 
-                    GameObject currBullet = Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
+                    GameObject currBullet = Instantiate(bullet, GunShootPos.transform.position, Quaternion.identity);
                     currBullet.transform.forward = shootDir.normalized;
                     yield return new WaitForSeconds(0.2f);
                     aud.PlayOneShot(gunList[selectedGun].shootSound, gunList[selectedGun].audShotVol);
 
-                    GameObject nextBullet = Instantiate(bullet, shootPos.transform.position, Quaternion.identity);
+                    GameObject nextBullet = Instantiate(bullet, GunShootPos.transform.position, Quaternion.identity);
                     nextBullet.transform.forward = shootDir.normalized;
                     yield return new WaitForSeconds(0.2f);
 
@@ -935,6 +960,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
     }
 
+    IEnumerator noAmmoSound()
+    {
+        aud.pitch = 1;
+        aud.PlayOneShot(noAmmo[Random.Range(0, noAmmo.Length)], noAmmoVol);
+        yield return new WaitForSeconds(0.25f);
+
+    }
+
 
     public void SetAudio(float newVolume)
     {
@@ -953,5 +986,49 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     {
         return collectedItems;
     }
-    
+
+    public void SetGunOffset()
+    {
+        if(gunList.Count < 2)
+        {
+            pos = new Vector3(shootPos.transform.position.x, shootPos.transform.position.y, shootPos.transform.position.z);
+            pos.x += gunList[selectedGun].xOffset;
+            pos.y += gunList[selectedGun].yOffset;
+            pos.z += gunList[selectedGun].zOffset;
+            GunShootPos = Instantiate(endOfBarrel, pos, shootPos.rotation, Camera.main.transform);
+            fungle = new Vector3(GunShootPos.transform.localPosition.x, GunShootPos.transform.localPosition.y, GunShootPos.transform.localPosition.z);
+
+        }
+
+
+        fungle.x += gunList[selectedGun].xOffset;
+        fungle.y += gunList[selectedGun].yOffset;
+        fungle.z += gunList[selectedGun].zOffset;
+
+        GunShootPos.transform.localPosition = fungle;
+
+        fungle.x -= gunList[selectedGun].xOffset;
+        fungle.y -= gunList[selectedGun].yOffset;
+        fungle.z -= gunList[selectedGun].zOffset;
+
+
+        //if (gunList.Count >= 2)
+        //{
+        //    pos.x -= gunList[selectedGun].xOffset;
+        //    pos.y -= gunList[selectedGun].yOffset;
+        //    pos.z -= gunList[selectedGun].zOffset;
+        //}
+
+
+
+
+        ////shootPos.transform.position =
+
+        //shootPos.transform.position = pos;
+        //shootPos.rotation = Quaternion.identity;
+
+
+        //shootPos.transform.position.z;
+
+    }
 }

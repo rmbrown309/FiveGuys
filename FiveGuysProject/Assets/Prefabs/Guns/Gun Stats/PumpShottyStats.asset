@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponID: 3
   ammoID: 3
-  shootRate: 0.5
-  shootDamage: 0.5
+  shootRate: 0.75
+  shootDamage: 0.6
   shootTime: 0.6
   ammoCur: 35
   ammoMax: 35
@@ -32,7 +32,9 @@ MonoBehaviour:
   bullet: {fileID: 4307941743950219541, guid: 5b4e996fa04c95641a778f341e077287, type: 3}
   hitEffect: {fileID: 0}
   shootSound: {fileID: 8300000, guid: 26a53028493e67f4f987dea83c468c81, type: 3}
+  reloadSound: {fileID: 8300000, guid: 0027d5a4e7e871848851e0a050e243bc, type: 3}
   audShotVol: 0.05
-  xOffset: 1.55
-  yOffset: 0.2
-  zOffset: 0
+  audReloadVol: 0.02
+  xOffset: 0
+  yOffset: 0.15
+  zOffset: 1.55

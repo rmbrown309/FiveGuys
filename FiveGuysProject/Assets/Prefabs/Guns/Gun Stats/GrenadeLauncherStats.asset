@@ -34,5 +34,5 @@ MonoBehaviour:
   shootSound: {fileID: 8300000, guid: aa2222adb8ddede45ae052e74bf4c092, type: 3}
   audShotVol: 0.2
   xOffset: 0
-  yOffset: 0
-  zOffset: 0
+  yOffset: 0.179
+  zOffset: 0.544

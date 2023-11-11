@@ -25,7 +25,9 @@ public class gunStats : ScriptableObject
     public GameObject bullet;
     public ParticleSystem hitEffect;
     public AudioClip shootSound;
+    public AudioClip reloadSound;
     [Range(0, 1)] public float audShotVol;
+    [Range(0, 1)] public float audReloadVol;
     public float xOffset;
     public float yOffset;
     public float zOffset;
