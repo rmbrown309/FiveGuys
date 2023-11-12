@@ -33,7 +33,7 @@ MonoBehaviour:
   hitEffect: {fileID: 3624506732799874557, guid: 95e1b57e380bd104692b69cea7257a77, type: 3}
   shootSound: {fileID: 8300000, guid: faaba985c9d61cc45885c4d0ece4443f, type: 3}
   reloadSound: {fileID: 0}
-  audShotVol: 0.019799065
+  audShotVol: 0.0154
   audReloadVol: 0.042863775
   xOffset: 0
   yOffset: 0.272
