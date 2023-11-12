@@ -210,7 +210,6 @@ public class GameManager : MonoBehaviour
     }
     public void SetCreditMenu()
     {
-        loadingMenu.SetActive(true);
         isPaused = !isPaused;
         Time.timeScale = origTimeScale;
         SceneManager.LoadScene(sceneBuildIndex: 4);
@@ -231,7 +230,6 @@ public class GameManager : MonoBehaviour
     }
     public void SetHelpMenu()
     {
-        loadingMenu.SetActive(true);
         activeMenu.SetActive(false);
         setActive(helpMenu);
     }
