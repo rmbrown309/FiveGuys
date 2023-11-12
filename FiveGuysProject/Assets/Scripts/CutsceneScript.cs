@@ -11,9 +11,23 @@ public class CutSceneScript : MonoBehaviour
         StartCoroutine(NextScene());
     }
 
+    void Update()
+    {
+        if (Input.GetButtonDown("Cancel") || Input.GetButtonDown("P"))
+        {
+            StopAllCoroutines();
+            StartCoroutine(SkipScene());
+        }
+    }
+
     IEnumerator NextScene()
     {
         yield return new WaitForSeconds(25f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    IEnumerator SkipScene()
+    {
+        yield return new WaitForSeconds(0.1f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
