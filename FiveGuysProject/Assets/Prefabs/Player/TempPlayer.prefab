@@ -15701,6 +15701,7 @@ MonoBehaviour:
   bullet: {fileID: 3773670445560834378, guid: 11797fb46023f3445838bd4a651a02d3, type: 3}
   shootRate: 0.5
   startDamage: 1
+  muzzleFlash: {fileID: 4219902870715704615, guid: 497e26118f22299409038b865970bee3, type: 3}
   grenade: {fileID: 5632428987490490690, guid: 3f030a2314438f84092bb33a3be57616, type: 3}
   tossRate: 5
   sprayEffect: {fileID: 265766274217486953, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
@@ -15764,7 +15765,7 @@ MonoBehaviour:
   audDeathVol: 0.556
   noAmmo:
   - {fileID: 8300000, guid: af7315442f6b9ee499a56bf3e4e25641, type: 3}
-  noAmmoVol: 0
+  noAmmoVol: 0.2
   isShoving: 0
   canMove: 0
 --- !u!143 &9198960336271817168
