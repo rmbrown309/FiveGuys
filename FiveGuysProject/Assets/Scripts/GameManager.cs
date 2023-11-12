@@ -29,6 +29,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject agreeMenu;
     [SerializeField] GameObject agreeMenuLoose;
     [SerializeField] GameObject findButtonMenu;
+    [SerializeField] GameObject loadingMenu;
 
     [SerializeField] TMP_Text objectiveText;
     [SerializeField] TMP_Text findButtonText;
@@ -207,10 +208,20 @@ public class GameManager : MonoBehaviour
         Time.timeScale = origTimeScale;
         SceneManager.LoadScene(sceneBuildIndex: 0);
     }
+    public void SetCreditMenu()
+    {
+        isPaused = !isPaused;
+        Time.timeScale = origTimeScale;
+        SceneManager.LoadScene(sceneBuildIndex: 4);
+    }
     public void SetSettings()
     {
         activeMenu.SetActive(false);
         setActive(settingsMenu);
+    }
+    public void SetLoading()
+    {
+        loadingMenu.SetActive(true);
     }
     public void SaveSettings()
     {
