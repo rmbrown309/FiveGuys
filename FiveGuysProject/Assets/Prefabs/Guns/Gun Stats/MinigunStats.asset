@@ -17,7 +17,7 @@ MonoBehaviour:
   shootRate: 0.03
   shootDamage: 0.8
   shootTime: 1
-  ammoCur: 100
+  ammoCur: 0
   ammoMax: 100
   cost: 0
   gunName: Minigun
@@ -30,9 +30,11 @@ MonoBehaviour:
   zSpread: 0
   model: {fileID: 919132149155446097, guid: f27cb6a5747322d46b577739c4c0d405, type: 3}
   bullet: {fileID: 4307941743950219541, guid: a65b0f35347196d41874814f00300685, type: 3}
-  hitEffect: {fileID: 0}
+  hitEffect: {fileID: 3624506732799874557, guid: 95e1b57e380bd104692b69cea7257a77, type: 3}
   shootSound: {fileID: 8300000, guid: 1c6e535d8dadfa545bcfb3a8ce7e3583, type: 3}
-  audShotVol: 0.05
+  reloadSound: {fileID: 0}
+  audShotVol: 0.022520417
+  audReloadVol: 0
   xOffset: 0
   yOffset: 0.13
   zOffset: 0.0418

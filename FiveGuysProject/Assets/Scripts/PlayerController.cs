@@ -111,10 +111,14 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     ParticleSystem MuzzleFlashPos;
     Vector3 pos;
     Vector3 fungle;
+    float origShotvol;
+    float sliderVol;
+
     //Shove
 
     private void Start()
     {
+
         GameManager.instance.numberOfLives = 3;
         canMove = true;
         powerUpCorutine = new IEnumerator[5];
@@ -124,6 +128,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         gunDamage = startDamage;
         extraDamage = 0;
         setGunStats(defGun);
+        origShotvol = 1;
+
         origHealthRegen = healthRegainSpeed;
         origShootRate = shootRate;
         currSprayAmmo = maxSprayAmmo;
@@ -845,8 +851,41 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         gunModel.GetComponent<MeshFilter>().sharedMesh = gun.model.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.model.GetComponent<MeshRenderer>().sharedMaterial;
         selectedGun = gunList.Count - 1;
+        if (!gun.isPowerWeapon && gunList.Count >1) 
+        {
+            if(!gunList[selectedGun-1].isPowerWeapon) //checks to see if your previous weapon was not a power weapon
+                gunList[selectedGun].ammoCur = gunList[selectedGun].ammoMax; //refills ammo if you buy again
+        }
         GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
         SetGunOffset();
+        if (gunList[selectedGun].numOfPellets == 1 && !gunList[selectedGun].isM16 && gunList.Count > 1)
+        {
+          
+            if (gunList[selectedGun].weaponID == 8 && gunList[selectedGun].weaponID == 7) //handles grenade thump
+                gunList[selectedGun].audShotVol = sliderVol / 2;
+            if (gunList[selectedGun].weaponID == 1) //handles subgun
+                gunList[selectedGun].audShotVol = sliderVol / 4;
+            if (gunList[selectedGun].weaponID == 2) //handles sniper
+                gunList[selectedGun].audShotVol = sliderVol / 2;
+            else //borgar
+                gunList[selectedGun].audShotVol = origShotvol * sliderVol;
+        }
+        //handles every other weapon
+
+        if (gunList[selectedGun].weaponID == 5 && gunList.Count > 1)// handles the m16 being a little loud
+            gunList[selectedGun].audShotVol = sliderVol / 1.25f;
+
+        if (gunList[selectedGun].weaponID == 4 && gunList.Count > 1) //handles double barrel being egregiously loud
+            gunList[selectedGun].audShotVol = sliderVol / 20;
+
+        if (gunList[selectedGun].weaponID == 9) //handles minigun being egregiously loud
+            gunList[selectedGun].audShotVol = sliderVol / 20;
+
+        if (gunList[selectedGun].numOfPellets > 1 && gunList[selectedGun].weaponID != 4 && gunList.Count > 1) //handles every other shotgun
+        {
+            gunList[selectedGun].audShotVol = (sliderVol / 5);
+            gunList[selectedGun].audReloadVol = (sliderVol / 10);
+        }
 
         //picked = true;
 
@@ -966,7 +1005,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     IEnumerator noAmmoSound()
     {
         isShooting = true;
-        aud.pitch = 1;
+        aud.pitch = Random.Range(0.95f, 1.05f);
         aud.PlayOneShot(noAmmo[Random.Range(0, noAmmo.Length)], noAmmoVol);
         yield return new WaitForSeconds(0.25f);
         isShooting = false;
@@ -977,12 +1016,41 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
     public void SetAudio(float newVolume)
     {
+        sliderVol = newVolume;
         audDamageVol = newVolume;
         audJumpVol = newVolume;
         audSprayVol = newVolume/2;
         audStepsVol = newVolume/4;
         audShoveVol = newVolume * 2;
         audDeathVol = newVolume * 3;
+        if (gunList[selectedGun].numOfPellets == 1 && !gunList[selectedGun].isM16) //handles every other weapon
+        {
+            if (gunList[selectedGun].weaponID == 8 && gunList[selectedGun].weaponID == 7) //handles grenade thump
+                gunList[selectedGun].audShotVol = newVolume / 2;
+            if (gunList[selectedGun].weaponID == 1) //handles subgun
+                gunList[selectedGun].audShotVol = newVolume / 4;
+            if (gunList[selectedGun].weaponID == 2) //handles sniper
+                gunList[selectedGun].audShotVol = newVolume / 2;
+            else //borger
+                gunList[selectedGun].audShotVol = origShotvol * newVolume;
+        }
+
+        if (gunList[selectedGun].weaponID == 5)// handles the m16
+            gunList[selectedGun].audShotVol = newVolume / 1.25f;
+
+        if (gunList[selectedGun].weaponID == 4) //handles double barrel being egregiously loud
+            gunList[selectedGun].audShotVol = newVolume / 20;
+
+        if (gunList[selectedGun].weaponID == 9) //handles minigun being egregiously loud
+            gunList[selectedGun].audShotVol = newVolume / 20;
+
+        if (gunList[selectedGun].numOfPellets > 1  && gunList[selectedGun].weaponID != 4 && gunList[selectedGun].weaponID != 9) //handles every other shotgun
+        {
+            gunList[selectedGun].audShotVol = (newVolume / 5);
+            gunList[selectedGun].audReloadVol = (newVolume / 10);
+
+        }
+        noAmmoVol = newVolume;
     }
     public void SetCollectables(int item)
     {
@@ -1020,23 +1088,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         fungle.z -= gunList[selectedGun].zOffset;
 
 
-        //if (gunList.Count >= 2)
-        //{
-        //    pos.x -= gunList[selectedGun].xOffset;
-        //    pos.y -= gunList[selectedGun].yOffset;
-        //    pos.z -= gunList[selectedGun].zOffset;
-        //}
-
-
-
-
-        ////shootPos.transform.position =
-
-        //shootPos.transform.position = pos;
-        //shootPos.rotation = Quaternion.identity;
-
-
-        //shootPos.transform.position.z;
+  
 
     }
 }

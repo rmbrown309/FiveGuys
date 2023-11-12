@@ -17,7 +17,7 @@ MonoBehaviour:
   shootRate: 0.75
   shootDamage: 0.6
   shootTime: 0.6
-  ammoCur: 32
+  ammoCur: 30
   ammoMax: 35
   cost: 0
   gunName: Pump Shotgun
@@ -30,11 +30,11 @@ MonoBehaviour:
   zSpread: 1
   model: {fileID: 100000, guid: bf2593fe0c804b84688e307cfb1ddfae, type: 3}
   bullet: {fileID: 115000959911575240, guid: e503722d621b9744197b20f811f08172, type: 3}
-  hitEffect: {fileID: 0}
+  hitEffect: {fileID: 3624506732799874557, guid: 95e1b57e380bd104692b69cea7257a77, type: 3}
   shootSound: {fileID: 8300000, guid: 26a53028493e67f4f987dea83c468c81, type: 3}
   reloadSound: {fileID: 8300000, guid: 0027d5a4e7e871848851e0a050e243bc, type: 3}
-  audShotVol: 0.05
-  audReloadVol: 0.02
+  audShotVol: 0.09008167
+  audReloadVol: 0.045040835
   xOffset: 0
   yOffset: 0.15
   zOffset: 1.55

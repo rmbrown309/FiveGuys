@@ -15765,7 +15765,7 @@ MonoBehaviour:
   audDeathVol: 0.556
   noAmmo:
   - {fileID: 8300000, guid: af7315442f6b9ee499a56bf3e4e25641, type: 3}
-  noAmmoVol: 0.2
+  noAmmoVol: 1
   isShoving: 0
   canMove: 0
 --- !u!143 &9198960336271817168

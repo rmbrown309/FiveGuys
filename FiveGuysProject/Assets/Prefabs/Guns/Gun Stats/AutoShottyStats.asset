@@ -30,10 +30,10 @@ MonoBehaviour:
   zSpread: 2
   model: {fileID: -927199367670048503, guid: d63c91e11d9ebb6469488f1040be7d41, type: 3}
   bullet: {fileID: 115000959911575240, guid: da7abed9477167b42a533a19ee07d419, type: 3}
-  hitEffect: {fileID: 0}
+  hitEffect: {fileID: 3624506732799874557, guid: 95e1b57e380bd104692b69cea7257a77, type: 3}
   shootSound: {fileID: 8300000, guid: a2f1a8de5b6012d45a0eb3c2c90b6fdc, type: 3}
   reloadSound: {fileID: 0}
-  audShotVol: 0.072
+  audShotVol: 0.023874294
   audReloadVol: 0
   xOffset: 0
   yOffset: 0.1886

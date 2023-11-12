@@ -17,7 +17,7 @@ MonoBehaviour:
   shootRate: 1.5
   shootDamage: 5
   shootTime: 3
-  ammoCur: 25
+  ammoCur: 18
   ammoMax: 25
   cost: 20
   gunName: Burger Sniper
@@ -32,7 +32,9 @@ MonoBehaviour:
   bullet: {fileID: 3773670445560834378, guid: 3905d5c52e14c9e4783a2daa23db404e, type: 3}
   hitEffect: {fileID: 6327853518906024368, guid: 349d4a817e629c04696c63e33888d7ad, type: 3}
   shootSound: {fileID: 8300000, guid: ab7331ded0d25d04e8b3a32ff427af4a, type: 3}
-  audShotVol: 0.526
+  reloadSound: {fileID: 0}
+  audShotVol: 0.22520417
+  audReloadVol: 0
   xOffset: 0
   yOffset: 0
   zOffset: 0
