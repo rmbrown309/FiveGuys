@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/FirstLevel.unity
     guid: 2072310db6e8e724c9954a822aa6c04b
   - enabled: 1
+    path: Assets/Scenes/FirstLevel Cutscene.unity
+    guid: 2c398fb8c9ff3f04f90cbb887434b935
+  - enabled: 1
     path: Assets/Scenes/AirportLevel.unity
     guid: 6679bbf2c8039f04cbd44402066d7c22
   - enabled: 1
