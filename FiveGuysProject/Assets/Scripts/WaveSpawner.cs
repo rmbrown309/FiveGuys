@@ -18,10 +18,14 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] bool continuousSpawning;
     [SerializeField] bool finalBossRoom;
   
-    bool spawnStopped = false;
-    bool isWaveActive = true;
+    bool spawnStopped;
+    bool isWaveActive;
 
- 
+    void Start()
+    {
+        isWaveActive = true;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -39,23 +43,23 @@ public class WaveSpawner : MonoBehaviour
         // allows next wave to begin
         if (spawnStopped && GameManager.instance.enemiesRemain == 0)
         {
-            if(continuousSpawning)
+            if (GameManager.instance.waves != GameManager.instance.maxWaves)
             {
-                waveStart++;
-                numOfEnemies++;
-                isWaveActive = true;
+                GameManager.instance.IncreaseWaveCount(waveStart + 1);
+                if (continuousSpawning)
+                {
+                    waveStart++;
+                    numOfEnemies++;
+                }
             }
 
-            if (GameManager.instance.waves != GameManager.instance.maxWaves)
-                GameManager.instance.IncreaseWaveCount(waveStart + 1);
-
             spawnStopped = false; // stops waves from being reset to a previous value
+            isWaveActive = true;
         }
     }
 
     IEnumerator TotalEnemy(int amount)
     {
-
         // prevents spawner from starting again during the wave
         isWaveActive = false;
 
@@ -88,8 +92,8 @@ public class WaveSpawner : MonoBehaviour
                 spawnpoint.y = posToSpawn[0].position.y;
             }
 
-            yield return new WaitForSeconds(spawnRate);
             Instantiate(enemy[Random.Range(0, enemy.Length)], spawnpoint, Quaternion.identity);
+            yield return new WaitForSeconds(spawnRate);
         }
 
         spawnStopped = true;
