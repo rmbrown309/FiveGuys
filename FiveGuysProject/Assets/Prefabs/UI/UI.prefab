@@ -61597,6 +61597,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasCamera
       objectReference: {fileID: 0}
+    - target: {fileID: 3152096982376883024, guid: 8919dde687b4619498f1200d060a1890, type: 3}
+      propertyPath: m_Depth
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

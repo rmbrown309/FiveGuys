@@ -9033,6 +9033,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1477648718482574878, guid: 089f673d38393c44d864c90346443dae, type: 3}
+      propertyPath: m_Depth
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1605192800554618265, guid: 089f673d38393c44d864c90346443dae, type: 3}
       propertyPath: SoundEffectSlider
       value: 

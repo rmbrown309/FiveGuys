@@ -2171,6 +2171,7 @@ MonoBehaviour:
   headPos: {fileID: 6946366020566781457}
   anim: {fileID: 3104086607220030555}
   damageCol: {fileID: 4481084150986438322}
+  spawnFx: {fileID: 4766909403181198026, guid: fa8cd5b1bae082d40b76a4a2a514cc57, type: 3}
   HP: 50
   targetFaceSpeed: 6
   viewAngle: 90
