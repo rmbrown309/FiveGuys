@@ -129,7 +129,7 @@ public class GameManager : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerScript = player.GetComponent<PlayerController>();
         playerSpawnPoint = GameObject.FindWithTag("Player Spawn Point");
-        waves = 1;
+        waves = 0;
         enableWaveUIText();
         //maxWaves = 1;
     }
@@ -148,6 +148,9 @@ public class GameManager : MonoBehaviour
             //activeMenu.SetActive(isPaused);
             setActive(pauseMenu);
         }
+
+        if(enemiesRemain == 0 && waves + 1 <= maxWaves)
+            IncreaseWaveCount();
     }
     private void FadePowerups()
     {
@@ -337,11 +340,11 @@ public class GameManager : MonoBehaviour
         Debug.Log(SceneManager.GetActiveScene().buildIndex);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
-    public void IncreaseWaveCount(int num)
+    public void IncreaseWaveCount()
     {
-        if (num <= maxWaves)
+        if (waves + 1 <= maxWaves)
         {
-            waves = num;
+            waves++;
             if (currentWaveCount != null)
                 currentWaveCount.text = waves.ToString("0");
             enableWaveUIText();
