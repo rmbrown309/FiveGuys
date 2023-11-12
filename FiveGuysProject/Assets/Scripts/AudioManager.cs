@@ -46,14 +46,14 @@ public class AudioManager : MonoBehaviour
             bossy = true;
         }
 
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(2) && bossy == false && GameManager.instance.collectablesActive)
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3) && bossy == false && GameManager.instance.collectablesActive)
         {
             aud.Stop();
             bossa.Play();
             bossy = true;
         }
 
-        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(3) && bossy == false && GameManager.instance.bossPhaseTwo)
+        if (SceneManager.GetActiveScene() == SceneManager.GetSceneByBuildIndex(5) && bossy == false && GameManager.instance.bossPhaseTwo)
         {
             aud.Stop();
             bossa.Play();
