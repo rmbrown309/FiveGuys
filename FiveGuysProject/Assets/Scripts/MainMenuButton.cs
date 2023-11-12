@@ -21,7 +21,7 @@ public class MainMenuButton : MonoBehaviour
     [SerializeField] Slider MusicVolumeSlider;
     [SerializeField] Slider SoundEffectSlider;
     [SerializeField] Slider SensSlider;
-
+    [SerializeField] GameObject loading;
     private void Start()
     {
         MusicVolumeSlider.value = SavedSettings.MusicVolume;
@@ -50,11 +50,16 @@ public class MainMenuButton : MonoBehaviour
     }
     public void StartGame()
     {
+        loading.SetActive(true);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public void Quit()
     {
         Application.Quit();
+    }
+    public void Credits()
+    {
+        SceneManager.LoadScene(4);
     }
     public void Settings()
     {

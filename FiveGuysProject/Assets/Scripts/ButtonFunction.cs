@@ -15,11 +15,13 @@ public class ButtonFunction : MonoBehaviour
     public void Quit()
     {
         //quit the game
+        GameManager.instance.SetLoading();
         Application.Quit();
     }
     public void Restart()
     {
         //restart the scene
+        GameManager.instance.SetLoading();
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         Resume();
     }
@@ -64,11 +66,17 @@ public class ButtonFunction : MonoBehaviour
 
     public void MainMenu()
     {
+        GameManager.instance.SetLoading();
         GameManager.instance.SetMainMenu();
+    }
+    public void Credits()
+    {
+        GameManager.instance.SetLoading();
+        GameManager.instance.SetCreditMenu();
     }
     public void NextLevel()
     {
-
+        GameManager.instance.SetLoading();
         GameManager.instance.NextLevel();
     }
     public void AgreeMenu()

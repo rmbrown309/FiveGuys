@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CorpoBossLevel.unity
     guid: f8946d7ce8e93c743a227505c2a3d764
+  - enabled: 1
+    path: Assets/Scenes/Credits.unity
+    guid: b0ff3cf44ae978c48bb11e3fa6e09b91
   m_configObjects: {}

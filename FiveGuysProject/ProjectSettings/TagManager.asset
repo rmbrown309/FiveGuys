@@ -13,6 +13,7 @@ TagManager:
   - AudioManager
   - GunHitAudio
   - GutHitAudio
+  - CreditHead
   layers:
   - Default
   - TransparentFX

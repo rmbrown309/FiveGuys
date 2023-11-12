@@ -115,6 +115,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
     private void Start()
     {
+        //GameManager.instance.StateUnpaused();
         GameManager.instance.numberOfLives = 3;
         canMove = true;
         powerUpCorutine = new IEnumerator[5];
