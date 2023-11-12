@@ -71015,7 +71015,7 @@ RectTransform:
   m_GameObject: {fileID: 1515470245}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 7.989359, y: 4.675392, z: 1}
+  m_LocalScale: {x: 8.189093, y: 4.7338347, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 624405520}
@@ -71632,10 +71632,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 557479952}
     m_Modifications:
-    - target: {fileID: 1786997897015923190, guid: 058d0e7ec29934347a540c712b448be6, type: 3}
-      propertyPath: m_Volume
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 2905833716415592689, guid: 058d0e7ec29934347a540c712b448be6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 154.03827
@@ -94894,7 +94890,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "If I use this plane... \nI can get to corporate and fight for a wage increase!"
+  m_text: 'I refuse to work alone any more!
+
+    I''ll fly to corporate and make
+    them listen!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ab640a91bc7f02c41b1a6b28c91605df, type: 2}
   m_sharedMaterial: {fileID: -229117984716261900, guid: ab640a91bc7f02c41b1a6b28c91605df, type: 2}
