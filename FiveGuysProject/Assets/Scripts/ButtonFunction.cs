@@ -40,6 +40,10 @@ public class ButtonFunction : MonoBehaviour
     {
         GameManager.instance.SetSettings();
     }
+    public void FindButton()
+    {
+        GameManager.instance.SetFindButton();
+    }
     public void HelpMenu()
     {
         GameManager.instance.SetHelpMenu();

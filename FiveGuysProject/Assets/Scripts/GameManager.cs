@@ -28,9 +28,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject controlsMenu;
     [SerializeField] GameObject agreeMenu;
     [SerializeField] GameObject agreeMenuLoose;
-
+    [SerializeField] GameObject findButtonMenu;
 
     [SerializeField] TMP_Text objectiveText;
+    [SerializeField] TMP_Text findButtonText;
+
     [SerializeField] string levelOneObjective;
     [SerializeField] string levelTwoObjective;
     [SerializeField] string levelThreeObjective;
@@ -84,7 +86,7 @@ public class GameManager : MonoBehaviour
     public Image dmgPowerImage;
     public Image playerHealthBar;
     public GameObject collectable;
-    public bool jumpPower { get;  set; }
+    public bool jumpPower { get; set; }
     public bool speedPower { get; set; }
     public bool invulnerablePower { get; set; }
     public bool fireSpeedPower { get; set; }
@@ -137,7 +139,7 @@ public class GameManager : MonoBehaviour
         //Debug.Log(waves);
 
         //once esc is pressed and there arent any menus active pause the game
-        if (Input.GetButtonDown("Cancel") && activeMenu == null)
+        if (Input.GetButtonDown("Cancel") || Input.GetButtonDown("P") && activeMenu == null)
         {
             StatePaused();
             //make the active menu be the pause menu
@@ -169,6 +171,12 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
         //let the cursor move around the screen only
         Cursor.lockState = CursorLockMode.Confined;
+        if(activeMenu != null)
+        {
+            activeMenu.SetActive(false);
+            activeMenu = null;
+        }
+       
     }
 
     public void StateUnpaused()
@@ -184,6 +192,14 @@ public class GameManager : MonoBehaviour
         //reset our active menu
         activeMenu.SetActive(false);
         activeMenu = null;
+    }
+    public void SetQuestText(string quest)
+    {
+        questText.SetText(quest);
+    }
+    public void SetQuestState(bool state)
+    {
+        quest.SetActive(state);
     }
     public void SetMainMenu()
     {
@@ -234,6 +250,20 @@ public class GameManager : MonoBehaviour
         activeMenu.SetActive(false);
         setActive(objectiveMenu);
     }
+    public void SetFindButton(string message = "")
+    {
+        if(message != "")
+        {
+            findButtonText.SetText(message);
+        }
+        if (activeMenu != null)
+        {
+            activeMenu.SetActive(false);
+        }
+        
+        StatePaused();
+        setActive(findButtonMenu);
+    }
     public void SetControlsMenu()
     {
         activeMenu.SetActive(false);
@@ -268,7 +298,8 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(NextLevelMenu(winMenu));
             }
             else
-            {                StartCoroutine(NextLevelMenu(nextLevelMenu));
+            {
+                StartCoroutine(NextLevelMenu(nextLevelMenu));
 
             }
         }
@@ -300,8 +331,8 @@ public class GameManager : MonoBehaviour
         if (num <= maxWaves)
         {
             waves = num;
-            if(currentWaveCount != null)
-               currentWaveCount.text = waves.ToString("0");
+            if (currentWaveCount != null)
+                currentWaveCount.text = waves.ToString("0");
             enableWaveUIText();
         }
     }
@@ -407,7 +438,7 @@ public class GameManager : MonoBehaviour
     // Next two methids control the Giant Text for each new wave
     public void enableWaveUIText()
     {
-        if(waveUIText != null)
+        if (waveUIText != null)
             StartCoroutine(WaveUISpawnRoutine());
     }
     public void SetBossHealthBar(float value)
