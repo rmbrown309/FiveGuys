@@ -20,7 +20,7 @@ MonoBehaviour:
   ammoCur: 50
   ammoMax: 50
   cost: 30
-  gunName: Automatic Shotgun
+  gunName: Automatic Totgun
   isShotgun: 1
   isM16: 0
   isPowerWeapon: 0
