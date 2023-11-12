@@ -24,16 +24,9 @@ public class CameraController : MonoBehaviour
     void Update()
     {
         // get input
-        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(2))
-        {
-            mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * savedSettings.Sensitivity * 1000;
-            mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * savedSettings.Sensitivity * 1000;
-        }
-        else
-        {
-            mouseY = (Input.GetAxis("Mouse Y") * Time.deltaTime * savedSettings.Sensitivity * 1000) / 4;
-            mouseX = (Input.GetAxis("Mouse X") * Time.deltaTime * savedSettings.Sensitivity * 1000) / 3;
-        }
+        mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * savedSettings.Sensitivity * 1000;
+        mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * savedSettings.Sensitivity * 1000;
+        
 
         if (invertY)
             xRot += mouseY;
