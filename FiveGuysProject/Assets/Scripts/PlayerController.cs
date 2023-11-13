@@ -113,11 +113,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     ParticleSystem MuzzleFlashPos;
     Vector3 pos;
     Vector3 fungle;
+    float origShotvol;
     //Shove
 
     private void Start()
     {
         //GameManager.instance.StateUnpaused();
+
         GameManager.instance.numberOfLives = 3;
         canMove = true;
         powerUpCorutine = new IEnumerator[5];
@@ -127,6 +129,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         gunDamage = startDamage;
         extraDamage = 0;
         setGunStats(defGun);
+        origShotvol = 1;
         origHealthRegen = healthRegainSpeed;
         origShootRate = shootRate;
         currSprayAmmo = maxSprayAmmo;
