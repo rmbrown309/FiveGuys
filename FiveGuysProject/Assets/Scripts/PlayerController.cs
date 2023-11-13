@@ -873,7 +873,33 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         selectedGun = gunList.Count - 1;
         GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
         SetGunOffset();
+        if (gunList[selectedGun].numOfPellets == 1 && !gunList[selectedGun].isM16) //handles every other weapon
+        {
+            if (gunList[selectedGun].weaponID == 8 && gunList[selectedGun].weaponID == 7) //handles grenade thump
+                gunList[selectedGun].audShotVol = noAmmoVol / 2;
+            if (gunList[selectedGun].weaponID == 1) //handles subgun
+                gunList[selectedGun].audShotVol = noAmmoVol / 4;
+            if (gunList[selectedGun].weaponID == 2) //handles sniper
+                gunList[selectedGun].audShotVol = noAmmoVol / 2;
+            else //borger
+                gunList[selectedGun].audShotVol = origShotvol * noAmmoVol;
+        }
 
+        if (gunList[selectedGun].weaponID == 5)// handles the m16
+            gunList[selectedGun].audShotVol = noAmmoVol / 1.25f;
+
+        if (gunList[selectedGun].weaponID == 4) //handles double barrel being egregiously loud
+            gunList[selectedGun].audShotVol = noAmmoVol / 20;
+
+        if (gunList[selectedGun].weaponID == 9) //handles minigun being egregiously loud
+            gunList[selectedGun].audShotVol = noAmmoVol / 20;
+
+        if (gunList[selectedGun].numOfPellets > 1 && gunList[selectedGun].weaponID != 4 && gunList[selectedGun].weaponID != 9) //handles every other shotgun
+        {
+            gunList[selectedGun].audShotVol = (noAmmoVol / 5);
+            gunList[selectedGun].audReloadVol = (noAmmoVol / 10);
+
+        }
         //picked = true;
 
 
