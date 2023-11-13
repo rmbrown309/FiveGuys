@@ -19,7 +19,6 @@ public class BigSmelly : MonoBehaviour, IDamage
     [SerializeField] ParticleSystem noxiousGas;
     [SerializeField] ParticleSystem spawnFx;
 
-
     [Header("----- Enemy Stats -----")]
     [SerializeField] float HP;
     [SerializeField] int targetFaceSpeed;

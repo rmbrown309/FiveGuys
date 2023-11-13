@@ -10,6 +10,7 @@ public class TrackingProjectiles : MonoBehaviour, ISpray
     [SerializeField] ParticleSystem bugRelease;
     //[SerializeField] float smallBug;
     //[SerializeField] float bigBug;
+    [SerializeField] SavedSettings settings;
 
     [Header("----- Bullet Stats -----")]
     public int damage;
@@ -67,7 +68,7 @@ public class TrackingProjectiles : MonoBehaviour, ISpray
         {
             float randPitch = Random.Range(0.95f, 1.05f);
             aud.pitch = randPitch;
-            aud.PlayOneShot(idleBuzz[Random.Range(0, idleBuzz.Length)], idleBuzzVol);
+            aud.PlayOneShot(idleBuzz[Random.Range(0, idleBuzz.Length)], settings.SoundEffectVoulume / 20);
         }
         yield return new WaitForSeconds(idleBuzzCoolDown);
     }
