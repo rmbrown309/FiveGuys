@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 
 public class GameManager : MonoBehaviour
 {
@@ -123,6 +124,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject[] lives;
     [SerializeField] GameObject[] livesLoose;
     [SerializeField] GameObject soundHandlerLoose;
+    bool winCondition;
 
     void Awake()
     {
@@ -149,13 +151,13 @@ public class GameManager : MonoBehaviour
         //once esc is pressed and there arent any menus active pause the game
         if (Input.GetButtonDown("Cancel") || Input.GetButtonDown("P") && activeMenu == null)
         {
-            StatePaused();
-            if (winMenu.activeInHierarchy == true ||nextLevelMenu.activeInHierarchy == true || loseMenu.activeInHierarchy == true)
+           // StatePaused();
+            if (winCondition)
             {
             }
             else
             {
-                
+                StatePaused();
                 //make the active menu be the pause menu
                 //activeMenu = pauseMenu;
                 //activeMenu.SetActive(isPaused);
@@ -341,12 +343,16 @@ public class GameManager : MonoBehaviour
         //when there are no enemies or waves remaining pull the win menu up
         if ((enemiesRemain < 1 && waves == maxWaves) || FinalBossDead)
         {
+            winCondition = true;
             if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1)
             {
+                //activeMenu = winMenu;
                 StartCoroutine(NextLevelMenu(winMenu));
             }
             else
             {
+                //activeMenu = nextLevelMenu;
+
                 StartCoroutine(NextLevelMenu(nextLevelMenu));
 
             }
@@ -358,9 +364,11 @@ public class GameManager : MonoBehaviour
     }
     public IEnumerator NextLevelMenu(GameObject Menu)
     {
+        
         noEnemies = true;
         yield return new WaitForSeconds(3);
         StatePaused();
+        
         setActive(Menu);
     }
     public void IncreasePlayerScore(int num)
