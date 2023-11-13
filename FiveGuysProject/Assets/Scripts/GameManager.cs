@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public GameObject playerSpawnPoint;
     public int numberOfLives { get; set; }
     [Header("-----Menu UI-----")]
+
     [SerializeField] GameObject activeMenu;
     [SerializeField] GameObject pauseMenu;
     [SerializeField] GameObject winMenu;
@@ -26,8 +27,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject helpMenu;
     [SerializeField] GameObject objectiveMenu;
     [SerializeField] GameObject controlsMenu;
+    //agree menu settings
     [SerializeField] GameObject agreeMenu;
+    [SerializeField] GameObject agreeMenuTittle;
+
+    //agere quit loose menu
     [SerializeField] GameObject agreeMenuLoose;
+    [SerializeField] GameObject agreeMenuRespawnLoose;
+    //button
     [SerializeField] GameObject findButtonMenu;
     [SerializeField] GameObject loadingMenu;
 
@@ -143,10 +150,17 @@ public class GameManager : MonoBehaviour
         if (Input.GetButtonDown("Cancel") || Input.GetButtonDown("P") && activeMenu == null)
         {
             StatePaused();
-            //make the active menu be the pause menu
-            //activeMenu = pauseMenu;
-            //activeMenu.SetActive(isPaused);
-            setActive(pauseMenu);
+            if (winMenu.activeInHierarchy == true ||nextLevelMenu.activeInHierarchy == true || loseMenu.activeInHierarchy == true)
+            {
+            }
+            else
+            {
+                
+                //make the active menu be the pause menu
+                //activeMenu = pauseMenu;
+                //activeMenu.SetActive(isPaused);
+                setActive(pauseMenu);
+            }
         }
 
         if(enemiesRemain == 0 && waves + 1 <= maxWaves)
@@ -167,20 +181,21 @@ public class GameManager : MonoBehaviour
     }
     public void StatePaused()
     {
-        //flip bool
-        isPaused = !isPaused;
-        //slow game down to 0
-        Time.timeScale = 0f;
-        //make the cursor visible again
-        Cursor.visible = true;
-        //let the cursor move around the screen only
-        Cursor.lockState = CursorLockMode.Confined;
-        if(activeMenu != null)
-        {
-            activeMenu.SetActive(false);
-            activeMenu = null;
-        }
-       
+        
+            //flip bool
+            isPaused = !isPaused;
+            //slow game down to 0
+            Time.timeScale = 0f;
+            //make the cursor visible again
+            Cursor.visible = true;
+            //let the cursor move around the screen only
+            Cursor.lockState = CursorLockMode.Confined;
+            if (activeMenu != null)
+            {
+                activeMenu.SetActive(false);
+                activeMenu = null;
+            }
+        
     }
 
     public void StateUnpaused()
@@ -215,7 +230,7 @@ public class GameManager : MonoBehaviour
     {
         isPaused = !isPaused;
         Time.timeScale = origTimeScale;
-        SceneManager.LoadScene(sceneBuildIndex: 4);
+        SceneManager.LoadScene(sceneBuildIndex: 6);
     }
     public void SetSettings()
     {
@@ -238,8 +253,27 @@ public class GameManager : MonoBehaviour
     }
     public void SetAgreeMenu()
     {
-        activeMenu.SetActive(false);
+        if(activeMenu != null)
+        {
+            activeMenu.SetActive(false);
+        }
         setActive(agreeMenu);
+    }
+    public void SetAgreeMenuTittle()
+    {
+        if (activeMenu != null)
+        {
+            activeMenu.SetActive(false);
+        }
+        setActive(agreeMenuTittle);
+    }
+    public void SetAgreeRespawnLoose()
+    {
+        if (activeMenu != null)
+        {
+            activeMenu.SetActive(false);
+        }
+        setActive(agreeMenuRespawnLoose);
     }
     public void SetAgreeMenuLoose()
     {

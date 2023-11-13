@@ -83,7 +83,15 @@ public class ButtonFunction : MonoBehaviour
     {
         GameManager.instance.SetAgreeMenu();
     }
-    public void LooseMenu()
+    public void AgreeMenuTittle()
+    {
+        GameManager.instance.SetAgreeMenuTittle();
+    }
+    public void AgreeMenuLooseRespawn()
+    {
+        GameManager.instance.SetAgreeRespawnLoose();
+    }
+    public void AgreeLooseMenu()
     {
         GameManager.instance.SetAgreeMenuLoose();
     }
