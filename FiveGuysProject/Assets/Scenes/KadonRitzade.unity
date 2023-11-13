@@ -999,10 +999,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fat Steve (NonBoss) Variant
       objectReference: {fileID: 0}
-    - target: {fileID: 7369355222695316815, guid: 43e1b74b9badcc74bb40eb1eaf7f5a7b, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1062,7 +1058,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2908664668703409485, guid: e2a57b18f852ce9489be17ece1fef0f4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3717848877053022123, guid: e2a57b18f852ce9489be17ece1fef0f4, type: 3}
       propertyPath: enemy.Array.data[0]
