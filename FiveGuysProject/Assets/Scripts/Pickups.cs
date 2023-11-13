@@ -94,10 +94,11 @@ public class Pickups : MonoBehaviour
 
                     break;
                 case PickupType.Debris:
-                    gameObject.GetComponent<Renderer>().enabled = false;
-                    gameObject.GetComponent<Collider>().enabled = false;
                     if(linkedDebris != null)
                         linkedDebris.SetActive(false);
+                    gameObject.GetComponent<Renderer>().enabled = false;
+                    gameObject.GetComponent<SphereCollider>().enabled = false;
+                    gameObject.GetComponent<BoxCollider>().enabled = false;
 
                     // remove label to show that pickup was bought
                     if (GameManager.instance.pickupLabel != null)

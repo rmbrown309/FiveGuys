@@ -146,7 +146,7 @@ public class RoamingMeleeEnemy : MonoBehaviour, IDamage, IPhysics
 
         if (agent.remainingDistance < roamDist && !destinationChosen)
         {
-            NavMeshHit hit, edge;
+            NavMeshHit hit;
             destinationChosen = true;
             agent.stoppingDistance = 0;
             yield return new WaitForSeconds(roamPauseTime);

@@ -991,6 +991,37 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         audStepsVol = newVolume/4;
         audShoveVol = newVolume * 2;
         audDeathVol = newVolume * 3;
+        if( gunList.Count > 0)
+        {
+            if (gunList[selectedGun].numOfPellets == 1 && !gunList[selectedGun].isM16) //handles every other weapon
+            {
+                if (gunList[selectedGun].weaponID == 8 && gunList[selectedGun].weaponID == 7) //handles grenade thump
+                    gunList[selectedGun].audShotVol = newVolume / 2;
+                if (gunList[selectedGun].weaponID == 1) //handles subgun
+                    gunList[selectedGun].audShotVol = newVolume / 4;
+                if (gunList[selectedGun].weaponID == 2) //handles sniper
+                    gunList[selectedGun].audShotVol = newVolume / 2;
+                else //borger
+                    gunList[selectedGun].audShotVol = origShotvol * newVolume;
+            }
+
+            if (gunList[selectedGun].weaponID == 5)// handles the m16
+                gunList[selectedGun].audShotVol = newVolume / 1.25f;
+
+            if (gunList[selectedGun].weaponID == 4) //handles double barrel being egregiously loud
+                gunList[selectedGun].audShotVol = newVolume / 20;
+
+            if (gunList[selectedGun].weaponID == 9) //handles minigun being egregiously loud
+                gunList[selectedGun].audShotVol = newVolume / 20;
+
+            if (gunList[selectedGun].numOfPellets > 1 && gunList[selectedGun].weaponID != 4 && gunList[selectedGun].weaponID != 9) //handles every other shotgun
+            {
+                gunList[selectedGun].audShotVol = (newVolume / 5);
+                gunList[selectedGun].audReloadVol = (newVolume / 10);
+
+            }
+        }
+        noAmmoVol = newVolume;
     }
     public void SetCollectables(int item)
     {
