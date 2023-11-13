@@ -59,7 +59,7 @@ public class MainMenuButton : MonoBehaviour
     }
     public void Credits()
     {
-        SceneManager.LoadScene(4);
+        SceneManager.LoadScene(6);
     }
     public void Settings()
     {
