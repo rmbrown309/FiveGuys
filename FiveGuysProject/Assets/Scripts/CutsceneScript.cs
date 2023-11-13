@@ -6,8 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class CutSceneScript : MonoBehaviour
 {
+    [SerializeField] AudioSource music;
+    [SerializeField] AudioSource sfx;
+    [SerializeField] SavedSettings settings;
+
     void Start()
     {
+        music.volume = settings.MusicVolume;
+        sfx.volume = settings.SoundEffectVoulume;
         StartCoroutine(NextScene());
     }
 

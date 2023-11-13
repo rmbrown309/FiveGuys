@@ -15311,6 +15311,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9174406362220048091, guid: 19b116ddfc5540d499cbab02e983e90a, type: 3}
   m_PrefabInstance: {fileID: 324996598}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &324996600 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 7234296450637529990, guid: 19b116ddfc5540d499cbab02e983e90a, type: 3}
+  m_PrefabInstance: {fileID: 324996598}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &325601110
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16116,6 +16121,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e141d41b6c1125344a326f38714485c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  music: {fileID: 1532055808}
+  sfx: {fileID: 324996600}
+  settings: {fileID: 11400000, guid: 46f271e14fe41cf4cb7765b24c31d09d, type: 2}
 --- !u!1001 &334454823
 PrefabInstance:
   m_ObjectHideFlags: 0
