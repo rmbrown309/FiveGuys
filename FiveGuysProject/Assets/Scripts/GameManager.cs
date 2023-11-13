@@ -341,7 +341,7 @@ public class GameManager : MonoBehaviour
         //when there are no enemies or waves remaining pull the win menu up
         if ((enemiesRemain < 1 && waves == maxWaves) || FinalBossDead)
         {
-            if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 1)
+            if (SceneManager.GetActiveScene().buildIndex == SceneManager.sceneCountInBuildSettings - 2)
             {
                 StartCoroutine(NextLevelMenu(winMenu));
             }
