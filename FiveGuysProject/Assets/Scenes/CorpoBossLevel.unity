@@ -48087,6 +48087,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7976005292892088786, guid: e3f1fce89b85f1c4b953ab1de12a5350, type: 3}
+      propertyPath: HP
+      value: 90
+      objectReference: {fileID: 0}
     - target: {fileID: 8097287626997402112, guid: e3f1fce89b85f1c4b953ab1de12a5350, type: 3}
       propertyPath: m_Name
       value: BossCEO
