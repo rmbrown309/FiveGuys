@@ -11,6 +11,7 @@ public class CameraController : MonoBehaviour
     [SerializeField] int lockVertMax;
     [SerializeField] bool invertY;
 
+    Vector3 origPos;
     float xRot;
     float mouseY;
     float mouseX;
@@ -19,6 +20,7 @@ public class CameraController : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        origPos = transform.localPosition;
     }
 
     void Update()
@@ -45,8 +47,6 @@ public class CameraController : MonoBehaviour
 
     public IEnumerator ShakeCam(float duration, float strength)
     {
-        Vector3 origPos = transform.localPosition;
-
         float elapsed = 0.0f;
 
         while (elapsed < duration)
