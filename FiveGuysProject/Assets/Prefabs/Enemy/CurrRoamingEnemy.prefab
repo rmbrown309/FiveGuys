@@ -2885,7 +2885,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: f41fdfe3b1071df499c6887a0bcb09c8, type: 3}
   - {fileID: 8300000, guid: 3d0ebe4c7a285c94f9a9341b6215d6d0, type: 3}
   idleChatterPlayPercentage: 0.001
-  idleCoolDown: 30
+  idleCoolDown: 120
   hitMarkerVol: 0.2
   hitMarkerAud:
   - {fileID: 8300000, guid: bd6250eaaeb1ac94e83a3c5bc3b22e61, type: 3}

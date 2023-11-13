@@ -35,7 +35,7 @@ public class BeerBottleGrenade : MonoBehaviour
         if (beerPuddle != null) 
         {
             //PuddleOnGround(targetDir);
-            Vector3 toCreate = new Vector3(transform.position.x, GameManager.instance.player.transform.position.y - 1, transform.position.z);
+            Vector3 toCreate = new Vector3(transform.position.x, GameManager.instance.player.transform.position.y - 0.9f, transform.position.z);
             Instantiate(beerPuddle, toCreate, beerPuddle.transform.rotation);
         }
         Destroy(gameObject, destroyTime);
