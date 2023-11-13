@@ -19,7 +19,7 @@ MonoBehaviour:
   shootTime: 0.6
   ammoCur: 35
   ammoMax: 35
-  cost: 20
+  cost: 0
   gunName: Pump Action Totgun
   isShotgun: 1
   isM16: 0

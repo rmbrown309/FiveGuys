@@ -114,6 +114,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     Vector3 pos;
     Vector3 fungle;
     float origShotvol;
+    Vector3 origWeaponPos;
+    Quaternion origWeaponRotation;
     //Shove
 
     private void Start()
@@ -134,6 +136,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         origShootRate = shootRate;
         currSprayAmmo = maxSprayAmmo;
         gunList[selectedGun].ammoCur = gunList[selectedGun].ammoMax;
+        origWeaponPos = new Vector3(gunModel.transform.localPosition.x, gunModel.transform.localPosition.y, gunModel.transform.localPosition.z);
+        origWeaponRotation = new Quaternion(gunModel.transform.localRotation.x, gunModel.transform.localRotation.y, gunModel.transform.localRotation.z, gunModel.transform.localRotation.w);
         GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
         GameManager.instance.updateSprayAmmoUI(currSprayAmmo, maxSprayAmmo);
         if (GameManager.instance.playerSpawnPoint != null)
@@ -329,16 +333,27 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
                 currBullet.transform.forward = shootDir.normalized;
              
             }
+     
+
+            Quaternion newRotation = new Quaternion(origWeaponRotation.x - 0.025f, origWeaponRotation.y, origWeaponRotation.z, origWeaponRotation.w);
+            //recoil by moving z
+            Vector3 newWeaponPos = new Vector3(origWeaponPos.x, origWeaponPos.y, origWeaponPos.z - 0.05f);
+
+            gunModel.transform.localRotation = newRotation;
+            gunModel.transform.localPosition = newWeaponPos;
+            yield return new WaitForSeconds(shootRate / 4);
             if (gunList[selectedGun].weaponID == 3)
             {
-                yield return new WaitForSeconds(0.25f);
 
                 aud.pitch = Random.Range(0.95f, 1.05f);
                 aud.PlayOneShot(gunList[selectedGun].reloadSound, gunList[selectedGun].audReloadVol);
             }
+            gunModel.transform.localPosition = origWeaponPos;
+            gunModel.transform.localRotation = origWeaponRotation;
+            yield return new WaitForSeconds(shootRate * 0.75f);
 
-            yield return new WaitForSeconds(shootRate);
-         
+            if (gunList[selectedGun].weaponID == 9)
+                yield return new WaitForSeconds(0.001f);
 
             isShooting = false;
 
@@ -874,6 +889,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         if (gunList[selectedGun].ammoCur > 0 && gunList.Count > 0)
         {
             isShooting = true;
+            Quaternion newRotation = new Quaternion(origWeaponRotation.x, origWeaponRotation.y, origWeaponRotation.z, origWeaponRotation.w); ;
+            Vector3 newWeaponPos = new Vector3(origWeaponPos.x, origWeaponPos.y, origWeaponPos.z - 0.05f);
 
             //plays gunshot audio and ticks the ammo down for the players current gun
             aud.pitch = Random.Range(0.95f, 1.05f);
@@ -912,10 +929,16 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
                 if (gunList[selectedGun].isM16 && gunList[selectedGun].weaponID != 4)
                 {
+                    newRotation.x = origWeaponRotation.x - 0.01f;
                     MuzzleFlashPos.Play();
                     GameObject currBullet = Instantiate(bullet, GunShootPos.transform.position, Quaternion.identity);
                     currBullet.transform.forward = shootDir.normalized;
+                    gunModel.transform.localRotation = newRotation;
+                    gunModel.transform.localPosition = newWeaponPos;
                     yield return new WaitForSeconds(0.08f);
+                    gunModel.transform.localPosition = origWeaponPos;
+                    gunModel.transform.localRotation = origWeaponRotation;
+
                     MuzzleFlashPos.Play();
                     GameObject nextBullet = Instantiate(bullet, GunShootPos.transform.position, Quaternion.identity);
                     nextBullet.transform.forward = shootDir.normalized;
@@ -930,12 +953,17 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
                 if (gunList[selectedGun].weaponID == 4 )
                 {
+                    newRotation.x = origWeaponRotation.x - 0.05f;
                     MuzzleFlashPos.Play();
                     GameObject currBullet = Instantiate(bullet, GunShootPos.transform.position, Quaternion.identity);
                     currBullet.transform.forward = shootDir.normalized;
+                    gunModel.transform.localRotation = newRotation;
+                    gunModel.transform.localPosition = newWeaponPos;
                     yield return new WaitForSeconds(0.2f);
                     aud.PlayOneShot(gunList[selectedGun].shootSound, gunList[selectedGun].audShotVol);
                     MuzzleFlashPos.Play();
+                    gunModel.transform.localPosition = origWeaponPos;
+                    gunModel.transform.localRotation = origWeaponRotation;
                     GameObject nextBullet = Instantiate(bullet, GunShootPos.transform.position, Quaternion.identity);
                     nextBullet.transform.forward = shootDir.normalized;
                     yield return new WaitForSeconds(0.2f);
@@ -947,8 +975,13 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
             }
 
-            yield return new WaitForSeconds(shootRate);
-            isShooting = false;
+            gunModel.transform.localRotation = newRotation;
+            gunModel.transform.localPosition = newWeaponPos;
+            yield return new WaitForSeconds(shootRate / 4);
+
+            gunModel.transform.localPosition = origWeaponPos;
+            gunModel.transform.localRotation = origWeaponRotation;
+            yield return new WaitForSeconds(shootRate * 0.75f); isShooting = false;
         }
     }
 
