@@ -30001,11 +30001,8 @@ MonoBehaviour:
   audShoot: {fileID: 8300000, guid: 402f7596ae9111b429d9d4fd262d7af0, type: 3}
   audShootVol: 0.3
   audDamage:
-  - {fileID: 8300000, guid: b8d8b916769e41448890a8188ebdd437, type: 3}
-  - {fileID: 8300000, guid: b4e9712d30993bf47a159f04775fca78, type: 3}
-  - {fileID: 8300000, guid: cbc495407bddc0342a370601aa1fa165, type: 3}
-  - {fileID: 8300000, guid: 3973424029f7cfe4bac050e02491b585, type: 3}
-  audDamageVol: 0.75
+  - {fileID: 8300000, guid: bd6250eaaeb1ac94e83a3c5bc3b22e61, type: 3}
+  audDamageVol: 0.2
   audJump: {fileID: 8300000, guid: e326698789d7b8749b25d5b4ba2e484f, type: 3}
   audJumpVol: 1
   audQuake: {fileID: 8300000, guid: 93075b47d6eb7cd48b07000f45b5e5dd, type: 3}
@@ -30018,7 +30015,7 @@ MonoBehaviour:
   audPhaseChangeVol: 0.35
   audFireworks: {fileID: 8300000, guid: a4cbac6c9854d5a40b6d2bf1716dc685, type: 3}
   audFireworksVol: 0.8
-  HP: 110
+  HP: 75
   speed: 8
   targetFaceSpeed: 4
   viewAngle: 90
