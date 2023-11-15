@@ -37,7 +37,7 @@ public class TrackingProjectiles : MonoBehaviour, ISpray
         Vector3 direction = GameManager.instance.player.transform.position - rb.position;
         direction.Normalize();
         Vector3 rotateAmount = Vector3.Cross(direction, transform.forward);
-        rb.angularVelocity = -rotateAmount * rotateSpeed;
+        rb.angularVelocity = -rotateAmount * rotateSpeed * Time.deltaTime;
         rb.velocity = speed * Time.deltaTime * (GameManager.instance.player.transform.position - transform.position);
         if (hasExpanded == false)
         {

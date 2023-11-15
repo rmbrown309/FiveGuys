@@ -303,9 +303,9 @@ MonoBehaviour:
   bugRelease: {fileID: 3666610841265798951, guid: 7269ba227c3f4e048af0e327d77784ab, type: 3}
   settings: {fileID: 11400000, guid: 46f271e14fe41cf4cb7765b24c31d09d, type: 2}
   damage: 1
-  speed: 600
+  speed: 75
   destroyTime: 4
-  rotateSpeed: 1000
+  rotateSpeed: 250
   aud: {fileID: -961521616031365446}
   idleBuzzVol: 0.15
   idleBuzz:

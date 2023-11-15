@@ -640,7 +640,7 @@ MonoBehaviour:
   despawnTime: 0.2
   pushBackResolve: 0
   bullet: {fileID: 1214147759416653589, guid: 52c43b34cef97b3449fec611bd559a3e, type: 3}
-  shootRate: 0.5
+  shootRate: 0.3
   shootAngle: 30
   aud: {fileID: 758993259465760071}
   idleChatterVol: 0.8
