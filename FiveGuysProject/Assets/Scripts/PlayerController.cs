@@ -871,7 +871,11 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         gunModel.GetComponent<MeshFilter>().sharedMesh = gun.model.GetComponent<MeshFilter>().sharedMesh;
         gunModel.GetComponent<MeshRenderer>().sharedMaterial = gun.model.GetComponent<MeshRenderer>().sharedMaterial;
         selectedGun = gunList.Count - 1;
-        GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
+        if (!gunList[selectedGun].isPowerWeapon && gunList.Count > 1)
+        {
+            if (!gunList[selectedGun - 1].isPowerWeapon)
+                GameManager.instance.updateAmmmo(gunList[selectedGun].ammoMax, gunList[selectedGun].ammoMax);
+        }
         SetGunOffset();
         if (gunList[selectedGun].numOfPellets == 1 && !gunList[selectedGun].isM16) //handles every other weapon
         {
