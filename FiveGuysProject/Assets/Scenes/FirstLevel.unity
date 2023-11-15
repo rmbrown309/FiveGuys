@@ -14917,6 +14917,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PrototypeEnvironment
       objectReference: {fileID: 0}
+    - target: {fileID: 319135082826594588, guid: 405fa0942d84766468015ccda9741403, type: 3}
+      propertyPath: m_Center.x
+      value: 9.65
+      objectReference: {fileID: 0}
     - target: {fileID: 1078579772246358111, guid: 405fa0942d84766468015ccda9741403, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.1174965
@@ -14956,6 +14960,30 @@ PrefabInstance:
     - target: {fileID: 1078579772246358111, guid: 405fa0942d84766468015ccda9741403, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1129989956944473049, guid: 405fa0942d84766468015ccda9741403, type: 3}
+      propertyPath: m_Center.z
+      value: 0.36
+      objectReference: {fileID: 0}
+    - target: {fileID: 3150406591922222817, guid: 405fa0942d84766468015ccda9741403, type: 3}
+      propertyPath: m_Center.x
+      value: 10.33
+      objectReference: {fileID: 0}
+    - target: {fileID: 3416574358284024597, guid: 405fa0942d84766468015ccda9741403, type: 3}
+      propertyPath: m_Center.z
+      value: 0.28
+      objectReference: {fileID: 0}
+    - target: {fileID: 4732301328561459243, guid: 405fa0942d84766468015ccda9741403, type: 3}
+      propertyPath: m_Center.x
+      value: 10.99
+      objectReference: {fileID: 0}
+    - target: {fileID: 5077879303897046556, guid: 405fa0942d84766468015ccda9741403, type: 3}
+      propertyPath: m_Center.z
+      value: 1.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6496068358821575927, guid: 405fa0942d84766468015ccda9741403, type: 3}
+      propertyPath: m_Center.z
+      value: 0.34
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
