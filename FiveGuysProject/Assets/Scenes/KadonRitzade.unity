@@ -2404,10 +2404,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: CurrMeleeEnemy
       objectReference: {fileID: 0}
-    - target: {fileID: 7848121369627312878, guid: f46188c19ca8c164a9bdef90eac906ff, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2972,6 +2968,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46dc765f4c220a449860167f5e987515, type: 3}
+--- !u!1001 &8988836141466543546
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 681448457296634124, guid: 81cd1f5b0df51b44086e856a53b90cc1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -38.966824
+      objectReference: {fileID: 0}
+    - target: {fileID: 681448457296634124, guid: 81cd1f5b0df51b44086e856a53b90cc1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.00000047683716
+      objectReference: {fileID: 0}
+    - target: {fileID: 681448457296634124, guid: 81cd1f5b0df51b44086e856a53b90cc1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -18.21239
+      objectReference: {fileID: 0}
+    - target: {fileID: 681448457296634124, guid: 81cd1f5b0df51b44086e856a53b90cc1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 681448457296634124, guid: 81cd1f5b0df51b44086e856a53b90cc1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 681448457296634124, guid: 81cd1f5b0df51b44086e856a53b90cc1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 681448457296634124, guid: 81cd1f5b0df51b44086e856a53b90cc1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 681448457296634124, guid: 81cd1f5b0df51b44086e856a53b90cc1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 681448457296634124, guid: 81cd1f5b0df51b44086e856a53b90cc1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 681448457296634124, guid: 81cd1f5b0df51b44086e856a53b90cc1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3344540303277351420, guid: 81cd1f5b0df51b44086e856a53b90cc1, type: 3}
+      propertyPath: m_Name
+      value: CurrRangedEnemy (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 81cd1f5b0df51b44086e856a53b90cc1, type: 3}
 --- !u!1001 &9050144551947160722
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3070,3 +3123,4 @@ SceneRoots:
   - {fileID: 383257357}
   - {fileID: 1935451316}
   - {fileID: 1645317640}
+  - {fileID: 8988836141466543546}
