@@ -362,6 +362,8 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
                 while (gunList[selectedGun].isPowerWeapon)
                     selectedGun--;
                 setGunStats(gunList[selectedGun]);
+                GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
+
             }
         }
      
@@ -874,8 +876,16 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
         if (!gunList[selectedGun].isPowerWeapon && gunList.Count > 1)
         {
             if (!gunList[selectedGun - 1].isPowerWeapon)
+            {
                 GameManager.instance.updateAmmmo(gunList[selectedGun].ammoMax, gunList[selectedGun].ammoMax);
+
+            }
+
+
         }
+        else
+            GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
+
         SetGunOffset();
         if (gunList[selectedGun].numOfPellets == 1 && !gunList[selectedGun].isM16) //handles every other weapon
         {
@@ -886,7 +896,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             if (gunList[selectedGun].weaponID == 2) //handles sniper
                 gunList[selectedGun].audShotVol = noAmmoVol / 2;
             else //borger
-                gunList[selectedGun].audShotVol = origShotvol * noAmmoVol;
+                gunList[selectedGun].audShotVol = noAmmoVol;
         }
 
         if (gunList[selectedGun].weaponID == 5)// handles the m16
