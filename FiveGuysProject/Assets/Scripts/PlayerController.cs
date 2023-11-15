@@ -157,7 +157,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
     {
         Movement();
 
-        if (Input.GetButton("Shoot") && !isShooting && gunList.Count > 0)//if it is a shotgun then fire multiple times
+        if (Input.GetButton("Shoot") && !isShooting && gunList.Count > 0 && !GameManager.instance.isPaused)//if it is a shotgun then fire multiple times
         {
             //by looping the shoot multiple time we instantiate the correct number of pellets to be shot because bullets are only instantiated when shoot is called.
             for (int i = 0; i < gunList[selectedGun].numOfPellets; i++)
@@ -187,9 +187,9 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
         }
 
-        if (sprayWeaponActive && Input.GetButton("Shoot2") && !isShooting)
+        if (sprayWeaponActive && Input.GetButton("Shoot2") && !isShooting && !GameManager.instance.isPaused)
             StartCoroutine(Spray());
-        if (Input.GetButton("Grenade") && !isTossing)
+        if (Input.GetButton("Grenade") && !isTossing && !GameManager.instance.isPaused)
         {
             StartCoroutine(TossGrenade());
         }
@@ -204,7 +204,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             GameManager.instance.ResetShoveUI();
         }
 
-        if (Input.GetButton("Shove") && !isShoving)
+        if (Input.GetButton("Shove") && !isShoving && !GameManager.instance.isPaused)
             StartCoroutine(Shove());
 
         //if player got damaged AND there isnt an active regen happening
@@ -244,7 +244,7 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
 
 
         // Changes the height position of the player..
-        if (Input.GetButtonDown("Jump") && jumpedTimes < jumpMax)
+        if (Input.GetButtonDown("Jump") && jumpedTimes < jumpMax && !GameManager.instance.isPaused)
         {
             playerVelocity.y = jumpHeight;
             jumpedTimes++;

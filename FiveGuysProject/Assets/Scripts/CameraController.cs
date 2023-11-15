@@ -49,7 +49,7 @@ public class CameraController : MonoBehaviour
     {
         float elapsed = 0.0f;
 
-        while (elapsed < duration)
+        while (elapsed < duration && !GameManager.instance.isPaused)
         {
             float x = Random.Range(-1, 2) * strength;
             float y = Random.Range(-1, 2) * strength;
