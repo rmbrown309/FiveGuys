@@ -118,40 +118,42 @@ public class Pickups : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        switch (pickupType)
-        {
-            case PickupType.HealthUp:
-                GameManager.instance.pickupText.text = "[E] Health Up: " + pickupCost + " Points";
-                break;
-            case PickupType.SpeedUp:
-                GameManager.instance.pickupText.text = "[E] Speed Up: " + pickupCost + " Points";
-                break;
-            case PickupType.QuickRegen:
-                GameManager.instance.pickupText.text = "[E] Quick Regen: " + pickupCost + " Points";
-                break;
-            case PickupType.DamageUp:
-                GameManager.instance.pickupText.text = "[E] Damage Up: " + pickupCost + " Points";
-                break;
-            case PickupType.AmmoRefill:
-                GameManager.instance.pickupText.text = "[E] Refill Ammo";
-                break;
-            case PickupType.SprayWeapon:
-                GameManager.instance.pickupText.text = "[E] Acquire Rat Killer: " + pickupCost + " Points";
-                break;
-            case PickupType.Debris:
-                GameManager.instance.pickupText.text = "[E] Clear Blocked Path: " + pickupCost + " Points";
-                break;
-        }
+
         if (other.CompareTag("Player") && !pickedUp)
         {
+            switch (pickupType)
+            {
+                case PickupType.HealthUp:
+                    GameManager.instance.pickupText.text = "[E] Health Up: " + pickupCost + " Points";
+                    break;
+                case PickupType.SpeedUp:
+                    GameManager.instance.pickupText.text = "[E] Speed Up: " + pickupCost + " Points";
+                    break;
+                case PickupType.QuickRegen:
+                    GameManager.instance.pickupText.text = "[E] Quick Regen: " + pickupCost + " Points";
+                    break;
+                case PickupType.DamageUp:
+                    GameManager.instance.pickupText.text = "[E] Damage Up: " + pickupCost + " Points";
+                    break;
+                case PickupType.AmmoRefill:
+                    GameManager.instance.pickupText.text = "[E] Refill Ammo";
+                    break;
+                case PickupType.SprayWeapon:
+                    GameManager.instance.pickupText.text = "[E] Acquire Rat Killer: " + pickupCost + " Points";
+                    break;
+                case PickupType.Debris:
+                    GameManager.instance.pickupText.text = "[E] Clear Blocked Path: " + pickupCost + " Points";
+                    break;
+            }
+
             playerInTrigger = true;
             if (GameManager.instance.pickupLabel != null)
             {
                 GameManager.instance.pickupLabelContainer.SetActive(true);
                 GameManager.instance.pickupLabel.SetActive(true);
             }
-                
-        }
+        }   
+        
     }
 
     private void OnTriggerExit(Collider other)

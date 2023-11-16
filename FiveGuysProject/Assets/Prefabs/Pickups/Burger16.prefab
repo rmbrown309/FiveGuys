@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 6813233917246252684}
   - component: {fileID: 7837618607850574841}
   - component: {fileID: 1771553108689860850}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Burger16
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9139937497407333371}
   - component: {fileID: 5773538270276982273}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point Light (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -344,7 +344,7 @@ GameObject:
   - component: {fileID: 2824343386746707044}
   - component: {fileID: 4572483013655339436}
   - component: {fileID: 2143829338046707532}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: M4_Magazine
   m_TagString: Untagged
   m_Icon: {fileID: 0}

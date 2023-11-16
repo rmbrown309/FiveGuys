@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2309824735537834292}
   - component: {fileID: 4792324032002113717}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point Light (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 5618180657883517333}
   - component: {fileID: 8018603402359425224}
   - component: {fileID: 2430344996750213102}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BurgerSniper
   m_TagString: GunPickUps
   m_Icon: {fileID: 0}

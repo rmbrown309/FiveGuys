@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3186641603106981263}
   - component: {fileID: 445076320490440004}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point Light (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 3484017016660026330}
   - component: {fileID: 3750111974411336540}
   - component: {fileID: 8391375901310642781}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RatKillerPickupStation
   m_TagString: PickUp
   m_Icon: {fileID: 0}
@@ -146,6 +146,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupType: 5
   pickupCost: 20
+  linkedDebris: {fileID: 0}
   aud: {fileID: 8391375901310642781}
   audCash: {fileID: 8300000, guid: fe47b3b42df583948969f511890dd8f0, type: 3}
   audCashVol: 0.5

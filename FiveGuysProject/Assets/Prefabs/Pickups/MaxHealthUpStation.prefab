@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 418059035434721732}
   - component: {fileID: 2465849385010284464}
   - component: {fileID: 1978656663373754347}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fridge-DrawerLower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 8157932106968017469}
   - component: {fileID: 5019187522557341513}
   - component: {fileID: 5347905640106244050}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MaxHealthUpStation
   m_TagString: PickUp
   m_Icon: {fileID: 0}
@@ -139,6 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupType: 0
   pickupCost: 15
+  linkedDebris: {fileID: 0}
   aud: {fileID: 5347905640106244050}
   audCash: {fileID: 8300000, guid: fe47b3b42df583948969f511890dd8f0, type: 3}
   audCashVol: 0.5
@@ -342,7 +343,7 @@ GameObject:
   - component: {fileID: 3459761500767378351}
   - component: {fileID: 8840648966969499119}
   - component: {fileID: 6979949576252649023}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fridge-Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424,7 +425,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3645097487154302679}
   - component: {fileID: 2955810700486644873}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point Light (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -519,7 +520,7 @@ GameObject:
   - component: {fileID: 1981507331041225624}
   - component: {fileID: 651637741245003746}
   - component: {fileID: 6876766074175052177}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fridge-DrawerUpper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -602,7 +603,7 @@ GameObject:
   - component: {fileID: 1752765405096987514}
   - component: {fileID: 8999984998712785630}
   - component: {fileID: 2367664005639897892}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Fridge-DoorUpper
   m_TagString: Untagged
   m_Icon: {fileID: 0}

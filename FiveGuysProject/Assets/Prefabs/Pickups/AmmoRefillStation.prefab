@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4805276013437195170}
   - component: {fileID: 8897048515027012467}
   - component: {fileID: 7179259862787946779}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stove-KnobLeft2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 8456335368167235309}
   - component: {fileID: 8004736485128630993}
   - component: {fileID: 4488657478952305251}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stove-KnobRight2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -177,7 +177,7 @@ GameObject:
   - component: {fileID: 4666936015341578956}
   - component: {fileID: 4500368791165101272}
   - component: {fileID: 3588260396339801134}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stove-TrayUpper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -264,7 +264,7 @@ GameObject:
   - component: {fileID: 3182737212548975568}
   - component: {fileID: 9209636630557513435}
   - component: {fileID: -1736819269632783813}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AmmoRefillStation
   m_TagString: PickUp
   m_Icon: {fileID: 0}
@@ -309,6 +309,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupType: 4
   pickupCost: 0
+  linkedDebris: {fileID: 0}
   aud: {fileID: -1736819269632783813}
   audCash: {fileID: 8300000, guid: 9fe335f139fd14b4c816ae426d42c281, type: 3}
   audCashVol: 0.3
@@ -512,7 +513,7 @@ GameObject:
   - component: {fileID: 4759282818249414137}
   - component: {fileID: 3186109374699823481}
   - component: {fileID: 6259653279873272257}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stove-TrayLower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -594,7 +595,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5232137506263010290}
   - component: {fileID: 9105381002057962726}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point Light (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -689,7 +690,7 @@ GameObject:
   - component: {fileID: 1252903848174563247}
   - component: {fileID: 4504199159463383559}
   - component: {fileID: 8767709396911466227}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stove-FrontDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -772,7 +773,7 @@ GameObject:
   - component: {fileID: 7093387465307553874}
   - component: {fileID: 8182487576577370379}
   - component: {fileID: 4636140849638291138}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stove-KnobLeft1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -855,7 +856,7 @@ GameObject:
   - component: {fileID: 1400654354201531874}
   - component: {fileID: 447751960592681845}
   - component: {fileID: 4396266125365414072}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stove-KnobRight1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -938,7 +939,7 @@ GameObject:
   - component: {fileID: 422747484668104822}
   - component: {fileID: 3928117232101399786}
   - component: {fileID: 1548495808485537986}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Stove-Drawer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

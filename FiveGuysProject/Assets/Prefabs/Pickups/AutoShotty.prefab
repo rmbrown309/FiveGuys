@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5289684499859701324}
   - component: {fileID: 658103444188206741}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point Light (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +109,7 @@ GameObject:
   - component: {fileID: 8862849505328196550}
   - component: {fileID: 3918338033716445415}
   - component: {fileID: 8231346489200558303}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AutoShotty
   m_TagString: GunPickUps
   m_Icon: {fileID: 0}

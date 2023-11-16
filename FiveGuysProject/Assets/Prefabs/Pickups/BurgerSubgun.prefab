@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 338578366815001243}
   - component: {fileID: 3757295264649896600}
   - component: {fileID: 2514340248660457350}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BurgerSubgun
   m_TagString: GunPickUps
   m_Icon: {fileID: 0}
@@ -231,7 +231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1668114683129118969}
   - component: {fileID: 3736309484522659505}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point Light (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

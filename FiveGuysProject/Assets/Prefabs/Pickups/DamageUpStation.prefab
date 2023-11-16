@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8549454389273347078}
   - component: {fileID: -3084276986120294230}
   - component: {fileID: 1898310868779436188}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DamageUpStation
   m_TagString: PickUp
   m_Icon: {fileID: 0}
@@ -56,6 +56,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupType: 3
   pickupCost: 35
+  linkedDebris: {fileID: 0}
   aud: {fileID: -3084276986120294230}
   audCash: {fileID: 8300000, guid: fe47b3b42df583948969f511890dd8f0, type: 3}
   audCashVol: 0.5
@@ -257,7 +258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 542036519057956151}
   - component: {fileID: 4136277152182597883}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -352,6 +353,10 @@ PrefabInstance:
     - target: {fileID: 159032, guid: f2cff542d8137ef4a8893f166fad3e24, type: 3}
       propertyPath: m_Name
       value: CardboardBox_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 159032, guid: f2cff542d8137ef4a8893f166fad3e24, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 159032, guid: f2cff542d8137ef4a8893f166fad3e24, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -461,6 +466,10 @@ PrefabInstance:
       value: CardboardBox_4
       objectReference: {fileID: 0}
     - target: {fileID: 166872, guid: 8b0e041139b374b4e869fec62970a236, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 166872, guid: 8b0e041139b374b4e869fec62970a236, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -568,6 +577,10 @@ PrefabInstance:
       value: CardboardBox_3
       objectReference: {fileID: 0}
     - target: {fileID: 167470, guid: 2b04d46579fa05b4893ee55a9b307b3f, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 167470, guid: 2b04d46579fa05b4893ee55a9b307b3f, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -673,6 +686,10 @@ PrefabInstance:
     - target: {fileID: 197592, guid: aa79bd001d2fc3c4b9a07d809c490276, type: 3}
       propertyPath: m_Name
       value: CardboardBox_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 197592, guid: aa79bd001d2fc3c4b9a07d809c490276, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 197592, guid: aa79bd001d2fc3c4b9a07d809c490276, type: 3}
       propertyPath: m_StaticEditorFlags

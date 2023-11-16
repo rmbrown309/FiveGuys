@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1086197851004699520}
   - component: {fileID: 6831833527032194413}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 327223924217097171}
   - component: {fileID: 8653220185871889756}
   - component: {fileID: 6826055282242096043}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -189,7 +189,7 @@ GameObject:
   - component: {fileID: 5440459736253311848}
   - component: {fileID: 1564668229714957273}
   - component: {fileID: 5700831920486675469}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Part_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   - component: {fileID: 3001742155182401371}
   - component: {fileID: 8169357432369716105}
   - component: {fileID: 6701344189513370995}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Press
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,7 +377,7 @@ GameObject:
   - component: {fileID: 4595158266880917037}
   - component: {fileID: 4504065033888274064}
   - component: {fileID: 8339267678175190025}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IceSpout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -464,7 +464,7 @@ GameObject:
   - component: {fileID: 6347408908333562388}
   - component: {fileID: 5795292670077216722}
   - component: {fileID: 4790432993766162439}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: QuickRegenStation
   m_TagString: PickUp
   m_Icon: {fileID: 0}
@@ -508,6 +508,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupType: 2
   pickupCost: 12
+  linkedDebris: {fileID: 0}
   aud: {fileID: 4790432993766162439}
   audCash: {fileID: 8300000, guid: fe47b3b42df583948969f511890dd8f0, type: 3}
   audCashVol: 0.5
@@ -710,7 +711,7 @@ GameObject:
   - component: {fileID: 1624729097237417153}
   - component: {fileID: 5155355001570747778}
   - component: {fileID: 3478836976232556737}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Display
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -793,7 +794,7 @@ GameObject:
   - component: {fileID: 4789145306339810599}
   - component: {fileID: 6536447476761449037}
   - component: {fileID: 5253632689445961479}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Part_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -876,7 +877,7 @@ GameObject:
   - component: {fileID: 952940308997074539}
   - component: {fileID: 398294046291081500}
   - component: {fileID: 7538175652786784543}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Dispenser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -961,7 +962,7 @@ GameObject:
   - component: {fileID: 3409339835248217134}
   - component: {fileID: 4494973239016883877}
   - component: {fileID: 6792928136764181948}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1045,7 +1046,7 @@ GameObject:
   - component: {fileID: 5992614493310367495}
   - component: {fileID: 6327423496211216648}
   - component: {fileID: 5247045747109163356}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Drain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1146,9 +1147,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1935064942984825950}
     m_Modifications:
+    - target: {fileID: 12210147951448103, guid: 439d2c061b03a6c4895ef54cc833745b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6759977766603999025, guid: 439d2c061b03a6c4895ef54cc833745b, type: 3}
       propertyPath: m_Name
       value: DrinkTable
+      objectReference: {fileID: 0}
+    - target: {fileID: 6759977766603999025, guid: 439d2c061b03a6c4895ef54cc833745b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7587560770182783927, guid: 439d2c061b03a6c4895ef54cc833745b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1189,6 +1198,10 @@ PrefabInstance:
     - target: {fileID: 7587560770182783927, guid: 439d2c061b03a6c4895ef54cc833745b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8946032902004217299, guid: 439d2c061b03a6c4895ef54cc833745b, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

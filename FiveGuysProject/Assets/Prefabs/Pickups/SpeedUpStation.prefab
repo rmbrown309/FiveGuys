@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 3639984193735371976}
   - component: {fileID: 872254998483314649}
   - component: {fileID: 1165035638720850025}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SpeedUpStation
   m_TagString: PickUp
   m_Icon: {fileID: 0}
@@ -52,6 +52,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pickupType: 1
   pickupCost: 10
+  linkedDebris: {fileID: 0}
   aud: {fileID: 1165035638720850025}
   audCash: {fileID: 8300000, guid: fe47b3b42df583948969f511890dd8f0, type: 3}
   audCashVol: 0.5
@@ -258,7 +259,7 @@ GameObject:
   m_Component:
   - component: {fileID: 867712181612669362}
   - component: {fileID: 3173542708808995592}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Point Light (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
