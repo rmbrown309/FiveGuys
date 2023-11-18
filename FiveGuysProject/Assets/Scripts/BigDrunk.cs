@@ -108,7 +108,7 @@ public class BigDrunk : MonoBehaviour, IDamage
             damageCol.enabled = false;
             StopAllCoroutines();
             StartCoroutine(Despawn());
-            GameManager.instance.IncreasePlayerScore(2);
+            GameManager.instance.IncreasePlayerScore(5);
         }
         else
         {
