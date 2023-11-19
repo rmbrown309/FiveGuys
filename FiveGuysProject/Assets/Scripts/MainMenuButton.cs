@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Audio;
+//using static UnityEditor.Progress;
 
 public class MainMenuButton : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class MainMenuButton : MonoBehaviour
     [SerializeField] Slider SoundEffectSlider;
     [SerializeField] Slider SensSlider;
     [SerializeField] GameObject loading;
+    
     private void Start()
     {
         MusicVolumeSlider.value = SavedSettings.MusicVolume;
@@ -32,17 +34,23 @@ public class MainMenuButton : MonoBehaviour
         AudioListener.volume = SavedSettings.masterVolume;
         resolutions = Screen.resolutions;
         resolutionDropdown.ClearOptions();
-        List<string> options = new List<string>();
-        
+
         int currentResolution = 0;
-        for(int i = 0; i < resolutions.Length; i++)
+        List<string> options = new List<string>();
+
+        for (int i = 0; i < resolutions.Length; i++)
         {
-            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+            if(i %2 == 1)
             {
-                currentResolution = i;
+                if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+                {
+                    currentResolution = i;
+                }
+                string option = resolutions[i].width + "x" + resolutions[i].height;
+                options.Add(option);
+        
             }
-            string option = resolutions[i].width + "x" + resolutions[i].height;
-            options.Add(option);
+            
         }
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolution;
@@ -85,6 +93,7 @@ public class MainMenuButton : MonoBehaviour
     public void SetResolution(int resolitionIndex)
     {
         Debug.Log(resolitionIndex);
+        resolitionIndex += (resolitionIndex - 1);
         Resolution resolution = resolutions[resolitionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
