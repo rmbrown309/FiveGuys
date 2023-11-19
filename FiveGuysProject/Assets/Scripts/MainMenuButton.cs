@@ -48,9 +48,7 @@ public class MainMenuButton : MonoBehaviour
                 }
                 string option = resolutions[i].width + "x" + resolutions[i].height;
                 options.Add(option);
-        
             }
-            
         }
         resolutionDropdown.AddOptions(options);
         resolutionDropdown.value = currentResolution;
@@ -88,7 +86,6 @@ public class MainMenuButton : MonoBehaviour
     }
     public void SetFullScreen(bool isFull)
     {
-        
         Screen.fullScreen = isFull;
     }
     public void SetResolution(int resolitionIndex)
