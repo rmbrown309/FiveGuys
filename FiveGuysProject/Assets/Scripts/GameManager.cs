@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] GameObject agreeMenuLoose;
     [SerializeField] GameObject agreeMenuRespawnLoose;
     //button
+    [SerializeField] GameObject[] quitButtons;
     [SerializeField] GameObject findButtonMenu;
     [SerializeField] GameObject loadingMenu;
 
@@ -141,6 +142,12 @@ public class GameManager : MonoBehaviour
         waves = 0;
         enableWaveUIText();
         //maxWaves = 1;
+
+        if(Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            foreach (GameObject button in quitButtons)
+                button.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -190,8 +197,8 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 0f;
             //make the cursor visible again
             Cursor.visible = true;
-            //let the cursor move around the screen only
-            Cursor.lockState = CursorLockMode.Confined;
+            //let the cursor move around
+            Cursor.lockState = CursorLockMode.None;
             if (activeMenu != null)
             {
                 activeMenu.SetActive(false);
