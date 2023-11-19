@@ -9,6 +9,12 @@ public class CollectablePickup : MonoBehaviour
     [SerializeField] float duration;
     [SerializeField] float heightUp;
     [SerializeField] int itemsCollected;
+
+    [Header("----- Audio Stuff -----")]
+    [SerializeField] AudioSource aud;
+    [SerializeField] AudioClip audPickup;
+    [Range(0, 1)][SerializeField] float audPickupVol;
+
     float rand;
     Vector3 origPosition;
     // Start is called before the first frame update
@@ -31,6 +37,7 @@ public class CollectablePickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            aud.PlayOneShot(audPickup, audPickupVol);
             player.GetComponent<PlayerController>().SetCollectables(itemsCollected);
             if (player.GetComponent<PlayerController>().GetCollectables() > 0)
             {
@@ -39,9 +46,14 @@ public class CollectablePickup : MonoBehaviour
             GameManager.instance.AddCurrentCollectables();
             Destroy(gameObject);
         }
-        if(GameManager.instance.playerScript.GetCollectables() == 5)
+        if (GameManager.instance.playerScript.GetCollectables() == 5)
         {
             GameManager.instance.SetQuestText("- Refuel the plane!");
         }
+    }
+
+    public void SetAudio(float newVolume)
+    {
+        audPickupVol = newVolume;
     }
 }
