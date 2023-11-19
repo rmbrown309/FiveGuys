@@ -192,7 +192,7 @@ public class GameManager : MonoBehaviour
     {
         
             //flip bool
-            isPaused = !isPaused;
+            isPaused = true;
             //slow game down to 0
             Time.timeScale = 0f;
             //make the cursor visible again
@@ -210,7 +210,7 @@ public class GameManager : MonoBehaviour
     public void StateUnpaused()
     {
         //flip our pause
-        isPaused = !isPaused;
+        isPaused = false;
         //set the speed of the game to orig speed
         Time.timeScale = origTimeScale;
         //make cursor invis
