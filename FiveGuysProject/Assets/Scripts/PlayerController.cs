@@ -878,10 +878,10 @@ public class PlayerController : MonoBehaviour, IDamage, IPower
             if (!gunList[selectedGun - 1].isPowerWeapon)
             {
                 GameManager.instance.updateAmmmo(gunList[selectedGun].ammoMax, gunList[selectedGun].ammoMax);
+                gunList[selectedGun].ammoCur = gunList[selectedGun].ammoMax;
+                GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
 
             }
-
-
         }
         else
             GameManager.instance.updateAmmmo(gunList[selectedGun].ammoCur, gunList[selectedGun].ammoMax);
