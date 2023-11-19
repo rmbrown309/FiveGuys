@@ -88,6 +88,7 @@ public class MainMenuButton : MonoBehaviour
     }
     public void SetFullScreen(bool isFull)
     {
+        
         Screen.fullScreen = isFull;
     }
     public void SetResolution(int resolitionIndex)

@@ -72,6 +72,7 @@ public class ButtonSwitch : MonoBehaviour
                 GameManager.instance.collectablesActive = true;
             }
         }
+        
     }
     // Update is called once per frame
     public void OnTriggerEnter(Collider other)

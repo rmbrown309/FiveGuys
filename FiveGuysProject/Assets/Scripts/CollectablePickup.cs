@@ -39,5 +39,9 @@ public class CollectablePickup : MonoBehaviour
             GameManager.instance.AddCurrentCollectables();
             Destroy(gameObject);
         }
+        if(GameManager.instance.playerScript.GetCollectables() == 5)
+        {
+            GameManager.instance.SetQuestText("- Refuel the plane!");
+        }
     }
 }

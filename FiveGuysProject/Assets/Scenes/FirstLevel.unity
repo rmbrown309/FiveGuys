@@ -9907,7 +9907,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 839363065835040744, guid: 089f673d38393c44d864c90346443dae, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 983847117315841641, guid: 089f673d38393c44d864c90346443dae, type: 3}
       propertyPath: m_IsActive
@@ -9915,7 +9915,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1425166901160935155, guid: 089f673d38393c44d864c90346443dae, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1477648718482574878, guid: 089f673d38393c44d864c90346443dae, type: 3}
       propertyPath: m_Depth
@@ -9935,7 +9935,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3632701127636703828, guid: 089f673d38393c44d864c90346443dae, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4329847803612284773, guid: 089f673d38393c44d864c90346443dae, type: 3}
       propertyPath: maxWaves
@@ -9963,7 +9963,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6046378889388694229, guid: 089f673d38393c44d864c90346443dae, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6635997336235690328, guid: 089f673d38393c44d864c90346443dae, type: 3}
       propertyPath: m_AnchorMax.y
