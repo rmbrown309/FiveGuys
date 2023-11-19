@@ -18,6 +18,9 @@ public class ButtonSwitch : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameManager.instance.enableCollectable(true);
+        GameManager.instance.enableCollectable(false);
+
         GameManager.instance.SetQuestText("- Find the control station");
         GameManager.instance.SetQuestState(true);
         // Debug.Log("Switch In");
@@ -56,11 +59,15 @@ public class ButtonSwitch : MonoBehaviour
                 if (gameEnding)
                 {
                     GameManager.instance.maxWaves = GameManager.instance.waves;
-                    GameManager.instance.SetQuestState(true);
+                    //GameManager.instance.SetQuestState(true);
+                    GameManager.instance.SetQuestText("- Feed all of the remaining costumers!");
+                    GameManager.instance.enableCollectable(false);
                 }
                 if (collectibleSpawning && collectibles != null)
                 {
                     buttonAudio.GetComponent<AudioSource>().PlayOneShot(buttonAudio.GetComponent<AudioSource>().clip);
+                    GameManager.instance.collectable.SetActive(true);
+                    GameManager.instance.collectablesActive = true;
                     GameManager.instance.SetQuestText("- Find the gas cans");
                     GameManager.instance.SetFindButton("Find the gas cans, and refuel the plane!");
                     //GameManager.instance.SetPowerText("Find the gas cans");
@@ -68,8 +75,7 @@ public class ButtonSwitch : MonoBehaviour
                     foreach (var item in collectibles)
                         item.SetActive(true);
                 }
-                GameManager.instance.collectable.SetActive(true);
-                GameManager.instance.collectablesActive = true;
+                
             }
         }
         
