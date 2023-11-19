@@ -143,7 +143,7 @@ public class GameManager : MonoBehaviour
         enableWaveUIText();
         //maxWaves = 1;
 
-        if(Application.platform == RuntimePlatform.WebGLPlayer)
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
         {
             foreach (GameObject button in quitButtons)
                 button.SetActive(false);

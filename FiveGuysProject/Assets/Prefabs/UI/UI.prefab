@@ -2843,6 +2843,10 @@ MonoBehaviour:
   agreeMenuTittle: {fileID: 5031230461519729180}
   agreeMenuLoose: {fileID: 5031230461519729180}
   agreeMenuRespawnLoose: {fileID: 2160707792305141549}
+  quitButtons:
+  - {fileID: 7706264316440794990}
+  - {fileID: 7755144222144496186}
+  - {fileID: 2734065746703168579}
   findButtonMenu: {fileID: 9162696715298467876}
   loadingMenu: {fileID: 3907019984857806226}
   objectiveText: {fileID: 6394764281524064367}
