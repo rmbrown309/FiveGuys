@@ -91,7 +91,11 @@ public class MainMenuButton : MonoBehaviour
     public void SetResolution(int resolitionIndex)
     {
         Debug.Log(resolitionIndex);
-        resolitionIndex += (resolitionIndex - 1);
+        if(resolitionIndex > 0)
+        {
+            resolitionIndex += (resolitionIndex - 1);
+        }
+        
         Resolution resolution = resolutions[resolitionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
