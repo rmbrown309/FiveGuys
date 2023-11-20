@@ -93,7 +93,7 @@ public class MainMenuButton : MonoBehaviour
         Debug.Log(resolitionIndex);
         if(resolitionIndex > 0)
         {
-            resolitionIndex += (resolitionIndex - 1);
+            resolitionIndex += (resolitionIndex);
         }
         
         Resolution resolution = resolutions[resolitionIndex];
