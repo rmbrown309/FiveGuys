@@ -94,8 +94,8 @@ public class Pickups : MonoBehaviour
 
                     break;
                 case PickupType.Debris:
-                    if(linkedDebris != null)
-                        linkedDebris.SetActive(false);
+                    if (linkedDebris != null)
+                        Destroy(linkedDebris);
                     gameObject.GetComponent<Renderer>().enabled = false;
                     gameObject.GetComponent<SphereCollider>().enabled = false;
                     gameObject.GetComponent<BoxCollider>().enabled = false;
